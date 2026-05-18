@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Platform | WAchat</title>
+  <meta name="description" content="WAchat platform capabilities for WhatsApp Business onboarding, template operations, messaging, webhooks, and support teams.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="index.html"><span class="brand-mark">WAchat</span><span>WAchat</span></a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a class="active" href="platform.html">Platform</a>
+        <a href="embedded-signup.html">Embedded Signup</a>
+        <a href="app-review-demo.html">Console Demo</a>
+        <a href="security.html">Security</a>
+        <a href="support.html">Support</a>
+      </div>
+      <div class="nav-actions">
+        <a class="button secondary" href="contact.html">Talk to us</a>
+        <a class="button" href="embedded-signup.html">Connect business</a>
+      </div>
+      <button class="button secondary mobile-toggle" data-menu-toggle type="button">Menu</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Platform</span></div>
+        <p class="eyebrow">Platform</p>
+        <h1>The control layer between WhatsApp APIs and client operations.</h1>
+        <p class="lead">WAchat gives implementation teams a place to connect business assets, manage approved message templates, send through Cloud API, and prove what happened when a customer asks.</p>
+      </div>
+    </section>
+
+    <!-- Core capabilities -->
+    <section class="section">
+      <div class="wrap">
+        <div class="grid cols-3">
+          <div class="card">
+            <div class="feat-icon">ON</div>
+            <h3>Onboard</h3>
+            <p class="muted">Embedded Signup, business portfolio selection, WABA mapping, phone-number registration, and workspace creation — all tracked in a single handover record.</p>
+          </div>
+          <div class="card">
+            <div class="feat-icon">GOV</div>
+            <h3>Govern</h3>
+            <p class="muted">Template categories, approval status, quality signals, and internal naming so teams know what each message is for before it reaches a customer.</p>
+          </div>
+          <div class="card">
+            <div class="feat-icon">SEND</div>
+            <h3>Send</h3>
+            <p class="muted">Controlled utility and service messaging flows for opted-in recipients, with delivery metadata retained for every send.</p>
+          </div>
+          <div class="card">
+            <div class="feat-icon">SYNC</div>
+            <h3>Sync</h3>
+            <p class="muted">Webhook subscriptions for message status, account changes, template events, and phone-number updates — all visible without raw callbacks.</p>
+          </div>
+          <div class="card">
+            <div class="feat-icon">SUP</div>
+            <h3>Support</h3>
+            <p class="muted">A full support trail for delivery questions, failed sends, template changes, and account configuration issues tied to the right business.</p>
+          </div>
+          <div class="card">
+            <div class="feat-icon">SEC</div>
+            <h3>Secure</h3>
+            <p class="muted">Minimum-necessary access, role separation, operational logs, token handling, and public deletion procedures for every onboarded business.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Permission table (dark) -->
+    <section class="section bg-dark">
+      <div class="wrap">
+        <div class="split">
+          <div>
+            <p class="eyebrow">What the app needs access to</p>
+            <h2>Every permission maps to a visible product action.</h2>
+            <p class="lead">WAchat requests only the permissions required to operate WhatsApp Business workflows. No permission is used for advertising, profiling, or purposes beyond the features listed here.</p>
+          </div>
+          <div class="card">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Product action</th>
+                  <th>Why it exists</th>
+                  <th>Where to see it</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Manage WhatsApp accounts</td>
+                  <td>Fetch and configure the client WABA, phone number, templates, and webhook subscription on behalf of the authorized business.</td>
+                  <td><a href="app-review-demo.html">Console setup</a></td>
+                </tr>
+                <tr>
+                  <td>Send business messages</td>
+                  <td>Send approved template messages and support replies for opted-in customers using the Cloud API.</td>
+                  <td><a href="app-review-demo.html">Messaging desk</a></td>
+                </tr>
+                <tr>
+                  <td>Authorize business assets</td>
+                  <td>Let a customer securely select and share their business portfolio through Embedded Signup.</td>
+                  <td><a href="embedded-signup.html">Signup flow</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Permission documentation (detailed) -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Permission documentation</p>
+          <h2>How WAchat uses each WhatsApp permission.</h2>
+          <p class="lead">WAchat is a WhatsApp Business Tech Provider. Both permissions below are required to onboard client businesses through Embedded Signup and operate messaging workflows on their behalf.</p>
+        </div>
+
+        <div style="display:grid;gap:24px">
+
+          <!-- whatsapp_business_messaging -->
+          <div class="card">
+            <div class="perm-block">
+              <div class="feat-icon">MSG</div>
+              <div style="flex:1;min-width:0">
+                <span class="perm-name">whatsapp_business_messaging</span>
+                <h3>Send approved template messages to opted-in customers</h3>
+                <p class="muted" style="margin-bottom:0">WAchat uses this permission to send pre-approved WhatsApp message templates to customers on behalf of the authorized business. Messages are only sent to recipients who have provided valid opt-in consent before the first message is initiated. All sends use templates that have already passed Meta's template review process.</p>
+                <div class="perm-cols">
+                  <div>
+                    <h4>Data accessed</h4>
+                    <ul class="check-list">
+                      <li>Phone number ID (identifies the sending number)</li>
+                      <li>Recipient phone number (customer-provided opt-in)</li>
+                      <li>Approved template name and variable parameters</li>
+                      <li>Message status webhooks: sent, delivered, read, failed</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>How it is used</h4>
+                    <ul class="check-list">
+                      <li>Send order updates and shipping alerts for e-commerce</li>
+                      <li>Send appointment reminders for healthcare providers</li>
+                      <li>Deliver transaction alerts for financial services</li>
+                      <li>Send post-support follow-up messages after ticket resolution</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- whatsapp_business_management -->
+          <div class="card">
+            <div class="perm-block">
+              <div class="feat-icon">MGT</div>
+              <div style="flex:1;min-width:0">
+                <span class="perm-name">whatsapp_business_management</span>
+                <h3>Manage client WhatsApp Business Accounts as a Tech Provider</h3>
+                <p class="muted" style="margin-bottom:0">WAchat uses this permission to onboard client businesses through Embedded Signup, read their WABA and phone number identifiers, create and manage message templates within their account, and subscribe to webhook events. This is the core permission that enables WAchat to operate as a Tech Provider managing WhatsApp infrastructure for multiple client businesses from a single platform.</p>
+                <div class="perm-cols">
+                  <div>
+                    <h4>Data accessed</h4>
+                    <ul class="check-list">
+                      <li>WABA ID and display name (via Embedded Signup)</li>
+                      <li>Phone number ID and registration status</li>
+                      <li>Template name, category, status, and body content</li>
+                      <li>Webhook subscription status and app subscription events</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4>How it is used</h4>
+                    <ul class="check-list">
+                      <li>Read client WABA after Embedded Signup authorization</li>
+                      <li>Create and submit templates for Meta approval on client's behalf</li>
+                      <li>Subscribe to webhooks for message status and account changes</li>
+                      <li>Fetch template approval status to inform operations team</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Use cases -->
+    <section class="section bg-muted">
+      <div class="wrap">
+        <div class="section-head center">
+          <p class="eyebrow">Use cases</p>
+          <h2>Industries already running this workflow.</h2>
+          <p class="lead">WAchat handles transactional messaging for teams that need to send high-trust messages to opted-in customers under real compliance requirements.</p>
+        </div>
+        <div class="grid cols-3">
+          <div class="card">
+            <div class="feat-icon">EC</div>
+            <h3>E-commerce &amp; retail</h3>
+            <p class="muted">Order confirmations, shipping updates, delivery alerts, and return notifications sent through approved utility templates to customers who opted in at checkout.</p>
+          </div>
+          <div class="card">
+            <div class="feat-icon">HC</div>
+            <h3>Healthcare &amp; wellness</h3>
+            <p class="muted">Appointment reminders, prescription pickup alerts, lab result notifications, and post-care follow-ups sent to patients who have opted in to receive updates.</p>
+          </div>
+          <div class="card">
+            <div class="feat-icon">FS</div>
+            <h3>Financial services</h3>
+            <p class="muted">Transaction alerts, payment confirmations, account status updates, and security notifications sent through compliant, pre-approved messaging flows.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Operational model -->
+    <section class="section">
+      <div class="wrap">
+        <div class="split">
+          <div>
+            <p class="eyebrow">Operational model</p>
+            <h2>Designed for agencies, software vendors, and service teams managing WhatsApp for more than one business.</h2>
+          </div>
+          <ul class="check-list">
+            <li>Separate each customer account, WABA, phone number, and template library in an isolated workspace.</li>
+            <li>Keep message sends traceable to the template, recipient, phone number, and status event.</li>
+            <li>Make data deletion and support requests easier to verify and complete.</li>
+            <li>Give Meta reviewers and client customers a real product surface to inspect at any time.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html"><span class="brand-mark">WAchat</span><span>WAchat</span></a>
+          <p>Secure messaging infrastructure for customer operations.</p>
+        </div>
+        <div class="footer-col">
+          <strong>Product</strong>
+          <a href="platform.html">Platform</a>
+          <a href="embedded-signup.html">Embedded Signup</a>
+          <a href="app-review-demo.html">Console Demo</a>
+        </div>
+        <div class="footer-col">
+          <strong>Company</strong>
+          <a href="security.html">Security</a>
+          <a href="support.html">Support</a>
+          <a href="contact.html">Talk to us</a>
+        </div>
+        <div class="footer-col">
+          <strong>Legal</strong>
+          <a href="privacy.html">Privacy</a>
+          <a href="data-deletion.html">Data Deletion</a>
+          <a href="terms.html">Terms</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 WAchat. Not affiliated with Meta Platforms, Inc.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

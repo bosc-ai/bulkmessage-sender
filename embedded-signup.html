@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Embedded Signup | WAchat</title>
+  <meta name="description" content="Connect a WhatsApp Business Account to WAchat using Embedded Signup.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="index.html"><span class="brand-mark">WAchat</span><span>WAchat</span></a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="platform.html">Platform</a>
+        <a class="active" href="embedded-signup.html">Embedded Signup</a>
+        <a href="app-review-demo.html">Console Demo</a>
+        <a href="security.html">Security</a>
+        <a href="support.html">Support</a>
+      </div>
+      <div class="nav-actions">
+        <a class="button secondary" href="contact.html">Talk to us</a>
+        <a class="button" href="#signup">Connect business</a>
+      </div>
+      <button class="button secondary mobile-toggle" data-menu-toggle type="button">Menu</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Embedded Signup</span></div>
+        <p class="eyebrow">Client authorization</p>
+        <h1>A clean front door for WhatsApp Business onboarding.</h1>
+        <p class="lead">Embedded Signup lets a client authorize their business assets without sending IDs over chat or email. WAchat turns that authorization into a managed workspace.</p>
+      </div>
+    </section>
+
+    <section class="section" id="signup">
+      <div class="wrap">
+        <div class="split">
+
+          <div class="signup-frame">
+            <div class="signup-titlebar">
+              <div class="window-dots"><span></span><span></span><span></span></div>
+              <span class="console-file">Embedded Signup</span>
+            </div>
+            <div class="signup-body">
+              <span class="badge green" style="margin-bottom:18px">Ready for configuration</span>
+              <h2>Connect a business account</h2>
+              <p class="lead" style="font-size:15px;margin-bottom:24px">In production this button opens Meta Login for Business, receives the signup session response, and sends the code to your backend token-exchange endpoint.</p>
+              <div class="hero-actions">
+                <button class="button lg" type="button" onclick="alert('Embedded Signup launch point. Connect this button to your Meta Login for Business configuration when deploying.')">Login with Facebook</button>
+                <a class="button lg secondary" href="app-review-demo.html">Preview console result</a>
+              </div>
+              <div class="notice" style="margin-top:22px">Before going live, add your HTTPS domain to Meta app settings and configure Login for Business, OAuth redirects, webhook callback, privacy URL, and data deletion URL.</div>
+            </div>
+          </div>
+
+          <div class="process">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h3>Authorize assets</h3>
+                <p class="muted">The business signs in, chooses the business portfolio, selects a WABA, and shares access.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h3>Create the workspace</h3>
+                <p class="muted">WAchat stores the required business and phone identifiers, then prepares the account for Cloud API operations.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h3>Activate monitoring</h3>
+                <p class="muted">Webhook subscriptions and status logs help the team support sends, templates, and account changes.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-muted">
+      <div class="wrap">
+        <div class="section-head center">
+          <p class="eyebrow">Production readiness</p>
+          <h2>What this page proves before a client signs in.</h2>
+        </div>
+        <div class="grid cols-3">
+          <div class="card">
+            <h3>Domain ownership</h3>
+            <p class="muted">The signup flow lives on the same brand domain as support, privacy, deletion, and security pages.</p>
+          </div>
+          <div class="card">
+            <h3>Clear data handling</h3>
+            <p class="muted">Clients can inspect what WAchat stores and how they can request deletion before authorizing assets.</p>
+          </div>
+          <div class="card">
+            <h3>Visible product result</h3>
+            <p class="muted">After authorization, the client sees a workspace for templates, sends, logs, and account health.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html"><span class="brand-mark">WAchat</span><span>WAchat</span></a>
+          <p>Embedded Signup and Cloud API onboarding.</p>
+        </div>
+        <div class="footer-col">
+          <strong>Product</strong>
+          <a href="platform.html">Platform</a>
+          <a href="embedded-signup.html">Embedded Signup</a>
+          <a href="app-review-demo.html">Console Demo</a>
+        </div>
+        <div class="footer-col">
+          <strong>Company</strong>
+          <a href="security.html">Security</a>
+          <a href="support.html">Support</a>
+          <a href="contact.html">Talk to us</a>
+        </div>
+        <div class="footer-col">
+          <strong>Legal</strong>
+          <a href="privacy.html">Privacy</a>
+          <a href="data-deletion.html">Data Deletion</a>
+          <a href="terms.html">Terms</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 WAchat. Not affiliated with Meta Platforms, Inc.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

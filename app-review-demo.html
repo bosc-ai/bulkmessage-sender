@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Console Demo | WAchat</title>
+  <meta name="description" content="WAchat console demo for WhatsApp Business onboarding, templates, Cloud API sends, and webhook logs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="index.html"><span class="brand-mark">WAchat</span><span>WAchat</span></a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="platform.html">Platform</a>
+        <a href="embedded-signup.html">Embedded Signup</a>
+        <a class="active" href="app-review-demo.html">Console Demo</a>
+        <a href="security.html">Security</a>
+        <a href="support.html">Support</a>
+      </div>
+      <div class="nav-actions">
+        <a class="button secondary" href="contact.html">Talk to us</a>
+        <a class="button" href="embedded-signup.html">Connect business</a>
+      </div>
+      <button class="button secondary mobile-toggle" data-menu-toggle type="button">Menu</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Console Demo</span></div>
+        <p class="eyebrow">Product walkthrough</p>
+        <h1>See the workspace a client gets after authorization.</h1>
+        <p class="lead">This console demo shows the practical surfaces WAchat provides: account onboarding, template operations, Cloud API sends, and webhook evidence — covering both <span style="font-weight:600;color:var(--ink)">whatsapp_business_management</span> and <span style="font-weight:600;color:var(--ink)">whatsapp_business_messaging</span> permissions.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="demo-shell">
+
+          <aside class="demo-sidebar">
+            <strong>WAchat Console</strong>
+            <a class="active" href="#overview">Account health</a>
+            <a href="#onboarding">Onboarding trail</a>
+            <a href="#templates">Templates</a>
+            <a href="#create-template">Create template</a>
+            <a href="#messaging">Send message</a>
+            <a href="#webhooks">Webhook logs</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="data-deletion.html">Data Deletion</a>
+          </aside>
+
+          <div class="demo-main">
+
+            <!-- Account health -->
+            <section id="overview">
+              <div class="card compact" style="margin-bottom:22px">
+                <span class="badge green" style="margin-bottom:14px">Workspace active</span>
+                <h2 style="font-size:22px;margin-bottom:8px">RetailCo India</h2>
+                <p class="muted" style="margin-bottom:18px">A connected WhatsApp Business Account with registered phone number, subscribed webhooks, and approved message templates. Authorized via Embedded Signup using <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:12px">whatsapp_business_management</code>.</p>
+                <div class="grid cols-3">
+                  <div class="card compact">
+                    <h3>WABA</h3>
+                    <p class="muted" style="font-size:13px;margin:0">Connected through Embedded Signup</p>
+                  </div>
+                  <div class="card compact">
+                    <h3>Phone number</h3>
+                    <p class="muted" style="font-size:13px;margin:0">Cloud API registration complete</p>
+                  </div>
+                  <div class="card compact">
+                    <h3>Webhooks</h3>
+                    <p class="muted" style="font-size:13px;margin:0">Message and template events active</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Onboarding trail -->
+            <section id="onboarding" style="padding:28px 0 0">
+              <p class="eyebrow">Onboarding trail — whatsapp_business_management</p>
+              <h2 style="font-size:22px;margin-bottom:20px">Every handoff is visible.</h2>
+              <div class="process">
+                <div class="step">
+                  <div class="step-num">1</div>
+                  <div class="step-content">
+                    <h3>Client authorized business assets via Embedded Signup</h3>
+                    <p class="muted">Business portfolio, WABA ID, and phone-number ID received after client completed Facebook Login for Business. WAchat exchanged the authorization code for a system user token.</p>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="step-num">2</div>
+                  <div class="step-content">
+                    <h3>WAchat created an isolated account workspace</h3>
+                    <p class="muted">WABA ID and phone number ID stored. Token exchange completed via <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:12px">GET /oauth/access_token</code>. Workspace access assigned to operations team.</p>
+                  </div>
+                </div>
+                <div class="step">
+                  <div class="step-num">3</div>
+                  <div class="step-content">
+                    <h3>Webhook subscription verified and active</h3>
+                    <p class="muted">Subscribed to <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:12px">messages</code>, <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:12px">message_template_status_update</code>, and <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:12px">account_update</code> events. All callbacks are captured for support.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Templates list -->
+            <section id="templates" style="padding:32px 0 0">
+              <p class="eyebrow">Template operations — whatsapp_business_management</p>
+              <h2 style="font-size:22px;margin-bottom:6px">Approved messages with purpose.</h2>
+              <p class="muted" style="font-size:14px;margin-bottom:16px">Templates are fetched via <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:12px">GET /v20.0/{waba-id}/message_templates</code> and displayed with their approval status and operational purpose.</p>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Template name</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Operational use</th>
+                  </tr>
+                </thead>
+                <tbody data-template-table>
+                  <tr>
+                    <td>order_update</td>
+                    <td>Utility</td>
+                    <td><span class="badge green">Approved</span></td>
+                    <td>Delivery and order-status notifications</td>
+                  </tr>
+                  <tr>
+                    <td>appointment_reminder</td>
+                    <td>Utility</td>
+                    <td><span class="badge green">Approved</span></td>
+                    <td>Booking reminders and schedule confirmation</td>
+                  </tr>
+                  <tr>
+                    <td>support_followup</td>
+                    <td>Utility</td>
+                    <td><span class="badge amber">Draft</span></td>
+                    <td>Follow-up after a customer support interaction</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <!-- Create template (whatsapp_business_management demo) -->
+            <section id="create-template" style="padding:32px 0 0">
+              <p class="eyebrow">Create template — whatsapp_business_management</p>
+              <h2 style="font-size:22px;margin-bottom:6px">Submit a new message template for Meta review.</h2>
+              <p class="muted" style="font-size:14px;margin-bottom:20px">WAchat calls <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:12px">POST /v20.0/{waba-id}/message_templates</code> on behalf of the authorized business. All templates go through Meta's review process before they can be sent to customers.</p>
+              <form class="card form" data-template-form>
+                <div class="grid cols-2">
+                  <div class="field">
+                    <label for="tmpl-name">Template name</label>
+                    <input id="tmpl-name" value="delivery_notification" placeholder="delivery_notification" required>
+                  </div>
+                  <div class="field">
+                    <label for="tmpl-category">Category</label>
+                    <select id="tmpl-category">
+                      <option value="UTILITY">Utility</option>
+                      <option value="MARKETING">Marketing</option>
+                      <option value="AUTHENTICATION">Authentication</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="grid cols-2">
+                  <div class="field">
+                    <label for="tmpl-language">Language</label>
+                    <select id="tmpl-language">
+                      <option value="en_US">English (US)</option>
+                      <option value="en_GB">English (UK)</option>
+                      <option value="hi">Hindi</option>
+                      <option value="ta">Tamil</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="tmpl-sample">Sample value for &#123;&#123;1&#125;&#125;</label>
+                    <input id="tmpl-sample" value="#ORD-12345" placeholder="#ORD-12345">
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="tmpl-body">Template body</label>
+                  <textarea id="tmpl-body" style="font-family:ui-monospace,monospace;font-size:13px;min-height:76px">Your order {{1}} has been dispatched and is on the way. Expected delivery: {{2}}. Track your package: {{3}}</textarea>
+                </div>
+                <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+                  <button class="button" type="submit">Submit template for review</button>
+                  <span class="badge gray">Meta approval required before sending</span>
+                </div>
+              </form>
+            </section>
+
+            <!-- Send message (whatsapp_business_messaging demo) -->
+            <section id="messaging" style="padding:32px 0 0">
+              <div class="toolbar">
+                <div>
+                  <p class="eyebrow">Cloud API send — whatsapp_business_messaging</p>
+                  <h2 style="font-size:22px;margin-bottom:6px">Send a controlled template message.</h2>
+                  <p class="muted" style="font-size:14px;margin:0">WAchat calls <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:12px">POST /v20.0/{phone-number-id}/messages</code> with an approved template. Only opted-in recipients receive messages.</p>
+                </div>
+                <button class="button" type="button" data-send-demo>Send demo message</button>
+              </div>
+              <div class="grid cols-2" style="margin-bottom:16px">
+                <label class="field">
+                  <span>Recipient (opted-in customer)</span>
+                  <input id="recipient" value="+91 90000 00000">
+                </label>
+                <label class="field">
+                  <span>Approved template</span>
+                  <select id="templateName">
+                    <option>order_update</option>
+                    <option>appointment_reminder</option>
+                    <option>support_followup</option>
+                  </select>
+                </label>
+              </div>
+              <div class="message-window">
+                <div class="phone">
+                  <div class="phone-top">Customer conversation — WhatsApp</div>
+                  <div class="phone-body" data-demo-phone>
+                    <div class="bubble">Hi, can you send my order update?</div>
+                    <div class="bubble sent">Sure. Sending the approved order update now.</div>
+                  </div>
+                </div>
+                <pre class="log" data-demo-log>webhook=message_status.delivered
+template=order_update
+status=delivered
+quality_rating=green
+recipient=+91 90000 00000</pre>
+              </div>
+            </section>
+
+            <!-- Webhook logs -->
+            <section id="webhooks" style="padding:32px 0 0">
+              <p class="eyebrow">Webhook evidence — whatsapp_business_management</p>
+              <h2 style="font-size:22px;margin-bottom:8px">Status changes your team can actually read.</h2>
+              <p class="muted" style="font-size:14px;margin-bottom:16px">WAchat subscribes to webhook events using <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-size:12px">POST /v20.0/{waba-id}/subscribed_apps</code>. Every event is captured and associated with the right business workspace.</p>
+              <div class="grid cols-3">
+                <div class="card compact">
+                  <h3>messages.sent</h3>
+                  <p class="muted" style="font-size:13px;margin:0">Cloud API accepted the template message payload for delivery.</p>
+                </div>
+                <div class="card compact">
+                  <h3>messages.delivered</h3>
+                  <p class="muted" style="font-size:13px;margin:0">Delivery confirmation received from Meta webhook callback.</p>
+                </div>
+                <div class="card compact">
+                  <h3>template_status_update</h3>
+                  <p class="muted" style="font-size:13px;margin:0">Template approval or rejection events captured for support.</p>
+                </div>
+                <div class="card compact">
+                  <h3>account_update</h3>
+                  <p class="muted" style="font-size:13px;margin:0">WABA account changes, business tier updates, and enforcement events.</p>
+                </div>
+                <div class="card compact">
+                  <h3>messages.read</h3>
+                  <p class="muted" style="font-size:13px;margin:0">Read receipts from the customer, tied to message thread for support.</p>
+                </div>
+                <div class="card compact">
+                  <h3>phone_number_update</h3>
+                  <p class="muted" style="font-size:13px;margin:0">Phone number quality, display name, and registration status changes.</p>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="index.html"><span class="brand-mark">WAchat</span><span>WAchat</span></a>
+          <p>Product walkthrough for onboarding and messaging operations.</p>
+        </div>
+        <div class="footer-col">
+          <strong>Product</strong>
+          <a href="platform.html">Platform</a>
+          <a href="embedded-signup.html">Embedded Signup</a>
+          <a href="app-review-demo.html">Console Demo</a>
+        </div>
+        <div class="footer-col">
+          <strong>Company</strong>
+          <a href="security.html">Security</a>
+          <a href="support.html">Support</a>
+          <a href="contact.html">Talk to us</a>
+        </div>
+        <div class="footer-col">
+          <strong>Legal</strong>
+          <a href="privacy.html">Privacy</a>
+          <a href="data-deletion.html">Data Deletion</a>
+          <a href="terms.html">Terms</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 WAchat. Not affiliated with Meta Platforms, Inc.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
