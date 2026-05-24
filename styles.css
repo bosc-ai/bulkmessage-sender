@@ -80,8 +80,11 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
-  scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
 }
 
 body {
@@ -598,6 +601,7 @@ h3 {
 
 .hero-visual {
   position: relative;
+  overflow: visible;
 }
 
 .inbox-wrap {
@@ -608,6 +612,7 @@ h3 {
   border: 1px solid var(--border);
   background: var(--bg);
   animation: float 6s ease-in-out infinite;
+  will-change: transform;
 }
 
 @keyframes float {
@@ -937,7 +942,7 @@ h3 {
   color: #fff;
 }
 
-/* Notification toast */
+/* Notification toast — animated by GSAP only, no CSS animation here */
 .inbox-toast {
   position: absolute;
   bottom: -20px;
@@ -950,7 +955,6 @@ h3 {
   display: flex;
   align-items: center;
   gap: 10px;
-  animation: toast-in 0.5s var(--spring) 1.2s both;
   z-index: 10;
 }
 
@@ -1558,19 +1562,11 @@ h3 {
 
 .faq-item.open .faq-chevron { transform: rotate(180deg); }
 
-.faq-a {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.35s var(--ease-out);
-}
-
-.faq-item.open .faq-a {
-  grid-template-rows: 1fr;
-}
-
 .faq-a-inner {
+  max-height: 0;
   overflow: hidden;
   padding: 0 24px;
+  transition: max-height 0.35s var(--ease-out), padding 0.25s var(--ease-out);
 }
 
 .faq-item.open .faq-a-inner {
@@ -1956,7 +1952,7 @@ h3 {
 
 /* ── 19. Animations & Keyframes ────────────── */
 
-/* Scroll reveal classes — set by JS */
+/* Scroll reveal classes — initial hidden state (GSAP overrides via fromTo) */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -1972,7 +1968,8 @@ h3 {
   transform: translateX(24px);
 }
 
-.revealed {
+.revealed,
+.is-visible {
   opacity: 1 !important;
   transform: none !important;
   transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
@@ -1984,6 +1981,30 @@ h3 {
   transform: translateY(20px);
 }
 
+/* ── Focus-visible styles ─────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  border-radius: var(--r-xs);
+}
+
+.btn:focus-visible,
+.faq-q:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* ── Touch targets — min 44px for all interactive elements ── */
+
+.btn { min-height: 44px; }
+.btn-sm { min-height: 36px; }
+.nav-links a { min-height: 44px; }
+.nav-signin { min-height: 44px; }
+.mobile-toggle { min-height: 44px; min-width: 44px; }
+.faq-q { min-height: 52px; }
+.mobile-menu a { min-height: 48px; display: flex; align-items: center; }
+
 /* ── 20. Responsive ────────────────────────── */
 
 @media (max-width: 1100px) {
@@ -1991,63 +2012,155 @@ h3 {
 }
 
 @media (max-width: 960px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 56px; }
-  .hero { padding: 130px 0 80px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero { padding: 120px 0 72px; }
   .hero-content { max-width: 100%; }
   .hero-lead { max-width: 100%; }
 
-  .inbox-wrap { animation: none; }
+  /* Stop float animation on tablet — reduces motion distraction */
+  .inbox-wrap { animation: none; will-change: auto; }
+  /* Scale inbox to fit on tablet */
+  .hero-visual { max-width: 600px; margin: 0 auto; }
+  /* Keep toast visible but clip at edge */
+  .hero-visual { overflow: visible; }
 
   .trust-band-inner { grid-template-columns: 1fr; gap: 48px; }
+  .trust-visual { max-width: 520px; }
 
   .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .usecases-grid { grid-template-columns: repeat(3, 1fr); }
 
-  .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
 
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .footer-brand { grid-column: 1 / -1; }
 
   .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .contact-form-card { padding: 32px; }
 }
 
 @media (max-width: 768px) {
-  .section { padding: 72px 0; }
-  .section-lg { padding: 88px 0; }
+  .section { padding: 64px 0; }
+  .section-lg { padding: 80px 0; }
+  .section-sm { padding: 52px 0; }
 
+  /* Nav: hide links, show hamburger */
   .nav-links { display: none; }
   .nav-signin { display: none; }
   .mobile-toggle { display: flex; }
-
   .nav-actions .btn:not(.mobile-toggle) { display: none; }
+  .nav { min-height: 60px; }
+  .mobile-menu { top: 60px; display: block; }
 
-  .mobile-menu { display: block; }
-
+  /* Hero */
+  .hero { padding: 100px 0 60px; }
   .inbox-body { grid-template-columns: 1fr; }
   .inbox-sidebar { display: none; }
+  .inbox-toast {
+    bottom: -14px;
+    right: -10px;
+    padding: 10px 12px;
+    gap: 8px;
+  }
 
+  /* Grids */
   .features-grid { grid-template-columns: 1fr; }
   .usecases-grid { grid-template-columns: repeat(2, 1fr); }
   .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  /* Fix border on 2-col stats: remove right border from even items */
+  .stats-strip .stat-item:nth-child(even) { border-right: none; }
+  .stats-strip .stat-item:nth-child(1),
+  .stats-strip .stat-item:nth-child(2) { border-bottom: 1px solid var(--border); }
 
-  .early-access-card { padding: 36px 24px; }
-
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
-  .footer-disclaimer { text-align: left; }
-
-  .form-grid { grid-template-columns: 1fr; }
-
-  .pricing-grid { grid-template-columns: 1fr; }
+  /* Pricing */
+  .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
   .pricing-card.featured { order: -1; }
+  .pricing-card { padding: 24px; }
+
+  /* Early access */
+  .early-access-card { padding: 36px 24px; }
+  .cta-band { padding: 72px 0; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .footer-disclaimer { text-align: left; max-width: 100%; }
+  .footer { padding: 48px 0 28px; }
+
+  /* Forms */
+  .form-grid { grid-template-columns: 1fr; }
+  .contact-form-card { padding: 24px; }
+
+  /* Trust */
+  .trust-band { padding: 56px 0; }
+  .trust-stats-row { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 480px) {
-  .container { width: calc(100% - 32px); }
-  h1 { font-size: 34px; }
-  h2 { font-size: 26px; }
+  .container,
+  .container-sm { width: calc(100% - 32px); }
+
+  .section { padding: 52px 0; }
+  .section-head { margin-bottom: 40px; }
+
+  h1 { font-size: clamp(30px, 8vw, 38px); }
+  h2 { font-size: clamp(24px, 6vw, 30px); }
+
+  /* Hero */
+  .hero { padding: 88px 0 52px; }
   .hero-cta { flex-direction: column; }
   .hero-cta .btn { width: 100%; justify-content: center; }
-  .usecases-grid { grid-template-columns: 1fr 1fr; }
+  .hero-trust { gap: 6px 12px; }
+  .inbox-toast { display: none; }
+
+  /* Grids */
+  .features-grid { grid-template-columns: 1fr; gap: 16px; }
+  .usecases-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
   .stats-strip { grid-template-columns: 1fr 1fr; }
-  .footer-grid { grid-template-columns: 1fr; }
-  .trust-stats-row { grid-template-columns: 1fr; }
+  .trust-stats-row { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .footer-bottom { flex-direction: column; gap: 12px; }
+  .footer-disclaimer { text-align: left; }
+
+  /* Pricing */
+  .pricing-price { font-size: 40px; }
+  .early-access-card { padding: 28px 20px; }
+
+  /* FAQ */
+  .faq-q { padding: 16px 18px; font-size: 14px; }
+  .faq-a-inner { padding: 0 18px; }
+  .faq-item.open .faq-a-inner { padding: 0 18px 16px; }
+
+  /* Contact */
+  .contact-form-card { padding: 20px; }
+  .contact-detail { gap: 10px; }
+}
+
+/* ── 21. Prefers-reduced-motion ─────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep critical transitions slightly visible */
+  .faq-a-inner { transition: none !important; }
+  .toggle-knob { transition: transform 0.1s !important; }
+
+  /* Stop float animation */
+  .inbox-wrap { animation: none !important; will-change: auto; }
+
+  /* Make reveal elements immediately visible */
+  .reveal,
+  .reveal-left,
+  .reveal-right {
+    opacity: 1;
+    transform: none;
+  }
 }

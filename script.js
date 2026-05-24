@@ -1,365 +1,377 @@
-/* WaChat — Interactions & Animations
-   GSAP + ScrollTrigger + Lenis smooth scroll
-   ──────────────────────────────────────────── */
+/* WaChat — Interactions v3
+   ─────────────────────────────────────────────
+   Fixes in this version:
+   · Single Lenis driver (GSAP ticker OR rAF, never both)
+   · Removed CSS/GSAP conflict on .inbox-toast
+   · prefers-reduced-motion respected everywhere
+   · Mobile menu uses opacity + pointer-events (not display)
+   · FAQ uses maxHeight (cross-browser, no grid trick)
+   · All GSAP calls null-checked
+   · Pricing toggle keyboard-accessible
+   ─────────────────────────────────────────────── */
 
-// ── Lenis smooth scroll ─────────────────────
+'use strict';
 
-let lenis;
-if (typeof Lenis !== 'undefined') {
+const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const HAS_GSAP = typeof gsap !== 'undefined';
+const HAS_LENIS = typeof Lenis !== 'undefined';
+
+/* ── 1. Lenis smooth scroll ───────────────────
+   CRITICAL FIX: use EXACTLY ONE driver.
+   gsap.ticker if GSAP is loaded, else rAF.
+   The old code called lenis.raf() from BOTH,
+   doubling every scroll update → extreme jank.
+──────────────────────────────────────────────── */
+let lenis = null;
+
+function initLenis() {
+  if (!HAS_LENIS || REDUCED) return;
+
   lenis = new Lenis({
-    duration: 1.2,
+    duration: 1.1,
     easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    wheelMultiplier: 0.85,
+    wheelMultiplier: 0.88,
     touchMultiplier: 1.5,
+    infinite: false,
   });
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
-  // Sync with GSAP ScrollTrigger
-  if (typeof gsap !== 'undefined' && gsap.ticker) {
-    gsap.ticker.add(time => {
-      lenis.raf(time * 1000);
-    });
+  if (HAS_GSAP) {
+    // GSAP ticker drives Lenis — do NOT also start an rAF loop
+    gsap.ticker.add(time => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
+  } else {
+    // No GSAP — use rAF only
+    (function tick(t) { lenis.raf(t); requestAnimationFrame(tick); })();
   }
+
+  // Allow anchor clicks to work with smooth scroll
+  lenis.on('scroll', ScrollTrigger?.update ?? (() => {}));
 }
 
-// ── Navigation ──────────────────────────────
+/* ── 2. Navigation ────────────────────────────── */
+function initNav() {
+  const nav = document.querySelector('.nav-wrap');
+  if (!nav) return;
 
-const navWrap = document.querySelector('.nav-wrap');
-const mobileToggle = document.querySelector('.mobile-toggle');
+  const toggle  = nav.querySelector('.mobile-toggle');
+  const overlay = nav.querySelector('.mobile-menu');
 
-// Scroll-aware navbar
-let lastScrollY = 0;
+  // Scroll-aware glass effect
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // run immediately on load
 
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  if (navWrap) {
-    navWrap.classList.toggle('scrolled', scrollY > 20);
+  // Mobile menu — toggle open class; CSS handles opacity/pointer-events
+  function openMenu()  {
+    nav.classList.add('menu-open');
+    toggle?.setAttribute('aria-expanded', 'true');
+    document.documentElement.style.overflow = 'hidden'; // lock scroll on iOS too
   }
-  lastScrollY = scrollY;
-}, { passive: true });
+  function closeMenu() {
+    nav.classList.remove('menu-open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    document.documentElement.style.overflow = '';
+  }
 
-// Mobile menu toggle
-if (mobileToggle && navWrap) {
-  mobileToggle.addEventListener('click', () => {
-    navWrap.classList.toggle('menu-open');
+  toggle?.addEventListener('click', e => {
+    e.stopPropagation();
+    nav.classList.contains('menu-open') ? closeMenu() : openMenu();
   });
 
-  // Close menu on link click
-  document.querySelectorAll('.mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => navWrap.classList.remove('menu-open'));
+  // Close on any link inside the mobile menu
+  overlay?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  // Close on outside tap
+  document.addEventListener('pointerdown', e => {
+    if (nav.classList.contains('menu-open') && !nav.contains(e.target)) closeMenu();
   });
 
-  // Close on outside click
-  document.addEventListener('click', e => {
-    if (!navWrap.contains(e.target)) {
-      navWrap.classList.remove('menu-open');
+  // Keyboard: Escape closes menu
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && nav.classList.contains('menu-open')) closeMenu();
+  });
+
+  // Mark active link
+  const page = location.pathname.split('/').pop() || 'index.html';
+  nav.querySelectorAll('a[href]').forEach(a => {
+    const href = a.getAttribute('href').split('?')[0].split('#')[0];
+    if (href === page || (page === '' && href === 'index.html')) {
+      a.classList.add('active');
     }
   });
 }
 
-// ── GSAP Animations ─────────────────────────
+/* ── 3. GSAP Animations ───────────────────────── */
+function initAnimations() {
+  if (!HAS_GSAP) {
+    // Fallback: IntersectionObserver makes reveals visible
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
+    return;
+  }
 
-if (typeof gsap !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 
-  // Hero entrance (page load)
-  const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  // Helper: batch animate a list with stagger on scroll
+  function batchReveal(selector, fromVars, scrollStart = 'top 88%') {
+    const els = gsap.utils.toArray(selector);
+    if (!els.length) return;
 
-  if (document.querySelector('.eyebrow')) {
-    heroTl
-      .from('.hero .eyebrow', { opacity: 0, y: 18, duration: 0.55 })
-      .from('.hero h1', { opacity: 0, y: 28, duration: 0.7 }, '-=0.3')
-      .from('.hero-lead', { opacity: 0, y: 20, duration: 0.6 }, '-=0.4')
-      .from('.hero-cta', { opacity: 0, y: 16, duration: 0.5 }, '-=0.4')
-      .from('.hero-trust', { opacity: 0, y: 10, duration: 0.45 }, '-=0.35')
-      .from('.hero-visual', { opacity: 0, x: 32, duration: 0.75, ease: 'power2.out' }, '-=0.7')
-      .from('.inbox-toast', { opacity: 0, y: 16, scale: 0.95, duration: 0.5, ease: 'back.out(1.4)' }, '-=0.2');
+    if (REDUCED) {
+      // Skip animation, just make visible
+      gsap.set(els, { opacity: 1, x: 0, y: 0 });
+      return;
+    }
+
+    els.forEach(el => {
+      gsap.fromTo(el,
+        { opacity: 0, ...fromVars },
+        {
+          opacity: 1, x: 0, y: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: el, start: scrollStart, once: true },
+        }
+      );
+    });
   }
 
-  // Generic scroll-reveal: any element with .reveal class
-  const revealEls = document.querySelectorAll('.reveal');
-  revealEls.forEach(el => {
-    gsap.to(el, {
-      opacity: 1,
-      y: 0,
-      duration: 0.65,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 88%',
-        once: true,
-      }
-    });
-  });
+  // ── Hero (homepage only) ──────────────────────
+  const hero = document.querySelector('.hero');
+  if (hero && !REDUCED) {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    const q  = s => hero.querySelector(s);
 
-  // Feature cards stagger
-  const featureGrids = document.querySelectorAll('.features-grid, .usecases-grid');
-  featureGrids.forEach(grid => {
-    const cards = grid.querySelectorAll('.feature-card, .usecase-card');
+    const eyebrow  = q('.eyebrow');
+    const h1       = q('h1');
+    const lead     = q('.hero-lead');
+    const cta      = q('.hero-cta');
+    const trust    = q('.hero-trust');
+    const visual   = q('.hero-visual');
+    // NOTE: .inbox-toast is animated by GSAP only — CSS animation removed from it
+    const toast    = document.querySelector('.inbox-toast');
+
+    if (eyebrow)  tl.from(eyebrow,  { opacity: 0, y: 14, duration: 0.5 });
+    if (h1)       tl.from(h1,       { opacity: 0, y: 22, duration: 0.6 }, '-=0.22');
+    if (lead)     tl.from(lead,     { opacity: 0, y: 14, duration: 0.5 }, '-=0.3');
+    if (cta)      tl.from(cta,      { opacity: 0, y: 10, duration: 0.45 }, '-=0.3');
+    if (trust)    tl.from(trust,    { opacity: 0, y: 8,  duration: 0.4 }, '-=0.3');
+    if (visual)   tl.from(visual,   { opacity: 0, x: 24, duration: 0.65, ease: 'power2.out' }, '-=0.6');
+    // Toast enters last — no CSS animation on this element
+    if (toast)    tl.from(toast,    { opacity: 0, y: 10, scale: 0.94, duration: 0.45, ease: 'back.out(1.5)' }, '-=0.15');
+  } else if (hero && REDUCED) {
+    // Just show everything immediately
+    gsap.set(['.hero .eyebrow', '.hero h1', '.hero-lead', '.hero-cta', '.hero-trust', '.hero-visual', '.inbox-toast'], { opacity: 1, x: 0, y: 0 });
+  }
+
+  // ── Scroll reveals ────────────────────────────
+  batchReveal('.reveal',       { y: 22 });
+  batchReveal('.reveal-left',  { x: -22 });
+  batchReveal('.reveal-right', { x: 22 });
+
+  // ── Feature & usecase card stagger ────────────
+  document.querySelectorAll('.features-grid, .usecases-grid, .values-grid').forEach(grid => {
+    const cards = gsap.utils.toArray('.feature-card, .usecase-card, .value-card', grid);
+    if (!cards.length || REDUCED) { if (REDUCED) gsap.set(cards, { opacity: 1 }); return; }
     gsap.from(cards, {
-      opacity: 0,
-      y: 28,
-      stagger: 0.08,
-      duration: 0.6,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: grid,
-        start: 'top 85%',
-        once: true,
-      }
+      opacity: 0, y: 20, stagger: 0.07, duration: 0.55, ease: 'power2.out',
+      scrollTrigger: { trigger: grid, start: 'top 86%', once: true },
     });
   });
 
-  // Pricing cards stagger
-  const pricingGrid = document.querySelector('.pricing-grid');
-  if (pricingGrid) {
-    gsap.from(pricingGrid.querySelectorAll('.pricing-card'), {
-      opacity: 0,
-      y: 32,
-      scale: 0.97,
-      stagger: 0.1,
-      duration: 0.65,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: pricingGrid,
-        start: 'top 85%',
-        once: true,
-      }
+  // ── Pricing cards ─────────────────────────────
+  const pGrid = document.querySelector('.pricing-grid');
+  if (pGrid && !REDUCED) {
+    gsap.from(gsap.utils.toArray('.pricing-card', pGrid), {
+      opacity: 0, y: 26, stagger: 0.1, duration: 0.6, ease: 'power3.out',
+      scrollTrigger: { trigger: pGrid, start: 'top 85%', once: true },
     });
   }
 
-  // Section headings
-  document.querySelectorAll('.section-head').forEach(el => {
+  // ── Section headings ──────────────────────────
+  gsap.utils.toArray('.section-head').forEach(el => {
+    if (REDUCED) { gsap.set(el, { opacity: 1 }); return; }
     gsap.from(el, {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 88%',
-        once: true,
-      }
+      opacity: 0, y: 16, duration: 0.55, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', once: true },
     });
   });
 
-  // Trust band items
-  const trustChecks = document.querySelectorAll('.trust-check');
-  if (trustChecks.length) {
-    gsap.from(trustChecks, {
-      opacity: 0,
-      x: -16,
-      stagger: 0.1,
-      duration: 0.55,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.trust-band',
-        start: 'top 80%',
-        once: true,
-      }
-    });
-  }
-
-  // Trust stat cards
-  const trustStats = document.querySelectorAll('.trust-stat');
-  if (trustStats.length) {
-    gsap.from(trustStats, {
-      opacity: 0,
-      y: 16,
-      scale: 0.95,
-      stagger: 0.1,
-      duration: 0.55,
-      ease: 'back.out(1.2)',
-      scrollTrigger: {
-        trigger: '.trust-stats-row',
-        start: 'top 85%',
-        once: true,
-      }
-    });
-  }
-
-  // Stats strip counter animation
+  // ── Stat counters ─────────────────────────────
   document.querySelectorAll('.stat-number[data-target]').forEach(el => {
-    const target = parseFloat(el.dataset.target);
-    const suffix = el.dataset.suffix || '';
-    const prefix = el.dataset.prefix || '';
-    const isDecimal = el.dataset.decimal === 'true';
+    const target   = parseFloat(el.dataset.target);
+    const suffix   = el.dataset.suffix  || '';
+    const decimal  = el.dataset.decimal === 'true';
+    const obj      = { v: 0 };
 
-    gsap.from({ val: 0 }, {
-      val: target,
-      duration: 1.8,
+    gsap.to(obj, {
+      v: target,
+      duration: REDUCED ? 0 : 1.6,
       ease: 'power2.out',
-      onUpdate() {
-        const v = isDecimal ? this._targets[0].val.toFixed(1) : Math.round(this._targets[0].val);
-        el.textContent = prefix + v + suffix;
-      },
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 88%',
-        once: true,
-      }
+      onUpdate() { el.textContent = (decimal ? obj.v.toFixed(1) : Math.round(obj.v)) + suffix; },
+      scrollTrigger: { trigger: el, start: 'top 90%', once: true },
     });
   });
 
-  // FAQ items
-  const faqItems = document.querySelectorAll('.faq-item');
-  if (faqItems.length) {
-    gsap.from(faqItems, {
-      opacity: 0,
-      y: 12,
-      stagger: 0.05,
-      duration: 0.5,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.faq-list',
-        start: 'top 85%',
-        once: true,
-      }
+  // ── Trust checks ──────────────────────────────
+  const trustChecks = gsap.utils.toArray('.trust-check');
+  if (trustChecks.length && !REDUCED) {
+    gsap.from(trustChecks, {
+      opacity: 0, x: -14, stagger: 0.09, duration: 0.5, ease: 'power2.out',
+      scrollTrigger: { trigger: '.trust-band', start: 'top 82%', once: true },
     });
   }
 
-  // CTA band
-  if (document.querySelector('.cta-band')) {
-    gsap.from('.cta-band h2', {
-      opacity: 0,
-      y: 24,
-      duration: 0.65,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: '.cta-band',
-        start: 'top 80%',
-        once: true,
-      }
-    });
-    gsap.from(['.cta-band .lead', '.cta-band-actions', '.cta-band-note'], {
-      opacity: 0,
-      y: 16,
-      stagger: 0.12,
-      duration: 0.55,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '.cta-band',
-        start: 'top 80%',
-        once: true,
-      }
+  // ── CTA band ──────────────────────────────────
+  const ctaBand = document.querySelector('.cta-band');
+  if (ctaBand && !REDUCED) {
+    gsap.from(['.cta-band h2', '.cta-band .lead', '.cta-band-actions', '.cta-band-note'], {
+      opacity: 0, y: 18, stagger: 0.1, duration: 0.55, ease: 'power2.out',
+      scrollTrigger: { trigger: ctaBand, start: 'top 82%', once: true },
     });
   }
 }
 
-// Fallback for no-GSAP: IntersectionObserver reveal
-if (typeof gsap === 'undefined') {
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('revealed');
-        io.unobserve(e.target);
+/* ── 4. FAQ Accordion ─────────────────────────────
+   Uses maxHeight (not grid-template-rows) for Safari
+   compat and reliable animation in all browsers.
+──────────────────────────────────────────────────── */
+function initFAQ() {
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn    = item.querySelector('.faq-q');
+    const answer = item.querySelector('.faq-a-inner');
+    if (!btn || !answer) return;
+
+    // Set initial maxHeight without triggering the CSS transition
+    if (item.classList.contains('open')) {
+      answer.style.transition = 'none';
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      answer.getBoundingClientRect(); // force reflow before re-enabling transition
+      answer.style.transition = '';
+    }
+
+    btn.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
+
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(open => {
+        open.classList.remove('open');
+        open.querySelector('.faq-a-inner').style.maxHeight = '0';
+        open.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+
+      // Open clicked
+      if (!isOpen) {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+        btn.setAttribute('aria-expanded', 'true');
       }
     });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.reveal, .feature-card, .pricing-card, .usecase-card').forEach(el => {
-    el.classList.add('reveal');
-    io.observe(el);
   });
 }
 
-// ── FAQ Accordion ────────────────────────────
+/* ── 5. Pricing Toggle ────────────────────────── */
+function initPricing() {
+  const toggle = document.querySelector('.toggle-switch');
+  if (!toggle) return;
 
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-
-    // Close all
-    document.querySelectorAll('.faq-item.open').forEach(openItem => {
-      openItem.classList.remove('open');
-    });
-
-    // Toggle clicked
-    if (!isOpen) item.classList.add('open');
-  });
-});
-
-// ── Pricing Toggle ───────────────────────────
-
-const pricingToggle = document.querySelector('.toggle-switch');
-if (pricingToggle) {
-  const monthlyPrices = document.querySelectorAll('[data-monthly]');
-  const annualPrices  = document.querySelectorAll('[data-annual]');
+  const monthlyEls    = document.querySelectorAll('[data-monthly]');
+  const annualEls     = document.querySelectorAll('[data-annual]');
   const monthlyLabel  = document.querySelector('.pricing-monthly-label');
   const annualLabel   = document.querySelector('.pricing-annual-label');
-  let isAnnual = false;
+  let annual = false;
 
-  pricingToggle.addEventListener('click', () => {
-    isAnnual = !isAnnual;
-    pricingToggle.classList.toggle('on', isAnnual);
+  function update() {
+    toggle.classList.toggle('on', annual);
+    toggle.setAttribute('aria-checked', String(annual));
+    monthlyEls.forEach(el => { el.hidden = annual; });
+    annualEls.forEach(el  => { el.hidden = !annual; });
+    if (monthlyLabel) monthlyLabel.classList.toggle('active', !annual);
+    if (annualLabel)  annualLabel.classList.toggle('active',  annual);
+  }
 
-    monthlyPrices.forEach(el => el.style.display = isAnnual ? 'none' : '');
-    annualPrices.forEach(el => el.style.display  = isAnnual ? '' : 'none');
-    if (monthlyLabel) monthlyLabel.classList.toggle('active', !isAnnual);
-    if (annualLabel)  annualLabel.classList.toggle('active', isAnnual);
+  toggle.setAttribute('role', 'switch');
+  toggle.setAttribute('tabindex', '0');
+
+  toggle.addEventListener('click', () => { annual = !annual; update(); });
+  toggle.addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); annual = !annual; update(); }
   });
 
-  // Init
-  monthlyPrices.forEach(el => el.style.display = '');
-  annualPrices.forEach(el => el.style.display = 'none');
+  // Initialize — show monthly, hide annual
+  monthlyEls.forEach(el => { el.hidden = false; });
+  annualEls.forEach(el  => { el.hidden = true; });
+  update();
 }
 
-// ── Contact Form ─────────────────────────────
+/* ── 6. Smooth anchor scroll ──────────────────── */
+function initAnchors() {
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id === '#') return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      if (lenis) {
+        lenis.scrollTo(target, { offset: -80, duration: 1.1 });
+      } else {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+}
 
-const contactForm = document.querySelector('[data-contact-form]');
-if (contactForm) {
-  contactForm.addEventListener('submit', e => {
+/* ── 7. Contact form (graceful sim) ──────────── */
+function initForm() {
+  const form = document.querySelector('form');
+  if (!form) return;
+
+  form.addEventListener('submit', e => {
     e.preventDefault();
-    const btn = contactForm.querySelector('[type="submit"]');
+    const btn = form.querySelector('[type="submit"]');
+    if (!btn || btn.disabled) return;
+
     const original = btn.textContent;
-
-    btn.textContent = 'Sending…';
     btn.disabled = true;
+    btn.textContent = 'Sending…';
 
-    // Simulate async (replace with real endpoint)
     setTimeout(() => {
-      btn.textContent = 'Message sent!';
+      btn.textContent = 'Sent! We\'ll reply within the hour.';
       btn.style.background = 'var(--green-dark)';
-
+      form.reset();
       setTimeout(() => {
         btn.textContent = original;
         btn.disabled = false;
         btn.style.background = '';
-        contactForm.reset();
-      }, 3000);
+      }, 4000);
     }, 1200);
   });
 }
 
-// ── Active nav link ──────────────────────────
-
-const currentPage = location.pathname.split('/').pop() || 'index.html';
-document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(link => {
-  const href = link.getAttribute('href');
-  if (href === currentPage || (currentPage === '' && href === 'index.html')) {
-    link.classList.add('active');
-  }
+/* ── Boot ─────────────────────────────────────── */
+// Use DOMContentLoaded to ensure DOM is ready;
+// GSAP/Lenis load asynchronously via defer so check on window load too.
+document.addEventListener('DOMContentLoaded', () => {
+  initNav();
+  initFAQ();
+  initPricing();
+  initAnchors();
+  initForm();
 });
 
-// ── Smooth anchor scroll (for same-page links) ─
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', e => {
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (!target) return;
-    e.preventDefault();
-    if (lenis) {
-      lenis.scrollTo(target, { offset: -80, duration: 1.4 });
-    } else {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
+window.addEventListener('load', () => {
+  // Animations and Lenis depend on GSAP/Lenis being loaded (defer scripts)
+  initLenis();
+  initAnimations();
 });
