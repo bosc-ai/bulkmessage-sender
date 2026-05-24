@@ -6,6 +6,10 @@
   <url><loc>https://wachat.serves.in/use-cases.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://wachat.serves.in/about.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://wachat.serves.in/contact.html</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://wachat.serves.in/platform.html</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://wachat.serves.in/support.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://wachat.serves.in/embedded-signup.html</loc><priority>0.6</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://wachat.serves.in/app-review-demo.html</loc><priority>0.5</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://wachat.serves.in/privacy.html</loc><priority>0.5</priority><changefreq>yearly</changefreq></url>
   <url><loc>https://wachat.serves.in/terms.html</loc><priority>0.5</priority><changefreq>yearly</changefreq></url>
   <url><loc>https://wachat.serves.in/data-deletion.html</loc><priority>0.5</priority><changefreq>yearly</changefreq></url>

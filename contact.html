@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js" defer></script>
 </head>
 <body>
 
@@ -109,28 +108,34 @@
           <h2 style="font-size:24px;margin-bottom:8px;">What can we help with?</h2>
           <p class="lead" style="font-size:15px;margin-bottom:28px;">Tell us about your business and what you're trying to do on WhatsApp.</p>
 
-          <form data-contact-form>
+          <form data-contact-form novalidate>
+            <!-- FormSubmit.co hidden config (fallback if JS fails) -->
+            <input type="hidden" name="_subject" value="New enquiry — WaChat website">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://wachat.serves.in/contact.html">
+
             <div class="form-grid">
               <div class="form-group">
                 <label class="form-label" for="name">Your name</label>
-                <input class="form-input" id="name" type="text" placeholder="Priya Mehta" required>
+                <input class="form-input" id="name" name="name" type="text" placeholder="Priya Mehta" required>
               </div>
               <div class="form-group">
                 <label class="form-label" for="company">Company</label>
-                <input class="form-input" id="company" type="text" placeholder="FreshMart Pvt. Ltd." required>
+                <input class="form-input" id="company" name="company" type="text" placeholder="FreshMart Pvt. Ltd." required>
               </div>
             </div>
             <div class="form-group">
               <label class="form-label" for="email">Work email</label>
-              <input class="form-input" id="email" type="email" placeholder="priya@freshmart.in" required>
+              <input class="form-input" id="email" name="email" type="email" placeholder="priya@freshmart.in" required>
             </div>
             <div class="form-group">
               <label class="form-label" for="phone">WhatsApp / Phone</label>
-              <input class="form-input" id="phone" type="tel" placeholder="+91 98765 43210">
+              <input class="form-input" id="phone" name="phone" type="tel" placeholder="+91 98765 43210">
             </div>
             <div class="form-group">
               <label class="form-label" for="reason">What do you need?</label>
-              <select class="form-select" id="reason">
+              <select class="form-select" id="reason" name="reason">
                 <option value="">Select a topic…</option>
                 <option>Book a product demo</option>
                 <option>Migrate from Wati / Interakt / AiSensy</option>
@@ -142,10 +147,10 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="message">Tell us more</label>
-              <textarea class="form-textarea" id="message" placeholder="e.g. We're a D2C brand with ~50k customers, currently using Wati. We send order updates and want to add a support inbox. What does migration look like?"></textarea>
+              <textarea class="form-textarea" id="message" name="message" placeholder="e.g. We're a D2C brand with ~50k customers, currently using Wati. We want to add a support inbox. What does migration look like?"></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;">Send message →</button>
-            <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px;">We'll reply within 1 business hour · 9am–7pm IST, Mon–Sat</p>
+            <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px;">We reply within 1 business hour · 9am–7pm IST, Mon–Sat</p>
           </form>
         </div>
 
