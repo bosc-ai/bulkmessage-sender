@@ -3,242 +3,236 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pricing | WaChat — WhatsApp Business Platform</title>
-  <meta name="description" content="WaChat pricing — starting at ₹999/month. Flat platform fee plus Meta conversation charges at cost. 14-day free trial, no credit card.">
-  <link rel="canonical" href="https://wachat.serves.in/pricing">
+  <title>Pricing — WaChat</title>
+  <meta name="description" content="Honest, pass-through pricing for WhatsApp Business. Starter ₹999/mo, Growth ₹2,999/mo, Scale custom. No markup on conversation charges.">
+  <link rel="icon" href="assets/wachat-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <style>
-    .compare-table { width: 100%; border-collapse: collapse; margin-top: 64px; }
-    .compare-table th, .compare-table td { padding: 14px 20px; text-align: left; font-size: 14px; border-bottom: 1px solid var(--border); }
-    .compare-table th { font-weight: 700; font-size: 13px; letter-spacing: 0.03em; color: var(--muted); text-transform: uppercase; background: var(--bg-subtle); }
-    .compare-table th:not(:first-child) { text-align: center; }
-    .compare-table td:not(:first-child) { text-align: center; }
-    .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table .check { color: var(--green); font-size: 16px; }
-    .compare-table .dash { color: var(--border-2); }
-    .compare-table .highlight-col { background: var(--green-bg); }
-    .faq-mini { margin-top: 64px; }
-    .faq-mini h2 { margin-bottom: 32px; }
+    .compare {
+      width: 100%; border-collapse: collapse;
+      background: #fff; border: 1px solid var(--line); border-radius: 14px;
+      overflow: hidden; font-size: 14px;
+    }
+    .compare th, .compare td {
+      padding: 14px 18px; text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+    .compare thead th { background: #FBFAF6; font-size: 12px; font-family: var(--font-mono); font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+    .compare tr:last-child td { border-bottom: 0; }
+    .compare td.center, .compare th.center { text-align: center; }
+    .compare td.feat { font-weight: 500; color: var(--ink); }
+    .compare .check { color: var(--green-deep); }
+    .compare .dash { color: #c4c0b1; }
+    .compare .featured-col { background: rgba(37, 211, 102, .04); }
+    .compare .group-row td { background: var(--paper-2); font-size: 11.5px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding: 10px 18px; }
+    .meta-rates {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    }
+    .rate {
+      background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 18px;
+    }
+    .rate h5 { font-size: 13px; font-weight: 600; }
+    .rate .price { font-family: var(--font-mono); font-size: 20px; letter-spacing: -0.02em; margin-top: 6px; }
+    .rate p { color: var(--muted); font-size: 12px; margin-top: 4px; line-height: 1.45; }
+    @media (max-width: 1024px) {
+      .meta-rates { grid-template-columns: repeat(2,1fr); }
+      .compare { font-size: 13px; }
+      .compare th, .compare td { padding: 12px 14px; }
+    }
+    @media (max-width: 640px) {
+      .meta-rates { grid-template-columns: 1fr; }
+      .compare-wrap { overflow-x: auto; }
+      .compare { min-width: 640px; }
+    }
   </style>
 </head>
-<body>
+<body data-page="pricing">
+  <div id="wc-nav"></div>
 
-<header class="nav-wrap scrolled">
-  <nav class="nav">
-    <a class="nav-logo" href="index.html">
-      <span class="nav-logo-mark">
-        <svg viewBox="0 0 24 24" fill="white"><path d="M20.52 3.48A11.84 11.84 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.2-1.57A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52z"/><path d="M17.47 14.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.21 8.21 0 0 1-2.42-1.5 9.07 9.07 0 0 1-1.67-2.08c-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.21 3.09c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z" fill="white"/></svg>
-      </span>
-      WaChat
-    </a>
-    <div class="nav-links">
-      <a href="features.html">Features</a><a href="pricing.html" class="active">Pricing</a><a href="use-cases.html">Use Cases</a><a href="about.html">About</a><a href="contact.html">Contact</a>
-    </div>
-    <div class="nav-actions">
-      <a class="nav-signin" href="https://wachats.serves.in/login">Sign in</a>
-      <a class="btn btn-primary" href="https://wachats.serves.in/register">Start free →</a>
-      <button class="mobile-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-    </div>
-  </nav>
-  <div class="mobile-menu">
-    <a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="use-cases.html">Use Cases</a><a href="about.html">About</a><a href="contact.html">Contact</a>
-    <div class="mobile-menu-cta"><a class="btn btn-primary" style="width:100%;justify-content:center;" href="https://wachats.serves.in/register">Start free trial →</a></div>
-  </div>
-</header>
+  <main id="main" class="page">
+    <section class="container page-hero" style="text-align:center;display:flex;flex-direction:column;align-items:center">
+      <div class="crumb" style="justify-content:center"><a href="index.html">Home</a> <span class="sep">/</span> <span>Pricing</span></div>
+      <span class="eyebrow"><span class="dot"></span> Pricing</span>
+      <h1 style="max-width:18ch">Honest pricing. No conversation markup.</h1>
+      <p class="lede" style="text-align:center">Pick a plan by team size and feature set. Meta's per-conversation charges are passed through at cost — you see them line-by-line on every invoice.</p>
 
-<main>
-
-  <div class="legal-hero">
-    <div class="container">
-      <p class="eyebrow">Up to 60% less than other BSPs</p>
-      <h1>Half the price.<br>All the features.</h1>
-      <p class="lead">WaChat costs 50–60% less than Wati, DoubleTick, and other leading BSPs — with the same Cloud API, inbox, and automation. Meta's per-conversation charges are billed at cost, never marked up.</p>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;justify-content:center;">
-        <span class="badge badge-green" style="font-size:12px;padding:6px 14px;">50–60% cheaper platform fee</span>
-        <span class="badge badge-gray" style="font-size:12px;padding:6px 14px;">Meta charges: at cost, no markup</span>
-        <span class="badge badge-blue" style="font-size:12px;padding:6px 14px;">14-day free trial</span>
+      <div class="bill-toggle" id="billToggle" role="tablist" style="margin-top:32px">
+        <button class="on" data-billing="monthly">Monthly</button>
+        <button data-billing="annual">Annual <span class="save">−20%</span></button>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <!-- Comparison strip -->
-  <div style="background:var(--bg-muted);border-bottom:1px solid var(--border);padding:0;">
-    <div class="container">
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center;overflow:hidden;border-radius:0;">
-        <div style="padding:20px 16px;border-right:1px solid var(--border);">
-          <div style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--subtle);margin-bottom:6px;">Industry average</div>
-          <div style="font-size:26px;font-weight:800;color:var(--muted);text-decoration:line-through;letter-spacing:-0.02em;">₹2,499</div>
-          <div style="font-size:12px;color:var(--subtle);margin-top:2px;">starter plan / month</div>
-        </div>
-        <div style="padding:20px 16px;border-right:1px solid var(--border);background:var(--green-bg);">
-          <div style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-text);margin-bottom:6px;">WaChat Starter</div>
-          <div style="font-size:26px;font-weight:800;color:var(--green);letter-spacing:-0.02em;">₹999</div>
-          <div style="font-size:12px;color:var(--green-text);margin-top:2px;">per month · save ₹1,500</div>
-        </div>
-        <div style="padding:20px 16px;border-right:1px solid var(--border);background:var(--green-bg);">
-          <div style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green-text);margin-bottom:6px;">WaChat Growth</div>
-          <div style="font-size:26px;font-weight:800;color:var(--green);letter-spacing:-0.02em;">₹2,999</div>
-          <div style="font-size:12px;color:var(--green-text);margin-top:2px;">vs ₹5,999 elsewhere · 50% off</div>
-        </div>
-        <div style="padding:20px 16px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--subtle);margin-bottom:6px;">You save per year</div>
-          <div style="font-size:26px;font-weight:800;color:var(--ink);letter-spacing:-0.02em;">₹18,000+</div>
-          <div style="font-size:12px;color:var(--muted);margin-top:2px;">on platform fees alone</div>
-        </div>
-      </div>
-      <p style="text-align:center;font-size:12px;color:var(--subtle);padding:10px 0;">Meta's per-conversation charges apply separately and are passed through at cost — we add zero markup. <a href="#meta-pricing" style="color:var(--green-text);">See Meta rates →</a></p>
-    </div>
-  </div>
-
-  <section class="section">
-    <div class="container">
-
-      <!-- Toggle -->
-      <div class="pricing-toggle">
-        <span class="pricing-monthly-label active">Monthly</span>
-        <div class="toggle-switch" role="switch" aria-label="Toggle annual pricing"></div>
-        <span class="pricing-annual-label">Annual</span>
-        <span class="pricing-save-badge">2 months free</span>
-      </div>
-
-      <!-- Cards -->
+    <section class="container" style="padding-bottom:64px">
       <div class="pricing-grid">
+        <article class="plan">
+          <div>
+            <div class="plan-name">Starter</div>
+            <div class="plan-price">
+              <span class="amt">₹<span class="price" data-monthly="999" data-annual="799">999</span></span>
+              <span class="per">/mo · billed monthly</span>
+            </div>
+            <p class="plan-desc">For founders running WhatsApp themselves and small teams just getting set up.</p>
+          </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 2 agents, unlimited contacts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Shared inbox &amp; templates</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 10 broadcasts / month</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Shopify &amp; WooCommerce</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Email support, 24h SLA</li>
+          </ul>
+          <a href="signup.html?plan=starter" class="btn btn-ghost">Start free trial</a>
+        </article>
 
-        <div class="pricing-card">
-          <div class="pricing-plan">Starter</div>
-          <div class="pricing-amount">
-            <span data-monthly><span class="pricing-currency">₹</span><span class="pricing-price">999</span></span>
-            <span data-annual style="display:none"><span class="pricing-currency">₹</span><span class="pricing-price">833</span></span>
-            <span class="pricing-period">&thinsp;/ month</span>
+        <article class="plan featured">
+          <div class="plan-badge">Most popular</div>
+          <div>
+            <div class="plan-name">Growth</div>
+            <div class="plan-price">
+              <span class="amt">₹<span class="price" data-monthly="2999" data-annual="2399">2,999</span></span>
+              <span class="per">/mo · billed monthly</span>
+            </div>
+            <p class="plan-desc">For scaling D2C and B2B teams who need automation, segmentation and reporting.</p>
           </div>
-          <p class="pricing-desc">Perfect for solo operators and small support teams just getting started on WhatsApp Business.</p>
-          <a href="https://wachats.serves.in/register" class="pricing-cta pricing-cta-outline">Start free trial →</a>
-          <div class="pricing-features">
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>1 WhatsApp Business number</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>2 agent seats</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>1,000 conversations / month</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Shared inbox</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Template campaigns</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Basic automation</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Email support</div>
-          </div>
-        </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 10 agents</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> No-code automation builder</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited broadcasts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Real-time analytics + ROI</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Public REST API + webhooks</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Priority chat support, 2h</li>
+          </ul>
+          <a href="signup.html?plan=growth" class="btn btn-green">Start free trial</a>
+        </article>
 
-        <div class="pricing-card featured">
-          <span class="pricing-featured-label">Most popular</span>
-          <div class="pricing-plan">Growth</div>
-          <div class="pricing-amount">
-            <span data-monthly><span class="pricing-currency">₹</span><span class="pricing-price">2,999</span></span>
-            <span data-annual style="display:none"><span class="pricing-currency">₹</span><span class="pricing-price">2,499</span></span>
-            <span class="pricing-period">&thinsp;/ month</span>
+        <article class="plan">
+          <div>
+            <div class="plan-name">Scale</div>
+            <div class="plan-price">
+              <span class="amt">Custom</span>
+            </div>
+            <p class="plan-desc">For 50+ agent teams, regulated industries, and businesses that need a name to call.</p>
           </div>
-          <p class="pricing-desc">For growing businesses with a real support team and broadcast campaigns running weekly.</p>
-          <a href="https://wachats.serves.in/register" class="pricing-cta pricing-cta-primary">Start free trial →</a>
-          <div class="pricing-features">
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>3 WhatsApp Business numbers</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>10 agent seats</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>10,000 conversations / month</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Advanced inbox & assignment rules</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>No-code automation flows</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>REST API & webhook access</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Shopify & HubSpot integrations</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Priority support (phone + chat)</div>
-          </div>
-        </div>
-
-        <div class="pricing-card">
-          <div class="pricing-plan">Scale</div>
-          <div class="pricing-amount">
-            <span class="pricing-price" style="font-size:36px;">Custom</span>
-          </div>
-          <p class="pricing-desc">For enterprises with high volume, custom integrations, compliance requirements, and a dedicated team.</p>
-          <a href="contact.html" class="pricing-cta pricing-cta-outline">Contact sales →</a>
-          <div class="pricing-features">
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited WhatsApp numbers</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited agent seats</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited conversations</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Custom integrations & development</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Dedicated account manager</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>99.9% uptime SLA</div>
-            <div class="pricing-feature"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>DPDP & compliance support</div>
-          </div>
-        </div>
-
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited agents &amp; numbers</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> SSO, audit log, role policies</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Data residency &amp; signed DPA</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 99.99% uptime SLA</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Dedicated success manager</li>
+          </ul>
+          <a href="contact.html?topic=scale" class="btn btn-ghost">Talk to sales</a>
+        </article>
       </div>
+      <div class="pricing-note" style="margin-top:24px">+ Meta conversation charges, billed at cost. No markup, ever.</div>
+    </section>
 
-      <p class="pricing-note">All plans include a 14-day free trial with full features. No credit card required. Meta conversation charges are billed at cost — see <a href="#meta-pricing" style="color:var(--green-text);">Meta's pricing</a>.</p>
-
-      <!-- Meta pricing note -->
-      <div id="meta-pricing" style="margin-top:48px;padding:28px 32px;background:var(--bg-subtle);border:1px solid var(--border);border-radius:var(--r-xl);">
-        <p class="eyebrow" style="margin-bottom:12px;">About Meta conversation charges</p>
-        <h3 style="margin-bottom:8px;">What you pay Meta — at cost, no markup</h3>
-        <p style="font-size:15px;line-height:1.75;color:var(--body);margin-bottom:0;">WhatsApp charges per conversation (not per message). Rates vary by country and conversation type (marketing, utility, service, authentication). For India-to-India conversations, marketing rates are approximately ₹0.58/conversation and utility/service are free within 24h windows. WaChat passes these through at cost — we make nothing on Meta fees. <a href="https://developers.facebook.com/docs/whatsapp/pricing/" rel="noopener" style="color:var(--green-text);">See full Meta pricing table →</a></p>
+    <section class="container" style="padding:48px 24px">
+      <div style="max-width:760px;margin:0 auto 24px">
+        <span class="eyebrow"><span class="dot"></span> Conversation charges, at cost</span>
+        <h2 style="margin-top:14px">Meta charges per conversation. We pass it through.</h2>
+        <p class="lede" style="margin-top:14px">Meta categorises each 24-hour conversation by intent. Below are the current rates for India — these flow through your WaChat invoice with no markup and no batching.</p>
       </div>
+      <div class="meta-rates">
+        <div class="rate">
+          <h5>Utility</h5>
+          <div class="price">₹0.115</div>
+          <p>Order updates, OTPs, payment reminders — anything tied to a transaction.</p>
+        </div>
+        <div class="rate">
+          <h5>Authentication</h5>
+          <div class="price">₹0.115</div>
+          <p>One-time passcodes for sign-in and verification flows.</p>
+        </div>
+        <div class="rate">
+          <h5>Marketing</h5>
+          <div class="price">₹0.7846</div>
+          <p>Promotional broadcasts to opted-in contacts — sales, drops, re-engagement.</p>
+        </div>
+        <div class="rate">
+          <h5>Service</h5>
+          <div class="price">Free</div>
+          <p>Customer-initiated conversations are now free in India, per Meta's 2024–25 update.</p>
+        </div>
+      </div>
+      <p style="text-align:center;color:var(--muted);font-size:12.5px;margin-top:16px;font-family:var(--font-mono)">Rates per 24-hour conversation, India market · effective 2026. Meta updates these from time to time — current rates always live in your billing console.</p>
+    </section>
 
-      <!-- FAQ mini -->
-      <div class="faq-mini">
-        <h2>Pricing questions</h2>
-        <div class="faq-list">
+    <section class="container" style="padding:80px 24px">
+      <div style="max-width:760px;margin:0 auto 32px">
+        <span class="eyebrow"><span class="dot"></span> Compare plans</span>
+        <h2 style="margin-top:14px">Every feature, side by side.</h2>
+      </div>
+      <div class="compare-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th></th><th class="center">Starter</th><th class="center featured-col">Growth</th><th class="center">Scale</th></tr>
+        </thead>
+        <tbody>
+          <tr class="group-row"><td colspan="4">Inbox &amp; team</td></tr>
+          <tr><td class="feat">Agent seats</td><td class="center">2</td><td class="center featured-col">10</td><td class="center">Unlimited</td></tr>
+          <tr><td class="feat">Connected numbers</td><td class="center">1</td><td class="center featured-col">3</td><td class="center">Unlimited</td></tr>
+          <tr><td class="feat">Contacts</td><td class="center">Unlimited</td><td class="center featured-col">Unlimited</td><td class="center">Unlimited</td></tr>
+          <tr><td class="feat">Assign, mention, snooze</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Internal notes</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Canned responses</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+
+          <tr class="group-row"><td colspan="4">Campaigns &amp; templates</td></tr>
+          <tr><td class="feat">Template messages</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Broadcasts / month</td><td class="center">10</td><td class="center featured-col">Unlimited</td><td class="center">Unlimited</td></tr>
+          <tr><td class="feat">Segmentation</td><td class="center dash">—</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">A/B testing</td><td class="center dash">—</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+
+          <tr class="group-row"><td colspan="4">Automation &amp; API</td></tr>
+          <tr><td class="feat">No-code flow builder</td><td class="center dash">—</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">REST API + webhooks</td><td class="center dash">—</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Rate limit (msg/sec)</td><td class="center">—</td><td class="center featured-col">80</td><td class="center">Custom</td></tr>
+
+          <tr class="group-row"><td colspan="4">Security &amp; compliance</td></tr>
+          <tr><td class="feat">SSO (SAML / OIDC)</td><td class="center dash">—</td><td class="center featured-col dash">—</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Audit log</td><td class="center dash">—</td><td class="center featured-col">30 days</td><td class="center">2 years</td></tr>
+          <tr><td class="feat">Signed DPA + data residency</td><td class="center dash">—</td><td class="center featured-col dash">—</td><td class="center check">✓</td></tr>
+
+          <tr class="group-row"><td colspan="4">Support</td></tr>
+          <tr><td class="feat">Channel</td><td class="center">Email</td><td class="center featured-col">Email + chat</td><td class="center">Slack + phone</td></tr>
+          <tr><td class="feat">First-reply SLA</td><td class="center">24h</td><td class="center featured-col">2h</td><td class="center">15 min</td></tr>
+          <tr><td class="feat">Onboarding</td><td class="center">Self-serve</td><td class="center featured-col">Guided</td><td class="center">Dedicated CSM</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section class="page-section alt">
+      <div class="container">
+        <div style="max-width:760px;margin:0 auto 40px;text-align:center">
+          <h2>Pricing questions, answered.</h2>
+        </div>
+        <div class="faq-list" id="faqList" style="max-width:760px;margin:0 auto">
           <div class="faq-item open">
-            <button class="faq-q">What happens after my 14-day trial?<svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <div class="faq-a"><div class="faq-a-inner"><p>You'll be asked to pick a plan and enter payment details. If you don't, your account pauses (data retained for 30 days) — no automatic charges, no surprise bills.</p></div></div>
+            <button class="faq-q">How exactly does pass-through pricing work? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Meta charges per 24-hour conversation, by category and destination country. We pass that cost straight to you — every invoice line shows Meta's published rate and the count, with a clearly labelled zero markup column. You can reconcile against Meta's own billing portal at any time.</div></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q">Can I switch plans mid-month?<svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Yes — upgrade anytime and you're prorated for the remainder of the month. Downgrades take effect at the next billing cycle.</p></div></div>
+            <button class="faq-q">Can I switch plans later? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes — upgrade or downgrade in one click inside your workspace. We pro-rate the difference, no contracts.</div></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q">Do you charge per message or per conversation?<svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <div class="faq-a"><div class="faq-a-inner"><p>WaChat charges per conversation (as defined in your plan). Meta charges separately per conversation — we pass those through at cost. Within Meta's 24-hour conversation window, you can send unlimited messages.</p></div></div>
+            <button class="faq-q">Do you charge GST? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes — 18% GST is added to the platform fee for Indian businesses. We issue compliant invoices that you can download as PDF.</div></div>
           </div>
           <div class="faq-item">
-            <button class="faq-q">Is there a refund policy?<svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-            <div class="faq-a"><div class="faq-a-inner"><p>Yes. If you're not satisfied within 30 days of your first paid month, we'll refund in full — no questions asked. After 30 days, we don't pro-rate mid-cycle cancellations.</p></div></div>
+            <button class="faq-q">What payment methods do you accept? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">UPI, Net Banking, Visa / Mastercard / Amex, and NEFT/RTGS for enterprise. International cards work too — we bill in INR.</div></div>
           </div>
         </div>
       </div>
+    </section>
+  </main>
 
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <div class="cta-band">
-    <div class="container">
-      <h2>Start your free trial today.</h2>
-      <p class="lead">14 days, full features, no credit card. Cancel anytime.</p>
-      <div class="cta-band-actions">
-        <a class="btn btn-primary btn-lg" href="https://wachats.serves.in/register">Get started free →</a>
-        <a class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,.25);" href="contact.html">Talk to sales</a>
-      </div>
-      <p class="cta-band-note"><span>No credit card</span><span>Setup in 10 minutes</span><span>Cancel anytime</span></p>
-    </div>
-  </div>
-
-</main>
-
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-brand-name"><span class="footer-brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20.52 3.48A11.84 11.84 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.2-1.57A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52z"/></svg></span>WaChat</div>
-        <p>The modern WhatsApp Business platform for Indian SMBs.</p>
-      </div>
-      <div class="footer-col"><strong>Product</strong><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="use-cases.html">Use Cases</a></div>
-      <div class="footer-col"><strong>Company</strong><a href="about.html">About</a><a href="contact.html">Contact</a><a href="security.html">Security</a></div>
-      <div class="footer-col"><strong>Legal</strong><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="data-deletion.html">Data Deletion</a><a href="cookies.html">Cookie Policy</a></div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-copyright">© 2026 Serves Technology Pvt. Ltd. · hello@serves.in</div>
-      <div class="footer-disclaimer">WhatsApp and the WhatsApp logo are trademarks of Meta Platforms, Inc. WaChat is an independent product and is not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc.</div>
-    </div>
-  </div>
-</footer>
-
-<script src="script.js" defer></script>
+  <div id="wc-footer"></div>
+  <script src="shell.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

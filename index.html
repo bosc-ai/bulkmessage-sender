@@ -3,741 +3,784 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WaChat — WhatsApp Business Platform for Indian SMBs | Official Meta BSP</title>
-  <meta name="description" content="WaChat is the modern WhatsApp Business platform for Indian SMBs. Multi-agent inbox, template campaigns, automation, and full Meta Cloud API support. 14-day free trial.">
+  <title>WaChat — Customer conversations on WhatsApp, done right.</title>
+  <meta name="description" content="The modern WhatsApp Business platform for Indian SMBs. Multi-agent inbox, template campaigns, automation, and full Cloud API support — without the bloat.">
   <meta property="og:title" content="WaChat — WhatsApp Business Platform for Indian SMBs">
   <meta property="og:description" content="Official Meta BSP. Multi-agent inbox, broadcast campaigns, no-code automation. Built on WhatsApp Cloud API. Start free trial.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wachat.serves.in/">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://wachat.serves.in/">
+  <link rel="icon" href="assets/wachat-logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-
-  <!-- GSAP -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <!-- Lenis smooth scroll -->
-
-  <style>
-    /* page-level overrides */
-    body { padding-top: 0; }
-  </style>
 </head>
-<body>
+<body data-page="home">
+  <div id="wc-nav"></div>
 
-<!-- ── Navigation ─────────────────────────────── -->
-<header class="nav-wrap scrolled">
-  <nav class="nav">
-    <a class="nav-logo" href="index.html">
-      <span class="nav-logo-mark">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20.52 3.48A11.84 11.84 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.2-1.57A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52z" fill="currentColor"/>
-          <path d="M17.47 14.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.21 8.21 0 0 1-2.42-1.5 9.07 9.07 0 0 1-1.67-2.08c-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.21 3.09c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z" fill="white"/>
-        </svg>
-      </span>
-      WaChat
-    </a>
-    <div class="nav-links">
-      <a href="features.html">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="use-cases.html">Use Cases</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="nav-actions">
-      <a class="nav-signin" href="https://wachats.serves.in/login">Sign in</a>
-      <a class="btn btn-primary" href="https://wachats.serves.in/register">Start free →</a>
-      <button class="mobile-toggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-  <div class="mobile-menu">
-    <a href="features.html">Features</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="use-cases.html">Use Cases</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <div class="mobile-menu-cta">
-      <a class="btn btn-primary" style="width:100%;justify-content:center;" href="https://wachats.serves.in/register">Start free trial →</a>
-    </div>
-  </div>
-</header>
+  <main id="main">
 
-<main>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="dot-grid" aria-hidden="true"></div>
+    <div class="mesh" aria-hidden="true"><div class="blob"></div></div>
 
-<!-- ── Hero ──────────────────────────────────── -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-inner">
+    <div class="container-wide">
+      <div class="hero-grid">
+        <div>
+          <span class="hero-eyebrow">
+            <span class="pulse"></span>
+            <span>Authorised WhatsApp Business Solution Provider</span>
+          </span>
 
-      <div class="hero-content">
-        <p class="eyebrow">Official Meta BSP · Cloud API · India</p>
-        <h1>Customer conversations<br>on WhatsApp —<br><span class="accent">done right.</span></h1>
-        <p class="hero-lead">WaChat is the modern WhatsApp Business platform for Indian SMBs — multi-agent inbox, template campaigns, automation, and full Meta Cloud API support.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary btn-lg" href="https://wachats.serves.in/register">Start free trial →</a>
-          <a class="btn btn-outline btn-lg" href="contact.html">Book a demo</a>
+          <h1>
+            Customer conversations on WhatsApp&nbsp;— <span class="accent">done&nbsp;right</span>.
+          </h1>
+
+          <p class="lede">
+            The modern WhatsApp Business platform for Indian SMBs. A shared inbox, template campaigns, no‑code automation, and full Cloud API support — without the bloat that every other tool ships with.
+          </p>
+
+          <div class="hero-cta">
+            <a href="signup.html" class="btn btn-green">Start free
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <a href="contact.html" class="btn btn-ghost">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              Book a demo · 30 min
+            </a>
+          </div>
+
+          <div class="hero-trust">
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 14‑day free trial</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> No credit card</span>
+            <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Set up in 10 minutes</span>
+          </div>
         </div>
-        <div class="hero-trust">
-          <span class="hero-trust-item">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Official Meta BSP
-          </span>
-          <span class="hero-trust-item">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Built on Cloud API
-          </span>
-          <span class="hero-trust-item">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Hosted in India
-          </span>
-        </div>
-      </div>
 
-      <!-- Inbox Mockup -->
-      <div class="hero-visual">
-        <div class="inbox-wrap">
-          <!-- Header -->
-          <div class="inbox-header">
-            <div class="inbox-header-left">
-              <span class="inbox-brand">WaChat Inbox</span>
-              <span class="inbox-badge-count">3</span>
+        <div class="hero-right" id="inboxWrap">
+          <div class="inbox-frame" id="inboxFrame">
+            <div class="inbox-chrome">
+              <div class="inbox-traffic"><span></span><span></span><span></span></div>
+              <div class="inbox-url"><span>app.wachat.serves.in/inbox</span></div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>
             </div>
-            <div class="inbox-header-icons">
-              <div class="inbox-icon-btn">
-                <svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </div>
-              <div class="inbox-icon-btn">
-                <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </div>
+            <div class="inbox-body">
+              <aside class="inbox-side">
+                <div class="inbox-side-head">
+                  <span>Inbox</span>
+                  <span class="count">12</span>
+                </div>
+                <div class="conv active">
+                  <div class="conv-avatar">PR</div>
+                  <div class="conv-body">
+                    <div class="conv-name">Priya R. <span class="when">now</span></div>
+                    <div class="conv-snippet">Awesome! When will it arrive?</div>
+                  </div>
+                </div>
+                <div class="conv">
+                  <div class="conv-avatar b">AK</div>
+                  <div class="conv-body">
+                    <div class="conv-name">Arjun K. <span class="when">2m</span></div>
+                    <div class="conv-snippet">Need a bulk quote for 200 units…</div>
+                  </div>
+                </div>
+                <div class="conv">
+                  <div class="conv-avatar c">SN</div>
+                  <div class="conv-body">
+                    <div class="conv-name">Sneha N. <span class="when">8m</span></div>
+                    <div class="conv-snippet">Thanks, got it 🙏</div>
+                  </div>
+                </div>
+                <div class="conv">
+                  <div class="conv-avatar d">RV</div>
+                  <div class="conv-body">
+                    <div class="conv-name">Rohit V. <span class="when">14m</span></div>
+                    <div class="conv-snippet">Payment failed, please retry…</div>
+                  </div>
+                </div>
+              </aside>
+
+              <section class="inbox-chat">
+                <div class="chat-head">
+                  <div class="conv-avatar">PR</div>
+                  <div class="chat-head-meta">
+                    <div class="name">Priya Raghavan</div>
+                    <div class="num">+91 98 1023 7741 · Order #12847</div>
+                  </div>
+                  <div class="live"><span class="dot"></span> Live</div>
+                </div>
+                <div class="chat-stream" id="chatStream"></div>
+                <div class="chat-compose">
+                  <div class="compose-input">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"><path d="M14 9V5a3 3 0 1 0-6 0v9a5 5 0 0 0 10 0V8"/></svg>
+                    Reply to Priya…
+                  </div>
+                  <button class="compose-send" aria-label="Send">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"/></svg>
+                  </button>
+                </div>
+              </section>
+
+              <aside class="inbox-right">
+                <div class="cust-name">Priya Raghavan</div>
+                <div class="cust-sub">VIP · since 2023</div>
+                <div class="cust-section">
+                  <h5>Order</h5>
+                  <div class="cust-row"><span>ID</span><b class="mono">#12847</b></div>
+                  <div class="cust-row"><span>Value</span><b class="mono">₹4,299</b></div>
+                  <div class="cust-row"><span>Status</span><b style="color:var(--green-deep)">Shipped</b></div>
+                </div>
+                <div class="cust-section">
+                  <h5>Tags</h5>
+                  <div class="tags">
+                    <span class="tag green">VIP</span>
+                    <span class="tag amber">Repeat</span>
+                    <span class="tag">Mumbai</span>
+                  </div>
+                </div>
+                <div class="cust-section">
+                  <h5>Assigned</h5>
+                  <div class="cust-row"><span>Agent</span><b>Meera S.</b></div>
+                </div>
+              </aside>
             </div>
           </div>
 
-          <div class="inbox-body">
-            <!-- Sidebar -->
-            <div class="inbox-sidebar">
-              <div class="inbox-sidebar-tabs">
-                <span class="inbox-tab active">All</span>
-                <span class="inbox-tab">Mine</span>
-                <span class="inbox-tab">Open</span>
-              </div>
-
-              <div class="inbox-convo active">
-                <div class="inbox-avatar blue">PS</div>
-                <div class="inbox-convo-info">
-                  <div class="inbox-convo-name">Priya Singh</div>
-                  <div class="inbox-convo-msg">My order hasn't arrived yet</div>
-                </div>
-                <div class="inbox-convo-meta">
-                  <span class="inbox-time">2m</span>
-                  <span class="inbox-unread">2</span>
-                </div>
-              </div>
-
-              <div class="inbox-convo">
-                <div class="inbox-avatar purple">AK</div>
-                <div class="inbox-convo-info">
-                  <div class="inbox-convo-name">Ankit Kumar</div>
-                  <div class="inbox-convo-msg">When will delivery happen?</div>
-                </div>
-                <div class="inbox-convo-meta">
-                  <span class="inbox-time">8m</span>
-                  <span class="inbox-unread">1</span>
-                </div>
-              </div>
-
-              <div class="inbox-convo">
-                <div class="inbox-avatar amber">RV</div>
-                <div class="inbox-convo-info">
-                  <div class="inbox-convo-name">Rohini Verma</div>
-                  <div class="inbox-convo-msg">Thanks! Issue resolved ✓</div>
-                </div>
-                <div class="inbox-convo-meta">
-                  <span class="inbox-time">14m</span>
-                  <span class="badge badge-green" style="font-size:9px;padding:2px 6px;">Done</span>
-                </div>
-              </div>
-
-              <div class="inbox-convo">
-                <div class="inbox-avatar teal">NM</div>
-                <div class="inbox-convo-info">
-                  <div class="inbox-convo-name">Neeraj Mehta</div>
-                  <div class="inbox-convo-msg">Can I change my address?</div>
-                </div>
-                <div class="inbox-convo-meta">
-                  <span class="inbox-time">22m</span>
-                </div>
-              </div>
+          <div class="hero-tag tl">
+            <div class="icon g">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
             </div>
-
-            <!-- Chat area -->
-            <div class="inbox-chat">
-              <div class="inbox-chat-header">
-                <div>
-                  <div class="inbox-chat-name">Priya Singh</div>
-                  <div class="inbox-chat-status">● Active now</div>
-                </div>
-                <div class="inbox-chat-actions">
-                  <span class="inbox-action-chip">Assign</span>
-                  <span class="inbox-action-chip">Label</span>
-                  <span class="inbox-action-chip badge-green" style="background:var(--green-bg);color:var(--green-text);border-color:var(--green-border);">Resolve</span>
-                </div>
-              </div>
-
-              <div class="inbox-messages">
-                <div class="msg msg-in">
-                  Hi! My order #ORD-12847 was supposed to be delivered yesterday. Can you check?
-                  <div class="msg-time">10:41 AM</div>
-                </div>
-                <div class="msg msg-out">
-                  Hi Priya! Let me check that for you right away. Give me a moment 🙏
-                  <div class="msg-time">10:42 AM ✓✓</div>
-                </div>
-                <div class="inbox-typing">
-                  <div class="typing-dot"></div>
-                  <div class="typing-dot"></div>
-                  <div class="typing-dot"></div>
-                </div>
-              </div>
-
-              <div class="inbox-compose">
-                <div class="inbox-compose-input">Type a message…</div>
-                <div class="inbox-compose-send">
-                  <svg viewBox="0 0 16 16" fill="none"><path d="M14 8L2 2l2.5 6L2 14l12-6z" fill="currentColor"/></svg>
-                </div>
-              </div>
+            <div>
+              <b>Delivered</b>
+              <span>read · 2s ago</span>
+            </div>
+          </div>
+          <div class="hero-tag br">
+            <div class="icon t">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/></svg>
+            </div>
+            <div>
+              <b>847 ms</b>
+              <span>median reply</span>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Toast notification -->
-        <div class="inbox-toast">
-          <div class="toast-icon">
-            <svg viewBox="0 0 20 20" fill="none"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 12v-4m0-4h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </div>
-          <div class="toast-text">
-            <strong>Template delivered</strong>
-            <span>Order update → 1,240 contacts</span>
-          </div>
+  <!-- ============ MARQUEE ============ -->
+  <section class="marquee-section">
+    <div class="container">
+      <div class="marquee-label">Trusted by ambitious teams across India</div>
+      <div class="marquee">
+        <div class="marquee-track" id="marquee">
+          <span class="logo"><span class="dot"></span>Northbloom</span>
+          <span class="logo"><span class="sq"></span>Aviron Labs</span>
+          <span class="logo"><span class="tri"></span>Plume &amp; Co.</span>
+          <span class="logo"><span class="ring"></span>Kallari</span>
+          <span class="logo"><span class="bar"></span>Daybreak Coffee</span>
+          <span class="logo"><span class="dot"></span>Mandala Studio</span>
+          <span class="logo"><span class="sq"></span>Sidecar</span>
+          <span class="logo"><span class="ring"></span>Indigo Fern</span>
+          <span class="logo"><span class="tri"></span>Halcyon</span>
+          <span class="logo"><span class="bar"></span>Otter &amp; Oak</span>
         </div>
       </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── Logo Cloud ─────────────────────────────── -->
-<div class="logo-cloud">
-  <div class="container">
-    <p class="logo-cloud-label">Trusted by growing teams across India</p>
-    <div class="logo-cloud-row">
-      <span class="logo-item">FreshMart</span>
-      <span class="logo-item">EduPath</span>
-      <span class="logo-item">HealthFirst</span>
-      <span class="logo-item">SwiftLogix</span>
-      <span class="logo-item">FinEdge</span>
-      <span class="logo-item">Apparels.co</span>
-    </div>
-  </div>
-</div>
-
-<!-- ── Features ───────────────────────────────── -->
-<section class="section">
-  <div class="container">
-    <div class="section-head reveal">
-      <p class="eyebrow">Everything you need</p>
-      <h2>A complete WhatsApp stack for your team</h2>
-      <p class="lead" style="margin-top:12px;">Everything from a shared inbox to broadcast campaigns — built for teams that talk to thousands of customers on WhatsApp every day.</p>
-    </div>
-
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">💬</div>
-        <h3>Multi-agent inbox</h3>
-        <p>Your whole team replies from one shared view, with conversation assignment, private notes, and collision detection — no double replies.</p>
+  <!-- ============ STATS ============ -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-head">
+        <span class="eyebrow"><span class="dot"></span> By the numbers</span>
+        <h2>Built for volume, priced for sanity.</h2>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">📨</div>
-        <h3>Template campaigns</h3>
-        <p>Send approved marketing and utility templates to thousands of contacts in minutes. Built-in delivery tracking and opt-out management.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🤖</div>
-        <h3>Automation & bots</h3>
-        <p>No-code flows for greetings, lead capture, FAQs, and out-of-hours auto-replies. Handle 60% of conversations without a human.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🏷️</div>
-        <h3>Contacts & CRM</h3>
-        <p>Custom attributes, tags, and lifecycle stages. Build segments, track conversation history, and know your customer before you reply.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📊</div>
-        <h3>Real-time analytics</h3>
-        <p>Track delivery rates, read receipts, response times, and agent performance. Know what's working and what isn't — instantly.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🔌</div>
-        <h3>API & integrations</h3>
-        <p>Webhooks, REST API, and pre-built connectors for Shopify, HubSpot, Zapier, and more. Fits into your stack without friction.</p>
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="num"><span class="counter" data-to="3" data-suffix="M+">0</span></div>
+          <div class="lbl">Messages delivered across our network last month</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span class="counter" data-to="99.98" data-decimals="2" data-suffix="%">0</span></div>
+          <div class="lbl">Uptime across the Cloud API gateway, measured Jan–Apr 2026</div>
+        </div>
+        <div class="stat">
+          <div class="num"><span class="counter" data-to="58" data-suffix="s">0</span></div>
+          <div class="lbl">Median time from sign‑up to first sent template message</div>
+        </div>
+        <div class="stat">
+          <div class="num">₹<span class="counter" data-to="0">0</span></div>
+          <div class="lbl">Markup on Meta conversation charges. Pass‑through, always</div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Stats strip -->
-    <div class="stats-strip reveal">
-      <div class="stat-item">
-        <div class="stat-number" data-target="500" data-suffix="+">0+</div>
-        <div class="stat-label">Teams using WaChat</div>
+  <!-- ============ FEATURES ============ -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow"><span class="dot"></span> The platform</span>
+        <h2>Everything you need to run WhatsApp at&nbsp;scale.</h2>
+        <p class="lede">From a two‑person startup to a fifty‑agent support team. One workspace, one bill, no zapier glue.</p>
       </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="2.4" data-suffix="M+" data-decimal="true">0</div>
-        <div class="stat-label">Messages sent monthly</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="99.9" data-suffix="%" data-decimal="true">0</div>
-        <div class="stat-label">API uptime SLA</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number" data-target="10" data-suffix="min">0</div>
-        <div class="stat-label">Average setup time</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ── Trust Band ─────────────────────────────── -->
-<div class="trust-band">
-  <div class="container">
-    <div class="trust-band-inner">
-      <div class="trust-band-content">
-        <p class="eyebrow">Official Meta BSP</p>
-        <h2>Built on the official WhatsApp Business Platform</h2>
-        <p class="lead">WaChat is an authorised Business Solution Provider built on Meta's official WhatsApp Cloud API. Your data flows directly between your business and Meta.</p>
-        <div class="trust-checks">
-          <div class="trust-check">
-            <div class="trust-check-icon">
-              <svg viewBox="0 0 10 10" fill="none"><path d="M8.5 3L4 7.5 1.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="feature-layout">
+        <div class="feat-tabs" id="featTabs" role="tablist">
+          <button class="feat-tab active" role="tab" aria-selected="true">
+            <span class="prog"></span>
+            <span class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
+            </span>
+            <span>
+              <span class="tt">Shared inbox</span>
+              <span class="dd">Assign, mention, snooze. Built like email.</span>
+            </span>
+          </button>
+          <button class="feat-tab" role="tab" aria-selected="false">
+            <span class="prog"></span>
+            <span class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m4 8 8 5 8-5"/></svg>
+            </span>
+            <span>
+              <span class="tt">Template campaigns</span>
+              <span class="dd">Bulk sends with delivery and read receipts.</span>
+            </span>
+          </button>
+          <button class="feat-tab" role="tab" aria-selected="false">
+            <span class="prog"></span>
+            <span class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M6 8.5v3a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3M12 13.5v2"/></svg>
+            </span>
+            <span>
+              <span class="tt">No‑code automation</span>
+              <span class="dd">Visual flows. Triggers, branches, webhooks.</span>
+            </span>
+          </button>
+          <button class="feat-tab" role="tab" aria-selected="false">
+            <span class="prog"></span>
+            <span class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m22 11-3 3-2-2"/></svg>
+            </span>
+            <span>
+              <span class="tt">Smart contacts</span>
+              <span class="dd">Segments, attributes, custom properties.</span>
+            </span>
+          </button>
+          <button class="feat-tab" role="tab" aria-selected="false">
+            <span class="prog"></span>
+            <span class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 5-7"/></svg>
+            </span>
+            <span>
+              <span class="tt">Real‑time analytics</span>
+              <span class="dd">Conversation funnels, agent SLAs, ROI.</span>
+            </span>
+          </button>
+          <button class="feat-tab" role="tab" aria-selected="false">
+            <span class="prog"></span>
+            <span class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg>
+            </span>
+            <span>
+              <span class="tt">API &amp; webhooks</span>
+              <span class="dd">REST, webhooks, idempotent retries.</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="feat-stage" id="featStage">
+          <div class="feat-panel show">
+            <div class="f-bar">
+              <h4>Shared inbox</h4>
+              <div class="right">
+                <span class="pill">3 agents online</span>
+                <span>· 12 open</span>
+              </div>
             </div>
-            Your own verified WhatsApp Business number — not a shared pool
-          </div>
-          <div class="trust-check">
-            <div class="trust-check-icon">
-              <svg viewBox="0 0 10 10" fill="none"><path d="M8.5 3L4 7.5 1.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="fp-inbox">
+              <div class="col-l">
+                <div class="seg">
+                  <span class="on">All</span><span>Mine</span><span>Unassigned</span>
+                </div>
+                <div class="row"><div class="av a1"></div><div class="ln"><div class="t">Arjun K. <span>2m</span></div><div class="s">Need a bulk quote for 200…</div></div></div>
+                <div class="row"><div class="av a2"></div><div class="ln"><div class="t">Priya R. <span>now</span></div><div class="s">When will it arrive?</div></div></div>
+                <div class="row"><div class="av a3"></div><div class="ln"><div class="t">Sneha N. <span>8m</span></div><div class="s">Thanks, got it 🙏</div></div></div>
+                <div class="row"><div class="av a4"></div><div class="ln"><div class="t">Rohit V. <span>14m</span></div><div class="s">Payment failed, please…</div></div></div>
+                <div class="row"><div class="av a5"></div><div class="ln"><div class="t">Devika M. <span>22m</span></div><div class="s">Can I exchange size?</div></div></div>
+              </div>
+              <div class="col-r">
+                <div class="chat-head">
+                  <div class="conv-avatar">PR</div>
+                  <div class="chat-head-meta">
+                    <div class="name">Priya Raghavan</div>
+                    <div class="num">Assigned to Meera S. · @rohan mentioned</div>
+                  </div>
+                  <div class="live"><span class="dot"></span> Live</div>
+                </div>
+                <div class="bubble in" style="animation-delay:.1s">Hi 👋 just got the shipment notification — but I'm travelling tomorrow. Can it be delivered Friday instead?</div>
+                <div class="bubble out" style="animation-delay:.25s">Of course Priya — I've rescheduled it to Friday between 4–6 PM. You'll get a confirmation shortly.<div class="meta"><span>11:42</span><span class="read">✓✓</span></div></div>
+                <div class="bubble in" style="animation-delay:.4s">Perfect. Thanks Meera!</div>
+              </div>
             </div>
-            Your own message templates approved directly by Meta
           </div>
-          <div class="trust-check">
-            <div class="trust-check-icon">
-              <svg viewBox="0 0 10 10" fill="none"><path d="M8.5 3L4 7.5 1.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+          <div class="feat-panel">
+            <div class="f-bar">
+              <h4>Template campaigns</h4>
+              <div class="right"><span class="pill">4 approved</span><span>· 1 in review</span></div>
             </div>
-            Direct billing through Meta — no markup, no hidden fees
-          </div>
-          <div class="trust-check">
-            <div class="trust-check-icon">
-              <svg viewBox="0 0 10 10" fill="none"><path d="M8.5 3L4 7.5 1.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="fp-templates">
+              <div class="tpl">
+                <div class="hd"><span class="tag-x">UTILITY</span><span class="mono" style="font-size:10.5px;color:var(--muted)">EN · HI</span></div>
+                <h5>order_shipped_v3</h5>
+                <p>Sent when an order changes to <b>shipped</b>. Includes tracking link.</p>
+                <div class="bar"><i style="width:96%"></i></div>
+                <div class="ft"><span>96% delivered</span><span>14.2k</span></div>
+              </div>
+              <div class="tpl">
+                <div class="hd"><span class="tag-x">MARKETING</span><span class="mono" style="font-size:10.5px;color:var(--muted)">EN</span></div>
+                <h5>festive_drop_eoss</h5>
+                <p>End‑of‑season sale broadcast for the VIP segment.</p>
+                <div class="bar"><i style="width:88%"></i></div>
+                <div class="ft"><span>88% delivered</span><span>8.7k</span></div>
+              </div>
+              <div class="tpl">
+                <div class="hd"><span class="tag-x">AUTH</span><span class="mono" style="font-size:10.5px;color:var(--muted)">EN</span></div>
+                <h5>otp_login_v2</h5>
+                <p>Six‑digit one‑time passcode for sign‑in flows.</p>
+                <div class="bar"><i style="width:99%"></i></div>
+                <div class="ft"><span>99% delivered</span><span>52k</span></div>
+              </div>
+              <div class="tpl">
+                <div class="hd"><span class="tag-x">UTILITY</span><span class="mono" style="font-size:10.5px;color:var(--muted)">EN · HI · TA</span></div>
+                <h5>cart_abandoned</h5>
+                <p>Triggers 60 min after a cart goes silent.</p>
+                <div class="bar"><i style="width:81%"></i></div>
+                <div class="ft"><span>81% delivered</span><span>3.4k</span></div>
+              </div>
+              <div class="tpl">
+                <div class="hd"><span class="tag-x">MARKETING</span><span class="mono" style="font-size:10.5px;color:var(--muted)">EN</span></div>
+                <h5>review_request_d7</h5>
+                <p>Asks for a product review seven days post‑delivery.</p>
+                <div class="bar"><i style="width:72%"></i></div>
+                <div class="ft"><span>72% delivered</span><span>1.9k</span></div>
+              </div>
+              <div class="tpl">
+                <div class="hd"><span class="tag-x amber">DRAFT</span><span class="mono" style="font-size:10.5px;color:var(--muted)">In review</span></div>
+                <h5>diwali_pre_order_2026</h5>
+                <p>Pending Meta approval — submitted 2 days ago.</p>
+                <div class="bar"><i style="width:0%"></i></div>
+                <div class="ft"><span>—</span><span>—</span></div>
+              </div>
             </div>
-            Data hosted in Mumbai, India — compliant with DPDP
           </div>
-        </div>
-      </div>
 
-      <div class="trust-visual">
-        <div class="trust-meta-badge">
-          <div class="trust-meta-icon">
-            <svg viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <div class="feat-panel">
+            <div class="f-bar">
+              <h4>Automation · Cart abandoned flow</h4>
+              <div class="right"><span class="pill">Live</span><span>· 3,412 runs/wk</span></div>
+            </div>
+            <div class="fp-auto">
+              <div class="node">
+                <div class="nic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m13 2-3 7h8l-9 13 3-9H4l9-11Z"/></svg></div>
+                <div class="nbody"><b>Trigger</b><small>cart.idle &gt; 60 min</small></div>
+              </div>
+              <div class="arrow">↓</div>
+              <div class="node blue">
+                <div class="nic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg></div>
+                <div class="nbody"><b>Branch</b><small>customer.lifetime_value</small></div>
+              </div>
+              <div class="branch">
+                <div class="node">
+                  <div class="nic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 4h16v16H4z"/><path d="m4 8 8 5 8-5"/></svg></div>
+                  <div class="nbody"><b>Send · cart_abandoned</b><small>HIGH · with 10% code</small></div>
+                </div>
+                <div class="node amber">
+                  <div class="nic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 4h16v16H4z"/><path d="m4 8 8 5 8-5"/></svg></div>
+                  <div class="nbody"><b>Send · cart_abandoned</b><small>STANDARD · no code</small></div>
+                </div>
+              </div>
+              <div class="arrow" style="padding-left:50%">↓</div>
+              <div class="node purple" style="margin-left:30%">
+                <div class="nic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M3 3h18v18H3z"/><path d="M9 9h6v6H9z"/></svg></div>
+                <div class="nbody"><b>Wait 24h, then close</b><small>recover.rate · 18.3%</small></div>
+              </div>
+            </div>
           </div>
-          <div class="trust-meta-text">
-            <strong>WhatsApp Business Solution Provider</strong>
-            <span>Authorised by Meta Platforms, Inc.</span>
+
+          <div class="feat-panel">
+            <div class="f-bar">
+              <h4>Contacts · VIP segment</h4>
+              <div class="right"><span class="pill">3,284 contacts</span><span>· 2 selected</span></div>
+            </div>
+            <div class="fp-contacts">
+              <div class="cont-row h"><div></div><div>Name</div><div>Phone</div><div>Tags</div><div style="text-align:right">LTV</div></div>
+              <div class="cont-row"><div class="chk on"></div><div class="nm"><span class="av-sm" style="background:linear-gradient(135deg,#34D399,#06B6D4)"></span> Priya Raghavan</div><div class="ph">+91 98 1023 7741</div><div class="tags"><span class="tag green">VIP</span><span class="tag">Mumbai</span></div><div class="mono" style="text-align:right">₹84,200</div></div>
+              <div class="cont-row"><div class="chk on"></div><div class="nm"><span class="av-sm" style="background:linear-gradient(135deg,#F59E0B,#EF4444)"></span> Arjun Kapoor</div><div class="ph">+91 99 8814 5520</div><div class="tags"><span class="tag green">VIP</span><span class="tag amber">B2B</span></div><div class="mono" style="text-align:right">₹2.1L</div></div>
+              <div class="cont-row"><div class="chk"></div><div class="nm"><span class="av-sm" style="background:linear-gradient(135deg,#6366F1,#A855F7)"></span> Sneha Nair</div><div class="ph">+91 80 4422 1198</div><div class="tags"><span class="tag green">VIP</span><span class="tag">Bangalore</span></div><div class="mono" style="text-align:right">₹62,400</div></div>
+              <div class="cont-row"><div class="chk"></div><div class="nm"><span class="av-sm" style="background:linear-gradient(135deg,#0F8A53,#25D366)"></span> Rohit Verma</div><div class="ph">+91 70 2330 5611</div><div class="tags"><span class="tag green">VIP</span><span class="tag">Delhi</span></div><div class="mono" style="text-align:right">₹48,900</div></div>
+              <div class="cont-row"><div class="chk"></div><div class="nm"><span class="av-sm" style="background:linear-gradient(135deg,#FB7185,#F59E0B)"></span> Devika Menon</div><div class="ph">+91 90 1234 8870</div><div class="tags"><span class="tag green">VIP</span><span class="tag amber">Repeat</span></div><div class="mono" style="text-align:right">₹41,100</div></div>
+            </div>
           </div>
-        </div>
-        <div class="trust-stats-row">
-          <div class="trust-stat">
-            <strong>99.9%</strong>
-            <span>API uptime</span>
+
+          <div class="feat-panel">
+            <div class="f-bar">
+              <h4>Analytics · Last 30 days</h4>
+              <div class="right"><span class="pill">All channels</span></div>
+            </div>
+            <div class="fp-analytics">
+              <div class="kpis">
+                <div class="kpi"><div class="l">Conversations</div><div class="v">18,402</div><div class="d">↑ 14.2% vs prev</div></div>
+                <div class="kpi"><div class="l">Median first reply</div><div class="v">42<span style="font-size:14px;color:var(--muted)"> s</span></div><div class="d">↑ 8% faster</div></div>
+                <div class="kpi"><div class="l">CSAT</div><div class="v">4.8<span style="font-size:14px;color:var(--muted)"> /5</span></div><div class="d down">↓ 0.1</div></div>
+              </div>
+              <div class="chart">
+                <svg viewBox="0 0 400 180" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="ga" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#25D366" stop-opacity=".35"/>
+                      <stop offset="100%" stop-color="#25D366" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0,140 C30,120 50,110 70,100 C100,90 120,110 140,90 C170,70 190,80 220,60 C250,45 270,55 300,40 C330,30 360,35 400,20 L400,180 L0,180 Z" fill="url(#ga)"/>
+                  <path d="M0,140 C30,120 50,110 70,100 C100,90 120,110 140,90 C170,70 190,80 220,60 C250,45 270,55 300,40 C330,30 360,35 400,20" stroke="#25D366" stroke-width="2" fill="none"/>
+                  <g stroke="#E7E4DA" stroke-dasharray="2 4">
+                    <line x1="0" x2="400" y1="40" y2="40"/>
+                    <line x1="0" x2="400" y1="90" y2="90"/>
+                    <line x1="0" x2="400" y1="140" y2="140"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
           </div>
-          <div class="trust-stat">
-            <strong>TLS</strong>
-            <span>Encrypted transit</span>
-          </div>
-          <div class="trust-stat">
-            <strong>MUM</strong>
-            <span>Data in India</span>
+
+          <div class="feat-panel">
+            <div class="f-bar">
+              <h4>API &amp; webhooks</h4>
+              <div class="right"><span class="pill">v2 · stable</span></div>
+            </div>
+            <div class="fp-api">
+              <div class="left">
+                <h5>Endpoints</h5>
+                <div class="endpoint"><span class="method">POST</span><span>/v2/messages</span></div>
+                <div class="endpoint"><span class="method get">GET</span><span>/v2/contacts/{id}</span></div>
+                <div class="endpoint"><span class="method">POST</span><span>/v2/templates/send</span></div>
+                <div class="endpoint"><span class="method del">DEL</span><span>/v2/conversations/{id}</span></div>
+                <p style="font-size:12.5px;color:var(--muted);line-height:1.55;margin-top:8px">Idempotent retries · Signed webhooks · 99.98% gateway uptime.</p>
+              </div>
+              <div class="right">
+                <div class="ln"><span class="num-x">1</span><span><span class="c">// send a templated message</span></span></div>
+                <div class="ln"><span class="num-x">2</span><span><span class="p">const</span> r = <span class="p">await</span> fetch(<span class="s">"/v2/messages"</span>, {</span></div>
+                <div class="ln"><span class="num-x">3</span><span>&nbsp;&nbsp;method: <span class="s">"POST"</span>,</span></div>
+                <div class="ln"><span class="num-x">4</span><span>&nbsp;&nbsp;headers: { <span class="k">Authorization</span>: <span class="s">`Bearer ${key}`</span> },</span></div>
+                <div class="ln"><span class="num-x">5</span><span>&nbsp;&nbsp;body: JSON.<span class="k">stringify</span>({</span></div>
+                <div class="ln"><span class="num-x">6</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">to</span>: <span class="s">"+919810237741"</span>,</span></div>
+                <div class="ln"><span class="num-x">7</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">template</span>: <span class="s">"order_shipped_v3"</span>,</span></div>
+                <div class="ln"><span class="num-x">8</span><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="k">vars</span>: { <span class="k">order_id</span>: <span class="s">"12847"</span> }</span></div>
+                <div class="ln"><span class="num-x">9</span><span>&nbsp;&nbsp;})</span></div>
+                <div class="ln"><span class="num-x">10</span><span>});</span></div>
+                <div class="ln"><span class="num-x">11</span><span><span class="c">// → { id: "msg_01HXY…", status: "queued" }</span></span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- ── Use Cases ───────────────────────────────── -->
-<section class="section bg-subtle">
-  <div class="container">
-    <div class="section-head reveal">
-      <p class="eyebrow">Use cases</p>
-      <h2>Built for how India does business</h2>
-      <p class="lead" style="margin-top:12px;">WaChat powers customer communication across every vertical — from D2C orders to hospital appointments.</p>
-    </div>
+  <!-- ============ TRUST BAND ============ -->
+  <section class="trust-band">
+    <div class="container">
+      <div class="trust-inner">
+        <span class="eyebrow" style="color:#34D399"><span class="dot"></span> Built on the official Cloud API</span>
+        <h2>No middleman. No shared numbers. No&nbsp;markup.</h2>
+        <p class="lede">Your business connects directly to the official WhatsApp Business Cloud API. We don't resell numbers, we don't pool messaging volume, and we don't mark up conversation charges. You see what Meta charges, billed at cost.</p>
 
-    <div class="usecases-grid">
-      <div class="usecase-card">
-        <span class="usecase-icon">🛒</span>
-        <div class="usecase-title">D2C & E-commerce</div>
-        <div class="usecase-desc">Order updates, abandoned cart recovery, post-purchase support</div>
-      </div>
-      <div class="usecase-card">
-        <span class="usecase-icon">🎓</span>
-        <div class="usecase-title">Education</div>
-        <div class="usecase-desc">Admissions, demo bookings, parent-teacher communication</div>
-      </div>
-      <div class="usecase-card">
-        <span class="usecase-icon">💳</span>
-        <div class="usecase-title">Financial Services</div>
-        <div class="usecase-desc">OTPs, statements, KYC reminders, payment confirmations</div>
-      </div>
-      <div class="usecase-card">
-        <span class="usecase-icon">🏥</span>
-        <div class="usecase-title">Healthcare</div>
-        <div class="usecase-desc">Appointment reminders, lab reports, telehealth follow-ups</div>
-      </div>
-      <div class="usecase-card">
-        <span class="usecase-icon">🚚</span>
-        <div class="usecase-title">Logistics</div>
-        <div class="usecase-desc">Booking confirmations, live tracking, delivery support</div>
+        <div class="trust-grid">
+          <div class="trust-card">
+            <div class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <h4>Your own verified number</h4>
+            <p>The phone number you use is registered to your business and verified directly with Meta. Not pooled, not shared, not rented.</p>
+          </div>
+          <div class="trust-card">
+            <div class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg>
+            </div>
+            <h4>Your own templates</h4>
+            <p>Templates are submitted and approved under your business account. Edit, version, and version‑control them inside WaChat.</p>
+          </div>
+          <div class="trust-card">
+            <div class="ic">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h4>Direct, transparent billing</h4>
+            <p>Conversation charges flow from Meta to you, at cost. WaChat earns from the platform fee only — never the message volume.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── Pricing ────────────────────────────────── -->
-<section class="section" id="pricing">
-  <div class="container">
-    <div class="section-head reveal">
-      <p class="eyebrow">Simple pricing</p>
-      <h2>No surprises. No markup on Meta fees.</h2>
-      <p class="lead" style="margin-top:12px;">A flat platform fee plus Meta's per-conversation charges passed through at cost. Everything includes a 14-day free trial.</p>
-    </div>
-
-    <!-- Toggle -->
-    <div class="pricing-toggle">
-      <span class="pricing-monthly-label active">Monthly</span>
-      <div class="toggle-switch" role="switch" aria-label="Annual pricing toggle"></div>
-      <span class="pricing-annual-label">Annual</span>
-      <span class="pricing-save-badge">Save 2 months</span>
-    </div>
-
-    <div class="pricing-grid">
-
-      <div class="pricing-card">
-        <div class="pricing-plan">Starter</div>
-        <div class="pricing-amount">
-          <span data-monthly>
-            <span class="pricing-currency">₹</span><span class="pricing-price">999</span>
-          </span>
-          <span data-annual style="display:none">
-            <span class="pricing-currency">₹</span><span class="pricing-price">833</span>
-          </span>
-          <span class="pricing-period">&thinsp;/ month</span>
-        </div>
-        <p class="pricing-desc">Perfect for small teams just getting started on WhatsApp Business.</p>
-        <a href="https://wachats.serves.in/register" class="pricing-cta pricing-cta-outline">Start free trial →</a>
-        <div class="pricing-features">
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            1 WhatsApp number
-          </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            2 agent seats
-          </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            1,000 conversations / mo
-          </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Template campaigns
-          </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Email support
-          </div>
-        </div>
+  <!-- ============ USE CASES ============ -->
+  <section class="usecases" id="use-cases">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow"><span class="dot"></span> Use cases</span>
+        <h2>Built for every industry that talks to&nbsp;customers.</h2>
+        <p class="lede">From a one‑woman jewellery brand in Jaipur to a 30‑clinic dental chain across the country — the playbooks are different, the platform isn't.</p>
       </div>
-
-      <div class="pricing-card featured">
-        <span class="pricing-featured-label">Most popular</span>
-        <div class="pricing-plan">Growth</div>
-        <div class="pricing-amount">
-          <span data-monthly>
-            <span class="pricing-currency">₹</span><span class="pricing-price">2,999</span>
-          </span>
-          <span data-annual style="display:none">
-            <span class="pricing-currency">₹</span><span class="pricing-price">2,499</span>
-          </span>
-          <span class="pricing-period">&thinsp;/ month</span>
-        </div>
-        <p class="pricing-desc">For growing teams who need more numbers, agents, and automation.</p>
-        <a href="https://wachats.serves.in/register" class="pricing-cta pricing-cta-primary">Start free trial →</a>
-        <div class="pricing-features">
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            3 WhatsApp numbers
+      <div class="uc-grid">
+        <article class="uc">
+          <div class="uc-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
           </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            10 agent seats
+          <h3>D2C &amp; e‑commerce</h3>
+          <p>Order updates, cart recovery, COD confirmation, post‑purchase reviews — all on the channel customers already check.</p>
+          <a class="btn-link" href="use-cases.html#d2c">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </article>
+        <article class="uc">
+          <div class="uc-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 10-10-5L2 10l10 5 10-5z"/><path d="M6 12v5a4 4 0 0 0 4 4h4a4 4 0 0 0 4-4v-5"/></svg>
           </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            10,000 conversations / mo
+          <h3>Education</h3>
+          <p>Admissions follow‑up, class reminders, fee receipts, parent broadcasts — without WhatsApp‑group chaos.</p>
+          <a class="btn-link" href="use-cases.html#education">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </article>
+        <article class="uc">
+          <div class="uc-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20M6 14h4"/></svg>
           </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            No-code automation flows
+          <h3>Financial services</h3>
+          <p>OTPs, statement alerts, KYC nudges, EMI reminders. Compliant templates, encrypted transit, audit log.</p>
+          <a class="btn-link" href="use-cases.html#finance">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </article>
+        <article class="uc">
+          <div class="uc-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
           </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            API & Zapier access
+          <h3>Healthcare</h3>
+          <p>Appointment confirmations, reports ready, prescription refills. HIPAA‑style consent built in.</p>
+          <a class="btn-link" href="use-cases.html#healthcare">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </article>
+        <article class="uc">
+          <div class="uc-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/><path d="M3 17.5h2M9 17.5h6M20 17.5h1M16 5h3l3 5v7.5M16 5v12.5M16 5H3v12.5"/></svg>
           </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Priority support
+          <h3>Logistics &amp; travel</h3>
+          <p>Booking confirmations, live tracking, gate changes, delay notices — in the customer's language.</p>
+          <a class="btn-link" href="use-cases.html#logistics">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </article>
+        <article class="uc">
+          <div class="uc-ic">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10A15.3 15.3 0 0 1 8 12 15.3 15.3 0 0 1 12 2zM2 12h20"/></svg>
           </div>
-        </div>
-      </div>
-
-      <div class="pricing-card">
-        <div class="pricing-plan">Scale</div>
-        <div class="pricing-amount">
-          <span class="pricing-price" style="font-size:36px;">Custom</span>
-        </div>
-        <p class="pricing-desc">For enterprises with high volume, custom integrations, and compliance requirements.</p>
-        <a href="contact.html" class="pricing-cta pricing-cta-outline">Contact sales →</a>
-        <div class="pricing-features">
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Unlimited numbers
-          </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Unlimited agents
-          </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Unlimited conversations
-          </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Custom integrations
-          </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Dedicated account manager
-          </div>
-          <div class="pricing-feature">
-            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5l-7 7L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            SLA & uptime guarantee
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <p class="pricing-note">All plans include a 14-day free trial — no credit card required. Plus Meta conversation charges billed at cost.</p>
-  </div>
-</section>
-
-<!-- ── Early Access ────────────────────────────── -->
-<section class="section-sm">
-  <div class="container">
-    <div class="early-access-card reveal">
-      <p class="eyebrow">We're just getting started</p>
-      <h2>Be one of our first customers</h2>
-      <p class="lead">We launched in 2026 because Indian SMBs deserve a WhatsApp platform that's fast, transparent, and priced fairly. Shape the roadmap with us.</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a href="https://wachats.serves.in/register" class="btn btn-primary btn-lg">Get early-access pricing →</a>
-        <a href="contact.html" class="btn btn-outline btn-lg">Talk to the founders</a>
+          <h3>Agencies</h3>
+          <p>Manage 10+ client workspaces from one console. Roles, billing splits, white‑label reports.</p>
+          <a class="btn-link" href="use-cases.html#agencies">Learn more <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </article>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ── FAQ ───────────────────────────────────── -->
-<section class="section bg-subtle">
-  <div class="container">
-    <div class="section-head reveal">
-      <p class="eyebrow">FAQ</p>
-      <h2>Questions we get asked a lot</h2>
+  <!-- ============ PRICING ============ -->
+  <section class="pricing" id="pricing">
+    <div class="container">
+      <div class="pricing-head">
+        <span class="eyebrow"><span class="dot"></span> Pricing</span>
+        <h2>Honest pricing. No conversation markup.</h2>
+        <p class="lede" style="margin: 0 auto">Pick a plan based on agents and features. Meta's conversation charges are passed through at cost — see them line‑by‑line in your invoice.</p>
+        <div class="bill-toggle" id="billToggle" role="tablist" style="margin-top:32px">
+          <button class="on" data-billing="monthly">Monthly</button>
+          <button data-billing="annual">Annual <span class="save">−20%</span></button>
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+        <article class="plan">
+          <div>
+            <div class="plan-name">Starter</div>
+            <div class="plan-price">
+              <span class="amt">₹<span class="price" data-monthly="999" data-annual="799">999</span></span>
+              <span class="per">/mo · billed monthly</span>
+            </div>
+            <p class="plan-desc">For founders running WhatsApp themselves and small teams just getting set up.</p>
+          </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 2 agents, unlimited contacts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Shared inbox &amp; templates</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 10 broadcasts / month</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Shopify &amp; WooCommerce</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Email support, 24h SLA</li>
+          </ul>
+          <a href="signup.html?plan=starter" class="btn btn-ghost">Start free trial</a>
+        </article>
+
+        <article class="plan featured">
+          <div class="plan-badge">Most popular</div>
+          <div>
+            <div class="plan-name">Growth</div>
+            <div class="plan-price">
+              <span class="amt">₹<span class="price" data-monthly="2999" data-annual="2399">2,999</span></span>
+              <span class="per">/mo · billed monthly</span>
+            </div>
+            <p class="plan-desc">For scaling D2C and B2B teams who need automation, segmentation and reporting.</p>
+          </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 10 agents</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> No‑code automation builder</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited broadcasts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Real‑time analytics + ROI</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Public REST API + webhooks</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Priority chat support, 2h</li>
+          </ul>
+          <a href="signup.html?plan=growth" class="btn btn-green">Start free trial</a>
+        </article>
+
+        <article class="plan">
+          <div>
+            <div class="plan-name">Scale</div>
+            <div class="plan-price">
+              <span class="amt">Custom</span>
+            </div>
+            <p class="plan-desc">For 50+ agent teams, regulated industries, and businesses that need a name to call.</p>
+          </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited agents &amp; numbers</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> SSO, audit log, role policies</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Data residency &amp; DPA</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 99.99% uptime SLA</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Dedicated success manager</li>
+          </ul>
+          <a href="contact.html?topic=scale" class="btn btn-ghost">Talk to sales</a>
+        </article>
+      </div>
+      <div class="pricing-note">+ Meta conversation charges, billed at cost. No markup, ever.</div>
     </div>
+  </section>
 
-    <div class="container-sm">
-      <div class="faq-list">
-
-        <div class="faq-item open">
-          <button class="faq-q">
-            Is WaChat an official Meta partner?
-            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p>Yes — WaChat is an authorised Business Solution Provider (BSP) built on Meta's official WhatsApp Cloud API. This means you get a real, verified WhatsApp Business number connected directly to Meta's infrastructure.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">
-            Do I need my own WhatsApp Business number?
-            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p>Yes. You connect your own verified WhatsApp Business number — we provide the platform and tooling around it. This keeps your customer data, templates, and conversations entirely under your business account.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">
-            How does pricing work?
-            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p>You pay a flat monthly platform fee (starting ₹999/mo) plus Meta's per-conversation charges — passed through to you at cost with zero markup. No hidden fees, no surprise bills.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">
-            How long does setup take?
-            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p>About 10 minutes if your WhatsApp Business Account is already verified. If you're starting fresh, the Meta verification process takes 1–3 days — we guide you through every step.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">
-            Can I migrate from Wati, Interakt, or AiSensy?
-            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p>Yes — we offer full template, contact, and conversation history migration from all major platforms. The migration is free and handled by our team. Most migrations complete within 24 hours.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">
-            Where is my data stored?
-            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p>All data is stored in Mumbai, India (with failover in Singapore). Data in transit is encrypted with TLS 1.3 and at rest with AES-256. We comply with India's DPDP Act 2023.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">
-            Can I cancel anytime?
-            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p>Yes — month-to-month, no contracts, cancel anytime. Annual plans get 2 months free. If you're not satisfied within 30 days, we'll refund in full, no questions asked.</p></div></div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-q">
-            Can you help me get the green tick?
-            <svg class="faq-chevron" viewBox="0 0 20 20" fill="none"><path d="M5 7.5l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-          <div class="faq-a"><div class="faq-a-inner"><p>Yes — we'll walk you through the Meta Business verification process and Official Business Account (green tick) application. The process takes 5–14 days depending on your business profile.</p></div></div>
-        </div>
-
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="testimonials" id="customers">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow"><span class="dot"></span> Customers</span>
+        <h2>Teams that switched to WaChat.</h2>
+        <p class="lede">A few of the founders, marketing heads and ops leads running WhatsApp on WaChat.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── CTA Band ────────────────────────────────── -->
-<div class="cta-band">
-  <div class="container">
-    <h2>Stop juggling WhatsApp tabs.</h2>
-    <p class="lead">Run your customer conversations like a team — with one shared inbox, real templates, and automation that actually works.</p>
-    <div class="cta-band-actions">
-      <a class="btn btn-primary btn-lg" href="https://wachats.serves.in/register">Start your free 14-day trial →</a>
-      <a class="btn btn-outline btn-lg" style="color:#fff;border-color:rgba(255,255,255,.25);" href="contact.html">Talk to us first</a>
-    </div>
-    <p class="cta-band-note">
-      <span>No credit card required</span>
-      <span>Setup in 10 minutes</span>
-      <span>Built on Meta's Cloud API</span>
-    </p>
-  </div>
-</div>
-
-</main>
-
-<!-- ── Footer ─────────────────────────────────── -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-brand-name">
-          <span class="footer-brand-mark">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20.52 3.48A11.84 11.84 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.2-1.57A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52z"/><path d="M17.47 14.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.21 8.21 0 0 1-2.42-1.5 9.07 9.07 0 0 1-1.67-2.08c-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.21 3.09c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z" fill="white"/></svg>
-          </span>
-          WaChat
-        </div>
-        <p>The modern WhatsApp Business platform for Indian SMBs. Built on Meta's Cloud API.</p>
-        <div class="footer-social">
-          <a class="footer-social-link" href="#" aria-label="LinkedIn">
-            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a class="footer-social-link" href="#" aria-label="Twitter/X">
-            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-          <a class="footer-social-link" href="#" aria-label="YouTube">
-            <svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="footer-col">
-        <strong>Product</strong>
-        <a href="features.html">Features</a>
-        <a href="pricing.html">Pricing</a>
-        <a href="use-cases.html">Use Cases</a>
-        <a href="integrations.html">Integrations</a>
-      </div>
-
-      <div class="footer-col">
-        <strong>Solutions</strong>
-        <a href="use-cases.html#ecommerce">D2C & E-commerce</a>
-        <a href="use-cases.html#education">Education</a>
-        <a href="use-cases.html#finance">Finance</a>
-        <a href="use-cases.html#healthcare">Healthcare</a>
-      </div>
-
-      <div class="footer-col">
-        <strong>Company</strong>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-        <a href="blog.html">Blog</a>
-        <a href="security.html">Security</a>
-      </div>
-
-      <div class="footer-col">
-        <strong>Legal</strong>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="data-deletion.html">Data Deletion</a>
-        <a href="cookies.html">Cookie Policy</a>
-        <a href="security.html">Security</a>
+      <div class="test-grid">
+        <article class="test">
+          <div class="qm">"</div>
+          <blockquote>The previous tool felt like a 2015 ticketing system bolted onto WhatsApp. WaChat felt designed by people who actually answer customer DMs. Switched the whole team in a weekend.</blockquote>
+          <div class="who">
+            <div class="ava a">RG</div>
+            <div>
+              <div class="nm">Rhea Gokhale</div>
+              <div class="ttl">Head of Growth</div>
+            </div>
+            <div class="biz">Plume &amp; Co.</div>
+          </div>
+        </article>
+        <article class="test">
+          <div class="qm">"</div>
+          <blockquote>Set up was 11 minutes. Eleven. The Meta verification went through the same evening. By Monday we'd already recovered ₹1.4L of abandoned carts.</blockquote>
+          <div class="who">
+            <div class="ava b">VK</div>
+            <div>
+              <div class="nm">Vikram Kothari</div>
+              <div class="ttl">Founder</div>
+            </div>
+            <div class="biz">Northbloom</div>
+          </div>
+        </article>
+        <article class="test">
+          <div class="qm">"</div>
+          <blockquote>The pass‑through pricing alone saved us ₹40k a month versus our previous BSP. The shared inbox is the cherry — agents finally stopped DM‑ing each other "who's replying to this?".</blockquote>
+          <div class="who">
+            <div class="ava c">NA</div>
+            <div>
+              <div class="nm">Nikita Agarwal</div>
+              <div class="ttl">Customer Ops Lead</div>
+            </div>
+            <div class="biz">Daybreak Coffee</div>
+          </div>
+        </article>
       </div>
     </div>
+  </section>
 
-    <div class="footer-bottom">
-      <div class="footer-copyright">
-        © 2026 Serves Technology Pvt. Ltd. · hello@serves.in · +91 98765 43210<br>
-        1st Floor, Innov8, Sector 44, Gurugram, Haryana 122003, India
-      </div>
-      <div class="footer-disclaimer">
-        WhatsApp and the WhatsApp logo are trademarks of Meta Platforms, Inc. WaChat is an independent product and is not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc.
+  <!-- ============ FAQ ============ -->
+  <section class="faq">
+    <div class="container">
+      <div class="faq-layout">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> FAQ</span>
+          <h2 style="margin-top:14px">Questions, answered.</h2>
+          <p class="lede" style="margin-top:18px">Can't find what you're looking for? Mail us at <a href="mailto:hello@serves.in" style="color:var(--green-deep);font-weight:500">hello@serves.in</a> — we reply in hours, not days.</p>
+        </div>
+        <div class="faq-list" id="faqList">
+          <div class="faq-item open">
+            <button class="faq-q">Do I need an existing WhatsApp Business Account? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">No — we'll walk you through creating one during onboarding. If you already have one, even better, we can migrate your existing number and templates over.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How does pass‑through pricing actually work? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Meta charges per conversation, by category and destination. We bill you the exact rate Meta charges us — every invoice line shows Meta's rate and our zero markup.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Can I keep my existing phone number? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes. If the number is currently on regular WhatsApp or another BSP, we can migrate it. Migration is free and takes 15–30 minutes once Meta clears the request.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Is WaChat affiliated with Meta or WhatsApp? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">WaChat is an authorised WhatsApp Business Solution Provider, but it's an independent product. We're not owned by, endorsed by, or sponsored by Meta. WhatsApp is a trademark of Meta Platforms, Inc.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What about GST, invoicing and Indian tax compliance? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Every invoice is GST‑compliant and downloadable as PDF. We support payments in INR via UPI, Net Banking, card, and NEFT/RTGS for enterprise.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">Can my developers hit the API directly? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes — every WaChat workspace exposes a REST API with idempotency keys, signed webhooks, and rate‑limit headers. Code samples live at docs.wachat.serves.in.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">How is my customer data stored? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Data is stored encrypted at rest in our Mumbai region. SOC 2 Type II report and ISO 27001 are available on request. On the Scale plan we offer dedicated tenancy and signed DPAs.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q">What happens if I want to leave? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Cancel anytime — no minimum contracts on Starter or Growth. Your number, templates and contacts all belong to your Meta account, not ours. We export everything on the way out.</div></div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<script src="script.js" defer></script>
+  <!-- ============ FINAL CTA ============ -->
+  <section class="final-cta">
+    <svg class="bubble-bg b1" viewBox="0 0 100 100" fill="none"><rect x="2" y="2" width="96" height="80" rx="20" stroke="white" stroke-width="2"/><path d="M30 82 l-10 14 l0 -14 z" stroke="white" stroke-width="2" fill="white"/></svg>
+    <svg class="bubble-bg b2" viewBox="0 0 100 100" fill="none"><rect x="2" y="2" width="96" height="80" rx="20" stroke="white" stroke-width="2"/><path d="M30 82 l-10 14 l0 -14 z" stroke="white" stroke-width="2" fill="white"/></svg>
+    <svg class="bubble-bg b3" viewBox="0 0 100 100" fill="none"><rect x="2" y="2" width="96" height="80" rx="20" stroke="white" stroke-width="2"/><path d="M30 82 l-10 14 l0 -14 z" stroke="white" stroke-width="2" fill="white"/></svg>
+
+    <div class="container final-cta-inner">
+      <h2>Stop juggling WhatsApp tabs.</h2>
+      <div class="sub">Start running your customer conversations like a real team.</div>
+      <a href="signup.html" class="btn btn-white">Start your free 14‑day trial →</a>
+      <div class="note">No credit card · Set up in 10 minutes · Cancel anytime</div>
+    </div>
+  </section>
+
+  </main>
+
+  <div id="wc-footer"></div>
+  <script src="shell.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

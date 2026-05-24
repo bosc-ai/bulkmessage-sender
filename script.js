@@ -1,322 +1,276 @@
-/* WaChat — Interactions v4
-   ─────────────────────────────────────────────
-   · Removed Lenis — CDN unreliability caused crashes on Vercel.
-     Native scroll is smooth enough and has zero dependencies.
-   · GSAP + ScrollTrigger only (cdnjs — highly reliable CDN).
-   · Contact form: AJAX to FormSubmit.co (real email delivery).
-   · FAQ: max-height cross-browser accordion.
-   · Mobile menu: opacity + pointer-events (animates cleanly).
-   · prefers-reduced-motion: all animations skipped.
-   · All GSAP calls null-guarded.
-   ─────────────────────────────────────────────── */
+/* =========================================================
+   WaChat — landing page interactions
+   Pure CSS animations only — no GSAP, no Lenis.
+   ========================================================= */
+(function () {
+  'use strict';
 
-'use strict';
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const HAS_GSAP = typeof gsap !== 'undefined';
-
-/* ── 1. Navigation ────────────────────────────── */
-function initNav() {
-  const nav = document.querySelector('.nav-wrap');
-  if (!nav) return;
-
-  const toggle  = nav.querySelector('.mobile-toggle');
-  const overlay = nav.querySelector('.mobile-menu');
-
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  function openMenu() {
-    nav.classList.add('menu-open');
-    toggle?.setAttribute('aria-expanded', 'true');
-    document.documentElement.style.overflow = 'hidden';
-  }
-  function closeMenu() {
-    nav.classList.remove('menu-open');
-    toggle?.setAttribute('aria-expanded', 'false');
-    document.documentElement.style.overflow = '';
+  // ---------- Marquee: duplicate logos for seamless loop ----------
+  const mq = document.getElementById('marquee');
+  if (mq) {
+    mq.innerHTML = mq.innerHTML + mq.innerHTML;
   }
 
-  toggle?.setAttribute('aria-expanded', 'false');
-  toggle?.addEventListener('click', e => {
-    e.stopPropagation();
-    nav.classList.contains('menu-open') ? closeMenu() : openMenu();
-  });
-
-  overlay?.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-
-  document.addEventListener('pointerdown', e => {
-    if (nav.classList.contains('menu-open') && !nav.contains(e.target)) closeMenu();
-  });
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && nav.classList.contains('menu-open')) closeMenu();
-  });
-
-  const page = location.pathname.split('/').pop() || 'index.html';
-  nav.querySelectorAll('a[href]').forEach(a => {
-    const href = a.getAttribute('href').split('?')[0].split('#')[0];
-    if (href === page || (page === '' && href === 'index.html')) {
-      a.classList.add('active');
+  // ---------- Phone-mockup tilt (the inbox frame) ----------
+  const inboxFrame = document.getElementById('inboxFrame');
+  const inboxWrap = document.getElementById('inboxWrap');
+  if (inboxFrame && inboxWrap && !reduced) {
+    let raf = null;
+    let target = { x: -4, y: 2 };
+    let cur = { x: -4, y: 2 };
+    function loop() {
+      cur.x += (target.x - cur.x) * 0.08;
+      cur.y += (target.y - cur.y) * 0.08;
+      inboxFrame.style.transform = `perspective(1400px) rotateY(${cur.x}deg) rotateX(${cur.y}deg)`;
+      raf = requestAnimationFrame(loop);
     }
-  });
-}
+    inboxWrap.addEventListener('mousemove', (e) => {
+      const rect = inboxWrap.getBoundingClientRect();
+      const cx = (e.clientX - rect.left) / rect.width - 0.5;
+      const cy = (e.clientY - rect.top) / rect.height - 0.5;
+      target.x = -4 + cx * 6;
+      target.y = 2 - cy * 5;
+    });
+    inboxWrap.addEventListener('mouseleave', () => {
+      target.x = -4; target.y = 2;
+    });
+    loop();
+  }
 
-/* ── 2. GSAP Animations ───────────────────────── */
-function initAnimations() {
-  if (!HAS_GSAP) {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+  // ---------- Hero chat: typing animation ----------
+  const stream = document.getElementById('chatStream');
+  const script = [
+    { who: 'in',  text: 'Hi 👋 quick question about my order' },
+    { who: 'out', text: 'Hi Priya! I see order #12847 — how can I help?', meta: '11:41 · ✓✓' },
+    { who: 'in',  text: 'Awesome! When will it arrive?' },
+    { who: 'out', text: 'Tomorrow by 6 PM. Tracking link → wc.in/t/12847', meta: '11:42 · ✓✓' },
+  ];
+  function makeBubble(role, text, meta) {
+    const b = document.createElement('div');
+    b.className = 'bubble ' + role;
+    b.textContent = text;
+    if (meta) {
+      const m = document.createElement('div');
+      m.className = 'meta';
+      const parts = meta.split('·');
+      m.innerHTML = '<span>' + parts[0].trim() + '</span>' + (parts[1] ? '<span class="read">' + parts[1].trim() + '</span>' : '');
+      b.appendChild(m);
+    }
+    return b;
+  }
+  function makeTyping() {
+    const t = document.createElement('div');
+    t.className = 'typing';
+    t.innerHTML = '<span></span><span></span><span></span>';
+    return t;
+  }
+  async function runChat() {
+    if (!stream) return;
+    while (true) {
+      stream.innerHTML = '';
+      await wait(400);
+      for (let i = 0; i < script.length; i++) {
+        const step = script[i];
+        if (step.who === 'out') {
+          const t = makeTyping();
+          stream.appendChild(t);
+          await wait(900);
+          t.remove();
+        }
+        stream.appendChild(makeBubble(step.who, step.text, step.meta));
+        await wait(step.who === 'in' ? 1100 : 1300);
+      }
+      await wait(2400);
+    }
+  }
+  function wait(ms) { return new Promise(r => setTimeout(r, reduced ? 200 : ms)); }
+  runChat();
+
+  // ---------- Stats: count-up on intersect ----------
+  function animateNumber(el, to, decimals, suffix) {
+    const dur = 1400;
+    const t0 = performance.now();
+    function step(now) {
+      const p = Math.min(1, (now - t0) / dur);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = to * eased;
+      el.textContent = formatNum(val, to, decimals);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = formatNum(to, to, decimals);
+    }
+    requestAnimationFrame(step);
+  }
+  function formatNum(v, to, decimals) {
+    if (decimals) return v.toFixed(decimals);
+    if (to >= 1000) return Math.round(v).toLocaleString('en-IN');
+    if (Number.isInteger(to)) return Math.round(v).toString();
+    return v.toFixed(1);
+  }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) {
+        const el = en.target;
+        const to = parseFloat(el.dataset.to);
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        const suffix = el.dataset.suffix || '';
+        if (suffix && !el.parentElement.querySelector('.suffix')) {
+          const s = document.createElement('span');
+          s.className = 'suffix';
+          s.textContent = suffix;
+          el.parentElement.appendChild(s);
+        }
+        animateNumber(el, to, decimals, suffix);
+        io.unobserve(el);
+      }
+    });
+  }, { threshold: 0.4 });
+  document.querySelectorAll('.counter').forEach((el) => io.observe(el));
+
+  // ---------- Feature tabs ----------
+  const tabs = document.querySelectorAll('#featTabs .feat-tab');
+  const panels = document.querySelectorAll('#featStage .feat-panel');
+  let activeIdx = 0;
+  let cycleTimer = null;
+  function setTab(idx) {
+    activeIdx = idx;
+    tabs.forEach((t, i) => {
+      t.classList.toggle('active', i === idx);
+      t.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+    });
+    panels.forEach((p, i) => p.classList.toggle('show', i === idx));
+  }
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      setTab(i);
+      restartCycle();
+    });
+  });
+  function cycle() {
+    setTab((activeIdx + 1) % tabs.length);
+  }
+  function restartCycle() {
+    if (cycleTimer) clearInterval(cycleTimer);
+    if (!reduced) cycleTimer = setInterval(cycle, 5500);
+  }
+  const featSec = document.querySelector('.features');
+  if (featSec) {
+    const featIo = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) {
+          restartCycle();
+        } else if (cycleTimer) {
+          clearInterval(cycleTimer);
+          cycleTimer = null;
+        }
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
-    return;
+    }, { threshold: 0.25 });
+    featIo.observe(featSec);
+  }
+  const featStage = document.getElementById('featStage');
+  if (featStage) {
+    featStage.addEventListener('mouseenter', () => { if (cycleTimer) clearInterval(cycleTimer); });
+    featStage.addEventListener('mouseleave', restartCycle);
   }
 
-  gsap.registerPlugin(ScrollTrigger);
-
-  function batchReveal(selector, fromVars, scrollStart = 'top 88%') {
-    const els = gsap.utils.toArray(selector);
-    if (!els.length) return;
-    if (REDUCED) { gsap.set(els, { opacity: 1, x: 0, y: 0 }); return; }
-    els.forEach(el => {
-      gsap.fromTo(el,
-        { opacity: 0, ...fromVars },
-        { opacity: 1, x: 0, y: 0, duration: 0.6, ease: 'power2.out',
-          scrollTrigger: { trigger: el, start: scrollStart, once: true } }
-      );
-    });
-  }
-
-  const hero = document.querySelector('.hero');
-  if (hero && !REDUCED) {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-    const q  = s => hero.querySelector(s);
-    const eyebrow = q('.eyebrow'), h1 = q('h1'), lead = q('.hero-lead');
-    const cta = q('.hero-cta'), trust = q('.hero-trust'), visual = q('.hero-visual');
-    const toast = document.querySelector('.inbox-toast');
-
-    if (eyebrow) tl.from(eyebrow, { opacity: 0, y: 14, duration: 0.5 });
-    if (h1)      tl.from(h1,      { opacity: 0, y: 22, duration: 0.6 }, '-=0.22');
-    if (lead)    tl.from(lead,    { opacity: 0, y: 14, duration: 0.5 }, '-=0.3');
-    if (cta)     tl.from(cta,     { opacity: 0, y: 10, duration: 0.45 }, '-=0.3');
-    if (trust)   tl.from(trust,   { opacity: 0, y: 8,  duration: 0.4 }, '-=0.3');
-    if (visual)  tl.from(visual,  { opacity: 0, x: 24, duration: 0.65, ease: 'power2.out' }, '-=0.6');
-    if (toast)   tl.from(toast,   { opacity: 0, y: 10, scale: 0.94, duration: 0.45, ease: 'back.out(1.5)' }, '-=0.15');
-  } else if (hero && REDUCED) {
-    gsap.set(['.hero .eyebrow', '.hero h1', '.hero-lead', '.hero-cta', '.hero-trust', '.hero-visual', '.inbox-toast'],
-      { opacity: 1, x: 0, y: 0 });
-  }
-
-  batchReveal('.reveal',       { y: 22 });
-  batchReveal('.reveal-left',  { x: -22 });
-  batchReveal('.reveal-right', { x: 22 });
-
-  document.querySelectorAll('.features-grid, .usecases-grid, .values-grid').forEach(grid => {
-    const cards = gsap.utils.toArray('.feature-card, .usecase-card, .value-card', grid);
-    if (!cards.length || REDUCED) { if (REDUCED) gsap.set(cards, { opacity: 1 }); return; }
-    gsap.from(cards, {
-      opacity: 0, y: 20, stagger: 0.07, duration: 0.55, ease: 'power2.out',
-      scrollTrigger: { trigger: grid, start: 'top 86%', once: true },
+  // ---------- Pricing toggle ----------
+  const billBtns = document.querySelectorAll('#billToggle button');
+  billBtns.forEach((b) => {
+    b.addEventListener('click', () => {
+      billBtns.forEach((x) => x.classList.remove('on'));
+      b.classList.add('on');
+      const mode = b.dataset.billing;
+      document.querySelectorAll('.plan .price').forEach((p) => {
+        const v = mode === 'annual' ? p.dataset.annual : p.dataset.monthly;
+        p.textContent = Number(v).toLocaleString('en-IN');
+      });
+      document.querySelectorAll('.plan-price .per').forEach((per) => {
+        per.textContent = mode === 'annual' ? '/mo · billed annually' : '/mo · billed monthly';
+      });
     });
   });
 
-  const pGrid = document.querySelector('.pricing-grid');
-  if (pGrid && !REDUCED) {
-    gsap.from(gsap.utils.toArray('.pricing-card', pGrid), {
-      opacity: 0, y: 26, stagger: 0.1, duration: 0.6, ease: 'power3.out',
-      scrollTrigger: { trigger: pGrid, start: 'top 85%', once: true },
-    });
-  }
-
-  gsap.utils.toArray('.section-head').forEach(el => {
-    if (REDUCED) { gsap.set(el, { opacity: 1 }); return; }
-    gsap.from(el, {
-      opacity: 0, y: 16, duration: 0.55, ease: 'power2.out',
-      scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-    });
-  });
-
-  document.querySelectorAll('.stat-number[data-target]').forEach(el => {
-    const target  = parseFloat(el.dataset.target);
-    const suffix  = el.dataset.suffix  || '';
-    const decimal = el.dataset.decimal === 'true';
-    const obj     = { v: 0 };
-    gsap.to(obj, {
-      v: target, duration: REDUCED ? 0 : 1.6, ease: 'power2.out',
-      onUpdate() { el.textContent = (decimal ? obj.v.toFixed(1) : Math.round(obj.v)) + suffix; },
-      scrollTrigger: { trigger: el, start: 'top 90%', once: true },
-    });
-  });
-
-  const trustChecks = gsap.utils.toArray('.trust-check');
-  if (trustChecks.length && !REDUCED) {
-    gsap.from(trustChecks, {
-      opacity: 0, x: -14, stagger: 0.09, duration: 0.5, ease: 'power2.out',
-      scrollTrigger: { trigger: '.trust-band', start: 'top 82%', once: true },
-    });
-  }
-
-  const ctaBand = document.querySelector('.cta-band');
-  if (ctaBand && !REDUCED) {
-    gsap.from(['.cta-band h2', '.cta-band .lead', '.cta-band-actions', '.cta-band-note'], {
-      opacity: 0, y: 18, stagger: 0.1, duration: 0.55, ease: 'power2.out',
-      scrollTrigger: { trigger: ctaBand, start: 'top 82%', once: true },
-    });
-  }
-}
-
-/* ── 3. FAQ Accordion ─────────────────────────────
-   max-height: cross-browser, works in all Safari versions.
-──────────────────────────────────────────────────── */
-function initFAQ() {
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const btn    = item.querySelector('.faq-q');
-    const answer = item.querySelector('.faq-a-inner');
-    if (!btn || !answer) return;
-
-    if (item.classList.contains('open')) {
-      answer.style.transition = 'none';
-      answer.style.maxHeight  = answer.scrollHeight + 'px';
-      answer.getBoundingClientRect();
-      answer.style.transition = '';
-    }
-
-    btn.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
-
+  // ---------- FAQ accordion ----------
+  document.querySelectorAll('#faqList .faq-item').forEach((item) => {
+    const btn = item.querySelector('.faq-q');
     btn.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
-
-      document.querySelectorAll('.faq-item.open').forEach(open => {
-        open.classList.remove('open');
-        open.querySelector('.faq-a-inner').style.maxHeight = '0';
-        open.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-      });
-
-      if (!isOpen) {
-        item.classList.add('open');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
-        btn.setAttribute('aria-expanded', 'true');
-      }
+      document.querySelectorAll('#faqList .faq-item').forEach((x) => x.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
     });
   });
-}
 
-/* ── 4. Pricing Toggle ────────────────────────── */
-function initPricing() {
-  const toggle = document.querySelector('.toggle-switch');
-  if (!toggle) return;
-
-  const monthlyEls   = document.querySelectorAll('[data-monthly]');
-  const annualEls    = document.querySelectorAll('[data-annual]');
-  const monthlyLabel = document.querySelector('.pricing-monthly-label');
-  const annualLabel  = document.querySelector('.pricing-annual-label');
-  let annual = false;
-
-  function update() {
-    toggle.classList.toggle('on', annual);
-    toggle.setAttribute('aria-checked', String(annual));
-    monthlyEls.forEach(el => { el.hidden = annual; });
-    annualEls.forEach(el  => { el.hidden = !annual; });
-    if (monthlyLabel) monthlyLabel.classList.toggle('active', !annual);
-    if (annualLabel)  annualLabel.classList.toggle('active',  annual);
+  // ---------- Scroll reveal: subtle fade-up on sections ----------
+  const revealIo = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      if (en.isIntersecting) {
+        en.target.style.opacity = '1';
+        en.target.style.transform = 'translateY(0)';
+        revealIo.unobserve(en.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  if (!reduced) {
+    document.querySelectorAll('.section-head, .stats-head, .trust-inner, .pricing-head, .faq-layout > div:first-child, .final-cta-inner').forEach((el) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1)';
+      revealIo.observe(el);
+    });
   }
 
-  toggle.setAttribute('role', 'switch');
-  toggle.setAttribute('tabindex', '0');
-  toggle.addEventListener('click', () => { annual = !annual; update(); });
-  toggle.addEventListener('keydown', e => {
-    if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); annual = !annual; update(); }
-  });
-
-  monthlyEls.forEach(el => { el.hidden = false; });
-  annualEls.forEach(el  => { el.hidden = true; });
-  update();
-}
-
-/* ── 5. Smooth anchor scroll (native — no Lenis) ─ */
-function initAnchors() {
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const id = a.getAttribute('href');
-      if (id === '#') return;
-      const target = document.querySelector(id);
-      if (!target) return;
-      e.preventDefault();
-      const navH = document.querySelector('.nav-wrap')?.offsetHeight ?? 68;
-      const top  = target.getBoundingClientRect().top + window.scrollY - navH - 8;
-      window.scrollTo({ top, behavior: REDUCED ? 'auto' : 'smooth' });
-    });
-  });
-}
-
-/* ── 6. Contact form → FormSubmit.co AJAX ──────── */
-function initForm() {
-  const form = document.querySelector('[data-contact-form]');
-  if (!form) return;
-
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const btn = form.querySelector('[type="submit"]');
-    if (!btn || btn.disabled) return;
-
-    const original = btn.textContent;
-    btn.disabled   = true;
-    btn.textContent = 'Sending…';
-
-    try {
-      const data = new FormData(form);
-      data.append('_subject',      'New enquiry — WaChat website');
-      data.append('_template',     'table');
-      data.append('_captcha',      'false');
-      data.append('_autoresponse', 'Thanks for reaching out to WaChat. We will reply within the hour.');
-
-      const res = await fetch('https://formsubmit.co/ajax/hello@wachat.serves.in', {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: data,
-      });
-
-      if (res.ok) {
-        btn.textContent    = 'Sent ✓  We\'ll reply within the hour.';
-        btn.style.background = 'var(--green-dark)';
-        form.reset();
-        setTimeout(() => {
-          btn.textContent    = original;
-          btn.disabled       = false;
-          btn.style.background = '';
-        }, 6000);
-      } else {
-        throw new Error('server');
-      }
-    } catch {
-      btn.textContent    = 'Could not send — email us directly';
-      btn.style.background = '#DC2626';
-      btn.disabled       = false;
-      btn.onclick        = () => {
-        window.location.href =
-          'mailto:hello@wachat.serves.in?subject=Demo%20Request&body=Hi%20WaChat%20team%2C';
-      };
-      setTimeout(() => {
-        btn.textContent    = original;
-        btn.style.background = '';
-        btn.onclick        = null;
-      }, 6000);
+  // ---------- Inner page: TOC scrollspy ----------
+  const tocLinks = document.querySelectorAll('.toc a');
+  if (tocLinks.length) {
+    const sections = [...tocLinks].map(a => document.querySelector(a.getAttribute('href')));
+    function onScroll() {
+      const y = window.scrollY + 120;
+      let active = sections[0];
+      sections.forEach(s => { if (s && s.offsetTop <= y) active = s; });
+      tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + (active && active.id)));
     }
-  });
-}
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
 
-/* ── Boot ─────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', () => {
-  initNav();
-  initFAQ();
-  initPricing();
-  initAnchors();
-  initForm();
-});
+  // ---------- Inner page: signup plan pre-select ----------
+  const planSel = document.getElementById('planSel');
+  if (planSel) {
+    const params = new URLSearchParams(location.search);
+    const planParam = params.get('plan');
+    if (planParam && [...planSel.options].some(o => o.value === planParam)) {
+      planSel.value = planParam;
+    }
+  }
 
-window.addEventListener('load', () => {
-  initAnimations();
-});
+  // ---------- Inner page: signup mock submit ----------
+  const signupForm = document.getElementById('signupForm');
+  if (signupForm) {
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const ok = e.target.checkValidity();
+      if (!ok) { e.target.reportValidity(); return; }
+      const success = document.getElementById('signupSuccess');
+      if (success) success.classList.add('show');
+      e.target.style.opacity = '.4';
+      e.target.style.pointerEvents = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ---------- Inner page: contact form ----------
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const ok = e.target.checkValidity();
+      if (!ok) { e.target.reportValidity(); return; }
+      const success = document.getElementById('contactSuccess');
+      if (success) success.classList.add('show');
+      e.target.style.opacity = '.4';
+      e.target.style.pointerEvents = 'none';
+    });
+  }
+
+})();

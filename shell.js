@@ -1,0 +1,157 @@
+/* =========================================================
+   WaChat — shared shell (nav + footer + mobile menu)
+   All pages live at root level — no /pages/ prefix needed.
+   ========================================================= */
+(function () {
+  'use strict';
+
+  const navLinks = [
+    { href: 'features.html',   label: 'Features',  key: 'features' },
+    { href: 'pricing.html',    label: 'Pricing',   key: 'pricing' },
+    { href: 'use-cases.html',  label: 'Use cases', key: 'use-cases' },
+    { href: 'customers.html',  label: 'Customers', key: 'customers' },
+    { href: 'blog.html',       label: 'Blog',      key: 'blog' },
+    { href: 'docs.html',       label: 'Docs',      key: 'docs' },
+  ];
+
+  const activeKey = (document.body.dataset.page || '').toLowerCase();
+  const logoSrc = 'assets/wachat-logo.png';
+
+  // ---- NAV ----
+  const navHost = document.getElementById('wc-nav');
+  if (navHost) {
+    navHost.innerHTML = `
+      <a class="skip" href="#main">Skip to content</a>
+      <header class="nav" id="wc-nav-el">
+        <div class="container-wide nav-inner">
+          <a class="brand" href="index.html" aria-label="WaChat home">
+            <span class="brand-mark" aria-hidden="true">
+              <img src="${logoSrc}" alt="" width="36" height="36">
+            </span>
+            <span class="brand-name">WaChat</span>
+          </a>
+
+          <nav class="nav-links" aria-label="Primary">
+            ${navLinks.map(l => `<a href="${l.href}" data-k="${l.key}"${activeKey === l.key ? ' aria-current="page"' : ''}>${l.label}</a>`).join('')}
+          </nav>
+
+          <div class="nav-cta">
+            <a href="signin.html" class="btn btn-ghost nav-signin">Sign in</a>
+            <a href="signup.html" class="btn btn-green">Start free →</a>
+            <button class="nav-burger" id="wc-burger" aria-label="Open menu" aria-expanded="false" aria-controls="wc-mobile">
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div class="mobile-menu" id="wc-mobile" aria-hidden="true">
+        <nav>
+          ${navLinks.map(l => `<a href="${l.href}"${activeKey === l.key ? ' aria-current="page"' : ''}>${l.label}</a>`).join('')}
+          <hr>
+          <a href="signin.html">Sign in</a>
+          <a href="signup.html" class="btn btn-green" style="justify-content:center;margin-top:6px">Start free →</a>
+        </nav>
+      </div>
+    `;
+
+    const nav = document.getElementById('wc-nav-el');
+    const onScroll = () => {
+      if (window.scrollY > 8) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const burger = document.getElementById('wc-burger');
+    const mobile = document.getElementById('wc-mobile');
+    function setMenu(open) {
+      mobile.classList.toggle('open', open);
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      mobile.setAttribute('aria-hidden', open ? 'false' : 'true');
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    burger.addEventListener('click', () => setMenu(!mobile.classList.contains('open')));
+    mobile.addEventListener('click', (e) => { if (e.target.tagName === 'A') setMenu(false); });
+    window.addEventListener('resize', () => { if (window.innerWidth > 1024) setMenu(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+  }
+
+  // ---- FOOTER ----
+  const footHost = document.getElementById('wc-footer');
+  if (footHost) {
+    footHost.innerHTML = `
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-top">
+            <div class="footer-brand">
+              <a class="brand" href="index.html">
+                <span class="brand-mark" aria-hidden="true">
+                  <img src="${logoSrc}" alt="" width="32" height="32">
+                </span>
+                <span class="brand-name">WaChat</span>
+              </a>
+              <p>Customer conversations on WhatsApp, done right. A Serves Technologies product, built in India.</p>
+              <p class="footer-contact"><a href="mailto:hello@serves.in">hello@serves.in</a></p>
+            </div>
+            <div class="footer-col">
+              <h5>Product</h5>
+              <ul>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="integrations.html">Integrations</a></li>
+                <li><a href="changelog.html">Changelog</a></li>
+                <li><a href="status.html">Status</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h5>Solutions</h5>
+              <ul>
+                <li><a href="use-cases.html#d2c">D2C &amp; e-commerce</a></li>
+                <li><a href="use-cases.html#education">Education</a></li>
+                <li><a href="use-cases.html#finance">Financial services</a></li>
+                <li><a href="use-cases.html#healthcare">Healthcare</a></li>
+                <li><a href="use-cases.html#logistics">Logistics &amp; travel</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h5>Resources</h5>
+              <ul>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="docs.html">Docs</a></li>
+                <li><a href="help.html">Help Center</a></li>
+                <li><a href="migration.html">Migration guide</a></li>
+                <li><a href="contact.html">Contact sales</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h5>Legal</h5>
+              <ul>
+                <li><a href="privacy.html">Privacy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+                <li><a href="data-deletion.html">Data deletion</a></li>
+                <li><a href="cookies.html">Cookies</a></li>
+                <li><a href="security.html">Security</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bot">
+            <div class="left">
+              <span>© 2026 Serves Technologies Pvt. Ltd.</span>
+              <span class="sep">·</span>
+              <span>Made in India</span>
+            </div>
+            <div class="socials">
+              <a href="#" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0H5a5 5 0 0 0-5 5v14a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5ZM8 19H5V8h3v11ZM6.5 6.7a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6ZM20 19h-3v-5.6c0-1.4-.5-2.4-1.8-2.4-1 0-1.6.7-1.8 1.3-.1.2-.1.6-.1.9V19h-3V8h3v1.3c.4-.7 1.1-1.6 2.8-1.6 2 0 3.6 1.3 3.6 4.1V19Z"/></svg></a>
+              <a href="#" aria-label="X / Twitter"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2H21l-6.49 7.42L22.5 22h-6.27l-4.9-6.4L5.7 22H3l6.95-7.94L1.5 2h6.34l4.43 5.86L18.24 2Zm-1.1 18h1.74L7 4h-1.86l11.74 16Z"/></svg></a>
+              <a href="#" aria-label="YouTube"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6a3 3 0 0 0-2.1 2.1A31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg></a>
+              <a href="#" aria-label="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.9 5.7-5.6 6 .4.4.8 1.1.8 2.3v3.4c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></svg></a>
+            </div>
+          </div>
+          <p class="footer-disclaimer">WhatsApp and the WhatsApp logo are trademarks of Meta Platforms, Inc. WaChat is an independent product of Serves Technologies and is not affiliated with, endorsed by, or sponsored by Meta. All product and company names herein may be trademarks of their respective owners.</p>
+        </div>
+      </footer>
+    `;
+  }
+})();

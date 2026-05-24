@@ -3,181 +3,122 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Contact | WaChat</title>
-  <meta name="description" content="Contact WaChat — book a demo, get migration help, or just say hello.">
-  <link rel="canonical" href="https://wachat.serves.in/contact">
+  <title>Contact sales — WaChat</title>
+  <meta name="description" content="Talk to WaChat — for enterprise pricing, migrations, partnerships and support.">
+  <link rel="icon" href="assets/wachat-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <style>
+    @media (max-width: 1024px) {
+      .contact-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
 </head>
-<body>
+<body data-page="contact">
+  <div id="wc-nav"></div>
 
-<header class="nav-wrap scrolled">
-  <nav class="nav">
-    <a class="nav-logo" href="index.html">
-      <span class="nav-logo-mark">
-        <svg viewBox="0 0 24 24" fill="white"><path d="M20.52 3.48A11.84 11.84 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.2-1.57A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52z"/><path d="M17.47 14.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.21 8.21 0 0 1-2.42-1.5 9.07 9.07 0 0 1-1.67-2.08c-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.21 3.09c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z" fill="white"/></svg>
-      </span>
-      WaChat
-    </a>
-    <div class="nav-links">
-      <a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="use-cases.html">Use Cases</a><a href="about.html">About</a><a href="contact.html" class="active">Contact</a>
-    </div>
-    <div class="nav-actions">
-      <a class="nav-signin" href="https://wachats.serves.in/login">Sign in</a>
-      <a class="btn btn-primary" href="https://wachats.serves.in/register">Start free →</a>
-      <button class="mobile-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-    </div>
-  </nav>
-  <div class="mobile-menu">
-    <a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="use-cases.html">Use Cases</a><a href="about.html">About</a><a href="contact.html">Contact</a>
-    <div class="mobile-menu-cta"><a class="btn btn-primary" style="width:100%;justify-content:center;" href="https://wachats.serves.in/register">Start free trial →</a></div>
-  </div>
-</header>
+  <main id="main" class="page">
+    <section class="container page-hero">
+      <div class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <span>Contact</span></div>
+      <span class="eyebrow"><span class="dot"></span> Contact</span>
+      <h1>Talk to a real human at WaChat.</h1>
+      <p class="lede">For enterprise pricing, BSP migrations, agency partnerships or anything else — fill in the form below or email <a href="mailto:hello@serves.in" style="color:var(--green-deep);font-weight:500">hello@serves.in</a>. We reply within one business day.</p>
+    </section>
 
-<main>
-
-  <div class="legal-hero">
-    <div class="container">
-      <p class="eyebrow">Get in touch</p>
-      <h1>We'd love to hear from you</h1>
-      <p class="lead">Whether you want a demo, have a question about pricing, or need migration help from another platform — we reply within a few hours.</p>
-    </div>
-  </div>
-
-  <section class="section">
-    <div class="container">
-      <div class="contact-grid">
-
-        <div class="contact-info reveal-left">
-          <p class="eyebrow">Channels</p>
-          <h2>We're a small team.<br>We actually respond.</h2>
-          <p class="lead" style="margin-bottom:40px;">No bots, no ticket queues. You'll hear from a real person who knows WhatsApp Business inside out.</p>
-
-          <div class="contact-detail">
-            <div class="contact-detail-icon">
-              <svg viewBox="0 0 20 20" fill="none"><path d="M16.5 13.5c-.7.7-1.5 1-2.5 1s-2-.4-2.8-1.1L7 9.2C6.4 8.5 6 7.5 6 6.5s.3-1.8 1-2.5c.4-.4.8-.6 1.3-.6.5 0 .9.2 1.3.6l1.7 1.7c.4.4.4 1 0 1.4L11 8c.7.7 1.5 1.4 2.3 2l.2-.2c.4-.4 1-.4 1.4 0l1.7 1.7c.8.9.8 2.2-.1 3z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="contact-detail-text">
-              <strong>Phone</strong>
-              <span><a href="tel:+918884406029">+91 888 440 6029</a></span>
-            </div>
+    <section class="container" style="padding-bottom:96px">
+      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start" class="contact-grid">
+        <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px">
+          <div class="form-success" id="contactSuccess">
+            ✓ Thanks — we've received your note and will get back to you within one business day.
           </div>
-
-          <div class="contact-detail">
-            <div class="contact-detail-icon">
-              <svg viewBox="0 0 20 20" fill="none"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h11A1.5 1.5 0 0 1 17 5.5v9A1.5 1.5 0 0 1 15.5 16h-11A1.5 1.5 0 0 1 3 14.5v-9z" stroke="currentColor" stroke-width="1.5"/><path d="M3 6l7 5 7-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-            </div>
-            <div class="contact-detail-text">
-              <strong>Email</strong>
-              <span><a href="mailto:hello@serves.in">hello@serves.in</a></span>
-            </div>
-          </div>
-
-          <div class="contact-detail">
-            <div class="contact-detail-icon">
-              <svg viewBox="0 0 20 20" fill="none"><path d="M17.5 10.5c0 3.87-3.36 7-7.5 7a8.3 8.3 0 0 1-3.5-.77L2.5 18l1.3-3.8A6.8 6.8 0 0 1 2.5 10.5C2.5 6.63 5.86 3.5 10 3.5s7.5 3.13 7.5 7z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="contact-detail-text">
-              <strong>WhatsApp</strong>
-              <span><a href="https://wa.me/918884406029">Chat with us on WhatsApp</a></span>
-            </div>
-          </div>
-
-          <div class="contact-detail">
-            <div class="contact-detail-icon">
-              <svg viewBox="0 0 20 20" fill="none"><path d="M10 2a5.5 5.5 0 0 1 5.5 5.5c0 3.8-5.5 10.5-5.5 10.5S4.5 11.3 4.5 7.5A5.5 5.5 0 0 1 10 2z" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="7.5" r="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </div>
-            <div class="contact-detail-text">
-              <strong>Office</strong>
-              <span>Global village front gate, 39/4<br>Behind Global Academy For Learning<br>Pattanagere, Rajarajeshwari Nagar<br>Bengaluru, Karnataka 560059, India</span>
-            </div>
-          </div>
-
-          <div style="margin-top:32px;padding:20px 24px;background:var(--green-bg);border:1px solid var(--green-border);border-radius:var(--r-xl);">
-            <p style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px;">Reply time promise</p>
-            <p style="font-size:14px;color:var(--body);margin:0;">We respond to every message within 1 business hour during 9am–7pm IST, Mon–Sat.</p>
-          </div>
-        </div>
-
-        <div class="contact-form-card reveal-right">
-          <p class="eyebrow">Send a message</p>
-          <h2 style="font-size:24px;margin-bottom:8px;">What can we help with?</h2>
-          <p class="lead" style="font-size:15px;margin-bottom:28px;">Tell us about your business and what you're trying to do on WhatsApp.</p>
-
-          <form data-contact-form novalidate>
-            <!-- FormSubmit.co hidden config (fallback if JS fails) -->
-            <input type="hidden" name="_subject" value="New enquiry — WaChat website">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_next" value="https://wachat.serves.in/contact.html">
-
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label" for="name">Your name</label>
-                <input class="form-input" id="name" name="name" type="text" placeholder="Priya Mehta" required>
+          <form id="contactForm" novalidate>
+            <div class="form-row-2">
+              <div class="form-row">
+                <label for="cName">Your name</label>
+                <input class="input" id="cName" required>
               </div>
-              <div class="form-group">
-                <label class="form-label" for="company">Company</label>
-                <input class="form-input" id="company" name="company" type="text" placeholder="FreshMart Pvt. Ltd." required>
+              <div class="form-row">
+                <label for="cCompany">Company</label>
+                <input class="input" id="cCompany" required>
               </div>
             </div>
-            <div class="form-group">
-              <label class="form-label" for="email">Work email</label>
-              <input class="form-input" id="email" name="email" type="email" placeholder="priya@freshmart.in" required>
+            <div class="form-row-2">
+              <div class="form-row">
+                <label for="cEmail">Work email</label>
+                <input class="input" type="email" id="cEmail" required>
+              </div>
+              <div class="form-row">
+                <label for="cPhone">Phone (optional)</label>
+                <input class="input" type="tel" id="cPhone" placeholder="+91 …">
+              </div>
             </div>
-            <div class="form-group">
-              <label class="form-label" for="phone">WhatsApp / Phone</label>
-              <input class="form-input" id="phone" name="phone" type="tel" placeholder="+91 98765 43210">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="reason">What do you need?</label>
-              <select class="form-select" id="reason" name="reason">
-                <option value="">Select a topic…</option>
-                <option>Book a product demo</option>
-                <option>Migrate from Wati / Interakt / AiSensy</option>
-                <option>Pricing question</option>
-                <option>Technical integration help</option>
-                <option>Enterprise / custom plan</option>
-                <option>Something else</option>
+            <div class="form-row">
+              <label for="cTopic">What can we help with?</label>
+              <select class="select" id="cTopic">
+                <option value="sales">Enterprise / Scale plan pricing</option>
+                <option value="migration">Migrating from another BSP</option>
+                <option value="agency">Agency / partner programme</option>
+                <option value="meta">Help with Meta verification</option>
+                <option value="support">Existing customer support</option>
+                <option value="other">Something else</option>
               </select>
             </div>
-            <div class="form-group">
-              <label class="form-label" for="message">Tell us more</label>
-              <textarea class="form-textarea" id="message" name="message" placeholder="e.g. We're a D2C brand with ~50k customers, currently using Wati. We want to add a support inbox. What does migration look like?"></textarea>
+            <div class="form-row">
+              <label for="cAgents">Approximate team size</label>
+              <select class="select" id="cAgents">
+                <option>1 – 5 agents</option>
+                <option>5 – 20 agents</option>
+                <option>20 – 50 agents</option>
+                <option>50+ agents</option>
+              </select>
             </div>
-            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:14px;">Send message →</button>
-            <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px;">We reply within 1 business hour · 9am–7pm IST, Mon–Sat</p>
+            <div class="form-row">
+              <label for="cMsg">Tell us more</label>
+              <textarea class="textarea" id="cMsg" placeholder="A few lines about your business, current WhatsApp setup, and what you'd like to solve."></textarea>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-green" type="submit">Send message →</button>
+            </div>
           </form>
         </div>
 
+        <aside style="display:flex;flex-direction:column;gap:16px">
+          <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px">
+            <h4 style="font-size:14px;font-weight:600">Email</h4>
+            <p style="font-family:var(--font-mono);font-size:14px;color:var(--ink);margin-top:6px"><a href="mailto:hello@serves.in" style="color:var(--green-deep)">hello@serves.in</a></p>
+            <p style="font-size:13px;color:var(--muted);margin-top:4px">General sales &amp; partnerships</p>
+          </div>
+          <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px">
+            <h4 style="font-size:14px;font-weight:600">Support</h4>
+            <p style="font-family:var(--font-mono);font-size:14px;color:var(--ink);margin-top:6px"><a href="mailto:support@serves.in" style="color:var(--green-deep)">support@serves.in</a></p>
+            <p style="font-size:13px;color:var(--muted);margin-top:4px">2-hour SLA on Growth and Scale plans</p>
+          </div>
+          <div style="background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px">
+            <h4 style="font-size:14px;font-weight:600">Office</h4>
+            <p style="font-size:14px;line-height:1.5;color:#1f2933;margin-top:6px">Serves Technologies Pvt. Ltd.<br>91Springboard, 175 &amp; 176, Outer Ring Road,<br>Bellandur, Bengaluru 560103, India</p>
+            <p style="font-size:13px;color:var(--muted);margin-top:6px;font-family:var(--font-mono)">CIN · U72200KA2023PTC180… · GST · 29AAJCS…</p>
+          </div>
+          <div style="background:var(--ink);color:#fff;border-radius:14px;padding:22px">
+            <h4 style="font-size:14px;font-weight:600;color:#fff">Already a customer?</h4>
+            <p style="font-size:13px;color:#94A3B8;margin-top:6px;line-height:1.5">Open a ticket inside your workspace — Help → New conversation. Average first reply: 42 minutes.</p>
+          </div>
+        </aside>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-</main>
-
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-brand-name"><span class="footer-brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20.52 3.48A11.84 11.84 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.2-1.57A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52z"/></svg></span>WaChat</div>
-        <p>The modern WhatsApp Business platform for Indian SMBs.</p>
-      </div>
-      <div class="footer-col"><strong>Product</strong><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="use-cases.html">Use Cases</a></div>
-      <div class="footer-col"><strong>Company</strong><a href="about.html">About</a><a href="contact.html">Contact</a><a href="security.html">Security</a></div>
-      <div class="footer-col"><strong>Legal</strong><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="data-deletion.html">Data Deletion</a><a href="cookies.html">Cookie Policy</a></div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-copyright">© 2026 Serves Technology Pvt. Ltd. · hello@serves.in</div>
-      <div class="footer-disclaimer">WhatsApp and the WhatsApp logo are trademarks of Meta Platforms, Inc. WaChat is an independent product and is not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc.</div>
-    </div>
-  </div>
-</footer>
-
-<script src="script.js" defer></script>
+  <div id="wc-footer"></div>
+  <script src="shell.js"></script>
+  <script src="script.js"></script>
+  <script>
+    const t = new URLSearchParams(location.search).get('topic');
+    if (t) {
+      const m = { scale:'sales', migration:'migration', agency:'agency', meta:'meta', support:'support' };
+      const sel = document.getElementById('cTopic');
+      if (m[t]) sel.value = m[t];
+    }
+  </script>
 </body>
 </html>

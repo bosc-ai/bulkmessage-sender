@@ -3,441 +3,365 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Console Demo — WaChat | WhatsApp Business Platform Walkthrough</title>
+  <title>Console Demo — WaChat</title>
   <meta name="description" content="WaChat console demo: WhatsApp Business onboarding via Embedded Signup, template management, Cloud API sends, and webhook event logs.">
-  <link rel="canonical" href="https://wachat.serves.in/app-review-demo.html">
+  <link rel="icon" href="assets/wachat-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <style>
+    /* badges */
+    .badge { display: inline-block; font-family: var(--font-mono); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 9999px; letter-spacing: .03em; }
+    .badge-green { background: var(--green-tint); color: var(--green-deep); }
+    .badge-amber { background: #FEF3C7; color: #92400E; }
+    .badge-gray { background: var(--paper-2); color: var(--muted); border: 1px solid var(--line); }
+    /* demo shell */
     .demo-shell {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 0;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--r-xl);
-      overflow: hidden;
-      min-height: 600px;
+      display: grid; grid-template-columns: 220px 1fr; gap: 0;
+      background: var(--paper); border: 1px solid var(--line); border-radius: 14px;
+      overflow: hidden; min-height: 600px;
     }
     .demo-sidebar {
-      background: var(--bg-subtle);
-      border-right: 1px solid var(--border);
-      padding: 20px 0;
+      background: var(--paper-2); border-right: 1px solid var(--line); padding: 20px 0;
     }
     .demo-sidebar strong {
-      display: block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color: var(--subtle);
-      padding: 0 16px;
-      margin-bottom: 12px;
+      display: block; font-size: 11px; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--muted); padding: 0 16px; margin-bottom: 12px;
     }
     .demo-sidebar a {
-      display: block;
-      padding: 9px 16px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--muted);
-      border-left: 2px solid transparent;
-      transition: color 0.15s, background 0.15s;
+      display: block; padding: 9px 16px; font-size: 13px; font-weight: 500; color: var(--muted);
+      border-left: 2px solid transparent; transition: color .15s, background .15s;
     }
     .demo-sidebar a:hover { color: var(--ink); background: rgba(0,0,0,.03); }
-    .demo-sidebar a.active { color: var(--ink); border-left-color: var(--green); background: rgba(37,211,102,.04); }
-    .demo-sidebar .sidebar-divider { height: 1px; background: var(--border); margin: 12px 0; }
+    .demo-sidebar a.active { color: var(--ink); border-left-color: var(--green); background: rgba(37,211,102,.06); }
+    .demo-sidebar .sidebar-divider { height: 1px; background: var(--line); margin: 12px 0; }
     .demo-main { padding: 28px 32px; }
     .demo-section { padding: 28px 0 0; }
     .demo-section:first-child { padding-top: 0; }
-    .section-divider { height: 1px; background: var(--border); margin: 28px 0; }
-    .demo-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--subtle); margin-bottom: 6px; }
+    .section-divider { height: 1px; background: var(--line); margin: 28px 0; }
+    .demo-eyebrow { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
     code {
-      font-family: ui-monospace, monospace;
-      font-size: 12px;
-      background: var(--bg-muted);
-      border: 1px solid var(--border);
-      padding: 2px 6px;
-      border-radius: var(--r-xs);
-      color: var(--ink-3);
+      font-family: var(--font-mono); font-size: 12px;
+      background: var(--paper-2); border: 1px solid var(--line);
+      padding: 2px 6px; border-radius: 6px; color: var(--ink);
     }
-    .demo-table { width:100%; border-collapse:collapse; font-size:13px; border:1px solid var(--border); border-radius:var(--r-md); overflow:hidden; }
-    .demo-table th { text-align:left; padding:10px 14px; background:var(--bg-subtle); border-bottom:1px solid var(--border); font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--muted); }
-    .demo-table td { padding:12px 14px; border-bottom:1px solid var(--border); color:var(--body); vertical-align:middle; }
-    .demo-table tr:last-child td { border-bottom:none; }
-    .demo-table td:first-child { font-family:ui-monospace,monospace; font-size:12px; color:var(--ink); }
-    .demo-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-    .demo-card { background:var(--bg-subtle); border:1px solid var(--border); border-radius:var(--r-md); padding:16px; }
-    .demo-card h3 { font-size:13px; font-weight:600; margin-bottom:4px; }
-    .demo-card p { font-size:12px; color:var(--muted); margin:0; }
-    .demo-form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
-    .demo-field label { display:block; font-size:12px; font-weight:600; color:var(--muted); margin-bottom:5px; }
+    .demo-table { width: 100%; border-collapse: collapse; font-size: 13px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+    .demo-table th { text-align: left; padding: 10px 14px; background: var(--paper-2); border-bottom: 1px solid var(--line); font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); }
+    .demo-table td { padding: 12px 14px; border-bottom: 1px solid var(--line); color: var(--muted); vertical-align: middle; }
+    .demo-table tr:last-child td { border-bottom: none; }
+    .demo-table td:first-child { font-family: var(--font-mono); font-size: 12px; color: var(--ink); }
+    .demo-grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .demo-card { background: var(--paper-2); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+    .demo-card h3 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .demo-card p { font-size: 12px; color: var(--muted); margin: 0; }
+    .demo-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .demo-field label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 5px; }
     .demo-field input, .demo-field select, .demo-field textarea {
-      width:100%; padding:8px 10px; border:1.5px solid var(--border); border-radius:var(--r-sm);
-      font:inherit; font-size:13px; color:var(--ink); background:var(--bg); outline:none;
-      transition:border-color .2s;
+      width: 100%; padding: 8px 10px; border: 1.5px solid var(--line); border-radius: 8px;
+      font: inherit; font-size: 13px; color: var(--ink); background: var(--paper); outline: none;
+      transition: border-color .2s;
     }
-    .demo-field input:focus, .demo-field select:focus, .demo-field textarea:focus { border-color:var(--green); }
-    .demo-field textarea { min-height:70px; resize:vertical; font-family:ui-monospace,monospace; font-size:12px; }
-    .msg-window { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:16px; }
-    .phone-frame { background:#F0F2F5; border:1px solid var(--border); border-radius:var(--r-md); padding:14px; min-height:140px; }
-    .phone-title { font-size:11px; font-weight:600; color:var(--muted); margin-bottom:10px; }
-    .bubble { display:inline-block; background:#fff; border-radius:0 10px 10px 10px; padding:8px 12px; font-size:12px; color:var(--ink); max-width:85%; margin-bottom:8px; box-shadow:0 1px 2px rgba(0,0,0,.1); }
-    .bubble.sent { background:#D9FDD3; border-radius:10px 10px 0 10px; float:right; clear:both; }
-    .bubble.received { float:left; clear:both; }
-    .log-frame { background:var(--dark); border-radius:var(--r-md); padding:14px; font-family:ui-monospace,monospace; font-size:11px; color:#4ADE80; line-height:1.8; overflow-x:auto; }
-    .process-steps { display:flex; flex-direction:column; gap:16px; }
-    .process-step { display:flex; align-items:flex-start; gap:12px; }
-    .process-num { width:26px; height:26px; border-radius:50%; background:var(--green); color:#fff; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
-    .process-step h3 { font-size:14px; font-weight:600; margin-bottom:2px; }
-    .process-step p { font-size:13px; color:var(--body); margin:0; line-height:1.55; }
-    @media (max-width:768px) {
-      .demo-shell { grid-template-columns:1fr; }
-      .demo-sidebar { display:none; }
-      .demo-main { padding:20px; }
-      .demo-grid-3 { grid-template-columns:1fr 1fr; }
-      .demo-form-row { grid-template-columns:1fr; }
-      .msg-window { grid-template-columns:1fr; }
+    .demo-field input:focus, .demo-field select:focus, .demo-field textarea:focus { border-color: var(--green); }
+    .demo-field textarea { min-height: 70px; resize: vertical; font-family: var(--font-mono); font-size: 12px; }
+    .msg-window { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .phone-frame { background: #F0F2F5; border: 1px solid var(--line); border-radius: 10px; padding: 14px; min-height: 140px; overflow: hidden; }
+    .phone-title { font-size: 11px; font-weight: 600; color: var(--muted); margin-bottom: 10px; }
+    .bubble { display: inline-block; background: #fff; border-radius: 0 10px 10px 10px; padding: 8px 12px; font-size: 12px; color: var(--ink); max-width: 85%; margin-bottom: 8px; box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+    .bubble.sent { background: #D9FDD3; border-radius: 10px 10px 0 10px; float: right; clear: both; }
+    .bubble.received { float: left; clear: both; }
+    .log-frame { background: #0A0A0A; border-radius: 10px; padding: 14px; font-family: var(--font-mono); font-size: 11px; color: #4ADE80; line-height: 1.8; overflow-x: auto; }
+    .process-steps { display: flex; flex-direction: column; gap: 16px; }
+    .process-step { display: flex; align-items: flex-start; gap: 12px; }
+    .process-num { width: 26px; height: 26px; border-radius: 50%; background: var(--green); color: #07371C; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .process-step h3 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+    .process-step p { font-size: 13px; color: var(--muted); margin: 0; line-height: 1.55; }
+    @media (max-width: 768px) {
+      .demo-shell { grid-template-columns: 1fr; }
+      .demo-sidebar { display: none; }
+      .demo-main { padding: 20px; }
+      .demo-grid-3 { grid-template-columns: 1fr 1fr; }
+      .demo-form-row { grid-template-columns: 1fr; }
+      .msg-window { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-<body>
+<body data-page="app-review-demo">
+  <div id="wc-nav"></div>
+  <main id="main" class="page">
 
-<header class="nav-wrap">
-  <nav class="nav">
-    <a class="nav-logo" href="index.html">
-      <span class="nav-logo-mark">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M20.52 3.48A11.84 11.84 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.2-1.57A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52z" fill="currentColor"/><path d="M17.47 14.39c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07a8.21 8.21 0 0 1-2.42-1.5 9.07 9.07 0 0 1-1.67-2.08c-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.21 3.09c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z" fill="white"/></svg>
-      </span>
-      WaChat
-    </a>
-    <div class="nav-links">
-      <a href="features.html">Features</a>
-      <a href="pricing.html">Pricing</a>
-      <a href="use-cases.html">Use Cases</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-    <div class="nav-actions">
-      <a class="nav-signin" href="https://wachats.serves.in/login">Sign in</a>
-      <a class="btn btn-primary" href="https://wachats.serves.in/register">Start free →</a>
-      <button class="mobile-toggle" aria-label="Toggle menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-  <div class="mobile-menu">
-    <a href="features.html">Features</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="use-cases.html">Use Cases</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <div class="mobile-menu-cta">
-      <a class="btn btn-primary" style="width:100%;justify-content:center;" href="https://wachats.serves.in/register">Start free trial →</a>
-    </div>
-  </div>
-</header>
+    <section class="container page-hero">
+      <div class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <span>Console Demo</span></div>
+      <span class="eyebrow"><span class="dot"></span> Product walkthrough</span>
+      <h1>See the workspace a business gets<br>after authorization.</h1>
+      <p class="lede">This console demo shows the practical surfaces WaChat provides: account onboarding, template operations, Cloud API sends, and webhook evidence — covering both <strong>whatsapp_business_management</strong> and <strong>whatsapp_business_messaging</strong> permissions.</p>
+    </section>
 
-<main>
+    <section class="container" style="padding:40px 0 96px">
+      <div class="demo-shell">
 
-<section class="legal-hero">
-  <div class="container-sm">
-    <p class="eyebrow">Product walkthrough</p>
-    <h1>See the workspace a business gets after authorization.</h1>
-    <p class="lead">This console demo shows the practical surfaces WaChat provides: account onboarding, template operations, Cloud API sends, and webhook evidence — covering both <strong>whatsapp_business_management</strong> and <strong>whatsapp_business_messaging</strong> permissions.</p>
-  </div>
-</section>
+        <nav class="demo-sidebar">
+          <strong>WaChat Console</strong>
+          <a class="active" href="#overview">Account health</a>
+          <a href="#onboarding">Onboarding trail</a>
+          <a href="#templates">Templates</a>
+          <a href="#create-template">Create template</a>
+          <a href="#messaging">Send message</a>
+          <a href="#webhooks">Webhook logs</a>
+          <div class="sidebar-divider"></div>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="data-deletion.html">Data Deletion</a>
+        </nav>
 
-<section class="section">
-  <div class="container">
-    <div class="demo-shell">
+        <div class="demo-main">
 
-      <nav class="demo-sidebar">
-        <strong>WaChat Console</strong>
-        <a class="active" href="#overview">Account health</a>
-        <a href="#onboarding">Onboarding trail</a>
-        <a href="#templates">Templates</a>
-        <a href="#create-template">Create template</a>
-        <a href="#messaging">Send message</a>
-        <a href="#webhooks">Webhook logs</a>
-        <div class="sidebar-divider"></div>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="data-deletion.html">Data Deletion</a>
-      </nav>
-
-      <div class="demo-main">
-
-        <!-- Account health -->
-        <div class="demo-section" id="overview">
-          <span class="badge badge-green" style="margin-bottom:14px;">Workspace active</span>
-          <h2 style="font-size:22px;margin-bottom:8px;">RetailCo India</h2>
-          <p class="eyebrow">Connected WABA · Cloud API · Webhooks active</p>
-          <p style="font-size:14px;color:var(--body);margin-bottom:20px;line-height:1.6;">A connected WhatsApp Business Account with registered phone number, subscribed webhooks, and approved message templates. Authorized via Embedded Signup using <code>whatsapp_business_management</code>.</p>
-          <div class="demo-grid-3">
-            <div class="demo-card">
-              <h3>WABA</h3>
-              <p>Connected through Embedded Signup</p>
-            </div>
-            <div class="demo-card">
-              <h3>Phone number</h3>
-              <p>Cloud API registration complete</p>
-            </div>
-            <div class="demo-card">
-              <h3>Webhooks</h3>
-              <p>Message and template events active</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="section-divider"></div>
-
-        <!-- Onboarding trail -->
-        <div class="demo-section" id="onboarding">
-          <div class="demo-eyebrow">Onboarding trail — whatsapp_business_management</div>
-          <h2 style="font-size:20px;margin-bottom:20px;">Every handoff is visible.</h2>
-          <div class="process-steps">
-            <div class="process-step">
-              <div class="process-num">1</div>
-              <div>
-                <h3>Client authorized business assets via Embedded Signup</h3>
-                <p>Business portfolio, WABA ID, and phone-number ID received after client completed Facebook Login for Business. WaChat exchanged the authorization code for a system user token via <code>GET /oauth/access_token</code>.</p>
+          <!-- Account health -->
+          <div class="demo-section" id="overview">
+            <span class="badge badge-green" style="margin-bottom:14px;">Workspace active</span>
+            <h2 style="font-size:22px;margin-bottom:8px;">RetailCo India</h2>
+            <p class="demo-eyebrow">Connected WABA · Cloud API · Webhooks active</p>
+            <p style="font-size:14px;color:var(--muted);margin:10px 0 20px;line-height:1.6;">A connected WhatsApp Business Account with registered phone number, subscribed webhooks, and approved message templates. Authorized via Embedded Signup using <code>whatsapp_business_management</code>.</p>
+            <div class="demo-grid-3">
+              <div class="demo-card">
+                <h3>WABA</h3>
+                <p>Connected through Embedded Signup</p>
               </div>
-            </div>
-            <div class="process-step">
-              <div class="process-num">2</div>
-              <div>
-                <h3>WaChat created an isolated account workspace</h3>
-                <p>WABA ID and phone number ID stored. Workspace access assigned to operations team. All identifiers stored with minimum-necessary access principle.</p>
+              <div class="demo-card">
+                <h3>Phone number</h3>
+                <p>Cloud API registration complete</p>
               </div>
-            </div>
-            <div class="process-step">
-              <div class="process-num">3</div>
-              <div>
-                <h3>Webhook subscription verified and active</h3>
-                <p>Subscribed to <code>messages</code>, <code>message_template_status_update</code>, and <code>account_update</code> events via <code>POST /v20.0/{waba-id}/subscribed_apps</code>. All callbacks captured for support.</p>
+              <div class="demo-card">
+                <h3>Webhooks</h3>
+                <p>Message and template events active</p>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="section-divider"></div>
+          <div class="section-divider"></div>
 
-        <!-- Templates -->
-        <div class="demo-section" id="templates">
-          <div class="demo-eyebrow">Template operations — whatsapp_business_management</div>
-          <h2 style="font-size:20px;margin-bottom:6px;">Approved messages with purpose.</h2>
-          <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Templates fetched via <code>GET /v20.0/{waba-id}/message_templates</code> and displayed with approval status and operational purpose.</p>
-          <table class="demo-table">
-            <thead>
-              <tr>
-                <th>Template name</th>
-                <th>Category</th>
-                <th>Status</th>
-                <th>Operational use</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>order_update</td>
-                <td>Utility</td>
-                <td><span class="badge badge-green">Approved</span></td>
-                <td>Delivery and order-status notifications</td>
-              </tr>
-              <tr>
-                <td>appointment_reminder</td>
-                <td>Utility</td>
-                <td><span class="badge badge-green">Approved</span></td>
-                <td>Booking reminders and schedule confirmation</td>
-              </tr>
-              <tr>
-                <td>support_followup</td>
-                <td>Utility</td>
-                <td><span class="badge badge-amber">Draft</span></td>
-                <td>Follow-up after a customer support interaction</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+          <!-- Onboarding trail -->
+          <div class="demo-section" id="onboarding">
+            <p class="demo-eyebrow">Onboarding trail — whatsapp_business_management</p>
+            <h2 style="font-size:20px;margin-bottom:20px;">Every handoff is visible.</h2>
+            <div class="process-steps">
+              <div class="process-step">
+                <div class="process-num">1</div>
+                <div>
+                  <h3>Client authorized business assets via Embedded Signup</h3>
+                  <p>Business portfolio, WABA ID, and phone-number ID received after client completed Facebook Login for Business. WaChat exchanged the authorization code for a system user token via <code>GET /oauth/access_token</code>.</p>
+                </div>
+              </div>
+              <div class="process-step">
+                <div class="process-num">2</div>
+                <div>
+                  <h3>WaChat created an isolated account workspace</h3>
+                  <p>WABA ID and phone number ID stored. Workspace access assigned to operations team. All identifiers stored with minimum-necessary access principle.</p>
+                </div>
+              </div>
+              <div class="process-step">
+                <div class="process-num">3</div>
+                <div>
+                  <h3>Webhook subscription verified and active</h3>
+                  <p>Subscribed to <code>messages</code>, <code>message_template_status_update</code>, and <code>account_update</code> events via <code>POST /v20.0/{waba-id}/subscribed_apps</code>. All callbacks captured for support.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div class="section-divider"></div>
+          <div class="section-divider"></div>
 
-        <!-- Create template -->
-        <div class="demo-section" id="create-template">
-          <div class="demo-eyebrow">Create template — whatsapp_business_management</div>
-          <h2 style="font-size:20px;margin-bottom:6px;">Submit a new message template for Meta review.</h2>
-          <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">WaChat calls <code>POST /v20.0/{waba-id}/message_templates</code> on behalf of the authorized business. All templates go through Meta's review before they can be sent to customers.</p>
-          <form onsubmit="event.preventDefault();alert('Template submitted for Meta review. Status will update from Draft to Approved or Rejected within 24-48 hours.');">
+          <!-- Templates -->
+          <div class="demo-section" id="templates">
+            <p class="demo-eyebrow">Template operations — whatsapp_business_management</p>
+            <h2 style="font-size:20px;margin-bottom:6px;">Approved messages with purpose.</h2>
+            <p style="font-size:13px;color:var(--muted);margin-bottom:14px;">Templates fetched via <code>GET /v20.0/{waba-id}/message_templates</code> and displayed with approval status and operational purpose.</p>
+            <table class="demo-table">
+              <thead>
+                <tr>
+                  <th>Template name</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Operational use</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>order_update</td>
+                  <td>Utility</td>
+                  <td><span class="badge badge-green">Approved</span></td>
+                  <td>Delivery and order-status notifications</td>
+                </tr>
+                <tr>
+                  <td>appointment_reminder</td>
+                  <td>Utility</td>
+                  <td><span class="badge badge-green">Approved</span></td>
+                  <td>Booking reminders and schedule confirmation</td>
+                </tr>
+                <tr>
+                  <td>support_followup</td>
+                  <td>Utility</td>
+                  <td><span class="badge badge-amber">Draft</span></td>
+                  <td>Follow-up after a customer support interaction</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <!-- Create template -->
+          <div class="demo-section" id="create-template">
+            <p class="demo-eyebrow">Create template — whatsapp_business_management</p>
+            <h2 style="font-size:20px;margin-bottom:6px;">Submit a new message template for Meta review.</h2>
+            <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">WaChat calls <code>POST /v20.0/{waba-id}/message_templates</code> on behalf of the authorized business. All templates go through Meta's review before they can be sent to customers.</p>
+            <form onsubmit="event.preventDefault();alert('Template submitted for Meta review. Status will update from Draft to Approved or Rejected within 24-48 hours.');">
+              <div class="demo-form-row">
+                <div class="demo-field">
+                  <label for="tmpl-name">Template name</label>
+                  <input id="tmpl-name" value="delivery_notification" placeholder="delivery_notification" required>
+                </div>
+                <div class="demo-field">
+                  <label for="tmpl-category">Category</label>
+                  <select id="tmpl-category">
+                    <option value="UTILITY">Utility</option>
+                    <option value="MARKETING">Marketing</option>
+                    <option value="AUTHENTICATION">Authentication</option>
+                  </select>
+                </div>
+              </div>
+              <div class="demo-form-row">
+                <div class="demo-field">
+                  <label for="tmpl-language">Language</label>
+                  <select id="tmpl-language">
+                    <option value="en_US">English (US)</option>
+                    <option value="hi">Hindi</option>
+                    <option value="ta">Tamil</option>
+                    <option value="mr">Marathi</option>
+                  </select>
+                </div>
+                <div class="demo-field">
+                  <label for="tmpl-sample">Sample for &#123;&#123;1&#125;&#125;</label>
+                  <input id="tmpl-sample" value="#ORD-12345" placeholder="#ORD-12345">
+                </div>
+              </div>
+              <div class="demo-field" style="margin-bottom:14px;">
+                <label for="tmpl-body">Template body</label>
+                <textarea id="tmpl-body">Your order {{1}} has been dispatched and is on the way. Expected delivery: {{2}}. Track: {{3}}</textarea>
+              </div>
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <button class="btn btn-green" type="submit">Submit for review</button>
+                <span class="badge badge-gray">Meta approval required before sending</span>
+              </div>
+            </form>
+          </div>
+
+          <div class="section-divider"></div>
+
+          <!-- Send message -->
+          <div class="demo-section" id="messaging">
+            <p class="demo-eyebrow">Cloud API send — whatsapp_business_messaging</p>
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px;">
+              <div>
+                <h2 style="font-size:20px;margin-bottom:4px;">Send a controlled template message.</h2>
+                <p style="font-size:13px;color:var(--muted);">WaChat calls <code>POST /v20.0/{phone-number-id}/messages</code> with an approved template. Only opted-in recipients receive messages.</p>
+              </div>
+              <button class="btn btn-green" type="button" onclick="
+                var log = document.getElementById('demo-log');
+                var phone = document.getElementById('demo-phone');
+                var bubble = document.createElement('div');
+                bubble.className='bubble sent';
+                bubble.textContent='Order #ORD-12847 has been dispatched. Expected delivery: Tomorrow. Track: wachat.in/track';
+                phone.appendChild(bubble);
+                log.textContent='webhook=message_status.delivered\ntemplate=order_update\nstatus=delivered\nquality_rating=green\nrecipient=+91 90000 00000\ntimestamp='+new Date().toISOString();
+              ">Send demo message</button>
+            </div>
             <div class="demo-form-row">
               <div class="demo-field">
-                <label for="tmpl-name">Template name</label>
-                <input id="tmpl-name" value="delivery_notification" placeholder="delivery_notification" required>
+                <label for="recipient">Recipient (opted-in customer)</label>
+                <input id="recipient" value="+91 90000 00000">
               </div>
               <div class="demo-field">
-                <label for="tmpl-category">Category</label>
-                <select id="tmpl-category">
-                  <option value="UTILITY">Utility</option>
-                  <option value="MARKETING">Marketing</option>
-                  <option value="AUTHENTICATION">Authentication</option>
+                <label for="templateName">Approved template</label>
+                <select id="templateName">
+                  <option>order_update</option>
+                  <option>appointment_reminder</option>
+                  <option>support_followup</option>
                 </select>
               </div>
             </div>
-            <div class="demo-form-row">
-              <div class="demo-field">
-                <label for="tmpl-language">Language</label>
-                <select id="tmpl-language">
-                  <option value="en_US">English (US)</option>
-                  <option value="hi">Hindi</option>
-                  <option value="ta">Tamil</option>
-                  <option value="mr">Marathi</option>
-                </select>
+            <div class="msg-window">
+              <div class="phone-frame">
+                <div class="phone-title">Customer conversation — WhatsApp</div>
+                <div id="demo-phone">
+                  <div class="bubble received">Hi, can you send my order update?</div>
+                  <div class="bubble sent">Sure. Sending the approved order update now.</div>
+                </div>
               </div>
-              <div class="demo-field">
-                <label for="tmpl-sample">Sample for &#123;&#123;1&#125;&#125;</label>
-                <input id="tmpl-sample" value="#ORD-12345" placeholder="#ORD-12345">
-              </div>
-            </div>
-            <div class="demo-field" style="margin-bottom:14px;">
-              <label for="tmpl-body">Template body</label>
-              <textarea id="tmpl-body">Your order {{1}} has been dispatched and is on the way. Expected delivery: {{2}}. Track: {{3}}</textarea>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-              <button class="btn btn-primary" type="submit">Submit for review</button>
-              <span class="badge badge-gray">Meta approval required before sending</span>
-            </div>
-          </form>
-        </div>
-
-        <div class="section-divider"></div>
-
-        <!-- Send message -->
-        <div class="demo-section" id="messaging">
-          <div class="demo-eyebrow">Cloud API send — whatsapp_business_messaging</div>
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px;">
-            <div>
-              <h2 style="font-size:20px;margin-bottom:4px;">Send a controlled template message.</h2>
-              <p style="font-size:13px;color:var(--muted);">WaChat calls <code>POST /v20.0/{phone-number-id}/messages</code> with an approved template. Only opted-in recipients receive messages.</p>
-            </div>
-            <button class="btn btn-primary" type="button" onclick="
-              var log = document.getElementById('demo-log');
-              var phone = document.getElementById('demo-phone');
-              var bubble = document.createElement('div');
-              bubble.className='bubble sent';
-              bubble.textContent='Order #ORD-12847 has been dispatched. Expected delivery: Tomorrow. Track: wachat.in/track';
-              phone.appendChild(bubble);
-              log.textContent='webhook=message_status.delivered\ntemplate=order_update\nstatus=delivered\nquality_rating=green\nrecipient=+91 90000 00000\ntimestamp='+new Date().toISOString();
-            ">Send demo message</button>
-          </div>
-          <div class="demo-form-row">
-            <div class="demo-field">
-              <label for="recipient">Recipient (opted-in customer)</label>
-              <input id="recipient" value="+91 90000 00000">
-            </div>
-            <div class="demo-field">
-              <label for="templateName">Approved template</label>
-              <select id="templateName">
-                <option>order_update</option>
-                <option>appointment_reminder</option>
-                <option>support_followup</option>
-              </select>
-            </div>
-          </div>
-          <div class="msg-window">
-            <div class="phone-frame">
-              <div class="phone-title">Customer conversation — WhatsApp</div>
-              <div id="demo-phone">
-                <div class="bubble received">Hi, can you send my order update?</div>
-                <div class="bubble sent">Sure. Sending the approved order update now.</div>
-              </div>
-            </div>
-            <div class="log-frame" id="demo-log">webhook=message_status.delivered
+              <div class="log-frame" id="demo-log">webhook=message_status.delivered
 template=order_update
 status=delivered
 quality_rating=green
 recipient=+91 90000 00000</div>
-          </div>
-        </div>
-
-        <div class="section-divider"></div>
-
-        <!-- Webhook logs -->
-        <div class="demo-section" id="webhooks">
-          <div class="demo-eyebrow">Webhook evidence — whatsapp_business_management</div>
-          <h2 style="font-size:20px;margin-bottom:6px;">Status changes your team can actually read.</h2>
-          <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">WaChat subscribes to webhook events using <code>POST /v20.0/{waba-id}/subscribed_apps</code>. Every event is captured and associated with the right business workspace.</p>
-          <div class="demo-grid-3">
-            <div class="demo-card">
-              <h3>messages.sent</h3>
-              <p>Cloud API accepted the template message payload for delivery.</p>
-            </div>
-            <div class="demo-card">
-              <h3>messages.delivered</h3>
-              <p>Delivery confirmation received from Meta webhook callback.</p>
-            </div>
-            <div class="demo-card">
-              <h3>template_status_update</h3>
-              <p>Template approval or rejection events captured for support.</p>
-            </div>
-            <div class="demo-card">
-              <h3>account_update</h3>
-              <p>WABA account changes, business tier updates, and enforcement events.</p>
-            </div>
-            <div class="demo-card">
-              <h3>messages.read</h3>
-              <p>Read receipts from the customer, tied to message thread.</p>
-            </div>
-            <div class="demo-card">
-              <h3>phone_number_update</h3>
-              <p>Phone number quality, display name, and registration status changes.</p>
             </div>
           </div>
+
+          <div class="section-divider"></div>
+
+          <!-- Webhook logs -->
+          <div class="demo-section" id="webhooks">
+            <p class="demo-eyebrow">Webhook evidence — whatsapp_business_management</p>
+            <h2 style="font-size:20px;margin-bottom:6px;">Status changes your team can actually read.</h2>
+            <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">WaChat subscribes to webhook events using <code>POST /v20.0/{waba-id}/subscribed_apps</code>. Every event is captured and associated with the right business workspace.</p>
+            <div class="demo-grid-3">
+              <div class="demo-card">
+                <h3>messages.sent</h3>
+                <p>Cloud API accepted the template message payload for delivery.</p>
+              </div>
+              <div class="demo-card">
+                <h3>messages.delivered</h3>
+                <p>Delivery confirmation received from Meta webhook callback.</p>
+              </div>
+              <div class="demo-card">
+                <h3>template_status_update</h3>
+                <p>Template approval or rejection events captured for support.</p>
+              </div>
+              <div class="demo-card">
+                <h3>account_update</h3>
+                <p>WABA account changes, business tier updates, and enforcement events.</p>
+              </div>
+              <div class="demo-card">
+                <h3>messages.read</h3>
+                <p>Read receipts from the customer, tied to message thread.</p>
+              </div>
+              <div class="demo-card">
+                <h3>phone_number_update</h3>
+                <p>Phone number quality, display name, and registration status changes.</p>
+              </div>
+            </div>
+          </div>
+
         </div>
-
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="section bg-subtle">
-  <div class="container">
-    <div class="section-head">
-      <p class="eyebrow">Compliance links</p>
-      <h2>All required policies are publicly accessible.</h2>
-      <p class="lead">WaChat maintains all Meta-required policy pages on this domain. All policies were effective before any business authorizes WaChat as a Tech Provider.</p>
-    </div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-      <a href="privacy.html" class="btn btn-outline">Privacy Policy</a>
-      <a href="terms.html" class="btn btn-outline">Terms of Service</a>
-      <a href="data-deletion.html" class="btn btn-outline">Data Deletion</a>
-      <a href="cookies.html" class="btn btn-outline">Cookie Policy</a>
-      <a href="security.html" class="btn btn-outline">Security</a>
-      <a href="embedded-signup.html" class="btn btn-outline">Embedded Signup</a>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-brand-name"><span class="footer-brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20.52 3.48A11.84 11.84 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.2-1.57A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.22-3.48-8.52z"/></svg></span>WaChat</div>
-        <p>The modern WhatsApp Business platform for Indian SMBs.</p>
+    <section class="page-section alt">
+      <div class="container" style="text-align:center;">
+        <span class="eyebrow"><span class="dot"></span> Compliance links</span>
+        <h2 style="margin:18px 0 14px;font-size:clamp(26px,3vw,38px);">All required policies are publicly accessible.</h2>
+        <p class="lede" style="margin:0 auto 32px;">WaChat maintains all Meta-required policy pages on this domain. All policies were effective before any business authorizes WaChat as a Tech Provider.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+          <a href="privacy.html" class="btn btn-ghost">Privacy Policy</a>
+          <a href="terms.html" class="btn btn-ghost">Terms of Service</a>
+          <a href="data-deletion.html" class="btn btn-ghost">Data Deletion</a>
+          <a href="cookies.html" class="btn btn-ghost">Cookie Policy</a>
+          <a href="security.html" class="btn btn-ghost">Security</a>
+          <a href="embedded-signup.html" class="btn btn-ghost">Embedded Signup</a>
+        </div>
       </div>
-      <div class="footer-col"><strong>Product</strong><a href="features.html">Features</a><a href="pricing.html">Pricing</a><a href="use-cases.html">Use Cases</a></div>
-      <div class="footer-col"><strong>Company</strong><a href="about.html">About</a><a href="contact.html">Contact</a><a href="security.html">Security</a></div>
-      <div class="footer-col"><strong>Legal</strong><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a><a href="data-deletion.html">Data Deletion</a><a href="cookies.html">Cookie Policy</a></div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-copyright">© 2026 Serves Technology Pvt. Ltd. · hello@serves.in</div>
-      <div class="footer-disclaimer">WhatsApp and the WhatsApp logo are trademarks of Meta Platforms, Inc. WaChat is an independent product and is not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc.</div>
-    </div>
-  </div>
-</footer>
+    </section>
 
-<script src="script.js" defer></script>
+  </main>
+  <div id="wc-footer"></div>
+  <script src="shell.js"></script>
 </body>
 </html>
