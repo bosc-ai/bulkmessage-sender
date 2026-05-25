@@ -17,6 +17,122 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ===== Interactive Demo ===== */
+    .lpdemo { padding: 120px 0; background: var(--paper-2); border-top: 1px solid var(--line); }
+    .lpdemo-wrap { background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-lg); }
+    .lpdemo-chrome { display: flex; align-items: center; gap: 16px; padding: 12px 20px; background: #F4F2EC; border-bottom: 1px solid var(--line); }
+    .lpdemo-dots { display: flex; gap: 6px; }
+    .lpdemo-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .lpdemo-dots span:nth-child(1) { background: #FF5F57; }
+    .lpdemo-dots span:nth-child(2) { background: #FFBD2E; }
+    .lpdemo-dots span:nth-child(3) { background: #28C840; }
+    .lpdemo-url { flex-shrink: 0; font-family: var(--font-mono); font-size: 12px; color: var(--muted); background: #fff; border: 1px solid var(--line); padding: 4px 12px; border-radius: 8px; }
+    .lpdemo-tabs { display: flex; gap: 4px; margin-left: auto; }
+    .lptab { padding: 6px 14px; font-size: 13px; font-weight: 500; color: var(--muted); border-radius: 8px; transition: all .2s; }
+    .lptab:hover { background: #fff; color: var(--ink); }
+    .lptab.active { background: var(--ink); color: #fff; }
+    .lpdemo-body { position: relative; }
+    .lppanel { display: none; }
+    .lppanel.show { display: flex; }
+    /* inbox panel */
+    .lpinbox { height: 460px; }
+    .lpinbox-list { width: 256px; border-right: 1px solid var(--line); overflow-y: auto; flex-shrink: 0; }
+    .lpinbox-head { padding: 12px 16px; font-size: 13px; font-weight: 600; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+    .lpinbox-head .cnt { font-family: var(--font-mono); font-size: 10px; font-weight: 700; background: var(--green); color: #fff; border-radius: 9999px; padding: 2px 7px; }
+    .lprow { display: flex; align-items: center; gap: 10px; padding: 11px 16px; cursor: pointer; border-bottom: 1px solid var(--line); transition: background .15s; }
+    .lprow:hover { background: var(--paper-2); }
+    .lprow.on { background: var(--green-tint); }
+    .lpav { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0; }
+    .lpav.a { background: linear-gradient(135deg,#34D399,#06B6D4); }
+    .lpav.b { background: linear-gradient(135deg,#F59E0B,#EF4444); }
+    .lpav.c { background: linear-gradient(135deg,#6366F1,#A855F7); }
+    .lpav.d { background: linear-gradient(135deg,#0F8A53,#25D366); }
+    .lprn { font-size: 12.5px; font-weight: 600; }
+    .lprs { font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 148px; margin-top: 1px; }
+    .lpwhen { font-size: 10.5px; color: var(--muted-2); font-family: var(--font-mono); }
+    .lpinbox-chat { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .lpchat-head { padding: 12px 16px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 10px; }
+    .lpchat-head .nm { font-size: 14px; font-weight: 600; }
+    .lpchat-head .sub { font-size: 11.5px; color: var(--muted); }
+    .lpchat-msgs { flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; background: #F0F2F5; }
+    .lpbub { max-width: 72%; padding: 9px 13px; font-size: 13px; line-height: 1.5; border-radius: 14px; }
+    .lpbub.in { background: #fff; align-self: flex-start; border-radius: 2px 14px 14px 14px; box-shadow: 0 1px 3px rgba(0,0,0,.07); }
+    .lpbub.out { background: #D9FDD3; align-self: flex-end; border-radius: 14px 14px 2px 14px; }
+    .lpchat-compose { padding: 10px 12px; border-top: 1px solid var(--line); display: flex; align-items: center; gap: 10px; background: #fff; }
+    .lpchat-input { flex: 1; padding: 9px 14px; border: 1.5px solid var(--line); border-radius: 22px; font: inherit; font-size: 13px; outline: none; transition: border-color .2s; background: var(--paper); }
+    .lpchat-input:focus { border-color: var(--green); }
+    .lpchat-send { width: 34px; height: 34px; border-radius: 50%; background: var(--green); display: grid; place-items: center; cursor: pointer; border: 0; flex-shrink: 0; transition: background .2s, transform .15s; }
+    .lpchat-send:hover { background: var(--green-2); transform: scale(1.05); }
+    .lpchat-send svg { color: #fff; }
+    /* campaign panel */
+    .lpcampaign { padding: 24px 28px; flex-direction: column; min-height: 460px; }
+    .lpc-hdr { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+    .lpc-hdr h4 { font-size: 16px; }
+    .lpc-ok { display: none; align-items: center; gap: 12px; background: var(--green-tint); border: 1px solid rgba(37,211,102,.3); border-radius: 12px; padding: 14px 18px; font-size: 14px; color: var(--green-deep); font-weight: 500; margin-bottom: 16px; }
+    .lpc-ok.show { display: flex; }
+    .lpct { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .lpct th { text-align: left; padding: 8px 12px; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); font-family: var(--font-mono); }
+    .lpct td { padding: 11px 12px; border-bottom: 1px solid var(--line); }
+    .lpct tr:last-child td { border-bottom: 0; }
+    .lpct td:first-child { font-family: var(--font-mono); font-size: 12px; color: var(--ink); }
+    .lptag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 9999px; font-family: var(--font-mono); letter-spacing: .03em; }
+    .lptag.u { background: #EDE9FE; color: #5B21B6; }
+    .lptag.m { background: #FEF3C7; color: #92400E; }
+    .lptag.aa { background: var(--green-tint); color: var(--green-deep); }
+    .lpbar { height: 4px; background: var(--line); border-radius: 9999px; width: 90px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 4px; }
+    .lpbar i { display: block; height: 100%; background: var(--green); border-radius: inherit; }
+    /* analytics panel */
+    .lpanalytics { padding: 24px 28px; flex-direction: column; min-height: 460px; gap: 20px; }
+    .lpkpis { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .lpkpi { background: var(--paper-2); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+    .lpkpi .ll { font-size: 12px; color: var(--muted); margin-bottom: 6px; font-family: var(--font-mono); }
+    .lpkpi .vv { font-family: var(--font-mono); font-size: 28px; font-weight: 600; letter-spacing: -0.04em; color: var(--ink); }
+    .lpkpi .cc { font-size: 12px; margin-top: 4px; }
+    .lpkpi .cc.up { color: #16A34A; }
+    .lpkpi .cc.dn { color: #DC2626; }
+    .lpchartbox { flex: 1; background: var(--paper-2); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; }
+    .lpchartbox h5 { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; font-family: var(--font-mono); }
+
+    /* ===== Comparison Table ===== */
+    .vs-section { padding: 120px 0; }
+    .vs-wrap { overflow-x: auto; margin-top: 48px; border-radius: 16px; border: 1px solid var(--line); overflow: hidden; }
+    .vs-tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .vs-tbl th { padding: 16px 20px; text-align: center; font-size: 14px; font-weight: 600; background: var(--paper-2); border-bottom: 2px solid var(--line); white-space: nowrap; }
+    .vs-tbl th:first-child { text-align: left; min-width: 180px; }
+    .vs-tbl th.ours { background: var(--green-tint); color: var(--green-deep); border-bottom-color: rgba(37,211,102,.4); }
+    .vs-tbl th .brand-lbl { font-family: var(--font-mono); font-size: 10px; font-weight: 500; opacity: .7; display: block; margin-top: 2px; }
+    .vs-tbl td { padding: 14px 20px; border-bottom: 1px solid var(--line); text-align: center; color: var(--muted); }
+    .vs-tbl tr:last-child td { border-bottom: 0; }
+    .vs-tbl td:first-child { text-align: left; font-weight: 500; color: var(--ink); background: var(--paper-2); }
+    .vs-tbl td.ours { background: rgba(37,211,102,.04); color: var(--ink); font-weight: 500; }
+    .vc { color: #16A34A; font-weight: 700; }
+    .vx { color: #DC2626; }
+    .vp { font-family: var(--font-mono); font-weight: 600; color: var(--ink); }
+    .vs-foot { font-size: 12px; color: var(--muted); margin-top: 14px; text-align: center; font-family: var(--font-mono); }
+    .vs-cta { text-align: center; margin-top: 32px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ===== Sticky Migration Card ===== */
+    .mig-card { position: fixed; bottom: 28px; right: 28px; width: 292px; background: #fff; border: 1px solid var(--line); border-left: 3px solid var(--green); border-radius: 16px; padding: 20px; box-shadow: 0 12px 40px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.06); z-index: 88; transform: translateY(20px); opacity: 0; pointer-events: none; transition: opacity .4s var(--ease), transform .4s var(--ease); }
+    .mig-card.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .mig-close { position: absolute; top: 12px; right: 12px; width: 24px; height: 24px; border-radius: 50%; background: var(--paper-2); border: 0; font-size: 16px; line-height: 1; color: var(--muted); cursor: pointer; display: grid; place-items: center; transition: background .15s; }
+    .mig-close:hover { background: var(--line); }
+    .mig-body { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; padding-right: 20px; }
+    .mig-ic { width: 38px; height: 38px; border-radius: 10px; background: var(--green-tint); display: grid; place-items: center; font-size: 20px; flex-shrink: 0; }
+    .mig-ttl { font-size: 13.5px; font-weight: 600; color: var(--ink); line-height: 1.3; }
+    .mig-sub { font-size: 12.5px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+
+    @media (max-width: 768px) {
+      .lpdemo-tabs { display: none; }
+      .lpinbox { height: auto; flex-direction: column; }
+      .lpinbox-list { width: 100%; height: 160px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .lpkpis { grid-template-columns: 1fr; }
+      .lpcampaign, .lpanalytics { padding: 16px; }
+      .vs-tbl { font-size: 12px; }
+      .vs-tbl th, .vs-tbl td { padding: 10px 12px; }
+      .mig-card { bottom: 16px; right: 16px; left: 16px; width: auto; }
+    }
+  </style>
 </head>
 <body data-page="home">
   <div id="wc-nav"></div>
@@ -591,6 +707,250 @@
     </div>
   </section>
 
+  <!-- ============ INTERACTIVE DEMO ============ -->
+  <section class="lpdemo" id="demo">
+    <div class="container">
+      <div class="section-head" style="text-align:center;margin:0 auto 48px;">
+        <span class="eyebrow"><span class="dot"></span> Live product tour</span>
+        <h2 style="margin:14px 0 16px;">See WaChat in action — no signup needed.</h2>
+        <p class="lede" style="margin:0 auto;">Click through the inbox, build a campaign, and check your analytics. This is the real UI.</p>
+      </div>
+
+      <div class="lpdemo-wrap">
+        <!-- browser chrome -->
+        <div class="lpdemo-chrome">
+          <div class="lpdemo-dots"><span></span><span></span><span></span></div>
+          <span class="lpdemo-url">app.wachat.serves.in — dashboard</span>
+          <div class="lpdemo-tabs">
+            <button class="lptab active" data-lp="inbox">Inbox</button>
+            <button class="lptab" data-lp="campaign">Campaigns</button>
+            <button class="lptab" data-lp="analytics">Analytics</button>
+          </div>
+        </div>
+
+        <div class="lpdemo-body">
+
+          <!-- INBOX PANEL -->
+          <div class="lppanel show lpinbox" id="lpp-inbox">
+            <div class="lpinbox-list">
+              <div class="lpinbox-head">Inbox <span class="cnt">4</span></div>
+              <div class="lprow on" data-conv="priya">
+                <div class="lpav a">P</div>
+                <div style="min-width:0;flex:1">
+                  <div class="lprn">Priya Sharma</div>
+                  <div class="lprs">Where's my order?</div>
+                </div>
+                <div class="lpwhen">2m</div>
+              </div>
+              <div class="lprow" data-conv="arjun">
+                <div class="lpav b">A</div>
+                <div style="min-width:0;flex:1">
+                  <div class="lprn">Arjun Mehta</div>
+                  <div class="lprs">Booking confirmed?</div>
+                </div>
+                <div class="lpwhen">14m</div>
+              </div>
+              <div class="lprow" data-conv="sneha">
+                <div class="lpav c">S</div>
+                <div style="min-width:0;flex:1">
+                  <div class="lprn">Sneha Reddy</div>
+                  <div class="lprs">Need invoice copy</div>
+                </div>
+                <div class="lpwhen">1h</div>
+              </div>
+              <div class="lprow" data-conv="rohit">
+                <div class="lpav d">R</div>
+                <div style="min-width:0;flex:1">
+                  <div class="lprn">Rohit Nair</div>
+                  <div class="lprs">Refund status?</div>
+                </div>
+                <div class="lpwhen">3h</div>
+              </div>
+            </div>
+
+            <div class="lpinbox-chat">
+              <div class="lpchat-head">
+                <div class="lpav a" id="lp-chat-av" style="width:32px;height:32px;font-size:11px;">P</div>
+                <div>
+                  <div class="nm" id="lp-chat-nm">Priya Sharma</div>
+                  <div class="sub" id="lp-chat-sub">+91 98765 43210 · open</div>
+                </div>
+              </div>
+              <div class="lpchat-msgs" id="lp-chat-msgs"></div>
+              <div class="lpchat-compose">
+                <input class="lpchat-input" id="lp-chat-input" placeholder="Type a reply…" type="text" autocomplete="off">
+                <button class="lpchat-send" id="lp-chat-send" aria-label="Send">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CAMPAIGN PANEL -->
+          <div class="lppanel lpcampaign" id="lpp-campaign">
+            <div class="lpc-hdr">
+              <h4>Broadcast campaigns</h4>
+              <button class="btn btn-green" onclick="lpSendCampaign()" style="font-size:13px;padding:9px 18px;">Launch campaign →</button>
+            </div>
+            <div class="lpc-ok" id="lpc-ok">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Campaign queued — 2,400 messages sending now. You'll see delivery stats in Analytics.
+            </div>
+            <table class="lpct">
+              <thead><tr><th>Template</th><th>Category</th><th>Reach</th><th>Open rate</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>order_shipped_v3</td>
+                  <td><span class="lptag u">Utility</span></td>
+                  <td>2,400</td>
+                  <td><span class="lpbar"><i style="width:91%"></i></span>91%</td>
+                  <td><span class="lptag aa">Approved</span></td>
+                </tr>
+                <tr>
+                  <td>sale_alert_aug</td>
+                  <td><span class="lptag m">Marketing</span></td>
+                  <td>8,150</td>
+                  <td><span class="lpbar"><i style="width:74%"></i></span>74%</td>
+                  <td><span class="lptag aa">Approved</span></td>
+                </tr>
+                <tr>
+                  <td>appt_reminder_q3</td>
+                  <td><span class="lptag u">Utility</span></td>
+                  <td>340</td>
+                  <td><span class="lpbar"><i style="width:88%"></i></span>88%</td>
+                  <td><span class="lptag aa">Approved</span></td>
+                </tr>
+                <tr>
+                  <td>restock_promo_oct</td>
+                  <td><span class="lptag m">Marketing</span></td>
+                  <td>5,200</td>
+                  <td>—</td>
+                  <td><span class="lptag" style="background:var(--paper-2);color:var(--muted);border:1px solid var(--line);">Pending</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- ANALYTICS PANEL -->
+          <div class="lppanel lpanalytics" id="lpp-analytics">
+            <div class="lpkpis">
+              <div class="lpkpi">
+                <div class="ll">Messages sent (30d)</div>
+                <div class="vv">48,320</div>
+                <div class="cc up">↑ 18% vs last month</div>
+              </div>
+              <div class="lpkpi">
+                <div class="ll">Avg delivery rate</div>
+                <div class="vv">98.4%</div>
+                <div class="cc up">↑ 0.3 pp</div>
+              </div>
+              <div class="lpkpi">
+                <div class="ll">Open rate (templates)</div>
+                <div class="vv">84.2%</div>
+                <div class="cc dn">↓ 1.1 pp</div>
+              </div>
+            </div>
+            <div class="lpchartbox">
+              <h5>Daily messages · last 14 days</h5>
+              <svg viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+                <defs>
+                  <linearGradient id="lg1" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#25D366" stop-opacity=".25"/>
+                    <stop offset="100%" stop-color="#25D366" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,90 C40,85 80,70 120,60 C160,50 200,75 240,55 C280,35 320,45 360,30 C400,15 440,25 480,20 C520,15 560,10 600,8 L600,120 L0,120 Z" fill="url(#lg1)"/>
+                <path d="M0,90 C40,85 80,70 120,60 C160,50 200,75 240,55 C280,35 320,45 360,30 C400,15 440,25 480,20 C520,15 560,10 600,8" fill="none" stroke="#25D366" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+
+        </div><!-- /lpdemo-body -->
+      </div><!-- /lpdemo-wrap -->
+    </div>
+  </section>
+
+  <!-- ============ COMPARISON TABLE ============ -->
+  <section class="vs-section" id="compare">
+    <div class="container">
+      <div class="section-head" style="text-align:center;margin:0 auto 0;">
+        <span class="eyebrow"><span class="dot"></span> How we stack up</span>
+        <h2 style="margin:14px 0 16px;">WaChat vs the alternatives.</h2>
+        <p class="lede" style="margin:0 auto;">Honest feature and pricing comparison against the three most common WhatsApp BSPs in India.</p>
+      </div>
+
+      <div class="vs-wrap">
+        <table class="vs-tbl">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="ours">WaChat <span class="brand-lbl">wachat.serves.in</span></th>
+              <th>Wati <span class="brand-lbl">wati.io</span></th>
+              <th>Interakt <span class="brand-lbl">interakt.shop</span></th>
+              <th>AiSensy <span class="brand-lbl">aisensy.com</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Starting price / month</td>
+              <td class="ours"><span class="vp">₹999</span></td>
+              <td><span class="vp">₹2,499</span></td>
+              <td><span class="vp">₹2,756</span></td>
+              <td><span class="vp">₹999</span></td>
+            </tr>
+            <tr>
+              <td>Meta conversation markup</td>
+              <td class="ours"><span class="vc">✓ None — pass-through</span></td>
+              <td><span class="vx">✗ Markup applied</span></td>
+              <td><span class="vx">✗ Markup applied</span></td>
+              <td><span class="vx">✗ Markup applied</span></td>
+            </tr>
+            <tr>
+              <td>Data stored in India</td>
+              <td class="ours"><span class="vc">✓ Mumbai region</span></td>
+              <td><span class="vx">✗ US / EU servers</span></td>
+              <td><span class="vx">✗ US / EU servers</span></td>
+              <td>Partial</td>
+            </tr>
+            <tr>
+              <td>Free migration from other BSP</td>
+              <td class="ours"><span class="vc">✓ Done-for-you</span></td>
+              <td><span class="vx">✗</span></td>
+              <td><span class="vx">✗</span></td>
+              <td><span class="vx">✗</span></td>
+            </tr>
+            <tr>
+              <td>Cloud API on all plans</td>
+              <td class="ours"><span class="vc">✓ Always</span></td>
+              <td>Growth+ only</td>
+              <td><span class="vc">✓</span></td>
+              <td><span class="vc">✓</span></td>
+            </tr>
+            <tr>
+              <td>Setup time</td>
+              <td class="ours"><span class="vc">✓ &lt; 10 minutes</span></td>
+              <td>~1–2 days</td>
+              <td>~1 day</td>
+              <td>~1 day</td>
+            </tr>
+            <tr>
+              <td>Support response (SLA)</td>
+              <td class="ours"><span class="vc">✓ &lt; 2 hours</span></td>
+              <td>24–48 hours</td>
+              <td>24 hours</td>
+              <td>12–24 hours</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="vs-foot">Pricing checked May 2025 from public plan pages. Subject to change.</p>
+      <div class="vs-cta">
+        <a href="signup.html" class="btn btn-green">Start free trial →</a>
+        <a href="migration.html" class="btn btn-ghost">See migration details</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ PRICING ============ -->
   <section class="pricing" id="pricing">
     <div class="container">
@@ -779,8 +1139,160 @@
 
   </main>
 
+  <!-- Sticky migration card -->
+  <div class="mig-card" id="migCard" role="complementary" aria-label="Free migration offer">
+    <button class="mig-close" id="migClose" aria-label="Dismiss">×</button>
+    <div class="mig-body">
+      <div class="mig-ic">🚚</div>
+      <div>
+        <div class="mig-ttl">Switching from Wati or Interakt?</div>
+        <div class="mig-sub">Free done-for-you migration. We handle everything.</div>
+      </div>
+    </div>
+    <a href="migration.html" class="btn btn-green" style="width:100%;justify-content:center;font-size:13.5px;padding:11px 0;">Free migration →</a>
+  </div>
+
   <div id="wc-footer"></div>
   <script src="shell.js"></script>
   <script src="script.js"></script>
+  <script>
+    /* ===== Interactive demo ===== */
+    const convs = {
+      priya: {
+        av: 'a', letter: 'P', name: 'Priya Sharma', phone: '+91 98765 43210',
+        msgs: [
+          { t:'in',  m:'Hi, I placed order #ORD-8821 two days ago and it still shows "processing". Where is it?' },
+          { t:'out', m:'Hi Priya! Let me check that for you right away 🔍' },
+          { t:'in',  m:'I needed it by tomorrow for a gift 😟' },
+          { t:'out', m:'I can see your order. It shipped this morning — Delhivery AWB 7742881. Expected delivery tomorrow by 6 PM. You’ll get an SMS too!' },
+          { t:'in',  m:'Oh great! Thank you so much 🙏' },
+        ]
+      },
+      arjun: {
+        av: 'b', letter: 'A', name: 'Arjun Mehta', phone: '+91 87654 32109',
+        msgs: [
+          { t:'in',  m:'I booked a table for 4 at 8 PM tonight. Did you get the booking?' },
+          { t:'out', m:'Yes Arjun, confirmed! Table for 4 at 8:00 PM tonight. We\'ll see you then 🍽️' },
+          { t:'in',  m:'Can I change it to 4 people? We may have one more friend joining.' },
+          { t:'out', m:'Done — updated to 5 people just in case. No problem at all 😊' },
+        ]
+      },
+      sneha: {
+        av: 'c', letter: 'S', name: 'Sneha Reddy', phone: '+91 76543 21098',
+        msgs: [
+          { t:'in',  m:'Hello, I need a GST invoice for my purchase last week. Invoice no INV-4490.' },
+          { t:'out', m:'Sure Sneha! Sending INV-4490 to your registered email right now. You\'ll receive it in 2 minutes.' },
+          { t:'in',  m:'My email is sneha.reddy@acmecorp.in' },
+          { t:'out', m:'Got it — sent to sneha.reddy@acmecorp.in. Let me know if you need anything else!' },
+          { t:'in',  m:'Received. Thanks! ✅' },
+        ]
+      },
+      rohit: {
+        av: 'd', letter: 'R', name: 'Rohit Nair', phone: '+91 65432 10987',
+        msgs: [
+          { t:'in',  m:'I returned a product 5 days ago. Refund still not received. TXN#887123.' },
+          { t:'out', m:'Hi Rohit, sorry for the wait. I can see your return was processed on the 18th. Refund is in transit — 2-3 more business days.' },
+          { t:'in',  m:'It\'s been 7 already 😤' },
+          { t:'out', m:'You\'re right, I\'m escalating this to our finance team right now. I\'ll personally follow up and message you by 5 PM today.' },
+        ]
+      }
+    };
+
+    let activeConv = 'priya';
+
+    function renderConv(key) {
+      const c = convs[key];
+      if (!c) return;
+      activeConv = key;
+
+      document.querySelectorAll('.lprow').forEach(r => r.classList.toggle('on', r.dataset.conv === key));
+      const avEl = document.getElementById('lp-chat-av');
+      avEl.className = 'lpav ' + c.av;
+      avEl.textContent = c.letter;
+      document.getElementById('lp-chat-nm').textContent = c.name;
+      document.getElementById('lp-chat-sub').textContent = c.phone + ' · open';
+
+      const box = document.getElementById('lp-chat-msgs');
+      box.innerHTML = '';
+      c.msgs.forEach(msg => {
+        const b = document.createElement('div');
+        b.className = 'lpbub ' + msg.t;
+        b.textContent = msg.m;
+        box.appendChild(b);
+      });
+      box.scrollTop = box.scrollHeight;
+    }
+
+    document.querySelectorAll('.lprow').forEach(r => {
+      r.addEventListener('click', () => renderConv(r.dataset.conv));
+    });
+
+    document.getElementById('lp-chat-send').addEventListener('click', sendReply);
+    document.getElementById('lp-chat-input').addEventListener('keydown', e => { if (e.key === 'Enter') sendReply(); });
+
+    function sendReply() {
+      const inp = document.getElementById('lp-chat-input');
+      const txt = inp.value.trim();
+      if (!txt) return;
+      inp.value = '';
+      const c = convs[activeConv];
+      c.msgs.push({ t: 'out', m: txt });
+      const box = document.getElementById('lp-chat-msgs');
+      const b = document.createElement('div');
+      b.className = 'lpbub out';
+      b.textContent = txt;
+      box.appendChild(b);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    /* tab switching */
+    document.querySelectorAll('.lptab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.lptab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.lppanel').forEach(p => p.classList.remove('show'));
+        tab.classList.add('active');
+        document.getElementById('lpp-' + tab.dataset.lp).classList.add('show');
+        if (tab.dataset.lp === 'inbox') renderConv(activeConv);
+      });
+    });
+
+    /* campaign launch */
+    function lpSendCampaign() {
+      const btn = document.querySelector('#lpp-campaign .btn-green');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      setTimeout(() => {
+        document.getElementById('lpc-ok').classList.add('show');
+        btn.textContent = 'Sent ✓';
+      }, 1200);
+    }
+
+    /* init */
+    renderConv('priya');
+
+    /* ===== Sticky migration card ===== */
+    (function() {
+      if (sessionStorage.getItem('migDismissed')) return;
+      const card = document.getElementById('migCard');
+      const close = document.getElementById('migClose');
+      let shown = false;
+
+      function showCard() {
+        if (shown) return;
+        shown = true;
+        card.classList.add('show');
+      }
+
+      setTimeout(showCard, 5000);
+      window.addEventListener('scroll', function onScroll() {
+        if (window.scrollY > 600) { showCard(); window.removeEventListener('scroll', onScroll); }
+      }, { passive: true });
+
+      close.addEventListener('click', () => {
+        card.classList.remove('show');
+        sessionStorage.setItem('migDismissed', '1');
+      });
+    })();
+  </script>
 </body>
 </html>
