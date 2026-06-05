@@ -138,7 +138,9 @@
           </div>
           <div class="footer-bot">
             <div class="left">
-              <span>© 2026 Serves Technologies Pvt. Ltd.</span>
+              <span>© 2026 Serves Technologies</span>
+              <span class="sep">·</span>
+              <span>MSME · Udyam UDYAM-KR-03-0513677</span>
               <span class="sep">·</span>
               <span>Made in India</span>
             </div>
