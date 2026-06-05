@@ -1,5 +1,5 @@
 /* =========================================================
-   WaChat — landing page interactions
+   BulkMessageSender — landing page interactions
    Pure CSS animations only — no GSAP, no Lenis.
    ========================================================= */
 (function () {

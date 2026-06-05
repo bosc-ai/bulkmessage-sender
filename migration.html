@@ -3,8 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Migration guide — WaChat</title>
-  <meta name="description" content="How to move your WhatsApp Business number from another BSP to WaChat — free, supervised, ~15 minutes.">
+  <title>Migrate to BulkMessageSender — Free WhatsApp BSP Migration</title>
+  <meta name="description" content="Switch your WhatsApp Business API number and templates from any BSP for free. Keep your green tick, templates and chat history. Done-for-you migration.">
+  <link rel="canonical" href="https://bulkmessagesender.com/migration.html">
+  <meta property="og:title" content="Migrate to BulkMessageSender — Free WhatsApp BSP Migration">
+  <meta property="og:description" content="Switch your WhatsApp Business API number and templates from any BSP for free. Keep your green tick, templates and chat history. Done-for-you migration.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://bulkmessagesender.com/migration.html">
+  <meta property="og:site_name" content="BulkMessageSender">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/wachat-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +25,7 @@
       <div class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <span>Migration guide</span></div>
       <span class="eyebrow"><span class="dot"></span> Migration guide</span>
       <h1>Moving from another BSP? Read this.</h1>
-      <p class="lede">Migrating a verified WhatsApp Business number to WaChat takes about 15 minutes once Meta approves the request. There's no fee, no downtime, and no loss of templates.</p>
+      <p class="lede">Migrating a verified WhatsApp Business number to BulkMessageSender takes about 15 minutes once Meta approves the request. There's no fee, no downtime, and no loss of templates.</p>
       <div class="cta-row">
         <a href="contact.html?topic=migration" class="btn btn-green">Talk to our migration team →</a>
         <a href="signup.html" class="btn btn-ghost">Start a workspace first</a>
@@ -34,23 +41,23 @@
           <li>30 minutes (active work is ~15 minutes; Meta takes the rest)</li>
         </ul>
 
-        <h2>Step 1 — Create a WaChat workspace</h2>
-        <p>Sign up at <a href="signup.html">wachat.serves.in/signup</a>. Pick the plan that matches your team — you can change it later. Don't connect a number yet.</p>
+        <h2>Step 1 — Create a BulkMessageSender workspace</h2>
+        <p>Sign up at <a href="signup.html">bulkmessagesender.com/signup</a>. Pick the plan that matches your team — you can change it later. Don't connect a number yet.</p>
 
         <h2>Step 2 — Export your data from your current BSP</h2>
         <p>From most BSPs you can export your contacts (CSV), your templates (JSON or copy-paste), and your conversation history. Save them locally; we'll import in step 5.</p>
 
         <h2>Step 3 — Initiate the number transfer on Meta</h2>
-        <p>Inside Meta Business Manager → WhatsApp Accounts → choose your number → <strong>Transfer to another BSP</strong>. Pick "WaChat" from the BSP list. Meta will send a confirmation request.</p>
+        <p>Inside Meta Business Manager → WhatsApp Accounts → choose your number → <strong>Transfer to another BSP</strong>. Pick "BulkMessageSender" from the BSP list. Meta will send a confirmation request.</p>
 
-        <h2>Step 4 — Accept the transfer in WaChat</h2>
-        <p>Within ten minutes, an accept-prompt will appear on your WaChat dashboard. Accept it. Meta sends a final confirmation and the number flips over.</p>
+        <h2>Step 4 — Accept the transfer in BulkMessageSender</h2>
+        <p>Within ten minutes, an accept-prompt will appear on your BulkMessageSender dashboard. Accept it. Meta sends a final confirmation and the number flips over.</p>
 
         <h2>Step 5 — Re-import templates and contacts</h2>
         <p>Templates approved on your previous BSP are tied to your Meta account, so they carry over automatically. Re-upload your contacts CSV under <code>Contacts → Import</code>.</p>
 
         <h2>Step 6 — Switch your webhooks</h2>
-        <p>If you were using your previous BSP's webhooks, update the destination URL to WaChat's (or point to your own server and have it relay). We keep the same event shape as the official Cloud API webhooks, so most integrations work without code changes.</p>
+        <p>If you were using your previous BSP's webhooks, update the destination URL to BulkMessageSender's (or point to your own server and have it relay). We keep the same event shape as the official Cloud API webhooks, so most integrations work without code changes.</p>
 
         <h2>What stays the same</h2>
         <ul>
@@ -61,7 +68,7 @@
 
         <h2>What changes</h2>
         <ul>
-          <li>Your dashboard, agent inbox, automation flows (all rebuilt in WaChat — usually faster than the previous tool)</li>
+          <li>Your dashboard, agent inbox, automation flows (all rebuilt in BulkMessageSender — usually faster than the previous tool)</li>
           <li>Your conversation rates — Meta's rates are passed through at cost, no markup</li>
         </ul>
 

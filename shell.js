@@ -1,5 +1,5 @@
 /* =========================================================
-   WaChat — shared shell (nav + footer + mobile menu)
+   BulkMessageSender — shared shell (nav + footer + mobile menu)
    All pages live at root level — no /pages/ prefix needed.
    ========================================================= */
 (function () {
@@ -24,11 +24,11 @@
       <a class="skip" href="#main">Skip to content</a>
       <header class="nav" id="wc-nav-el">
         <div class="container-wide nav-inner">
-          <a class="brand" href="index.html" aria-label="WaChat home">
+          <a class="brand" href="index.html" aria-label="BulkMessageSender home">
             <span class="brand-mark" aria-hidden="true">
               <img src="${logoSrc}" alt="" width="36" height="36">
             </span>
-            <span class="brand-name">WaChat</span>
+            <span class="brand-name">BulkMessageSender</span>
           </a>
 
           <nav class="nav-links" aria-label="Primary">
@@ -90,10 +90,10 @@
                 <span class="brand-mark" aria-hidden="true">
                   <img src="${logoSrc}" alt="" width="32" height="32">
                 </span>
-                <span class="brand-name">WaChat</span>
+                <span class="brand-name">BulkMessageSender</span>
               </a>
-              <p>Customer conversations on WhatsApp, done right. A Serves Technologies product, built in India.</p>
-              <p class="footer-contact"><a href="mailto:hello@serves.in">hello@serves.in</a></p>
+              <p>BulkMessageSender is a WhatsApp bulk message sender &amp; broadcast platform built on the official WhatsApp Business API — send campaigns, automate replies and manage a shared team inbox. A Weflux product by Serves Technologies, built in India.</p>
+              <p class="footer-contact"><a href="mailto:hello@serves.in">hello@serves.in</a> · <a href="https://weflux.in">A Weflux product</a></p>
             </div>
             <div class="footer-col">
               <h5>Product</h5>
@@ -149,7 +149,7 @@
               <a href="#" aria-label="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.9 5.7-5.6 6 .4.4.8 1.1.8 2.3v3.4c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></svg></a>
             </div>
           </div>
-          <p class="footer-disclaimer">WhatsApp and the WhatsApp logo are trademarks of Meta Platforms, Inc. WaChat is an independent product of Serves Technologies and is not affiliated with, endorsed by, or sponsored by Meta. All product and company names herein may be trademarks of their respective owners.</p>
+          <p class="footer-disclaimer">WhatsApp and the WhatsApp logo are trademarks of Meta Platforms, Inc. BulkMessageSender is an independent product of Serves Technologies (a Weflux product) and is not affiliated with, endorsed by, or sponsored by Meta. All product and company names herein may be trademarks of their respective owners.</p>
         </div>
       </footer>
     `;

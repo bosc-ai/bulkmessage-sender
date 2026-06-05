@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /signin.html
+Disallow: /signup.html
+Disallow: /app-review-demo.html
 
-Sitemap: https://wachat.serves.in/sitemap.xml
+Sitemap: https://bulkmessagesender.com/sitemap.xml
