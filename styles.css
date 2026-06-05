@@ -782,10 +782,11 @@ h3 { font-size: 22px; line-height: 1.25; letter-spacing: -0.02em; }
 .bill-toggle button .save { font-size: 10px; font-family: var(--font-mono); background: var(--green-tint); color: var(--green-deep); padding: 1px 6px; border-radius: 4px; }
 .bill-toggle button.on .save { background: var(--green); color: #07371C; }
 
-.pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; align-items: stretch; }
+.pricing-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; align-items: stretch; }
+.pricing-grid .plan-price .amt { font-size: 38px; }
 .plan {
   background: #fff; border: 1px solid var(--line); border-radius: 18px;
-  padding: 28px; display: flex; flex-direction: column; gap: 16px;
+  padding: 26px 24px; display: flex; flex-direction: column; gap: 16px;
   position: relative;
   transition: transform .25s var(--ease), box-shadow .25s var(--ease);
 }

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pricing — WaChat</title>
-  <meta name="description" content="Honest, pass-through pricing for WhatsApp Business. Starter ₹999/mo, Growth ₹2,999/mo, Scale custom. No markup on conversation charges.">
+  <meta name="description" content="Honest, pass-through pricing for WhatsApp Business. Free ₹0, Basic ₹999/mo, Pro ₹2,499/mo, Scale custom. No markup on conversation charges.">
   <link rel="icon" href="assets/wachat-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +46,7 @@
     @media (max-width: 640px) {
       .meta-rates { grid-template-columns: 1fr; }
       .compare-wrap { overflow-x: auto; }
-      .compare { min-width: 640px; }
+      .compare { min-width: 760px; }
     }
   </style>
 </head>
@@ -70,18 +70,37 @@
       <div class="pricing-grid">
         <article class="plan">
           <div>
-            <div class="plan-name">Starter</div>
+            <div class="plan-name">Free</div>
+            <div class="plan-price">
+              <span class="amt">₹<span class="price" data-monthly="0" data-annual="0">0</span></span>
+              <span class="per">/mo · forever</span>
+            </div>
+            <p class="plan-desc">For trying the WhatsApp Business API hands-on before you commit.</p>
+          </div>
+          <ul>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 1 agent, unlimited contacts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 1 connected number</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Shared inbox &amp; 5 templates</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Community + email support</li>
+          </ul>
+          <a href="signup.html?plan=free" class="btn btn-ghost">Start free</a>
+        </article>
+
+        <article class="plan">
+          <div>
+            <div class="plan-name">Basic</div>
             <div class="plan-price">
               <span class="amt">₹<span class="price" data-monthly="999" data-annual="799">999</span></span>
               <span class="per">/mo · billed monthly</span>
             </div>
-            <p class="plan-desc">For founders running WhatsApp themselves and small teams just getting set up.</p>
+            <p class="plan-desc">For small teams running day-to-day WhatsApp support and broadcasts.</p>
           </div>
           <ul>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 2 agents, unlimited contacts</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Shared inbox &amp; templates</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 10 broadcasts / month</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Shopify &amp; WooCommerce</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 20 agent seats</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 1 connected number</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited templates &amp; contacts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 10 automation flows</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Broadcast campaigns</li>
             <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Email support, 24h SLA</li>
           </ul>
           <a href="signup.html?plan=starter" class="btn btn-ghost">Start free trial</a>
@@ -90,20 +109,20 @@
         <article class="plan featured">
           <div class="plan-badge">Most popular</div>
           <div>
-            <div class="plan-name">Growth</div>
+            <div class="plan-name">Pro</div>
             <div class="plan-price">
-              <span class="amt">₹<span class="price" data-monthly="2999" data-annual="2399">2,999</span></span>
+              <span class="amt">₹<span class="price" data-monthly="2499" data-annual="1999">2,499</span></span>
               <span class="per">/mo · billed monthly</span>
             </div>
-            <p class="plan-desc">For scaling D2C and B2B teams who need automation, segmentation and reporting.</p>
+            <p class="plan-desc">For scaling D2C &amp; B2B teams who need analytics and more numbers.</p>
           </div>
           <ul>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 10 agents</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> No-code automation builder</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited broadcasts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 30 agent seats</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 3 connected numbers</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 20 automation flows</li>
             <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Real-time analytics + ROI</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Public REST API + webhooks</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Priority chat support, 2h</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Segmentation &amp; A/B testing</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Priority chat support, 2h SLA</li>
           </ul>
           <a href="signup.html?plan=growth" class="btn btn-green">Start free trial</a>
         </article>
@@ -114,13 +133,14 @@
             <div class="plan-price">
               <span class="amt">Custom</span>
             </div>
-            <p class="plan-desc">For 50+ agent teams, regulated industries, and businesses that need a name to call.</p>
+            <p class="plan-desc">For large teams that need API access, unlimited automation and SLAs.</p>
           </div>
           <ul>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited agents &amp; numbers</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited agent seats</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 10 connected numbers</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited automation flows</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> REST API + webhooks</li>
             <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> SSO, audit log, role policies</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Data residency &amp; signed DPA</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 99.99% uptime SLA</li>
             <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Dedicated success manager</li>
           </ul>
           <a href="contact.html?topic=scale" class="btn btn-ghost">Talk to sales</a>
@@ -168,37 +188,42 @@
       <div class="compare-wrap">
       <table class="compare">
         <thead>
-          <tr><th></th><th class="center">Starter</th><th class="center featured-col">Growth</th><th class="center">Scale</th></tr>
+          <tr><th></th><th class="center">Free</th><th class="center">Basic</th><th class="center featured-col">Pro</th><th class="center">Scale</th></tr>
         </thead>
         <tbody>
-          <tr class="group-row"><td colspan="4">Inbox &amp; team</td></tr>
-          <tr><td class="feat">Agent seats</td><td class="center">2</td><td class="center featured-col">10</td><td class="center">Unlimited</td></tr>
-          <tr><td class="feat">Connected numbers</td><td class="center">1</td><td class="center featured-col">3</td><td class="center">Unlimited</td></tr>
-          <tr><td class="feat">Contacts</td><td class="center">Unlimited</td><td class="center featured-col">Unlimited</td><td class="center">Unlimited</td></tr>
-          <tr><td class="feat">Assign, mention, snooze</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
-          <tr><td class="feat">Internal notes</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
-          <tr><td class="feat">Canned responses</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr class="group-row"><td colspan="5">Inbox &amp; team</td></tr>
+          <tr><td class="feat">Agent seats</td><td class="center">1</td><td class="center">20</td><td class="center featured-col">30</td><td class="center">Unlimited</td></tr>
+          <tr><td class="feat">Connected numbers</td><td class="center">1</td><td class="center">1</td><td class="center featured-col">3</td><td class="center">10</td></tr>
+          <tr><td class="feat">Contacts</td><td class="center">Unlimited</td><td class="center">Unlimited</td><td class="center featured-col">Unlimited</td><td class="center">Unlimited</td></tr>
+          <tr><td class="feat">Assign, mention, snooze</td><td class="center check">✓</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Internal notes</td><td class="center check">✓</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Canned responses</td><td class="center check">✓</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Roles &amp; permissions</td><td class="center dash">—</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
 
-          <tr class="group-row"><td colspan="4">Campaigns &amp; templates</td></tr>
-          <tr><td class="feat">Template messages</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
-          <tr><td class="feat">Broadcasts / month</td><td class="center">10</td><td class="center featured-col">Unlimited</td><td class="center">Unlimited</td></tr>
-          <tr><td class="feat">Segmentation</td><td class="center dash">—</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
-          <tr><td class="feat">A/B testing</td><td class="center dash">—</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr class="group-row"><td colspan="5">Campaigns &amp; templates</td></tr>
+          <tr><td class="feat">Message templates</td><td class="center">5</td><td class="center">Unlimited</td><td class="center featured-col">Unlimited</td><td class="center">Unlimited</td></tr>
+          <tr><td class="feat">Broadcast campaigns</td><td class="center check">✓</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Segmentation</td><td class="center dash">—</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">A/B testing</td><td class="center dash">—</td><td class="center dash">—</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
 
-          <tr class="group-row"><td colspan="4">Automation &amp; API</td></tr>
-          <tr><td class="feat">No-code flow builder</td><td class="center dash">—</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
-          <tr><td class="feat">REST API + webhooks</td><td class="center dash">—</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
-          <tr><td class="feat">Rate limit (msg/sec)</td><td class="center">—</td><td class="center featured-col">80</td><td class="center">Custom</td></tr>
+          <tr class="group-row"><td colspan="5">Automation &amp; analytics</td></tr>
+          <tr><td class="feat">Automation flows</td><td class="center dash">—</td><td class="center">10</td><td class="center featured-col">20</td><td class="center">Unlimited</td></tr>
+          <tr><td class="feat">No-code flow builder</td><td class="center dash">—</td><td class="center check">✓</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Real-time analytics + ROI</td><td class="center dash">—</td><td class="center dash">—</td><td class="center featured-col check">✓</td><td class="center check">✓</td></tr>
 
-          <tr class="group-row"><td colspan="4">Security &amp; compliance</td></tr>
-          <tr><td class="feat">SSO (SAML / OIDC)</td><td class="center dash">—</td><td class="center featured-col dash">—</td><td class="center check">✓</td></tr>
-          <tr><td class="feat">Audit log</td><td class="center dash">—</td><td class="center featured-col">30 days</td><td class="center">2 years</td></tr>
-          <tr><td class="feat">Signed DPA + data residency</td><td class="center dash">—</td><td class="center featured-col dash">—</td><td class="center check">✓</td></tr>
+          <tr class="group-row"><td colspan="5">Developer &amp; API</td></tr>
+          <tr><td class="feat">REST API + webhooks</td><td class="center dash">—</td><td class="center dash">—</td><td class="center featured-col dash">—</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Rate limit (msg/sec)</td><td class="center">—</td><td class="center">—</td><td class="center featured-col">—</td><td class="center">Custom</td></tr>
 
-          <tr class="group-row"><td colspan="4">Support</td></tr>
-          <tr><td class="feat">Channel</td><td class="center">Email</td><td class="center featured-col">Email + chat</td><td class="center">Slack + phone</td></tr>
-          <tr><td class="feat">First-reply SLA</td><td class="center">24h</td><td class="center featured-col">2h</td><td class="center">15 min</td></tr>
-          <tr><td class="feat">Onboarding</td><td class="center">Self-serve</td><td class="center featured-col">Guided</td><td class="center">Dedicated CSM</td></tr>
+          <tr class="group-row"><td colspan="5">Security &amp; compliance</td></tr>
+          <tr><td class="feat">SSO (SAML / OIDC)</td><td class="center dash">—</td><td class="center dash">—</td><td class="center featured-col dash">—</td><td class="center check">✓</td></tr>
+          <tr><td class="feat">Audit log</td><td class="center dash">—</td><td class="center dash">—</td><td class="center featured-col">30 days</td><td class="center">2 years</td></tr>
+          <tr><td class="feat">Signed DPA + data residency</td><td class="center dash">—</td><td class="center dash">—</td><td class="center featured-col dash">—</td><td class="center check">✓</td></tr>
+
+          <tr class="group-row"><td colspan="5">Support</td></tr>
+          <tr><td class="feat">Channel</td><td class="center">Community</td><td class="center">Email</td><td class="center featured-col">Email + chat</td><td class="center">Slack + phone</td></tr>
+          <tr><td class="feat">First-reply SLA</td><td class="center">Best-effort</td><td class="center">24h</td><td class="center featured-col">2h</td><td class="center">15 min</td></tr>
+          <tr><td class="feat">Onboarding</td><td class="center">Self-serve</td><td class="center">Self-serve</td><td class="center featured-col">Guided</td><td class="center">Dedicated CSM</td></tr>
         </tbody>
       </table>
       </div>
