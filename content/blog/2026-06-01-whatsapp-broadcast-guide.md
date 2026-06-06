@@ -1,14 +1,17 @@
 ---
-title: "How to send a WhatsApp broadcast that actually gets read"
-description: "A practical guide to planning, writing and sending WhatsApp broadcast campaigns on the WhatsApp Business API — without getting your number flagged."
+title: How to send a WhatsApp broadcast that actually gets read
+description: A practical guide to planning, writing and sending WhatsApp
+  broadcast campaigns on the WhatsApp Business API — without getting your number
+  flagged.
 date: 2026-06-01
-author: "BulkMessageSender Team"
-category: "Broadcasts"
+author: BulkMessageSender Team
+category: Broadcasts
 cover: green
 draft: false
 ---
-
 WhatsApp broadcasts are the highest-engagement channel most Indian businesses have — open rates routinely beat email by 5–10×. But a careless blast can get your number rate-limited or your quality rating dropped. Here's how to do it right.
+
+![image.png](blob:https:/app.pagescms.org/7e80c72e-d6bb-4e30-8266-d80d24d9c933)
 
 ## 1. Start from an opted-in list
 
@@ -31,3 +34,4 @@ Personalise the first line with the contact's name and a specific reason for the
 Ramp volume gradually on a new number. Watch your delivery and read rates, and pause if quality dips. BulkMessageSender shows these live so you can react before Meta does.
 
 > Ready to try it? [Start free](https://weflux.in/register) and send your first broadcast in minutes.
+
