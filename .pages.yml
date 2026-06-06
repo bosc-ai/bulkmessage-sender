@@ -1,0 +1,58 @@
+# Pages CMS configuration — https://pagescms.org
+# Connect this repo at https://app.pagescms.org and edit content visually.
+# Publishing here commits Markdown to /content; Vercel rebuilds the site.
+
+media:
+  input: assets/uploads
+  output: /assets/uploads
+
+content:
+  - name: blog
+    label: Blog
+    type: collection
+    path: content/blog
+    filename: '{fields.date}-{primary}.md'
+    view:
+      fields: [title, category, date, author]
+    fields: &postFields
+      - { name: title, label: Title, type: string, required: true }
+      - { name: description, label: Summary (used for SEO + card), type: text, required: true }
+      - { name: date, label: Date, type: date, required: true, options: { format: yyyy-MM-dd } }
+      - { name: author, label: Author, type: string }
+      - { name: category, label: Category / tag, type: string }
+      - { name: readTime, label: Read time (optional, e.g. "6 min read"), type: string }
+      - name: cover
+        label: Card cover colour
+        type: select
+        default: green
+        options:
+          values: [green, dark, cream]
+      - { name: draft, label: Draft (hide from site), type: boolean, default: false }
+      - { name: body, label: Body, type: rich-text }
+
+  - name: articles
+    label: Articles
+    type: collection
+    path: content/articles
+    filename: '{fields.date}-{primary}.md'
+    view:
+      fields: [title, category, date, author]
+    fields: *postFields
+
+  - name: help
+    label: Help Center
+    type: collection
+    path: content/help
+    filename: '{fields.date}-{primary}.md'
+    view:
+      fields: [title, category, date, author]
+    fields: *postFields
+
+  - name: resources
+    label: Resources
+    type: collection
+    path: content/resources
+    filename: '{fields.date}-{primary}.md'
+    view:
+      fields: [title, category, date, author]
+    fields: *postFields

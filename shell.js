@@ -6,16 +6,16 @@
   'use strict';
 
   const navLinks = [
-    { href: 'features.html',   label: 'Features',  key: 'features' },
-    { href: 'pricing.html',    label: 'Pricing',   key: 'pricing' },
-    { href: 'use-cases.html',  label: 'Use cases', key: 'use-cases' },
-    { href: 'customers.html',  label: 'Customers', key: 'customers' },
-    { href: 'blog.html',       label: 'Blog',      key: 'blog' },
-    { href: 'docs.html',       label: 'Docs',      key: 'docs' },
+    { href: '/features.html',   label: 'Features',  key: 'features' },
+    { href: '/pricing.html',    label: 'Pricing',   key: 'pricing' },
+    { href: '/use-cases.html',  label: 'Use cases', key: 'use-cases' },
+    { href: '/customers.html',  label: 'Customers', key: 'customers' },
+    { href: '/blog.html',       label: 'Blog',      key: 'blog' },
+    { href: '/docs.html',       label: 'Docs',      key: 'docs' },
   ];
 
   const activeKey = (document.body.dataset.page || '').toLowerCase();
-  const logoSrc = 'assets/wachat-logo.png';
+  const logoSrc = '/assets/wachat-logo.png';
 
   // ---- NAV ----
   const navHost = document.getElementById('wc-nav');
@@ -24,7 +24,7 @@
       <a class="skip" href="#main">Skip to content</a>
       <header class="nav" id="wc-nav-el">
         <div class="container-wide nav-inner">
-          <a class="brand" href="index.html" aria-label="BulkMessageSender home">
+          <a class="brand" href="/index.html" aria-label="BulkMessageSender home">
             <span class="brand-mark" aria-hidden="true">
               <img src="${logoSrc}" alt="" width="36" height="36">
             </span>
@@ -86,7 +86,7 @@
         <div class="container">
           <div class="footer-top">
             <div class="footer-brand">
-              <a class="brand" href="index.html">
+              <a class="brand" href="/index.html">
                 <span class="brand-mark" aria-hidden="true">
                   <img src="${logoSrc}" alt="" width="32" height="32">
                 </span>
@@ -98,41 +98,43 @@
             <div class="footer-col">
               <h5>Product</h5>
               <ul>
-                <li><a href="features.html">Features</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-                <li><a href="integrations.html">Integrations</a></li>
-                <li><a href="changelog.html">Changelog</a></li>
-                <li><a href="status.html">Status</a></li>
+                <li><a href="/features.html">Features</a></li>
+                <li><a href="/pricing.html">Pricing</a></li>
+                <li><a href="/integrations.html">Integrations</a></li>
+                <li><a href="/changelog.html">Changelog</a></li>
+                <li><a href="/status.html">Status</a></li>
               </ul>
             </div>
             <div class="footer-col">
               <h5>Solutions</h5>
               <ul>
-                <li><a href="use-cases.html#d2c">D2C &amp; e-commerce</a></li>
-                <li><a href="use-cases.html#education">Education</a></li>
-                <li><a href="use-cases.html#finance">Financial services</a></li>
-                <li><a href="use-cases.html#healthcare">Healthcare</a></li>
-                <li><a href="use-cases.html#logistics">Logistics &amp; travel</a></li>
+                <li><a href="/use-cases.html#d2c">D2C &amp; e-commerce</a></li>
+                <li><a href="/use-cases.html#education">Education</a></li>
+                <li><a href="/use-cases.html#finance">Financial services</a></li>
+                <li><a href="/use-cases.html#healthcare">Healthcare</a></li>
+                <li><a href="/use-cases.html#logistics">Logistics &amp; travel</a></li>
               </ul>
             </div>
             <div class="footer-col">
               <h5>Resources</h5>
               <ul>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="docs.html">Docs</a></li>
-                <li><a href="help.html">Help Center</a></li>
-                <li><a href="migration.html">Migration guide</a></li>
-                <li><a href="contact.html">Contact sales</a></li>
+                <li><a href="/blog.html">Blog</a></li>
+                <li><a href="/articles.html">Articles</a></li>
+                <li><a href="/help.html">Help Center</a></li>
+                <li><a href="/resources.html">Resources</a></li>
+                <li><a href="/docs.html">Docs</a></li>
+                <li><a href="/migration.html">Migration guide</a></li>
+                <li><a href="/contact.html">Contact sales</a></li>
               </ul>
             </div>
             <div class="footer-col">
               <h5>Legal</h5>
               <ul>
-                <li><a href="privacy.html">Privacy</a></li>
-                <li><a href="terms.html">Terms</a></li>
-                <li><a href="data-deletion.html">Data deletion</a></li>
-                <li><a href="cookies.html">Cookies</a></li>
-                <li><a href="security.html">Security</a></li>
+                <li><a href="/privacy.html">Privacy</a></li>
+                <li><a href="/terms.html">Terms</a></li>
+                <li><a href="/data-deletion.html">Data deletion</a></li>
+                <li><a href="/cookies.html">Cookies</a></li>
+                <li><a href="/security.html">Security</a></li>
               </ul>
             </div>
           </div>
