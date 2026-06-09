@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weflux vs Other WhatsApp Platforms | Weflux</title>
+  <meta name="description" content="Why businesses switch to Weflux. Honest feature and pricing comparison.">
+  <link rel="icon" href="assets/wachat-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Premium Comparison Page Styling using strict theme variables */
+    .comparison-page {
+      background: radial-gradient(circle at top right, rgba(37, 211, 102, 0.04), transparent 500px),
+                  radial-gradient(circle at bottom left, rgba(37, 211, 102, 0.04), transparent 500px),
+                  var(--paper);
+    }
+    
+    .hero-custom { padding: 60px 0 40px; text-align: center; }
+    .hero-custom h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+      color: var(--ink);
+    }
+
+    /* Responsive Table Wrapper */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+      border-radius: 16px;
+      background: #fff;
+      border: 1px solid var(--line);
+      margin-top: 40px;
+    }
+    .table-responsive::-webkit-scrollbar { height: 8px; }
+    .table-responsive::-webkit-scrollbar-track { background: var(--paper-2); border-radius: 8px; }
+    .table-responsive::-webkit-scrollbar-thumb { background: rgba(37, 211, 102, 0.3); border-radius: 8px; }
+    .vs-tbl { width: 100%; min-width: 700px; border-collapse: collapse; margin: 0; font-size: 14px; }
+    .vs-tbl th, .vs-tbl td { padding: 18px 24px; border-bottom: 1px solid var(--line); text-align: center; }
+    .vs-tbl th { background: var(--paper-2); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.05em; color: var(--muted); }
+    .vs-tbl th:first-child { text-align: left; }
+    .vs-tbl tr:last-child td { border-bottom: none; }
+    .vs-tbl tr:hover td { background: rgba(37, 211, 102, 0.02); }
+    .vs-tbl td:first-child { font-weight: 500; color: var(--ink); background: var(--paper-2); text-align: left; }
+    .vs-tbl th.ours { background: var(--green-tint); color: var(--green-deep); border-bottom-color: rgba(37,211,102,.4); }
+    .vs-tbl td.ours { background: rgba(37, 211, 102, 0.04); font-weight: 600; color: var(--ink); }
+    .vc { color: var(--green-deep); font-weight: 700; }
+    .vx { color: var(--red); }
+    .brand-lbl { font-family: var(--font-mono); font-size: 10px; font-weight: 500; opacity: .7; display: block; margin-top: 2px; }
+
+    /* Upgraded Feature Grid */
+    .feature-showcase { display: grid; grid-template-columns: 1fr; gap: 32px; margin-top: 60px; }
+    @media (min-width: 768px) { .feature-showcase { grid-template-columns: repeat(3, 1fr); } }
+    .feature-card-glass {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 40px 32px;
+      transition: all 0.4s var(--ease);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .feature-card-glass:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(37, 211, 102, 0.08);
+      border-color: rgba(37, 211, 102, 0.4);
+    }
+    .feature-card-glass::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--green), var(--teal));
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .feature-card-glass:hover::before { opacity: 1; }
+    .icon-wrapper {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: var(--green-tint); color: var(--green-deep);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+    }
+    .feature-card-glass h3 { font-size: 1.4rem; margin-bottom: 16px; letter-spacing: -0.01em; color: var(--ink); }
+    .feature-card-glass p { color: var(--muted); line-height: 1.7; flex-grow: 1; }
+
+    /* Premium Pricing Card */
+    .pricing-grid-custom { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: stretch; margin-top: 50px; }
+    @media (min-width: 900px) { .pricing-grid-custom { grid-template-columns: repeat(3, 1fr); } }
+    .plan-custom { 
+      display: flex; flex-direction: column; height: 100%; 
+      background: #fff; border: 1px solid var(--line); border-radius: 18px; 
+      padding: 26px 24px; gap: 16px; transition: transform .25s var(--ease), box-shadow .25s var(--ease); 
+    }
+    .plan-custom:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .plan-custom .btn { margin-top: auto; width: 100%; }
+    .plan-custom ul { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-direction: column; gap: 12px; }
+    .plan-custom ul li { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14.5px; }
+    .plan-custom ul li svg { color: var(--ink); flex-shrink: 0; }
+    
+    .plan-custom.premium-card {
+      background: var(--ink); color: #fff;
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      box-shadow: 0 20px 40px rgba(37, 211, 102, 0.2);
+      position: relative;
+    }
+    @media (min-width: 900px) { .plan-custom.premium-card { transform: scale(1.05); z-index: 2; } }
+    .plan-custom.premium-card .plan-name, .plan-custom.premium-card .plan-price .amt { color: #fff; }
+    .plan-custom.premium-card .plan-desc, .plan-custom.premium-card .plan-price .mo { color: var(--muted-2); }
+    .plan-custom.premium-card ul li { color: var(--paper-2); }
+    .plan-custom.premium-card ul li svg { color: var(--green); }
+    
+    .badge-pro {
+      background: var(--green); color: #07371C; font-size: 0.75rem; padding: 4px 10px;
+      border-radius: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;
+      vertical-align: middle;
+    }
+    .btn-premium { background: var(--green); color: #07371C !important; border: none; font-weight: 600; display: flex; align-items: center; justify-content: center; height: 44px; border-radius: var(--radius-btn); }
+    .btn-premium:hover { background: var(--green-2); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,211,102,0.3); }
+  </style>
+</head>
+<body data-page="comparison" class="comparison-page">
+  <div id="wc-nav"></div>
+
+  <main id="main" class="page">
+    
+    <!-- Custom Adjusted Hero Section -->
+    <section class="hero-custom">
+      <div class="container">
+        <div class="crumb" style="margin-bottom: 24px; justify-content: center;">
+          <a href="index.html">Home</a> <span class="sep">/</span> <span>Compare</span>
+        </div>
+        <div class="hero-eyebrow" style="margin-bottom: 24px;">
+          <div class="pulse"></div> Not Another Engagement Platform
+        </div>
+        <h1 style="max-width: 900px; margin: 0 auto 24px;">Weflux vs <span class="accent">The Industry</span></h1>
+        <p class="lede" style="margin: 0 auto 32px;">Most WhatsApp providers started as messaging platforms and gradually expanded into complex engagement suites. Weflux focuses on one thing: making operations simple, scalable, and affordable.</p>
+        <div class="hero-cta" style="justify-content: center;">
+          <a href="https://weflux.in/register" class="btn btn-green">Start free →</a>
+          <a href="#compare-table" class="btn btn-ghost">See comparison</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section id="compare-table" style="padding-top: 40px; padding-bottom: 80px;">
+      <div class="container">
+        <div class="section-head" style="text-align:center;margin:0 auto 0;">
+          <span class="eyebrow"><span class="dot"></span> Feature Comparison</span>
+          <h2 style="margin:14px 0 16px;">How we stack up.</h2>
+          <p class="lede" style="margin:0 auto;">An honest breakdown of why growing teams switch to Weflux.</p>
+        </div>
+
+        <div class="table-responsive">
+          <table class="vs-tbl">
+            <thead>
+              <tr>
+                <th>Capability</th>
+                <th class="ours">Weflux <span class="brand-lbl">weflux.in</span></th>
+                <th>Typical Platform</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>WhatsApp-first platform</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Usually multi-channel</td></tr>
+              <tr><td>Shared Team Inbox</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Yes</td></tr>
+              <tr><td>Broadcast Campaigns</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Yes</td></tr>
+              <tr><td>Bulk Contact Import</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Yes</td></tr>
+              <tr><td>Lead Stages</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Limited / Varies</span></td></tr>
+              <tr><td>Internal Notes</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Not always available</span></td></tr>
+              <tr><td>Tags Management</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Yes</td></tr>
+              <tr><td>Bulk Tag Assignment</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Limited</span></td></tr>
+              <tr><td>Canned Responses</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Yes</td></tr>
+              <tr><td>Bulk Canned Responses</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Rare</span></td></tr>
+              <tr><td>Lead Assignment Rules</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Enterprise Only</span></td></tr>
+              <tr><td>Custom Attributes</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Limited</span></td></tr>
+              <tr><td>Automation Flows</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Yes</td></tr>
+              <tr><td>JSON Workflow Import</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Rare</span></td></tr>
+              <tr><td>Message Scheduling</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Limited</span></td></tr>
+              <tr><td>Template Scheduling</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Yes</td></tr>
+              <tr><td>Multi-Agent Collaboration</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Yes</td></tr>
+              <tr><td>Team Member Management</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Yes</td></tr>
+              <tr><td>Real-Time Analytics</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Higher plans only</td></tr>
+              <tr><td>ROI Tracking</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Usually premium</span></td></tr>
+              <tr><td>A/B Testing</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Limited</span></td></tr>
+              <tr><td>Request New Features</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Rare</span></td></tr>
+              <tr><td>Custom Development</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Rare</span></td></tr>
+              <tr><td>API & Webhooks</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Yes</td></tr>
+              <tr><td>Meta Direct Billing</td><td class="ours"><span class="vc">✓ Yes</span></td><td>Depends on provider</td></tr>
+              <tr><td>Zero Markup Philosophy</td><td class="ours"><span class="vc">✓ Yes</span></td><td><span class="vx">Varies</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Differentiation Section -->
+    <section style="padding-top: 40px; padding-bottom: 80px;">
+      <div class="container">
+        <div class="section-head" style="text-align:center;margin:0 auto 0;">
+          <span class="eyebrow"><span class="dot"></span> Differentiation</span>
+          <h2 style="margin:14px 0 16px;">What makes Weflux different?</h2>
+          <p class="lede" style="margin:0 auto;">We designed Weflux to adapt to your business, not the other way around.</p>
+        </div>
+        
+        <div class="feature-showcase">
+          <article class="feature-card-glass">
+            <div class="icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m22 11-3 3-2-2"/></svg>
+            </div>
+            <h3>Internal Notes & Pipeline</h3>
+            <p>Add private notes to leads to store context without the customer ever knowing. Track every lead through custom CRM stages like New, Qualified, Proposal Sent, Won, or Lost.</p>
+          </article>
+
+          <article class="feature-card-glass">
+            <div class="icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
+            </div>
+            <h3>Rule-Based Assignment</h3>
+            <p>Automatically assign leads based on region, campaign, source, or team to reduce manual work. Add custom attributes like Budget, Property Type, or Student Course effortlessly.</p>
+          </article>
+
+          <article class="feature-card-glass">
+            <div class="icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M6 8.5v3a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3M12 13.5v2"/></svg>
+            </div>
+            <h3>JSON Automations</h3>
+            <p>Manage thousands of contacts with bulk imports. Skip the complicated visual flow builder—upload your JSON, generate workflows, and publish instantly with complete version control.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing" style="padding-top: 100px; padding-bottom: 100px;">
+      <div class="container">
+        <div class="pricing-head">
+          <span class="eyebrow"><span class="dot"></span> Built to Scale</span>
+          <h2>Transparent Pricing.</h2>
+          <p class="lede" style="margin: 0 auto">Many competitors either don't offer a permanent free plan or restrict usage significantly. With Weflux, our pricing is transparent with zero markup on Meta charges.</p>
+        </div>
+        
+        <div class="pricing-grid-custom">
+          <!-- Free Plan -->
+          <article class="plan-custom">
+            <div class="plan-head">
+              <h3 class="plan-name">Free Plan</h3>
+              <div class="plan-price">
+                <span class="amt">₹0</span><span class="mo">/mo</span>
+              </div>
+              <p class="plan-desc">Forever free. Perfect for testing WhatsApp API before scaling.</p>
+            </div>
+            <ul>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 1 Agent Seat</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited Contacts</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 1 Number & Shared Inbox</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 5 Templates</li>
+            </ul>
+            <a href="https://weflux.in/register" class="btn btn-ghost">Start free</a>
+          </article>
+          
+          <!-- Basic Plan (Featured) -->
+          <article class="plan-custom premium-card">
+            <div class="plan-head">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <h3 class="plan-name">Basic Plan</h3>
+                <span class="badge-pro">Most popular</span>
+              </div>
+              <div class="plan-price">
+                <span class="amt">₹999</span><span class="mo">/mo</span>
+              </div>
+              <p class="plan-desc">For many small businesses, this covers the entire operation.</p>
+            </div>
+            <ul>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 20 Agent Seats</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited Contacts & Templates</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Broadcast Campaigns</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 10 Automation Flows</li>
+            </ul>
+            <a href="https://weflux.in/register" class="btn btn-premium">Start free trial</a>
+          </article>
+
+          <!-- Pro Plan -->
+          <article class="plan-custom">
+            <div class="plan-head">
+              <h3 class="plan-name">Pro Plan</h3>
+              <div class="plan-price">
+                <span class="amt">₹2,499</span><span class="mo">/mo</span>
+              </div>
+              <p class="plan-desc">Designed for growing sales and support teams.</p>
+            </div>
+            <ul>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 30 Agents & 3 Numbers</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 20 Automation Flows</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Real-Time Analytics & ROI Tracking</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Segmentation & A/B Testing</li>
+            </ul>
+            <a href="https://weflux.in/register" class="btn btn-ghost">Start free trial</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+      <div class="container final-cta-inner">
+        <h2>Ready to switch to Weflux?</h2>
+        <div class="sub">Experience WhatsApp operations made simple and affordable.</div>
+        <a href="https://weflux.in/register" class="btn btn-white">Start free trial →</a>
+      </div>
+    </section>
+  </main>
+
+  <div id="wc-footer"></div>
+  <script src="shell.js"></script>
+</body>
+</html>

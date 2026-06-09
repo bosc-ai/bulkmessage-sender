@@ -11,7 +11,8 @@
     { href: '/use-cases.html',  label: 'Use cases', key: 'use-cases' },
     { href: '/customers.html',  label: 'Customers', key: 'customers' },
     { href: '/blog.html',       label: 'Blog',      key: 'blog' },
-    { href: '/docs.html',       label: 'Docs',      key: 'docs' },
+    { href: '/comparison.html', label: 'Compare',   key: 'comparison' },
+
   ];
 
   const activeKey = (document.body.dataset.page || '').toLowerCase();
@@ -98,7 +99,11 @@
             <div class="footer-col">
               <h5>Product</h5>
               <ul>
-                <li><a href="/features.html">Features</a></li>
+                <li><a href="/features.html">All Features</a></li>
+                <li><a href="/broadcasts.html">Broadcasts</a></li>
+                <li><a href="/shared-inbox.html">Shared Inbox</a></li>
+                <li><a href="/automations.html">Automations</a></li>
+                <li><a href="/whatsapp-crm.html">WhatsApp CRM</a></li>
                 <li><a href="/pricing.html">Pricing</a></li>
                 <li><a href="/changelog.html">Changelog</a></li>
                 <li><a href="/status.html">Status</a></li>
@@ -121,7 +126,7 @@
                 <li><a href="/articles.html">Articles</a></li>
                 <li><a href="/help.html">Help Center</a></li>
                 <li><a href="/resources.html">Resources</a></li>
-                <li><a href="/docs.html">Docs</a></li>
+
                 <li><a href="/contact.html">Contact sales</a></li>
               </ul>
             </div>
