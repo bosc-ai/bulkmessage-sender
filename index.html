@@ -1016,7 +1016,6 @@
       <p class="vs-foot">Pricing checked May 2025 from public plan pages. Subject to change.</p>
       <div class="vs-cta">
         <a href="https://weflux.in/register" class="btn btn-green">Start free trial →</a>
-        <a href="migration.html" class="btn btn-ghost">See migration details</a>
       </div>
     </div>
   </section>
@@ -1228,19 +1227,6 @@
 
   </main>
 
-  <!-- Sticky migration card -->
-  <div class="mig-card" id="migCard" role="complementary" aria-label="Free migration offer">
-    <button class="mig-close" id="migClose" aria-label="Dismiss">×</button>
-    <div class="mig-body">
-      <div class="mig-ic">🚚</div>
-      <div>
-        <div class="mig-ttl">Switching from Wati or Interakt?</div>
-        <div class="mig-sub">Free done-for-you migration. We handle everything.</div>
-      </div>
-    </div>
-    <a href="migration.html" class="btn btn-green" style="width:100%;justify-content:center;font-size:13.5px;padding:11px 0;">Free migration →</a>
-  </div>
-
   <div id="wc-footer"></div>
   <script src="shell.js"></script>
   <script src="script.js"></script>
@@ -1358,30 +1344,6 @@
 
     /* init */
     renderConv('priya');
-
-    /* ===== Sticky migration card ===== */
-    (function() {
-      if (sessionStorage.getItem('migDismissed')) return;
-      const card = document.getElementById('migCard');
-      const close = document.getElementById('migClose');
-      let shown = false;
-
-      function showCard() {
-        if (shown) return;
-        shown = true;
-        card.classList.add('show');
-      }
-
-      setTimeout(showCard, 5000);
-      window.addEventListener('scroll', function onScroll() {
-        if (window.scrollY > 600) { showCard(); window.removeEventListener('scroll', onScroll); }
-      }, { passive: true });
-
-      close.addEventListener('click', () => {
-        card.classList.remove('show');
-        sessionStorage.setItem('migDismissed', '1');
-      });
-    })();
   </script>
 </body>
 </html>

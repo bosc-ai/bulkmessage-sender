@@ -100,7 +100,6 @@
               <ul>
                 <li><a href="/features.html">Features</a></li>
                 <li><a href="/pricing.html">Pricing</a></li>
-                <li><a href="/integrations.html">Integrations</a></li>
                 <li><a href="/changelog.html">Changelog</a></li>
                 <li><a href="/status.html">Status</a></li>
               </ul>
@@ -123,7 +122,6 @@
                 <li><a href="/help.html">Help Center</a></li>
                 <li><a href="/resources.html">Resources</a></li>
                 <li><a href="/docs.html">Docs</a></li>
-                <li><a href="/migration.html">Migration guide</a></li>
                 <li><a href="/contact.html">Contact sales</a></li>
               </ul>
             </div>

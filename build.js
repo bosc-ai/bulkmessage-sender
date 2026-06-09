@@ -239,8 +239,6 @@ function writeSitemap(collectionUrls) {
     ["pricing.html", "0.9", "weekly"],
     ["use-cases.html", "0.8", "monthly"],
     ["platform.html", "0.8", "monthly"],
-    ["integrations.html", "0.7", "monthly"],
-    ["migration.html", "0.7", "monthly"],
     ["customers.html", "0.7", "monthly"],
     ["about.html", "0.6", "monthly"],
     ["contact.html", "0.7", "monthly"],
