@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Content Studio — BulkMessageSender</title>
+<link rel="icon" href="/assets/wachat-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#1faa59;--green-d:#0F8A53;--accent:#25D366;--ink:#10211a;--muted:#5b6b63;
+    --line:#e3e8e4;--bg:#f6f8f6;--card:#fff;--danger:#d33;--radius:12px;
+    --font:'Geist',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:var(--green-d)}
+  .hidden{display:none!important}
+  .topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:11px 22px}
+  .brand{font-weight:700;display:flex;align-items:center;gap:9px;font-size:15px}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+  .grow{flex:1}
+  .user{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font);font-weight:600;font-size:13.5px;padding:9px 15px;border-radius:9px;cursor:pointer;text-decoration:none}
+  .btn:hover{background:#f4f7f5}
+  .btn.primary{background:var(--green);border-color:var(--green);color:#fff}
+  .btn.primary:hover{background:var(--green-d)}
+  .btn.ghost{background:transparent}
+  .btn.danger{color:var(--danger);border-color:#f3caca}
+  .btn.danger:hover{background:#fdecec}
+  .btn[disabled]{opacity:.5;cursor:not-allowed}
+  /* login */
+  .login{min-height:100vh;display:grid;place-items:center;padding:24px}
+  .login-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:38px;max-width:400px;width:100%;text-align:center;box-shadow:0 12px 40px rgba(16,33,26,.06)}
+  .login-card h1{font-size:21px;margin:14px 0 6px}
+  .login-card p.sub{color:var(--muted);font-size:14px;margin:0 0 24px}
+  .login-card input{width:100%;font-size:15px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;margin-bottom:11px;font-family:var(--font);outline:none}
+  .login-card input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(31,170,89,.12)}
+  .login-card button{width:100%;background:var(--green);color:#fff;border:none;padding:12px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px}
+  .login-card button:hover{background:var(--green-d)}
+  .login-err{color:var(--danger);font-size:13px;margin-top:12px;min-height:18px}
+  .login-note{font-size:12px;color:var(--muted);margin-top:18px;line-height:1.5}
+  /* layout */
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 22px 90px}
+  .page-head{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+  .page-head h2{font-size:19px;margin:0}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+  .tabs button{border:1px solid var(--line);background:#fff;padding:7px 13px;border-radius:20px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+  .tabs button.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  .list{display:flex;flex-direction:column;gap:8px}
+  .post-row{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px 16px;cursor:pointer;transition:.12s}
+  .post-row:hover{border-color:var(--green);box-shadow:0 2px 10px rgba(16,33,26,.05)}
+  .post-row .t{font-weight:600;flex:1;min-width:0}
+  .post-row .t small{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px;font-family:var(--mono)}
+  .pill{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap}
+  .pill.draft{background:#fff3d6;color:#9a6b00}
+  .pill.live{background:#e6f8ee;color:var(--green-d)}
+  .empty{text-align:center;color:var(--muted);padding:50px 0}
+  .spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--line);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:-3px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .edit-grid{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:start}
+  @media(max-width:900px){.edit-grid{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+  .card .hd{padding:11px 15px;border-bottom:1px solid var(--line);font-weight:600;font-size:12px;letter-spacing:.03em;color:var(--muted);text-transform:uppercase}
+  .pad{padding:15px}
+  label{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 5px}
+  input[type=text],input[type=date],select,textarea{width:100%;font-family:var(--font);font-size:14px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px 11px;outline:none}
+  input:focus,select:focus,textarea:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(31,170,89,.12)}
+  .field{margin-bottom:13px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .filename{font-family:var(--mono);font-size:11.5px;color:var(--green-d);background:#eefaf2;border:1px solid #d4efdf;border-radius:7px;padding:7px 9px;word-break:break-all}
+  .check{display:flex;align-items:center;gap:8px}
+  .check input{width:auto}
+  .invalid{border-color:var(--danger)!important}
+  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:11px 18px;border-radius:10px;font-size:13.5px;opacity:0;pointer-events:none;transition:.25s;z-index:80;max-width:90vw}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .toast.err{background:var(--danger)}
+  .editor-title{font-size:22px;font-weight:700;border:none;width:100%;padding:6px 0;margin-bottom:6px;outline:none;font-family:var(--font)}
+  .editor-title::placeholder{color:#b3bdb6}
+  .tox-tinymce{border-radius:10px!important;border-color:var(--line)!important}
+</style>
+</head>
+<body>
+
+<!-- ===== LOGIN ===== -->
+<div class="login" id="loginView">
+  <div class="login-card">
+    <div class="brand" style="justify-content:center;font-size:17px"><span class="dot"></span> BulkMessageSender</div>
+    <h1>Content Studio</h1>
+    <p class="sub">Sign in to write and publish.</p>
+    <form id="loginForm" autocomplete="on">
+      <input id="liUser" name="username" placeholder="Username" autocomplete="username" required>
+      <input id="liPass" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+      <button type="submit" id="liBtn">Sign in</button>
+      <div class="login-err" id="loginErr"></div>
+    </form>
+    <p class="login-note">Trouble signing in? Ask your admin for your username and password.</p>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="appView" class="hidden">
+  <div class="topbar">
+    <div class="brand"><span class="dot"></span> Content Studio</div>
+    <div class="grow"></div>
+    <div class="user" id="userBox"></div>
+    <button class="btn ghost" id="btnLogout">Sign out</button>
+  </div>
+
+  <!-- LIST -->
+  <div class="wrap" id="listView">
+    <div class="page-head">
+      <h2>Posts</h2>
+      <div class="grow"></div>
+      <button class="btn primary" id="btnNew">+ New post</button>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div class="list" id="postList"><div class="empty"><span class="spinner"></span> Loading…</div></div>
+  </div>
+
+  <!-- EDIT -->
+  <div class="wrap hidden" id="editView">
+    <div class="page-head">
+      <button class="btn ghost" id="btnBack">← All posts</button>
+      <div class="grow"></div>
+      <button class="btn danger hidden" id="btnDelete">Delete</button>
+      <button class="btn" id="btnDraft">Save as draft</button>
+      <button class="btn primary" id="btnPublish">Publish →</button>
+    </div>
+    <div class="edit-grid">
+      <div>
+        <div class="card"><div class="pad">
+          <input class="editor-title" id="fTitle" placeholder="Post title…">
+          <textarea id="tinyBody"></textarea>
+        </div></div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="hd">Settings</div>
+          <div class="pad">
+            <div class="field">
+              <label for="fCollection">Section</label>
+              <select id="fCollection">
+                <option value="blog">Blog</option>
+                <option value="articles">Articles</option>
+                <option value="case-studies">Case Studies</option>
+                <option value="help">Help Center</option>
+                <option value="resources">Resources</option>
+              </select>
+            </div>
+            <div class="field"><label for="fDesc">Summary (SEO + card) *</label><textarea id="fDesc" rows="3" placeholder="One or two sentences."></textarea></div>
+            <div class="row2">
+              <div class="field"><label for="fDate">Date *</label><input type="date" id="fDate"></div>
+              <div class="field"><label for="fCover">Cover</label><select id="fCover"><option value="green">green</option><option value="dark">dark</option><option value="cream">cream</option></select></div>
+            </div>
+            <div class="field"><label for="fAuthor">Author</label><input type="text" id="fAuthor" value="BulkMessageSender Team"></div>
+            <div class="row2">
+              <div class="field"><label for="fCategory">Category</label><input type="text" id="fCategory" placeholder="Broadcasts"></div>
+              <div class="field"><label for="fReadTime">Read time</label><input type="text" id="fReadTime" placeholder="auto"></div>
+            </div>
+            <div class="field"><label for="fSlug">URL slug</label><input type="text" id="fSlug" placeholder="auto from title"></div>
+            <div class="field check"><input type="checkbox" id="fDraft"><label for="fDraft" style="margin:0">Draft (hidden from site)</label></div>
+          </div>
+        </div>
+        <div class="card"><div class="hd">Where it goes</div><div class="pad">
+          <label>File</label><div class="filename" id="pathPreview">content/blog/…</div>
+          <label style="margin-top:11px">Live URL</label><div class="filename" id="urlPreview">…</div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tinymce@7/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+//=================== config ===================
+const SITE='https://bulkmessagesender.com';
+const COLLECTIONS=[
+  {dir:'blog',label:'Blog'},{dir:'articles',label:'Articles'},
+  {dir:'case-studies',label:'Case Studies'},{dir:'help',label:'Help Center'},{dir:'resources',label:'Resources'},
+];
+const dirLabel=(d)=>(COLLECTIONS.find(c=>c.dir===d)||{}).label||d;
+
+//=================== state + helpers ===================
+const $=s=>document.querySelector(s);
+let USER=null, editing=null, tiny=null, tinyReady=false, pendingBody=null, filterDir='all', slugTouched=false;
+
+function toast(m,err){const t=$('#toast');t.textContent=m;t.className='toast show'+(err?' err':'');clearTimeout(t._h);t._h=setTimeout(()=>t.className='toast',3400);}
+function slugify(s){return String(s||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,80);}
+function todayISO(){return new Date().toISOString().slice(0,10);}
+function yamlQ(s){return '"'+String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"')+'"';}
+
+async function api(path,opts={}){
+  const r=await fetch(path,Object.assign({credentials:'same-origin',headers:{'Content-Type':'application/json'}},opts));
+  let j={}; try{j=await r.json();}catch{}
+  if(r.status===401){USER=null;showLogin('Your session expired — please sign in again.');throw new Error('Not signed in');}
+  if(!r.ok)throw new Error(j.error||('HTTP '+r.status));
+  return j;
+}
+
+//=================== auth ===================
+async function init(){
+  try{const j=await api('/api/login');if(j.user){USER=j.user;showApp();return;}}catch(e){}
+  showLogin();
+}
+function showLogin(msg){$('#appView').classList.add('hidden');$('#loginView').classList.remove('hidden');$('#loginErr').textContent=msg||'';}
+function showApp(){
+  $('#loginView').classList.add('hidden');$('#appView').classList.remove('hidden');
+  $('#userBox').innerHTML=`Signed in as <b style="color:var(--ink)">${USER}</b>`;
+  buildTabs();gotoList();
+}
+$('#loginForm').addEventListener('submit',async e=>{
+  e.preventDefault();$('#loginErr').textContent='';$('#liBtn').disabled=true;$('#liBtn').textContent='Signing in…';
+  try{
+    const j=await api('/api/login',{method:'POST',body:JSON.stringify({username:$('#liUser').value,password:$('#liPass').value})});
+    USER=j.user;showApp();
+  }catch(err){$('#loginErr').textContent=err.message;}
+  $('#liBtn').disabled=false;$('#liBtn').textContent='Sign in';
+});
+$('#btnLogout').onclick=async()=>{try{await api('/api/login',{method:'DELETE'});}catch(e){}USER=null;showLogin('Signed out.');};
+
+//=================== list ===================
+function buildTabs(){
+  const tabs=[{dir:'all',label:'All'},...COLLECTIONS];
+  $('#tabs').innerHTML=tabs.map(t=>`<button data-dir="${t.dir}" class="${t.dir===filterDir?'on':''}">${t.label}</button>`).join('');
+  $('#tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{filterDir=b.dataset.dir;buildTabs();renderList();});
+}
+let ALL_POSTS=[];
+function gotoList(){$('#editView').classList.add('hidden');$('#listView').classList.remove('hidden');loadList();}
+async function loadList(){
+  const host=$('#postList');host.innerHTML='<div class="empty"><span class="spinner"></span> Loading…</div>';
+  try{const j=await api('/api/posts');ALL_POSTS=j.posts||[];renderList();}
+  catch(e){host.innerHTML='<div class="empty">Could not load posts: '+e.message+'</div>';}
+}
+function renderList(){
+  const host=$('#postList');
+  let posts=filterDir==='all'?ALL_POSTS:ALL_POSTS.filter(p=>p.dir===filterDir);
+  if(!posts.length){host.innerHTML='<div class="empty">No posts yet. Click <b>+ New post</b> to write your first one.</div>';return;}
+  host.innerHTML=posts.map((p,i)=>`
+    <div class="post-row" data-i="${i}">
+      <div class="t">${escapeHtml(p.title)}<small>${dirLabel(p.dir)} · ${p.date}</small></div>
+      <span class="pill ${p.draft?'draft':'live'}">${p.draft?'Draft':'Live'}</span>
+    </div>`).join('');
+  host.querySelectorAll('.post-row').forEach(r=>r.onclick=()=>openPost(posts[+r.dataset.i]));
+}
+function escapeHtml(s){return String(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+//=================== frontmatter ===================
+function parseFM(raw){
+  const m=raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+  if(!m)return{data:{},body:raw};
+  let data={};try{data=jsyaml.load(m[1])||{};}catch(e){data={};}
+  return{data,body:m[2]};
+}
+
+//=================== open / new ===================
+function openPost(p){
+  showEditor();setBusy(true,'Loading…');
+  api('/api/posts?path='+encodeURIComponent(p.path)).then(j=>{
+    const {data:fm,body}=parseFM(j.content);
+    editing={path:p.path,sha:j.sha};
+    $('#btnDelete').classList.remove('hidden');
+    fillForm(p.dir,fm);
+    setBody((fm.format==='html'?body:marked.parse(body||'')).trim());
+    setBusy(false);
+  }).catch(e=>{toast('Could not open: '+e.message,true);setBusy(false);gotoList();});
+}
+function newPost(){
+  showEditor();editing=null;$('#btnDelete').classList.add('hidden');
+  fillForm('blog',{author:'BulkMessageSender Team',cover:'green',date:todayISO()});
+  setBody('');
+}
+function fillForm(dir,fm){
+  $('#fCollection').value=dir||'blog';
+  $('#fTitle').value=fm.title||'';
+  $('#fDesc').value=fm.description||'';
+  $('#fDate').value=fm.date?String(fm.date).slice(0,10):todayISO();
+  $('#fAuthor').value=fm.author||'BulkMessageSender Team';
+  $('#fCategory').value=fm.category||'';
+  $('#fReadTime').value=fm.readTime||'';
+  $('#fCover').value=fm.cover||'green';
+  $('#fDraft').checked=!!fm.draft;
+  $('#fSlug').value=editing?((editing.path.match(/\d{4}-\d{2}-\d{2}-(.+)\.md$/)||[])[1]||''):slugify(fm.title||'');
+  slugTouched=!!editing;
+  refresh();
+}
+function showEditor(){$('#listView').classList.add('hidden');$('#editView').classList.remove('hidden');window.scrollTo(0,0);}
+
+//=================== TinyMCE ===================
+function setBody(html){if(tinyReady&&tiny)tiny.setContent(html);else pendingBody=html;}
+function getBody(){return tinyReady&&tiny?tiny.getContent():(pendingBody||'');}
+
+tinymce.init({
+  selector:'#tinyBody',license_key:'gpl',height:560,menubar:false,branding:false,promotion:false,
+  plugins:'advlist autolink lists link image table code fullscreen media charmap searchreplace visualblocks wordcount autoresize',
+  toolbar:'undo redo | blocks | bold italic underline strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table blockquote | removeformat | code fullscreen',
+  block_formats:'Paragraph=p; Heading 2=h2; Heading 3=h3; Heading 4=h4; Quote=blockquote; Preformatted=pre',
+  autoresize_bottom_margin:24,min_height:420,
+  content_style:`body{font-family:'Geist',-apple-system,sans-serif;font-size:16px;line-height:1.7;color:#16241d;max-width:720px;margin:18px auto;padding:0 12px}
+    h2{font-size:1.4em;margin:1.1em 0 .4em}h3{font-size:1.18em}a{color:#0F8A53}
+    img{max-width:100%;height:auto;border-radius:10px}
+    blockquote{border-left:3px solid #1faa59;background:#f3faf6;margin:1em 0;padding:.4em 1em;border-radius:0 8px 8px 0}
+    table{border-collapse:collapse;width:100%}table td,table th{border:1px solid #d8e0da;padding:8px 12px}
+    pre{background:#10211a;color:#e7f3ec;padding:14px;border-radius:10px;overflow:auto}`,
+  images_upload_handler:(blobInfo)=>new Promise((resolve,reject)=>{
+    const fn=blobInfo.filename();
+    const name=Date.now().toString(36)+'-'+slugify(fn.replace(/\.[^.]+$/,''))+(fn.match(/\.[^.]+$/)?.[0]||'.png');
+    const fr=new FileReader();
+    fr.onload=async()=>{try{const j=await api('/api/upload',{method:'POST',body:JSON.stringify({name,base64:fr.result.split(',')[1]})});resolve(j.url);}catch(e){reject('Upload failed: '+e.message);}};
+    fr.onerror=()=>reject('Could not read image');
+    fr.readAsDataURL(blobInfo.blob());
+  }),
+  setup:(ed)=>{tiny=ed;ed.on('init',()=>{tinyReady=true;if(pendingBody!=null){ed.setContent(pendingBody);pendingBody=null;}});},
+});
+
+//=================== build file + save ===================
+function meta(){
+  return{
+    collection:$('#fCollection').value,title:$('#fTitle').value.trim(),desc:$('#fDesc').value.trim(),
+    date:$('#fDate').value||todayISO(),author:$('#fAuthor').value.trim(),category:$('#fCategory').value.trim(),
+    readTime:$('#fReadTime').value.trim(),cover:$('#fCover').value,draft:$('#fDraft').checked,
+    slug:($('#fSlug').value.trim()||slugify($('#fTitle').value))||'untitled',
+  };
+}
+function buildFile(m){
+  let fm='---\n';
+  fm+='title: '+yamlQ(m.title||'Untitled')+'\n';
+  fm+='description: '+yamlQ(m.desc)+'\n';
+  fm+='date: '+m.date+'\n';
+  if(m.author)fm+='author: '+yamlQ(m.author)+'\n';
+  if(m.category)fm+='category: '+yamlQ(m.category)+'\n';
+  if(m.readTime)fm+='readTime: '+yamlQ(m.readTime)+'\n';
+  fm+='cover: '+m.cover+'\n';
+  fm+='draft: '+(m.draft?'true':'false')+'\n';
+  fm+='format: html\n---\n\n';
+  return fm+getBody().trim()+'\n';
+}
+function pathFor(m){return 'content/'+m.collection+'/'+m.date+'-'+m.slug+'.md';}
+function liveUrl(m){return SITE+'/'+m.collection+'/'+m.slug+'.html';}
+function refresh(){const m=meta();$('#pathPreview').textContent=pathFor(m);$('#urlPreview').textContent=liveUrl(m);}
+
+async function save(asDraft){
+  document.querySelectorAll('.invalid').forEach(e=>e.classList.remove('invalid'));
+  const m=meta();if(asDraft)m.draft=true;
+  const errs=[];if(!m.title)errs.push('#fTitle');if(!m.desc)errs.push('#fDesc');if(!m.date)errs.push('#fDate');
+  if(errs.length){errs.forEach(s=>$(s).classList.add('invalid'));toast('Fill in the required fields',true);return;}
+  if(!getBody().trim()){toast('Write some content first',true);return;}
+  const newPath=pathFor(m);
+  setBusy(true,'Publishing…');
+  try{
+    const j=await api('/api/save',{method:'POST',body:JSON.stringify({
+      path:newPath,content:buildFile(m),
+      sha:editing&&editing.path===newPath?editing.sha:undefined,
+      oldPath:editing&&editing.path!==newPath?editing.path:undefined,
+      title:m.title,draft:m.draft,
+    })});
+    editing={path:newPath,sha:j.sha};
+    $('#btnDelete').classList.remove('hidden');$('#fDraft').checked=m.draft;
+    setBusy(false);toast(m.draft?'Saved as draft ✓':'Published ✓ — site rebuilding');
+  }catch(e){setBusy(false);toast('Failed: '+e.message,true);}
+}
+$('#btnPublish').onclick=()=>save(false);
+$('#btnDraft').onclick=()=>save(true);
+$('#btnNew').onclick=newPost;
+$('#btnBack').onclick=gotoList;
+$('#btnDelete').onclick=async()=>{
+  if(!editing)return;if(!confirm('Delete this post permanently?\n'+editing.path))return;
+  setBusy(true,'Deleting…');
+  try{await api('/api/delete',{method:'POST',body:JSON.stringify({path:editing.path,sha:editing.sha})});setBusy(false);toast('Deleted');gotoList();}
+  catch(e){setBusy(false);toast('Delete failed: '+e.message,true);}
+};
+function setBusy(on,label){
+  ['btnPublish','btnDraft','btnDelete'].forEach(id=>{const b=$('#'+id);if(b)b.disabled=on;});
+  $('#btnPublish').textContent=on?(label||'Working…'):'Publish →';
+}
+
+//=================== slug + live refresh ===================
+$('#fSlug').addEventListener('input',()=>slugTouched=true);
+$('#fTitle').addEventListener('input',()=>{if(!slugTouched)$('#fSlug').value=slugify($('#fTitle').value);refresh();});
+['fCollection','fDate','fSlug'].forEach(id=>$('#'+id).addEventListener('input',refresh));
+
+init();
+</script>
+</body>
+</html>
