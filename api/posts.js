@@ -35,17 +35,18 @@ export default async function handler(req, res) {
         items.filter((f) => f.name.endsWith(".md")).map(async (f) => {
           const m = f.name.match(/^(\d{4}-\d{2}-\d{2})-(.+)\.md$/);
           let title = (m ? m[2] : f.name.replace(/\.md$/, "")).replace(/-/g, " ");
-          let draft = false;
+          let draft = false, category = "", image = "";
           try {
-            const rr = await gh(`/repos/${OWNER}/${REPO}/contents/${f.path}?ref=${BRANCH}`);
-            if (rr.ok) {
-              const fm = frontmatter(b64decode((await rr.json()).content));
-              const t = fm.match(/^title:\s*(.+)$/m);
-              if (t) title = unquote(t[1]);
-              draft = /^draft:\s*true\b/m.test(fm);
-            }
+            const raw = b64decode((await gh(`/repos/${OWNER}/${REPO}/contents/${f.path}?ref=${BRANCH}`).then((x) => x.json())).content);
+            const fmm = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+            const fm = fmm ? fmm[1] : raw, body = fmm ? fmm[2] : "";
+            const t = fm.match(/^title:\s*(.+)$/m); if (t) title = unquote(t[1]);
+            draft = /^draft:\s*true\b/m.test(fm);
+            const c = fm.match(/^category:\s*(.+)$/m); if (c) category = unquote(c[1]);
+            const im = body.match(/<img[^>]+src="([^"]+)"/i) || body.match(/!\[[^\]]*\]\(([^)\s]+)/);
+            if (im && !im[1].startsWith("blob:")) image = im[1];
           } catch {}
-          posts.push({ dir, path: f.path, date: m ? m[1] : "", slug: m ? m[2] : f.name.replace(/\.md$/, ""), title, draft });
+          posts.push({ dir, path: f.path, sha: f.sha, date: m ? m[1] : "", slug: m ? m[2] : f.name.replace(/\.md$/, ""), title, draft, category, image });
         })
       );
     })
