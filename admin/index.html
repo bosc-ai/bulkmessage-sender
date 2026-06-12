@@ -82,6 +82,32 @@
   .editor-title{font-size:22px;font-weight:700;border:none;width:100%;padding:6px 0;margin-bottom:6px;outline:none;font-family:var(--font)}
   .editor-title::placeholder{color:#b3bdb6}
   .tox-tinymce{border-radius:10px!important;border-color:var(--line)!important}
+  /* password show/hide */
+  .pw-wrap{position:relative;margin-bottom:11px}
+  .pw-wrap input{margin-bottom:0;padding-right:44px}
+  .login-card .pw-toggle{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:auto;margin:0;padding:6px 8px;background:none;border:none;color:var(--muted);font-size:17px;line-height:1;cursor:pointer}
+  .login-card .pw-toggle:hover{color:var(--ink);background:none}
+  /* sticky action bar on the editor so Publish stays reachable */
+  #editView .page-head{position:sticky;top:53px;z-index:20;background:var(--bg);padding:12px 0;margin-bottom:14px;border-bottom:1px solid var(--line)}
+  /* responsive */
+  @media(max-width:820px){
+    .topbar{padding:10px 14px;gap:8px}
+    .wrap{padding:18px 14px 90px}
+    .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:6px}
+    .tabs button{flex:0 0 auto}
+    #listView .page-head{flex-wrap:wrap}
+    #listView .page-head h2{flex:1 1 auto}
+  }
+  @media(max-width:600px){
+    .user{display:none}
+    .editor-title{font-size:19px}
+    .pad{padding:13px}
+    #editView .page-head{flex-wrap:wrap;gap:8px;top:51px}
+    #editView .page-head .grow{display:none}
+    #editView .page-head #btnBack{flex:1 1 100%;justify-content:flex-start}
+    #editView .page-head .btn:not(#btnBack){flex:1 1 auto}
+    .row2{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
@@ -94,7 +120,10 @@
     <p class="sub">Sign in to write and publish.</p>
     <form id="loginForm" autocomplete="on">
       <input id="liUser" name="username" placeholder="Username" autocomplete="username" required>
-      <input id="liPass" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+      <div class="pw-wrap">
+        <input id="liPass" name="password" type="password" placeholder="Password" autocomplete="current-password" required>
+        <button type="button" class="pw-toggle" id="liPassToggle" aria-label="Show password" title="Show password">👁</button>
+      </div>
       <button type="submit" id="liBtn">Sign in</button>
       <div class="login-err" id="loginErr"></div>
     </form>
@@ -191,7 +220,24 @@ const dirLabel=(d)=>(COLLECTIONS.find(c=>c.dir===d)||{}).label||d;
 
 //=================== state + helpers ===================
 const $=s=>document.querySelector(s);
-let USER=null, editing=null, tiny=null, tinyReady=false, pendingBody=null, filterDir='all', slugTouched=false;
+let USER=null, editing=null, tiny=null, tinyReady=false, pendingBody=null, filterDir='all', slugTouched=false, formDirty=false;
+
+// unsaved-changes guard
+function isDirty(){return formDirty || (tinyReady && tiny && tiny.isDirty());}
+function confirmLeave(){return !isDirty() || confirm('You have unsaved changes. Leave without saving?');}
+function clearDirty(){formDirty=false; if(tinyReady&&tiny) tiny.setDirty(false);}
+function toDateStr(d){
+  if(!d) return todayISO();
+  if(d instanceof Date && !isNaN(d)) return d.toISOString().slice(0,10);
+  const s=String(d); return /^\d{4}-\d{2}-\d{2}/.test(s) ? s.slice(0,10) : todayISO();
+}
+
+// show / hide password on the login screen
+$('#liPassToggle').onclick=()=>{
+  const p=$('#liPass'), t=$('#liPassToggle'), show=p.type==='password';
+  p.type=show?'text':'password'; t.textContent=show?'🙈':'👁';
+  t.setAttribute('aria-label',show?'Hide password':'Show password'); p.focus();
+};
 
 function toast(m,err){const t=$('#toast');t.textContent=m;t.className='toast show'+(err?' err':'');clearTimeout(t._h);t._h=setTimeout(()=>t.className='toast',3400);}
 function slugify(s){return String(s||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,80);}
@@ -225,7 +271,7 @@ $('#loginForm').addEventListener('submit',async e=>{
   }catch(err){$('#loginErr').textContent=err.message;}
   $('#liBtn').disabled=false;$('#liBtn').textContent='Sign in';
 });
-$('#btnLogout').onclick=async()=>{try{await api('/api/login',{method:'DELETE'});}catch(e){}USER=null;showLogin('Signed out.');};
+$('#btnLogout').onclick=async()=>{if(!confirmLeave())return;try{await api('/api/login',{method:'DELETE'});}catch(e){}USER=null;showLogin('Signed out.');};
 
 //=================== list ===================
 function buildTabs(){
@@ -282,7 +328,7 @@ function fillForm(dir,fm){
   $('#fCollection').value=dir||'blog';
   $('#fTitle').value=fm.title||'';
   $('#fDesc').value=fm.description||'';
-  $('#fDate').value=fm.date?String(fm.date).slice(0,10):todayISO();
+  $('#fDate').value=toDateStr(fm.date);
   $('#fAuthor').value=fm.author||'BulkMessageSender Team';
   $('#fCategory').value=fm.category||'';
   $('#fReadTime').value=fm.readTime||'';
@@ -290,6 +336,7 @@ function fillForm(dir,fm){
   $('#fDraft').checked=!!fm.draft;
   $('#fSlug').value=editing?((editing.path.match(/\d{4}-\d{2}-\d{2}-(.+)\.md$/)||[])[1]||''):slugify(fm.title||'');
   slugTouched=!!editing;
+  formDirty=false;
   refresh();
 }
 function showEditor(){$('#listView').classList.add('hidden');$('#editView').classList.remove('hidden');window.scrollTo(0,0);}
@@ -364,13 +411,14 @@ async function save(asDraft){
     })});
     editing={path:newPath,sha:j.sha};
     $('#btnDelete').classList.remove('hidden');$('#fDraft').checked=m.draft;
+    clearDirty();
     setBusy(false);toast(m.draft?'Saved as draft ✓':'Published ✓ — site rebuilding');
   }catch(e){setBusy(false);toast('Failed: '+e.message,true);}
 }
-$('#btnPublish').onclick=()=>save(false);
+$('#btnPublish').onclick=()=>{ if(confirm('Publish this post to the live website now?')) save(false); };
 $('#btnDraft').onclick=()=>save(true);
-$('#btnNew').onclick=newPost;
-$('#btnBack').onclick=gotoList;
+$('#btnNew').onclick=()=>{ if(confirmLeave()) newPost(); };
+$('#btnBack').onclick=()=>{ if(confirmLeave()) gotoList(); };
 $('#btnDelete').onclick=async()=>{
   if(!editing)return;if(!confirm('Delete this post permanently?\n'+editing.path))return;
   setBusy(true,'Deleting…');
@@ -386,6 +434,12 @@ function setBusy(on,label){
 $('#fSlug').addEventListener('input',()=>slugTouched=true);
 $('#fTitle').addEventListener('input',()=>{if(!slugTouched)$('#fSlug').value=slugify($('#fTitle').value);refresh();});
 ['fCollection','fDate','fSlug'].forEach(id=>$('#'+id).addEventListener('input',refresh));
+// mark the post dirty when any field changes, so we can warn before losing edits
+['fTitle','fDesc','fDate','fAuthor','fCategory','fReadTime','fCover','fDraft','fSlug','fCollection'].forEach(id=>{
+  const el=$('#'+id); el.addEventListener('input',()=>formDirty=true); el.addEventListener('change',()=>formDirty=true);
+});
+// warn before closing / refreshing the tab with unsaved work
+window.addEventListener('beforeunload',e=>{ if(isDirty()){ e.preventDefault(); e.returnValue=''; } });
 
 init();
 </script>

@@ -66,6 +66,16 @@ function renderBody(data, content) {
   return data.format === "html" ? content : marked.parse(content);
 }
 
+// First image in a post's rendered HTML, absolute-ised — used for og:image.
+const DEFAULT_OG = `${SITE}/assets/wachat-logo.png`;
+function firstImg(html) {
+  const m = /<img[^>]+src="([^"]+)"/i.exec(html || "");
+  if (!m) return "";
+  let s = m[1];
+  if (s.startsWith("/")) s = SITE + s;
+  return /^https?:\/\//.test(s) ? s : "";
+}
+
 const HEAD_LINKS = `
   <link rel="icon" href="/assets/wachat-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,12 +86,14 @@ const HEAD_LINKS = `
 // ---------- Templates ----------
 function postPage(col, post) {
   const url = `${SITE}/${col.dir}/${post.slug}.html`;
+  const ogImage = post.image || firstImg(post.html) || DEFAULT_OG;
   const metaLine = [post.author, post.dateLabel, post.readTime].filter(Boolean).join(" · ");
   const jsonld = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description || "",
+    image: ogImage,
     datePublished: post.date || undefined,
     dateModified: post.date || undefined,
     author: { "@type": post.author ? "Person" : "Organization", name: post.author || "BulkMessageSender" },
@@ -106,7 +118,11 @@ function postPage(col, post) {
   <meta property="og:type" content="article">
   <meta property="og:url" content="${url}">
   <meta property="og:site_name" content="BulkMessageSender">
-  <meta name="twitter:card" content="summary_large_image">${HEAD_LINKS}
+  <meta property="og:image" content="${esc(ogImage)}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${esc(ogImage)}">
+  ${post.date ? `<meta property="article:published_time" content="${post.date}">` : ""}
+  ${post.author ? `<meta property="article:author" content="${esc(post.author)}">` : ""}${HEAD_LINKS}
   <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 </head>
 <body data-page="${col.key}">
@@ -160,7 +176,9 @@ ${posts
   <meta property="og:type" content="website">
   <meta property="og:url" content="${url}">
   <meta property="og:site_name" content="BulkMessageSender">
-  <meta name="twitter:card" content="summary_large_image">${HEAD_LINKS}
+  <meta property="og:image" content="${DEFAULT_OG}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${DEFAULT_OG}">${HEAD_LINKS}
 </head>
 <body data-page="${col.key}">
   <div id="wc-nav"></div>
@@ -212,6 +230,7 @@ function loadPosts(col) {
         category: data.category || "",
         cover: { dark: "v2", cream: "v3", v2: "v2", v3: "v3" }[data.cover] || "",
         readTime: data.readTime || readTime(content),
+        image: data.image || "",
         html: renderBody(data, content),
       };
     })
