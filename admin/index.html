@@ -108,6 +108,29 @@
     #editView .page-head .btn:not(#btnBack){flex:1 1 auto}
     .row2{grid-template-columns:1fr}
   }
+  /* ---- custom confirm dialog ---- */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(16,33,26,.42);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:90;opacity:0;pointer-events:none;transition:opacity .18s}
+  .modal-backdrop.show{opacity:1;pointer-events:auto}
+  .modal-card{background:#fff;border-radius:18px;width:100%;max-width:400px;padding:26px 24px 20px;text-align:center;box-shadow:0 24px 70px rgba(16,33,26,.28);transform:translateY(12px) scale(.97);transition:transform .2s cubic-bezier(.2,.9,.3,1)}
+  .modal-backdrop.show .modal-card{transform:none}
+  .modal-icon{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;background:var(--green-tint);color:var(--green-d)}
+  .modal-card.danger .modal-icon{background:#fdecec;color:var(--danger)}
+  .modal-card h3{margin:0 0 7px;font-size:17px;font-weight:700}
+  .modal-card p{margin:0 0 20px;color:var(--muted);font-size:14px;line-height:1.55}
+  .modal-actions{display:flex;gap:10px}
+  .modal-actions .btn{flex:1;padding:11px;font-size:14px}
+  .btn.danger-solid{background:var(--danger);border-color:var(--danger);color:#fff}
+  .btn.danger-solid:hover{background:#b91c1c}
+  /* ---- polish ---- */
+  .topbar{box-shadow:0 1px 0 rgba(16,33,26,.03),0 2px 12px rgba(16,33,26,.03)}
+  .card{box-shadow:0 1px 2px rgba(16,33,26,.04)}
+  .login-logo{width:50px;height:50px;border-radius:13px;display:block;margin:0 auto 12px;box-shadow:0 4px 14px rgba(16,33,26,.12)}
+  .post-row{gap:12px}
+  .post-row .sec-dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+  .post-row .rt{font-weight:600;font-size:14.5px;line-height:1.3}
+  .post-row .rm{color:var(--muted);font-size:12px;margin-top:3px;font-family:var(--mono)}
+  .post-row:hover{transform:translateY(-1px)}
+  .tabs button{transition:.12s}
 </style>
 </head>
 <body>
@@ -115,7 +138,7 @@
 <!-- ===== LOGIN ===== -->
 <div class="login" id="loginView">
   <div class="login-card">
-    <div class="brand" style="justify-content:center;font-size:17px"><span class="dot"></span> BulkMessageSender</div>
+    <img class="login-logo" src="/assets/wachat-logo.png" alt="BulkMessageSender">
     <h1>Content Studio</h1>
     <p class="sub">Sign in to write and publish.</p>
     <form id="loginForm" autocomplete="on">
@@ -204,6 +227,19 @@
   </div>
 </div>
 
+<!-- custom confirm dialog -->
+<div class="modal-backdrop" id="modal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-icon" id="modalIcon">?</div>
+    <h3 id="modalTitle"></h3>
+    <p id="modalMsg"></p>
+    <div class="modal-actions">
+      <button class="btn ghost" id="modalCancel">Cancel</button>
+      <button class="btn primary" id="modalOk">OK</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
@@ -217,14 +253,35 @@ const COLLECTIONS=[
   {dir:'case-studies',label:'Case Studies'},{dir:'help',label:'Help Center'},{dir:'resources',label:'Resources'},
 ];
 const dirLabel=(d)=>(COLLECTIONS.find(c=>c.dir===d)||{}).label||d;
+const SECTION_COLOR={blog:'#1faa59',articles:'#3b82f6','case-studies':'#8b5cf6',help:'#f59e0b',resources:'#ec4899'};
 
 //=================== state + helpers ===================
 const $=s=>document.querySelector(s);
 let USER=null, editing=null, tiny=null, tinyReady=false, pendingBody=null, filterDir='all', slugTouched=false, formDirty=false;
 
+// custom confirm dialog -> Promise<boolean>
+function dialog(opts){
+  opts=opts||{};
+  return new Promise(resolve=>{
+    const bg=$('#modal'), card=bg.querySelector('.modal-card'), ok=$('#modalOk'), cancel=$('#modalCancel');
+    $('#modalTitle').textContent=opts.title||'Are you sure?';
+    $('#modalMsg').textContent=opts.message||'';
+    ok.textContent=opts.okText||'OK'; cancel.textContent=opts.cancelText||'Cancel';
+    $('#modalIcon').textContent=opts.danger?'⚠':'?';
+    card.classList.toggle('danger',!!opts.danger);
+    ok.className='btn '+(opts.danger?'danger-solid':'primary');
+    bg.classList.add('show'); setTimeout(()=>ok.focus(),40);
+    function done(v){bg.classList.remove('show');cleanup();resolve(v);}
+    const onOk=()=>done(true), onCancel=()=>done(false);
+    const onKey=e=>{if(e.key==='Escape'){e.preventDefault();onCancel();}else if(e.key==='Enter'){e.preventDefault();onOk();}};
+    const onBg=e=>{if(e.target===bg)onCancel();};
+    function cleanup(){ok.removeEventListener('click',onOk);cancel.removeEventListener('click',onCancel);document.removeEventListener('keydown',onKey,true);bg.removeEventListener('mousedown',onBg);}
+    ok.addEventListener('click',onOk);cancel.addEventListener('click',onCancel);document.addEventListener('keydown',onKey,true);bg.addEventListener('mousedown',onBg);
+  });
+}
 // unsaved-changes guard
 function isDirty(){return formDirty || (tinyReady && tiny && tiny.isDirty());}
-function confirmLeave(){return !isDirty() || confirm('You have unsaved changes. Leave without saving?');}
+function confirmLeave(){return !isDirty() || dialog({title:'Discard changes?',message:'You have edits that haven’t been saved. Leave without saving them?',okText:'Discard',cancelText:'Keep editing',danger:true});}
 function clearDirty(){formDirty=false; if(tinyReady&&tiny) tiny.setDirty(false);}
 function toDateStr(d){
   if(!d) return todayISO();
@@ -271,7 +328,7 @@ $('#loginForm').addEventListener('submit',async e=>{
   }catch(err){$('#loginErr').textContent=err.message;}
   $('#liBtn').disabled=false;$('#liBtn').textContent='Sign in';
 });
-$('#btnLogout').onclick=async()=>{if(!confirmLeave())return;try{await api('/api/login',{method:'DELETE'});}catch(e){}USER=null;showLogin('Signed out.');};
+$('#btnLogout').onclick=async()=>{if(!await confirmLeave())return;try{await api('/api/login',{method:'DELETE'});}catch(e){}USER=null;showLogin('Signed out.');};
 
 //=================== list ===================
 function buildTabs(){
@@ -292,7 +349,8 @@ function renderList(){
   if(!posts.length){host.innerHTML='<div class="empty">No posts yet. Click <b>+ New post</b> to write your first one.</div>';return;}
   host.innerHTML=posts.map((p,i)=>`
     <div class="post-row" data-i="${i}">
-      <div class="t">${escapeHtml(p.title)}<small>${dirLabel(p.dir)} · ${p.date}</small></div>
+      <span class="sec-dot" style="background:${SECTION_COLOR[p.dir]||'#9aa7a0'}"></span>
+      <div class="t"><div class="rt">${escapeHtml(p.title)}</div><div class="rm">${dirLabel(p.dir)} · ${p.date}</div></div>
       <span class="pill ${p.draft?'draft':'live'}">${p.draft?'Draft':'Live'}</span>
     </div>`).join('');
   host.querySelectorAll('.post-row').forEach(r=>r.onclick=()=>openPost(posts[+r.dataset.i]));
@@ -415,12 +473,13 @@ async function save(asDraft){
     setBusy(false);toast(m.draft?'Saved as draft ✓':'Published ✓ — site rebuilding');
   }catch(e){setBusy(false);toast('Failed: '+e.message,true);}
 }
-$('#btnPublish').onclick=()=>{ if(confirm('Publish this post to the live website now?')) save(false); };
+$('#btnPublish').onclick=async()=>{ if(await dialog({title:'Publish to your live site?',message:'This publishes the post to bulkmessagesender.com — it’ll be live in about a minute.',okText:'Publish',cancelText:'Not yet'})) save(false); };
 $('#btnDraft').onclick=()=>save(true);
-$('#btnNew').onclick=()=>{ if(confirmLeave()) newPost(); };
-$('#btnBack').onclick=()=>{ if(confirmLeave()) gotoList(); };
+$('#btnNew').onclick=async()=>{ if(await confirmLeave()) newPost(); };
+$('#btnBack').onclick=async()=>{ if(await confirmLeave()) gotoList(); };
 $('#btnDelete').onclick=async()=>{
-  if(!editing)return;if(!confirm('Delete this post permanently?\n'+editing.path))return;
+  if(!editing)return;
+  if(!await dialog({title:'Delete this post?',message:'This permanently removes the post from your site. This can’t be undone.',okText:'Delete',cancelText:'Cancel',danger:true}))return;
   setBusy(true,'Deleting…');
   try{await api('/api/delete',{method:'POST',body:JSON.stringify({path:editing.path,sha:editing.sha})});setBusy(false);toast('Deleted');gotoList();}
   catch(e){setBusy(false);toast('Delete failed: '+e.message,true);}
