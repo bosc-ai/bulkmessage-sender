@@ -27,6 +27,8 @@ const COLLECTIONS = [
     lede: "Guides, playbooks and field notes on WhatsApp marketing, broadcasts and bulk messaging for Indian businesses." },
   { key: "articles",  dir: "articles",  list: "articles.html",  title: "Articles",     eyebrow: "Articles",
     lede: "In-depth articles on the WhatsApp Business API, broadcast strategy and growing with WhatsApp." },
+  { key: "case-studies", dir: "case-studies", list: "case-studies.html", title: "Case Studies", eyebrow: "Case studies",
+    lede: "How Indian businesses grow revenue and retention with WhatsApp broadcasts and the official Business API." },
   { key: "help",      dir: "help",      list: "help.html",      title: "Help Center",  eyebrow: "Help Center",
     lede: "How-to guides and answers for setting up and running BulkMessageSender on the WhatsApp Business API." },
   { key: "resources", dir: "resources", list: "resources.html", title: "Resources",    eyebrow: "Resources",
@@ -38,6 +40,9 @@ const SKIP_COPY = new Set([
   "dist", "content", "node_modules", ".git", ".github", ".claude", ".vscode",
   "build.js", "package.json", "package-lock.json", "vercel.json", ".pages.yml",
   "README.md", ".gitignore", ".DS_Store", "sitemap.xml",
+  "api", "lib", // serverless functions + their shared code — bundled by Vercel, not static
+  "blog-editor.html", "ADMIN-SETUP.md", // local tools/docs — not published to the live site
+
   ...COLLECTIONS.map((c) => c.list), // listing pages are generated
 ]);
 
@@ -51,8 +56,14 @@ function fmtDate(d) {
   return `${dt.getDate()} ${MONTHS[dt.getMonth()]} ${dt.getFullYear()}`;
 }
 function readTime(md) {
-  const words = md.trim().split(/\s+/).filter(Boolean).length;
+  const words = md.replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean).length;
   return `${Math.max(1, Math.round(words / 200))} min read`;
+}
+
+// Body can be HTML (from the /admin dashboard — `format: html` in frontmatter)
+// or Markdown (legacy posts / Pages CMS). Render each faithfully.
+function renderBody(data, content) {
+  return data.format === "html" ? content : marked.parse(content);
 }
 
 const HEAD_LINKS = `
@@ -201,7 +212,7 @@ function loadPosts(col) {
         category: data.category || "",
         cover: { dark: "v2", cream: "v3", v2: "v2", v3: "v3" }[data.cover] || "",
         readTime: data.readTime || readTime(content),
-        html: marked.parse(content),
+        html: renderBody(data, content),
       };
     })
     .filter(Boolean)

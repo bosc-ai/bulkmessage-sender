@@ -124,6 +124,7 @@
               <ul>
                 <li><a href="/blog.html">Blog</a></li>
                 <li><a href="/articles.html">Articles</a></li>
+                <li><a href="/case-studies.html">Case Studies</a></li>
                 <li><a href="/help.html">Help Center</a></li>
                 <li><a href="/resources.html">Resources</a></li>
 

@@ -39,6 +39,15 @@ content:
       fields: [title, category, date, author]
     fields: *postFields
 
+  - name: case-studies
+    label: Case Studies
+    type: collection
+    path: content/case-studies
+    filename: '{fields.date}-{primary}.md'
+    view:
+      fields: [title, category, date, author]
+    fields: *postFields
+
   - name: help
     label: Help Center
     type: collection
