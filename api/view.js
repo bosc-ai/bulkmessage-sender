@@ -6,7 +6,11 @@ export default async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
   const key = String(req.query.slug || "").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 120);
   if (key && kvEnabled()) {
-    try { await kvCmd("/hincrby/views/" + key + "/1"); } catch {}
+    const day = new Date().toISOString().slice(0, 10);
+    try {
+      await kvCmd("/hincrby/views/" + key + "/1");        // per-post total
+      await kvCmd("/hincrby/views_daily/" + day + "/1");  // site-wide daily (for the sparkline)
+    } catch {}
   }
   res.statusCode = 204;
   res.end();
