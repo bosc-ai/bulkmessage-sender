@@ -70,6 +70,22 @@ Paste that as the value of `ADMIN_USERS`. To **add or remove a writer later**, j
 
 ---
 
+## View analytics (optional, free) — show real view counts in the dashboard
+
+The dashboard can show **real per-post view counts** (the "Views" stat card + a Views column).
+This needs a free Redis store to keep the counts. Until it's connected, the dashboard simply
+hides views and shows "This month" instead — nothing breaks.
+
+To turn it on:
+1. Vercel → your project → **Storage** (or **Integrations → Marketplace**) → add **Upstash for Redis** → pick the **Free** plan → connect it to this project. This auto-adds the `KV_REST_API_URL` / `KV_REST_API_TOKEN` (or `UPSTASH_REDIS_REST_*`) env vars.
+2. **Redeploy.**
+
+That's it — each published post page pings `/api/view` on load (counted in Redis), and the dashboard reads the totals via `/api/stats`. Counts are raw page views (no cookies, privacy-friendly).
+
+*Want richer site analytics too (referrers, devices, trends)?* Toggle on **Vercel → Analytics → Web Analytics** (free) — that data lives in Vercel's own dashboard.
+
+---
+
 ## Notes
 - **Security:** the GitHub key and `SESSION_SECRET` live only in Vercel's env (server-side, never sent to browsers). Sessions are signed cookies. The dashboard page is `noindex` and useless without a valid login.
 - **Images** upload to `assets/uploads/` and commit automatically.

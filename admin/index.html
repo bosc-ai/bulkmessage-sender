@@ -268,8 +268,8 @@
         <div class="stats" id="stats"></div>
         <div class="panel">
           <table class="posts">
-            <thead><tr><th>Post</th><th>Category</th><th>Status</th><th>Updated</th><th></th></tr></thead>
-            <tbody id="postRows"><tr><td colspan="5"><div class="empty"><span class="spinner"></span> Loading…</div></td></tr></tbody>
+            <thead id="postHead"></thead>
+            <tbody id="postRows"><tr><td colspan="6"><div class="empty"><span class="spinner"></span> Loading…</div></td></tr></tbody>
           </table>
         </div>
       </div>
@@ -373,6 +373,9 @@ const $=s=>document.querySelector(s);
 let USER=null, editing=null, tiny=null, tinyReady=false, pendingBody=null;
 let filterDir='all', draftsOnly=false, query='', formDirty=false, slugTouched=false;
 let ALL_POSTS=[], menuPost=null;
+let STATS={enabled:false,views:{},total:0};
+function viewsFor(p){return STATS.views[p.dir+'__'+p.slug]||0;}
+function formatNum(n){n=+n||0;return n>=1000?(n/1000).toFixed(1).replace(/\.0$/,'')+'K':String(n);}
 
 function toast(m,err){const t=$('#toast');t.textContent=m;t.className='toast show'+(err?' err':'');clearTimeout(t._h);t._h=setTimeout(()=>t.className='toast',3400);}
 function slugify(s){return String(s||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,80);}
@@ -459,13 +462,16 @@ function renderStats(){
   const I={grid:'<svg viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
     check:'<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>',
     pen:'<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>',
-    cal:'<svg viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>'};
-  $('#stats').innerHTML=card('#1faa59',I.grid,'Total posts',total)+card('#3b82f6',I.check,'Published',pub)+card('#f59e0b',I.pen,'Drafts',dr)+card('#8b5cf6',I.cal,'This month',thisMonth);
+    cal:'<svg viewBox="0 0 24 24" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+    eye:'<svg viewBox="0 0 24 24" stroke="currentColor"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>'};
+  const last=STATS.enabled?card('#8b5cf6',I.eye,'Views (all time)',formatNum(STATS.total)):card('#8b5cf6',I.cal,'This month',thisMonth);
+  $('#stats').innerHTML=card('#1faa59',I.grid,'Total posts',total)+card('#3b82f6',I.check,'Published',pub)+card('#f59e0b',I.pen,'Drafts',dr)+last;
 }
 async function loadList(){
-  $('#postRows').innerHTML='<tr><td colspan="5"><div class="empty"><span class="spinner"></span> Loading…</div></td></tr>';
+  $('#postRows').innerHTML='<tr><td colspan="6"><div class="empty"><span class="spinner"></span> Loading…</div></td></tr>';
   try{const j=await api('/api/posts');ALL_POSTS=j.posts||[];}
-  catch(e){$('#postRows').innerHTML='<tr><td colspan="5"><div class="empty">Could not load posts: '+escapeHtml(e.message)+'</div></td></tr>';return;}
+  catch(e){$('#postRows').innerHTML='<tr><td colspan="6"><div class="empty">Could not load posts: '+escapeHtml(e.message)+'</div></td></tr>';return;}
+  try{STATS=await api('/api/stats');}catch(e){STATS={enabled:false,views:{},total:0};}
   updateNavCounts();buildTabs();renderStats();renderTable();
 }
 function updateNavCounts(){$('#navCountPosts').textContent=ALL_POSTS.length;$('#navCountDrafts').textContent=ALL_POSTS.filter(p=>p.draft).length;}
@@ -482,8 +488,9 @@ function currentPosts(){
 }
 function fmtUpdated(d){if(!d)return '—';const dt=new Date(d);if(isNaN(dt))return d;return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
 function renderTable(){
-  const posts=currentPosts(), host=$('#postRows');
-  if(!posts.length){host.innerHTML='<tr><td colspan="5"><div class="empty">No posts here yet. Click <b>+ New post</b> to write one.</div></td></tr>';return;}
+  const posts=currentPosts(), host=$('#postRows'), v=STATS.enabled;
+  $('#postHead').innerHTML=`<tr><th>Post</th><th>Category</th><th>Status</th>${v?'<th>Views</th>':''}<th>Updated</th><th></th></tr>`;
+  if(!posts.length){host.innerHTML='<tr><td colspan="6"><div class="empty">No posts here yet. Click <b>+ New post</b> to write one.</div></td></tr>';return;}
   host.innerHTML=posts.map((p,i)=>{
     const c=SECTION_COLOR[p.dir]||'#9aa7a0';
     const thumb=p.image?`<img class="thumb" src="${escapeHtml(p.image)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'thumb',style:'background:${c}',textContent:'${escapeHtml((p.title||'?')[0].toUpperCase())}'}))">`
@@ -493,6 +500,7 @@ function renderTable(){
       <td><div class="post-cell">${thumb}<div><div class="pt">${escapeHtml(p.title)}</div><div class="pd">${dirLabel(p.dir)} · ${p.date}</div></div></div></td>
       <td><span class="cat-pill" style="background:${tint(c)};color:${c}">${escapeHtml(cat)}</span></td>
       <td><span class="status ${p.draft?'draft':'published'}"><span class="dot"></span>${p.draft?'Draft':'Published'}</span></td>
+      ${v?`<td class="updated" style="font-weight:600;color:var(--ink)">${formatNum(viewsFor(p))}</td>`:''}
       <td class="updated">${fmtUpdated(p.date)}</td>
       <td style="text-align:right"><button class="row-more" data-i="${i}">⋯</button></td>
     </tr>`;

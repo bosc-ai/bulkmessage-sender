@@ -146,6 +146,7 @@ ${post.html}
   </main>
   <div id="wc-footer"></div>
   <script src="/shell.js"></script>
+  <script>try{fetch('/api/view?slug=${col.dir}__${post.slug}',{method:'POST',keepalive:true}).catch(function(){});}catch(e){}</script>
 </body>
 </html>
 `;
