@@ -166,6 +166,23 @@
   .editor-title{font-size:23px;font-weight:700;border:none;width:100%;padding:6px 0;margin-bottom:6px;outline:none;font-family:var(--font)}
   .editor-title::placeholder{color:#b3bdb6}
   .tox-tinymce{border-radius:10px!important;border-color:var(--line)!important}
+  /* cover upload zone */
+  .cover-zone{border:2px dashed var(--line);border-radius:12px;padding:22px 14px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s;position:relative}
+  .cover-zone:hover,.cover-zone.drag{border-color:var(--green);background:#f3fbf6}
+  .cover-zone .cz-icon{width:34px;height:34px;background:#eef2ef;border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 7px;color:var(--muted)}
+  .cover-zone .cz-lbl{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+  .cover-zone .cz-sub{font-size:11.5px;color:var(--muted)}
+  .cover-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+  .cover-prev{position:relative;border-radius:10px;overflow:hidden;background:#eef2ef;margin-bottom:10px}
+  .cover-prev img{width:100%;max-height:180px;object-fit:cover;display:block}
+  .cover-rm{position:absolute;top:6px;right:6px;background:rgba(16,33,26,.7);color:#fff;border:none;border-radius:6px;width:26px;height:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;line-height:1}
+  .cover-rm:hover{background:rgba(220,53,53,.85)}
+  /* faq editor items */
+  .faq-item-ed{border:1px solid var(--line);border-radius:10px;padding:11px 12px;margin-bottom:9px;position:relative}
+  .faq-item-ed label{font-size:12px;font-weight:600;color:var(--muted);display:block;margin:0 0 4px}
+  .faq-item-ed input,.faq-item-ed textarea{margin-bottom:8px}
+  .faq-rm{position:absolute;top:8px;right:8px;border:none;background:none;color:var(--muted);cursor:pointer;font-size:16px;line-height:1;padding:2px 5px;border-radius:5px}
+  .faq-rm:hover{background:#fdecec;color:var(--danger)}
 
   /* modal + toast */
   .modal-backdrop{position:fixed;inset:0;background:rgba(16,33,26,.42);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:90;opacity:0;pointer-events:none;transition:opacity .18s}
@@ -298,26 +315,65 @@
             <textarea id="tinyBody"></textarea>
           </div></div>
           <div>
+            <!-- Cover Image -->
+            <div class="card" style="margin-bottom:16px">
+              <div class="hd">Cover Image</div>
+              <div class="pad">
+                <div id="coverPrev" class="cover-prev hidden">
+                  <img id="coverImg" src="" alt="">
+                  <button class="cover-rm" id="coverRm" title="Remove image">×</button>
+                </div>
+                <div class="cover-zone" id="coverZone">
+                  <div class="cz-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+                  <div class="cz-lbl">Drop image or click to upload</div>
+                  <div class="cz-sub">JPEG · PNG · WebP · max 10 MB</div>
+                  <input type="file" id="coverFile" accept="image/jpeg,image/png,image/webp">
+                </div>
+                <div class="field" style="margin-top:10px"><label for="fImageAlt">Alt text</label><input type="text" id="fImageAlt" placeholder="Describe the image for accessibility &amp; SEO"></div>
+              </div>
+            </div>
+            <!-- Settings -->
             <div class="card" style="margin-bottom:16px">
               <div class="hd">Settings</div>
               <div class="pad">
                 <div class="field"><label for="fCollection">Section</label>
                   <select id="fCollection"><option value="blog">Blog</option><option value="articles">Articles</option><option value="case-studies">Case Studies</option><option value="help">Help Center</option><option value="resources">Resources</option></select>
                 </div>
-                <div class="field"><label for="fDesc">Summary (SEO + card) *</label><textarea id="fDesc" rows="3" placeholder="One or two sentences."></textarea></div>
                 <div class="row2">
                   <div class="field"><label for="fDate">Date *</label><input type="date" id="fDate"></div>
-                  <div class="field"><label for="fCover">Cover</label><select id="fCover"><option value="green">green</option><option value="dark">dark</option><option value="cream">cream</option></select></div>
+                  <div class="field"><label for="fCover">Card color</label><select id="fCover"><option value="green">green</option><option value="dark">dark</option><option value="cream">cream</option></select></div>
                 </div>
                 <div class="field"><label for="fAuthor">Author</label><input type="text" id="fAuthor" value="BulkMessageSender Team"></div>
                 <div class="row2">
                   <div class="field"><label for="fCategory">Category</label><input type="text" id="fCategory" placeholder="Broadcasts"></div>
+                  <div class="field"><label for="fSubCat">Sub Category</label><input type="text" id="fSubCat" placeholder="Tutorial"></div>
+                </div>
+                <div class="row2">
                   <div class="field"><label for="fReadTime">Read time</label><input type="text" id="fReadTime" placeholder="auto"></div>
+                  <div class="field"><label for="fTags">Tags</label><input type="text" id="fTags" placeholder="tag1, tag2"></div>
                 </div>
                 <div class="field"><label for="fSlug">URL slug</label><input type="text" id="fSlug" placeholder="auto from title"></div>
                 <div class="field check"><input type="checkbox" id="fDraft"><label for="fDraft" style="margin:0">Draft (hidden from site)</label></div>
               </div>
             </div>
+            <!-- SEO & Meta -->
+            <div class="card" style="margin-bottom:16px">
+              <div class="hd">SEO &amp; Meta</div>
+              <div class="pad">
+                <div class="field"><label for="fDesc">Meta Description *</label><textarea id="fDesc" rows="3" placeholder="One or two sentences for Google and card previews."></textarea></div>
+                <div class="field"><label for="fMetaTitle">Meta Title <span style="font-weight:400;color:var(--muted)">(defaults to post title)</span></label><input type="text" id="fMetaTitle" placeholder="Custom title for Google"></div>
+                <div class="field"><label for="fKeywords">Keywords <span style="font-weight:400;color:var(--muted)">(comma-separated)</span></label><input type="text" id="fKeywords" placeholder="whatsapp bulk messaging, broadcast"></div>
+              </div>
+            </div>
+            <!-- FAQs -->
+            <div class="card" style="margin-bottom:16px">
+              <div class="hd">FAQs <span style="font-weight:400;color:var(--muted);font-size:11px;text-transform:none;letter-spacing:0"> — adds FAQ rich results on Google</span></div>
+              <div class="pad">
+                <div id="faqList"></div>
+                <button class="btn" id="addFaq" style="width:100%;justify-content:center;font-size:13px">+ Add FAQ</button>
+              </div>
+            </div>
+            <!-- Where it goes -->
             <div class="card"><div class="hd">Where it goes</div><div class="pad">
               <label>File</label><div class="filename" id="pathPreview">content/blog/…</div>
               <label style="margin-top:11px">Live URL</label><div class="filename" id="urlPreview">…</div>
@@ -383,6 +439,7 @@ let USER=null, editing=null, tiny=null, tinyReady=false, pendingBody=null;
 let filterDir='all', draftsOnly=false, query='', formDirty=false, slugTouched=false;
 let ALL_POSTS=[], menuPost=null;
 let STATS={enabled:false,views:{},total:0};
+let coverImageUrl='', faqs=[];
 function viewsFor(p){return STATS.views[p.dir+'__'+p.slug]||0;}
 function formatNum(n){n=+n||0;return n>=1000?(n/1000).toFixed(1).replace(/\.0$/,'')+'K':String(n);}
 
@@ -592,6 +649,48 @@ function renderSettings(){
   $('#setLogout').onclick=()=>$('#btnLogout').click();
 }
 
+//=================== cover image ===================
+function setCoverUrl(url){
+  coverImageUrl=url||'';
+  const prev=$('#coverPrev'),zone=$('#coverZone');
+  if(coverImageUrl){$('#coverImg').src=coverImageUrl;prev.classList.remove('hidden');zone.classList.add('hidden');}
+  else{prev.classList.add('hidden');zone.classList.remove('hidden');}
+}
+$('#coverRm').onclick=()=>{setCoverUrl('');formDirty=true;};
+(function(){
+  const zone=$('#coverZone');
+  zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag');});
+  zone.addEventListener('dragleave',()=>zone.classList.remove('drag'));
+  zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('drag');const f=e.dataTransfer.files[0];if(f)uploadCoverFile(f);});
+  $('#coverFile').addEventListener('change',e=>{const f=e.target.files[0];if(f)uploadCoverFile(f);e.target.value='';});
+})();
+async function uploadCoverFile(file){
+  if(file.size>10*1024*1024){toast('Image too large (max 10 MB)',true);return;}
+  toast('Uploading cover image…');
+  const ext=(file.name.match(/\.[^.]+$/)||['.jpg'])[0];
+  const name=Date.now().toString(36)+'-cover'+ext;
+  const fr=new FileReader();
+  fr.onload=async()=>{try{const j=await api('/api/upload',{method:'POST',body:JSON.stringify({name,base64:fr.result.split(',')[1]})});setCoverUrl(j.url);formDirty=true;toast('Cover uploaded ✓');}catch(e){toast('Upload failed: '+e.message,true);}};
+  fr.readAsDataURL(file);
+}
+
+//=================== faqs ===================
+function renderFaqs(){
+  const list=$('#faqList');
+  if(!faqs.length){list.innerHTML='';return;}
+  list.innerHTML=faqs.map((f,i)=>`<div class="faq-item-ed">
+    <button class="faq-rm" data-i="${i}" title="Remove FAQ">×</button>
+    <label>Question</label>
+    <input type="text" class="faq-q" data-i="${i}" value="${escapeHtml(f.q)}" placeholder="e.g. What is WhatsApp bulk messaging?">
+    <label>Answer</label>
+    <textarea class="faq-a" data-i="${i}" rows="3" placeholder="Write the answer here…">${escapeHtml(f.a)}</textarea>
+  </div>`).join('');
+  list.querySelectorAll('.faq-rm').forEach(b=>b.onclick=()=>{faqs.splice(+b.dataset.i,1);formDirty=true;renderFaqs();});
+  list.querySelectorAll('.faq-q').forEach(inp=>inp.addEventListener('input',e=>{faqs[+e.target.dataset.i].q=e.target.value;formDirty=true;}));
+  list.querySelectorAll('.faq-a').forEach(ta=>ta.addEventListener('input',e=>{faqs[+e.target.dataset.i].a=e.target.value;formDirty=true;}));
+}
+$('#addFaq').onclick=()=>{faqs.push({q:'',a:''});renderFaqs();formDirty=true;setTimeout(()=>{const qs=$('#faqList').querySelectorAll('.faq-q');if(qs.length)qs[qs.length-1].focus();},30);};
+
 //=================== open / new ===================
 function openPost(p){
   setView('edit');setActiveNav('');closeNav();setBusy(true,'Loading…');
@@ -606,8 +705,13 @@ function parseFM(raw){const m=raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S
 function fillForm(dir,fm){
   $('#fCollection').value=dir||'blog';$('#fTitle').value=fm.title||'';$('#fDesc').value=fm.description||'';
   $('#fDate').value=toDateStr(fm.date);$('#fAuthor').value=fm.author||'BulkMessageSender Team';
-  $('#fCategory').value=fm.category||'';$('#fReadTime').value=fm.readTime||'';$('#fCover').value=fm.cover||'green';$('#fDraft').checked=!!fm.draft;
+  $('#fCategory').value=fm.category||'';$('#fSubCat').value=Array.isArray(fm.sub_categories)?fm.sub_categories.join(', '):(fm.sub_categories||'');
+  $('#fReadTime').value=fm.readTime||'';$('#fTags').value=Array.isArray(fm.tags)?fm.tags.join(', '):(fm.tags||'');
+  $('#fCover').value=fm.cover||'green';$('#fDraft').checked=!!fm.draft;
   $('#fSlug').value=editing?((editing.path.match(/\d{4}-\d{2}-\d{2}-(.+)\.md$/)||[])[1]||''):slugify(fm.title||'');
+  $('#fMetaTitle').value=fm.meta_title||'';$('#fKeywords').value=Array.isArray(fm.keywords)?fm.keywords.join(', '):(fm.keywords||'');
+  setCoverUrl(fm.image||'');$('#fImageAlt').value=fm.image_alt||'';
+  faqs=Array.isArray(fm.faqs)?fm.faqs.map(f=>({q:String(f.q||''),a:String(f.a||'')})):[];renderFaqs();
   slugTouched=!!editing;formDirty=false;refresh();
 }
 
@@ -636,11 +740,25 @@ tinymce.init({
 });
 
 //=================== build + save ===================
-function meta(){return{collection:$('#fCollection').value,title:$('#fTitle').value.trim(),desc:$('#fDesc').value.trim(),date:$('#fDate').value||todayISO(),author:$('#fAuthor').value.trim(),category:$('#fCategory').value.trim(),readTime:$('#fReadTime').value.trim(),cover:$('#fCover').value,draft:$('#fDraft').checked,slug:($('#fSlug').value.trim()||slugify($('#fTitle').value))||'untitled'};}
+function meta(){return{collection:$('#fCollection').value,title:$('#fTitle').value.trim(),desc:$('#fDesc').value.trim(),date:$('#fDate').value||todayISO(),author:$('#fAuthor').value.trim(),category:$('#fCategory').value.trim(),subCat:$('#fSubCat').value.trim(),readTime:$('#fReadTime').value.trim(),tags:$('#fTags').value.trim(),cover:$('#fCover').value,draft:$('#fDraft').checked,slug:($('#fSlug').value.trim()||slugify($('#fTitle').value))||'untitled',metaTitle:$('#fMetaTitle').value.trim(),keywords:$('#fKeywords').value.trim(),image:coverImageUrl,imageAlt:$('#fImageAlt').value.trim()};}
 function buildFile(m){
-  let fm='---\n';fm+='title: '+yamlQ(m.title||'Untitled')+'\n';fm+='description: '+yamlQ(m.desc)+'\n';fm+='date: '+m.date+'\n';
-  if(m.author)fm+='author: '+yamlQ(m.author)+'\n';if(m.category)fm+='category: '+yamlQ(m.category)+'\n';if(m.readTime)fm+='readTime: '+yamlQ(m.readTime)+'\n';
-  fm+='cover: '+m.cover+'\n';fm+='draft: '+(m.draft?'true':'false')+'\n';fm+='format: html\n---\n\n';
+  let fm='---\n';
+  fm+='title: '+yamlQ(m.title||'Untitled')+'\n';
+  fm+='description: '+yamlQ(m.desc)+'\n';
+  if(m.metaTitle)fm+='meta_title: '+yamlQ(m.metaTitle)+'\n';
+  if(m.keywords)fm+='keywords: '+yamlQ(m.keywords)+'\n';
+  if(m.tags)fm+='tags: '+yamlQ(m.tags)+'\n';
+  if(m.subCat)fm+='sub_categories: '+yamlQ(m.subCat)+'\n';
+  fm+='date: '+m.date+'\n';
+  if(m.author)fm+='author: '+yamlQ(m.author)+'\n';
+  if(m.category)fm+='category: '+yamlQ(m.category)+'\n';
+  if(m.readTime)fm+='readTime: '+yamlQ(m.readTime)+'\n';
+  fm+='cover: '+m.cover+'\n';
+  if(m.image){fm+='image: '+yamlQ(m.image)+'\n';if(m.imageAlt)fm+='image_alt: '+yamlQ(m.imageAlt)+'\n';}
+  fm+='draft: '+(m.draft?'true':'false')+'\n';
+  const vf=faqs.filter(f=>f.q.trim()&&f.a.trim());
+  if(vf.length){fm+='faqs:\n';vf.forEach(f=>{fm+='  - q: '+yamlQ(f.q.trim())+'\n    a: '+yamlQ(f.a.trim())+'\n';});}
+  fm+='format: html\n---\n\n';
   return fm+getBody().trim()+'\n';
 }
 function pathFor(m){return 'content/'+m.collection+'/'+m.date+'-'+m.slug+'.md';}
@@ -676,7 +794,7 @@ document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLower
 $('#fSlug').addEventListener('input',()=>slugTouched=true);
 $('#fTitle').addEventListener('input',()=>{if(!slugTouched)$('#fSlug').value=slugify($('#fTitle').value);refresh();});
 ['fCollection','fDate','fSlug'].forEach(id=>$('#'+id).addEventListener('input',refresh));
-['fTitle','fDesc','fDate','fAuthor','fCategory','fReadTime','fCover','fDraft','fSlug','fCollection'].forEach(id=>{const el=$('#'+id);el.addEventListener('input',()=>formDirty=true);el.addEventListener('change',()=>formDirty=true);});
+['fTitle','fDesc','fDate','fAuthor','fCategory','fSubCat','fReadTime','fTags','fCover','fDraft','fSlug','fCollection','fMetaTitle','fKeywords','fImageAlt'].forEach(id=>{const el=$('#'+id);el.addEventListener('input',()=>formDirty=true);el.addEventListener('change',()=>formDirty=true);});
 window.addEventListener('beforeunload',e=>{if(isDirty()){e.preventDefault();e.returnValue='';}});
 
 init();

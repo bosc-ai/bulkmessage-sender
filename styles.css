@@ -1021,6 +1021,20 @@ h3 { font-size: 22px; line-height: 1.25; letter-spacing: -0.02em; }
 .prose img[style*="float: left"]  { float: left;  margin: 6px 24px 16px 0; }
 .prose img[style*="float: right"] { float: right; margin: 6px 0 16px 24px; }
 
+/* Post-page FAQ accordion (rendered by build.js from faqs: frontmatter) */
+.post-faq-item { border-bottom: 1px solid var(--line); }
+.post-faq-item:first-child { border-top: 1px solid var(--line); }
+.post-faq-q {
+  list-style: none; display: flex; align-items: center; justify-content: space-between;
+  padding: 15px 0; font-size: 16px; font-weight: 600; cursor: pointer; gap: 14px;
+  color: var(--ink);
+}
+.post-faq-q::-webkit-details-marker { display: none; }
+.post-faq-q::after { content: '+'; font-size: 22px; font-weight: 300; color: var(--muted); flex-shrink: 0; }
+details[open] > .post-faq-q { color: var(--green-deep); }
+details[open] > .post-faq-q::after { content: '−'; color: var(--green-deep); }
+.post-faq-a { padding: 0 0 18px; color: var(--muted); font-size: 15px; line-height: 1.65; max-width: 68ch; }
+
 .two-col {
   display: grid;
   grid-template-columns: 220px 1fr;

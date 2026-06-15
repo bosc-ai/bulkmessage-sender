@@ -88,6 +88,7 @@ function postPage(col, post) {
   const url = `${SITE}/${col.dir}/${post.slug}.html`;
   const ogImage = post.image || firstImg(post.html) || DEFAULT_OG;
   const metaLine = [post.author, post.dateLabel, post.readTime].filter(Boolean).join(" · ");
+  const pageTitle = post.metaTitle || post.title;
   const jsonld = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -105,15 +106,35 @@ function postPage(col, post) {
     mainEntityOfPage: url,
     url,
   };
+  const faqJsonld = post.faqs && post.faqs.length ? JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": post.faqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a },
+    })),
+  }) : "";
+  const faqSection = post.faqs && post.faqs.length ? `
+      <section class="post-faqs" style="max-width:760px;margin:56px auto 0">
+        <h2 style="font-size:22px;font-weight:700;margin:0 0 20px;letter-spacing:-.02em">Frequently Asked Questions</h2>
+        <div class="post-faq-list">
+          ${post.faqs.map(f => `<details class="post-faq-item">
+            <summary class="post-faq-q">${esc(f.q)}</summary>
+            <div class="post-faq-a">${esc(f.a)}</div>
+          </details>`).join("\n          ")}
+        </div>
+      </section>` : "";
   return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${esc(post.title)} | BulkMessageSender</title>
+  <title>${esc(pageTitle)} | BulkMessageSender</title>
   <meta name="description" content="${esc(post.description)}">
+  ${post.keywords ? `<meta name="keywords" content="${esc(post.keywords)}">` : ""}
   <link rel="canonical" href="${url}">
-  <meta property="og:title" content="${esc(post.title)}">
+  <meta property="og:title" content="${esc(pageTitle)}">
   <meta property="og:description" content="${esc(post.description)}">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${url}">
@@ -124,6 +145,7 @@ function postPage(col, post) {
   ${post.date ? `<meta property="article:published_time" content="${post.date}">` : ""}
   ${post.author ? `<meta property="article:author" content="${esc(post.author)}">` : ""}${HEAD_LINKS}
   <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
+  ${faqJsonld ? `<script type="application/ld+json">${faqJsonld}</script>` : ""}
 </head>
 <body data-page="${col.key}">
   <div id="wc-nav"></div>
@@ -138,7 +160,7 @@ function postPage(col, post) {
     <section class="container" style="padding-bottom:96px">
       <article class="prose" style="max-width:760px;margin:0 auto">
 ${post.html}
-      </article>
+      </article>${faqSection}
       <div style="max-width:760px;margin:48px auto 0">
         <a href="/${col.list}" class="btn btn-ghost">← Back to ${esc(col.title)}</a>
       </div>
@@ -225,6 +247,11 @@ function loadPosts(col) {
         slug,
         title: data.title || slug,
         description: data.description || "",
+        metaTitle: data.meta_title || "",
+        keywords: Array.isArray(data.keywords) ? data.keywords.join(", ") : (data.keywords || ""),
+        tags: Array.isArray(data.tags) ? data.tags.join(", ") : (data.tags || ""),
+        faqs: Array.isArray(data.faqs) ? data.faqs.filter(f => f && f.q && f.a) : [],
+        imageAlt: data.image_alt || "",
         date: data.date ? new Date(data.date).toISOString().slice(0, 10) : "",
         dateLabel: fmtDate(data.date),
         author: data.author || "",
