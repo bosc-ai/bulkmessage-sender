@@ -126,6 +126,19 @@
     .mig-ttl { font-size: 13.5px; font-weight: 600; color: var(--ink); line-height: 1.3; }
     .mig-sub { font-size: 12.5px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
 
+    /* ===== Weflux Promo ===== */
+    .wf-promo { background: #060d06; padding: 0 0 80px; position: relative; overflow: hidden; }
+    .wf-promo::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 1200px 500px at 50% 0%, rgba(37,201,95,.08), transparent); pointer-events: none; }
+    .wf-promo-head { text-align: center; padding: 80px 0 48px; position: relative; z-index: 1; }
+    .wf-promo-head h2 { color: #edfaef; margin: 14px 0 16px; }
+    .wf-promo-head .lede { color: rgba(237,250,239,.55); margin: 0 auto; }
+    .wf-promo-head .eyebrow { color: rgba(37,201,95,.7); }
+    .wf-promo-head .eyebrow .dot { box-shadow: 0 0 0 4px rgba(37,201,95,.22); }
+    .wf-embed-wrap { position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 0 0 1px rgba(37,201,95,.12), 0 40px 100px -20px rgba(0,0,0,.7), 0 0 80px -20px rgba(37,201,95,.12); aspect-ratio: 16/9; }
+    .wf-embed-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .wf-promo-foot { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 40px; position: relative; z-index: 1; }
+    .wf-promo-note { font-size: 12px; color: rgba(37,201,95,.45); font-family: var(--font-mono); text-align: center; margin-top: 16px; }
+
     @media (max-width: 768px) {
       .lpdemo-tabs { display: none; }
       .lpinbox { height: auto; flex-direction: column; }
@@ -135,6 +148,8 @@
       .vs-tbl { font-size: 12px; }
       .vs-tbl th, .vs-tbl td { padding: 10px 12px; }
       .mig-card { bottom: 16px; right: 16px; left: 16px; width: auto; }
+      .wf-promo { padding-bottom: 48px; }
+      .wf-promo-head { padding: 48px 0 32px; }
     }
   </style>
 
@@ -355,6 +370,30 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WEFLUX PROMO ============ -->
+  <section class="wf-promo" id="weflux-demo">
+    <div class="container">
+      <div class="wf-promo-head">
+        <span class="eyebrow"><span class="dot"></span> Platform walkthrough</span>
+        <h2>Every feature, alive.</h2>
+        <p class="lede">90 seconds. Inbox to pipeline to analytics. See the full Weflux CRM flow before you sign up.</p>
+      </div>
+      <div class="wf-embed-wrap">
+        <iframe
+          src="weflux-promo.html"
+          title="Weflux CRM product walkthrough"
+          allow="autoplay"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <p class="wf-promo-note">Space to play · ← → to seek · drag the scrubber</p>
+      <div class="wf-promo-foot">
+        <a href="signup.html" class="btn btn-green">Start free trial →</a>
+        <a href="app-review-demo.html" class="btn btn-ghost" style="color:#edfaef;border-color:rgba(255,255,255,.15);">Explore the console</a>
       </div>
     </div>
   </section>
