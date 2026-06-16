@@ -5,6 +5,16 @@
 (function () {
   'use strict';
 
+  // ---- GOOGLE TAG MANAGER (injected once from shell so new pages auto-track) ----
+  if (!window.dataLayer || !window.dataLayer.some(function(e){ return e['gtm.start']; })) {
+    // Head script
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-55CH5SQK');
+    // Noscript fallback
+    var ns = document.createElement('noscript');
+    ns.innerHTML = '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-55CH5SQK" height="0" width="0" style="display:none;visibility:hidden"></iframe>';
+    document.body.insertBefore(ns, document.body.firstChild);
+  }
+
   const navLinks = [
     { href: '/features.html',   label: 'Features',  key: 'features' },
     { href: '/pricing.html',    label: 'Pricing',   key: 'pricing' },
