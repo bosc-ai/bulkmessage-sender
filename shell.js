@@ -5,6 +5,18 @@
 (function () {
   'use strict';
 
+  // ---- GOOGLE ANALYTICS 4 (injected once from shell so new pages auto-track) ----
+  if (!document.querySelector('script[src*="G-EGHHC5WBPN"]')) {
+    var ga = document.createElement('script');
+    ga.async = true;
+    ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-EGHHC5WBPN';
+    document.head.appendChild(ga);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EGHHC5WBPN');
+  }
+
   // ---- GOOGLE TAG MANAGER (injected once from shell so new pages auto-track) ----
   if (!window.dataLayer || !window.dataLayer.some(function(e){ return e['gtm.start']; })) {
     // Head script
