@@ -67,8 +67,19 @@
     @media (max-width: 900px) { .es-cols { grid-template-columns: 1fr !important; gap: 48px !important; } }
     @media (max-width: 768px) { .es-grid { grid-template-columns: 1fr; } }
   </style>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-55CH5SQK');</script>
+<!-- End Google Tag Manager -->
 </head>
 <body data-page="embedded-signup">
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-55CH5SQK"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
   <div id="wc-nav"></div>
   <main id="main" class="page">
 
@@ -92,12 +103,13 @@
               <span style="display:inline-block;background:var(--green-tint);color:var(--green-deep);font-family:var(--font-mono);font-size:11px;font-weight:600;padding:4px 12px;border-radius:9999px;margin-bottom:20px;letter-spacing:.04em;">READY FOR CONFIGURATION</span>
               <h2>Connect your WhatsApp Business Account</h2>
               <p style="font-size:15px;color:var(--muted);margin:12px 0 28px;line-height:1.6;">Click the button below to open Meta Login for Business. You'll choose your business portfolio and WhatsApp Business Account — BulkMessageSender receives only what it needs to manage your account.</p>
-              <button class="signup-btn" type="button" onclick="alert('In production this button launches Meta\'s Embedded Signup flow. Your business selects its WhatsApp Business Account and authorizes BulkMessageSender as the Tech Provider.')">
+              <button class="signup-btn" type="button" id="es-launch-btn" onclick="launchWhatsAppSignup()">
                 <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                Login with Facebook
+                <span id="es-btn-label">Connect WhatsApp Business</span>
               </button>
+              <div id="es-status" style="display:none;margin-top:16px;padding:12px 16px;border-radius:10px;font-size:14px;text-align:left;"></div>
               <div class="signup-notice">
-                <strong>For production use:</strong> Add your HTTPS domain to Meta app settings and configure Login for Business, OAuth redirects, webhook callback URL, privacy policy URL, and data deletion URL before going live.
+                <strong>Secure authorization:</strong> Meta's popup only asks for whatsapp_business_management and whatsapp_business_messaging permissions. No passwords or payment details are shared.
               </div>
             </div>
           </div>
@@ -170,5 +182,120 @@
   </main>
   <div id="wc-footer"></div>
   <script src="shell.js"></script>
+
+  <!-- Meta / Facebook JS SDK — required for Embedded Signup -->
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '1298282128472807',
+        cookie: true,
+        xfbml: true,
+        version: 'v22.0'
+      });
+    };
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <script>
+    // ── Embedded Signup (ES v4) ─────────────────────────────────────────────
+    // Uses code-based flow: Meta returns a short-lived code → backend exchanges
+    // for a System User Token and stores the WABA ID + phone number ID.
+
+    const API_BASE = 'https://api.wachat.serves.in';
+
+    function setStatus(msg, type) {
+      var el = document.getElementById('es-status');
+      el.style.display = 'block';
+      el.style.background = type === 'success' ? '#D1FAE5' : type === 'error' ? '#FEE2E2' : '#EFF6FF';
+      el.style.color      = type === 'success' ? '#065F46' : type === 'error' ? '#991B1B' : '#1E40AF';
+      el.style.border     = '1px solid ' + (type === 'success' ? '#6EE7B7' : type === 'error' ? '#FCA5A5' : '#BFDBFE');
+      el.innerHTML = msg;
+    }
+
+    function setBtn(loading) {
+      var btn   = document.getElementById('es-launch-btn');
+      var label = document.getElementById('es-btn-label');
+      btn.disabled    = loading;
+      btn.style.opacity = loading ? '0.7' : '1';
+      label.textContent = loading ? 'Connecting…' : 'Connect WhatsApp Business';
+    }
+
+    // Session info callback — fires when client selects WABA / phone number
+    // (before the FB.login callback). Capture for audit / pre-fill.
+    var _sessionInfo = null;
+    window.onmessage = function (e) {
+      if (typeof e.data === 'string') {
+        try {
+          var data = JSON.parse(e.data);
+          if (data.type === 'WA_EMBEDDED_SIGNUP') {
+            _sessionInfo = data.data;
+            console.log('[ES] session_info:', _sessionInfo);
+          }
+        } catch (_) {}
+      }
+    };
+
+    function launchWhatsAppSignup() {
+      if (typeof FB === 'undefined') {
+        setStatus('⚠️ Facebook SDK still loading — please wait a moment and try again.', 'info');
+        return;
+      }
+
+      setBtn(true);
+
+      FB.login(function (response) {
+        if (response.authResponse) {
+          var code = response.authResponse.code;
+
+          setStatus('Authorization received — completing setup…', 'info');
+
+          // Exchange code server-side (never expose App Secret in frontend)
+          fetch(API_BASE + '/embedded-signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ code: code, session_info: _sessionInfo })
+          })
+          .then(function (r) { return r.json(); })
+          .then(function (data) {
+            if (data.success) {
+              setStatus(
+                '✅ <strong>WhatsApp Business Account connected!</strong><br>' +
+                'WABA: ' + (data.waba_id || '—') + '<br>' +
+                'Phone: ' + (data.display_phone || data.phone_number_id || '—'),
+                'success'
+              );
+            } else {
+              setStatus('❌ Setup failed: ' + (data.error || 'Unknown error'), 'error');
+            }
+            setBtn(false);
+          })
+          .catch(function (err) {
+            setStatus('❌ Network error — please try again. (' + err.message + ')', 'error');
+            setBtn(false);
+          });
+
+        } else {
+          // User closed popup or denied permission
+          setStatus('Authorization cancelled. Click the button to try again.', 'info');
+          setBtn(false);
+        }
+      }, {
+        config_id: '',                // Optional: Meta Business Login config ID (leave blank to use default)
+        response_type: 'code',       // ES v4 — returns a code, NOT a token
+        override_default_response_type: true,
+        extras: {
+          feature: 'whatsapp_embedded_signup',
+          sessionInfoVersion: 3,
+          setup: {}
+        }
+      });
+    }
+  </script>
 </body>
 </html>
