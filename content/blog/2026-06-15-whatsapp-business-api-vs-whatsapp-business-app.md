@@ -10,7 +10,7 @@ category: "Whatsapp API"
 cover: green
 image: "/assets/uploads/mqeydyv1-cover.png"
 image_alt: "WhatsApp Business API vs WhatsApp Business App"
-draft: true
+draft: false
 format: html
 ---
 

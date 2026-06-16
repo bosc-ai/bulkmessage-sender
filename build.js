@@ -66,14 +66,17 @@ function renderBody(data, content) {
   return data.format === "html" ? content : marked.parse(content);
 }
 
+// Make a possibly-relative image URL absolute (required for og:image/twitter:image to work).
+function absUrl(s) {
+  if (!s) return "";
+  if (s.startsWith("/")) s = SITE + s;
+  return /^https?:\/\//.test(s) ? s : "";
+}
 // First image in a post's rendered HTML, absolute-ised — used for og:image.
 const DEFAULT_OG = `${SITE}/assets/wachat-logo.png`;
 function firstImg(html) {
   const m = /<img[^>]+src="([^"]+)"/i.exec(html || "");
-  if (!m) return "";
-  let s = m[1];
-  if (s.startsWith("/")) s = SITE + s;
-  return /^https?:\/\//.test(s) ? s : "";
+  return m ? absUrl(m[1]) : "";
 }
 
 const HEAD_LINKS = `
@@ -85,8 +88,8 @@ const HEAD_LINKS = `
 
 // ---------- Templates ----------
 function postPage(col, post) {
-  const url = `${SITE}/${col.dir}/${post.slug}.html`;
-  const ogImage = post.image || firstImg(post.html) || DEFAULT_OG;
+  const url = `${SITE}/${col.dir}/${post.slug}`;
+  const ogImage = absUrl(post.image) || firstImg(post.html) || DEFAULT_OG;
   const metaLine = [post.author, post.dateLabel, post.readTime].filter(Boolean).join(" · ");
   const pageTitle = post.metaTitle || post.title;
   const jsonld = {
@@ -151,7 +154,7 @@ function postPage(col, post) {
   <div id="wc-nav"></div>
   <main id="main" class="page">
     <section class="container page-hero" style="max-width:820px">
-      <div class="crumb"><a href="/index.html">Home</a> <span class="sep">/</span> <a href="/${col.list}">${esc(col.title)}</a> <span class="sep">/</span> <span>${esc(post.title)}</span></div>
+      <div class="crumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/${col.dir}">${esc(col.title)}</a> <span class="sep">/</span> <span>${esc(post.title)}</span></div>
       ${post.category ? `<span class="eyebrow"><span class="dot"></span> ${esc(post.category)}</span>` : ""}
       <h1>${esc(post.title)}</h1>
       ${post.description ? `<p class="lede">${esc(post.description)}</p>` : ""}
@@ -162,7 +165,7 @@ function postPage(col, post) {
 ${post.html}
       </article>${faqSection}
       <div style="max-width:760px;margin:48px auto 0">
-        <a href="/${col.list}" class="btn btn-ghost">← Back to ${esc(col.title)}</a>
+        <a href="/${col.dir}" class="btn btn-ghost">← Back to ${esc(col.title)}</a>
       </div>
     </section>
   </main>
@@ -179,13 +182,13 @@ function listPage(col, posts) {
     ? `<div class="blog-grid">
 ${posts
   .map(
-    (p) => `        <a class="blog-card" href="/${col.dir}/${p.slug}.html"><div class="cover${p.cover ? " " + p.cover : ""}"></div><div class="body"><div class="cat">${esc([p.category, p.readTime].filter(Boolean).join(" · "))}</div><h3>${esc(p.title)}</h3><p class="excerpt">${esc(p.description)}</p><div class="meta"><span>${esc(p.author || "BulkMessageSender")}</span><span>${esc(p.dateLabel)}</span></div></div></a>`
+    (p) => `        <a class="blog-card" href="/${col.dir}/${p.slug}"><div class="cover${p.cover ? " " + p.cover : ""}"></div><div class="body"><div class="cat">${esc([p.category, p.readTime].filter(Boolean).join(" · "))}</div><h3>${esc(p.title)}</h3><p class="excerpt">${esc(p.description)}</p><div class="meta"><span>${esc(p.author || "BulkMessageSender")}</span><span>${esc(p.dateLabel)}</span></div></div></a>`
   )
   .join("\n")}
       </div>`
     : `<div style="text-align:center;padding:64px 0;color:var(--muted)"><p>New ${esc(col.title.toLowerCase())} coming soon.</p></div>`;
 
-  const url = `${SITE}/${col.list}`;
+  const url = `${SITE}/${col.dir}`;
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -207,7 +210,7 @@ ${posts
   <div id="wc-nav"></div>
   <main id="main" class="page">
     <section class="container page-hero">
-      <div class="crumb"><a href="/index.html">Home</a> <span class="sep">/</span> <span>${esc(col.title)}</span></div>
+      <div class="crumb"><a href="/">Home</a> <span class="sep">/</span> <span>${esc(col.title)}</span></div>
       <span class="eyebrow"><span class="dot"></span> ${esc(col.eyebrow)}</span>
       <h1>${esc(col.title)}</h1>
       <p class="lede">${esc(col.lede)}</p>
@@ -277,10 +280,10 @@ function run() {
     fs.mkdirSync(path.join(DIST, col.dir), { recursive: true });
     for (const p of posts) {
       fs.writeFileSync(path.join(DIST, col.dir, `${p.slug}.html`), postPage(col, p));
-      urls.push({ loc: `${SITE}/${col.dir}/${p.slug}.html`, lastmod: p.date || undefined, pr: "0.6", cf: "monthly" });
+      urls.push({ loc: `${SITE}/${col.dir}/${p.slug}`, lastmod: p.date || undefined, pr: "0.6", cf: "monthly" });
     }
     fs.writeFileSync(path.join(DIST, col.list), listPage(col, posts));
-    urls.push({ loc: `${SITE}/${col.list}`, pr: "0.7", cf: "weekly" });
+    urls.push({ loc: `${SITE}/${col.dir}`, pr: "0.7", cf: "weekly" });
     console.log(`  ${col.list.padEnd(15)} ${posts.length} post(s)`);
   }
 
@@ -310,7 +313,7 @@ function writeSitemap(collectionUrls) {
     ["terms.html", "0.3", "yearly"],
     ["cookies.html", "0.3", "yearly"],
     ["data-deletion.html", "0.3", "yearly"],
-  ].map(([p, pr, cf]) => ({ loc: `${SITE}/${p}`, lastmod: today, pr, cf }));
+  ].map(([p, pr, cf]) => ({ loc: `${SITE}/${p.replace(/\.html$/, "")}`, lastmod: today, pr, cf }));
 
   const all = [...statics, ...collectionUrls];
   const body = all

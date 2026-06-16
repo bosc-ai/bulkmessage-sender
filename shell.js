@@ -25,7 +25,7 @@
       <a class="skip" href="#main">Skip to content</a>
       <header class="nav" id="wc-nav-el">
         <div class="container-wide nav-inner">
-          <a class="brand" href="/index.html" aria-label="BulkMessageSender home">
+          <a class="brand" href="/" aria-label="BulkMessageSender home">
             <span class="brand-mark" aria-hidden="true">
               <img src="${logoSrc}" alt="" width="36" height="36">
             </span>
@@ -87,7 +87,7 @@
         <div class="container">
           <div class="footer-top">
             <div class="footer-brand">
-              <a class="brand" href="/index.html">
+              <a class="brand" href="/">
                 <span class="brand-mark" aria-hidden="true">
                   <img src="${logoSrc}" alt="" width="32" height="32">
                 </span>
@@ -99,14 +99,14 @@
             <div class="footer-col">
               <h5>Product</h5>
               <ul>
-                <li><a href="/features.html">All Features</a></li>
-                <li><a href="/broadcasts.html">Broadcasts</a></li>
-                <li><a href="/shared-inbox.html">Shared Inbox</a></li>
-                <li><a href="/automations.html">Automations</a></li>
-                <li><a href="/whatsapp-crm.html">WhatsApp CRM</a></li>
-                <li><a href="/pricing.html">Pricing</a></li>
-                <li><a href="/changelog.html">Changelog</a></li>
-                <li><a href="/status.html">Status</a></li>
+                <li><a href="/features">All Features</a></li>
+                <li><a href="/broadcasts">Broadcasts</a></li>
+                <li><a href="/shared-inbox">Shared Inbox</a></li>
+                <li><a href="/automations">Automations</a></li>
+                <li><a href="/whatsapp-crm">WhatsApp CRM</a></li>
+                <li><a href="/pricing">Pricing</a></li>
+                <li><a href="/changelog">Changelog</a></li>
+                <li><a href="/status">Status</a></li>
               </ul>
             </div>
             <div class="footer-col">
@@ -122,23 +122,23 @@
             <div class="footer-col">
               <h5>Resources</h5>
               <ul>
-                <li><a href="/blog.html">Blog</a></li>
-                <li><a href="/articles.html">Articles</a></li>
-                <li><a href="/case-studies.html">Case Studies</a></li>
-                <li><a href="/help.html">Help Center</a></li>
-                <li><a href="/resources.html">Resources</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/case-studies">Case Studies</a></li>
+                <li><a href="/help">Help Center</a></li>
+                <li><a href="/resources">Resources</a></li>
 
-                <li><a href="/contact.html">Contact sales</a></li>
+                <li><a href="/contact">Contact sales</a></li>
               </ul>
             </div>
             <div class="footer-col">
               <h5>Legal</h5>
               <ul>
-                <li><a href="/privacy.html">Privacy</a></li>
-                <li><a href="/terms.html">Terms</a></li>
-                <li><a href="/data-deletion.html">Data deletion</a></li>
-                <li><a href="/cookies.html">Cookies</a></li>
-                <li><a href="/security.html">Security</a></li>
+                <li><a href="/privacy">Privacy</a></li>
+                <li><a href="/terms">Terms</a></li>
+                <li><a href="/data-deletion">Data deletion</a></li>
+                <li><a href="/cookies">Cookies</a></li>
+                <li><a href="/security">Security</a></li>
               </ul>
             </div>
           </div>
