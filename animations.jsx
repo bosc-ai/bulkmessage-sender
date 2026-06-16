@@ -338,6 +338,7 @@ function Stage({
   loop = true,
   autoplay = true,
   persistKey = 'animstage',
+  hideControls = false,
   children,
 }) {
   const [time, setTime] = React.useState(() => {
@@ -371,7 +372,7 @@ function Stage({
     if (!stageRef.current) return;
     const el = stageRef.current;
     const measure = () => {
-      const barH = 44; // playback bar height
+      const barH = hideControls ? 0 : 44;
       const s = Math.min(
         el.clientWidth / width,
         (el.clientHeight - barH) / height
@@ -481,7 +482,7 @@ function Stage({
       </div>
 
       {/* Playback bar — stacked below canvas, never overlapping */}
-      <PlaybackBar
+      {!hideControls && <PlaybackBar
         time={displayTime}
         actualTime={time}
         duration={duration}
@@ -490,7 +491,7 @@ function Stage({
         onReset={() => { setTime(0); }}
         onSeek={(t) => setTime(t)}
         onHover={(t) => setHoverTime(t)}
-      />
+      />}
     </div>
   );
 }
