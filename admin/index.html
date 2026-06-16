@@ -33,6 +33,8 @@
   .btn.danger-solid{background:var(--danger);border-color:var(--danger);color:#fff}
   .btn.danger-solid:hover{background:#b91c1c}
   .btn[disabled]{opacity:.5;cursor:not-allowed}
+  .btn.live{background:#fff;border-color:#bfe8d3;color:var(--green-d);cursor:default}
+  .btn.live:hover{background:#fff}
 
   /* ===== LOGIN ===== */
   .login{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(1200px 500px at 50% -10%,#e9f7ef,transparent),var(--bg)}
@@ -306,6 +308,7 @@
           <button class="btn ghost" id="btnBack">← All posts</button>
           <div style="flex:1"></div>
           <button class="btn danger hidden" id="btnDelete">Delete</button>
+          <button class="btn" id="btnPreview">👁 Preview</button>
           <button class="btn" id="btnDraft">Save as draft</button>
           <button class="btn primary" id="btnPublish">Publish →</button>
         </div>
@@ -440,6 +443,7 @@ let filterDir='all', draftsOnly=false, query='', formDirty=false, slugTouched=fa
 let ALL_POSTS=[], menuPost=null;
 let STATS={enabled:false,views:{},total:0};
 let coverImageUrl='', faqs=[];
+let postIsLive=false, isBusy=false;
 function viewsFor(p){return STATS.views[p.dir+'__'+p.slug]||0;}
 function formatNum(n){n=+n||0;return n>=1000?(n/1000).toFixed(1).replace(/\.0$/,'')+'K':String(n);}
 
@@ -479,6 +483,14 @@ function dialog(opts){
 function isDirty(){return formDirty||(tinyReady&&tiny&&tiny.isDirty());}
 function confirmLeave(){return !isDirty()||dialog({title:'Discard changes?',message:'You have edits that haven’t been saved. Leave without saving them?',okText:'Discard',cancelText:'Keep editing',danger:true});}
 function clearDirty(){formDirty=false;if(tinyReady&&tiny)tiny.setDirty(false);}
+function refreshPublishBtn(){
+  if(isBusy)return;
+  const btn=$('#btnPublish');if(!btn)return;
+  if(postIsLive&&!isDirty()){btn.textContent='✓ Published';btn.classList.add('live');btn.classList.remove('primary');}
+  else if(postIsLive&&isDirty()){btn.textContent='Republish →';btn.classList.remove('live');btn.classList.add('primary');}
+  else{btn.textContent='Publish →';btn.classList.remove('live');btn.classList.add('primary');}
+}
+function markDirty(){formDirty=true;refreshPublishBtn();}
 
 //=================== auth ===================
 $('#liPassToggle').onclick=()=>{const p=$('#liPass'),t=$('#liPassToggle'),show=p.type==='password';p.type=show?'text':'password';t.textContent=show?'🙈':'👁';p.focus();};
@@ -656,7 +668,7 @@ function setCoverUrl(url){
   if(coverImageUrl){$('#coverImg').src=coverImageUrl;prev.classList.remove('hidden');zone.classList.add('hidden');}
   else{prev.classList.add('hidden');zone.classList.remove('hidden');}
 }
-$('#coverRm').onclick=()=>{setCoverUrl('');formDirty=true;};
+$('#coverRm').onclick=()=>{setCoverUrl('');markDirty();};
 (function(){
   const zone=$('#coverZone');
   zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag');});
@@ -670,7 +682,7 @@ async function uploadCoverFile(file){
   const ext=(file.name.match(/\.[^.]+$/)||['.jpg'])[0];
   const name=Date.now().toString(36)+'-cover'+ext;
   const fr=new FileReader();
-  fr.onload=async()=>{try{const j=await api('/api/upload',{method:'POST',body:JSON.stringify({name,base64:fr.result.split(',')[1]})});setCoverUrl(j.url);formDirty=true;toast('Cover uploaded ✓');}catch(e){toast('Upload failed: '+e.message,true);}};
+  fr.onload=async()=>{try{const j=await api('/api/upload',{method:'POST',body:JSON.stringify({name,base64:fr.result.split(',')[1]})});setCoverUrl(j.url);markDirty();toast('Cover uploaded ✓');}catch(e){toast('Upload failed: '+e.message,true);}};
   fr.readAsDataURL(file);
 }
 
@@ -685,11 +697,11 @@ function renderFaqs(){
     <label>Answer</label>
     <textarea class="faq-a" data-i="${i}" rows="3" placeholder="Write the answer here…">${escapeHtml(f.a)}</textarea>
   </div>`).join('');
-  list.querySelectorAll('.faq-rm').forEach(b=>b.onclick=()=>{faqs.splice(+b.dataset.i,1);formDirty=true;renderFaqs();});
-  list.querySelectorAll('.faq-q').forEach(inp=>inp.addEventListener('input',e=>{faqs[+e.target.dataset.i].q=e.target.value;formDirty=true;}));
-  list.querySelectorAll('.faq-a').forEach(ta=>ta.addEventListener('input',e=>{faqs[+e.target.dataset.i].a=e.target.value;formDirty=true;}));
+  list.querySelectorAll('.faq-rm').forEach(b=>b.onclick=()=>{faqs.splice(+b.dataset.i,1);markDirty();renderFaqs();});
+  list.querySelectorAll('.faq-q').forEach(inp=>inp.addEventListener('input',e=>{faqs[+e.target.dataset.i].q=e.target.value;markDirty();}));
+  list.querySelectorAll('.faq-a').forEach(ta=>ta.addEventListener('input',e=>{faqs[+e.target.dataset.i].a=e.target.value;markDirty();}));
 }
-$('#addFaq').onclick=()=>{faqs.push({q:'',a:''});renderFaqs();formDirty=true;setTimeout(()=>{const qs=$('#faqList').querySelectorAll('.faq-q');if(qs.length)qs[qs.length-1].focus();},30);};
+$('#addFaq').onclick=()=>{faqs.push({q:'',a:''});renderFaqs();markDirty();setTimeout(()=>{const qs=$('#faqList').querySelectorAll('.faq-q');if(qs.length)qs[qs.length-1].focus();},30);};
 
 //=================== open / new ===================
 function openPost(p){
@@ -712,7 +724,7 @@ function fillForm(dir,fm){
   $('#fMetaTitle').value=fm.meta_title||'';$('#fKeywords').value=Array.isArray(fm.keywords)?fm.keywords.join(', '):(fm.keywords||'');
   setCoverUrl(fm.image||'');$('#fImageAlt').value=fm.image_alt||'';
   faqs=Array.isArray(fm.faqs)?fm.faqs.map(f=>({q:String(f.q||''),a:String(f.a||'')})):[];renderFaqs();
-  slugTouched=!!editing;formDirty=false;refresh();
+  slugTouched=!!editing;formDirty=false;postIsLive=!!editing&&!fm.draft;refresh();refreshPublishBtn();
 }
 
 //=================== TinyMCE ===================
@@ -736,7 +748,7 @@ tinymce.init({
     fr.onload=async()=>{try{const j=await api('/api/upload',{method:'POST',body:JSON.stringify({name,base64:fr.result.split(',')[1]})});resolve(j.url);}catch(e){reject('Upload failed: '+e.message);}};
     fr.onerror=()=>reject('Could not read image');fr.readAsDataURL(blobInfo.blob());
   }),
-  setup:(ed)=>{tiny=ed;ed.on('init',()=>{tinyReady=true;if(pendingBody!=null){ed.setContent(pendingBody);pendingBody=null;}});},
+  setup:(ed)=>{tiny=ed;ed.on('init',()=>{tinyReady=true;if(pendingBody!=null){ed.setContent(pendingBody);pendingBody=null;}refreshPublishBtn();});ed.on('input change Undo Redo SetContent',()=>refreshPublishBtn());},
 });
 
 //=================== build + save ===================
@@ -770,19 +782,39 @@ async function save(asDraft){
   const errs=[];if(!m.title)errs.push('#fTitle');if(!m.desc)errs.push('#fDesc');if(!m.date)errs.push('#fDate');
   if(errs.length){errs.forEach(s=>$(s).classList.add('invalid'));toast('Fill in the required fields',true);return;}
   if(!getBody().trim()){toast('Write some content first',true);return;}
-  const newPath=pathFor(m);setBusy(true,'Publishing…');
+  const newPath=pathFor(m);setBusy(true,asDraft?'Saving…':(postIsLive?'Republishing…':'Publishing…'));
   try{
     const j=await api('/api/save',{method:'POST',body:JSON.stringify({path:newPath,content:buildFile(m),sha:editing&&editing.path===newPath?editing.sha:undefined,oldPath:editing&&editing.path!==newPath?editing.path:undefined,title:m.title,draft:m.draft})});
-    editing={path:newPath,sha:j.sha};$('#btnDelete').classList.remove('hidden');$('#fDraft').checked=m.draft;clearDirty();
-    setBusy(false);toast(m.draft?'Saved as draft ✓':'Published ✓ — site rebuilding');
+    editing={path:newPath,sha:j.sha};$('#btnDelete').classList.remove('hidden');$('#fDraft').checked=m.draft;
+    postIsLive=!m.draft;clearDirty();setBusy(false);
+    toast(m.draft?'Saved as draft ✓':'Published ✓ — live in about a minute');
   }catch(e){setBusy(false);toast('Failed: '+e.message,true);}
 }
-$('#btnPublish').onclick=async()=>{if(await dialog({title:'Publish to your live site?',message:'This publishes the post to bulkmessagesender.com — it’ll be live in about a minute.',okText:'Publish',cancelText:'Not yet'}))save(false);};
+$('#btnPublish').onclick=async()=>{
+  if(postIsLive&&!isDirty()){toast('Already live — no changes to publish');return;}
+  const republish=postIsLive;
+  if(await dialog({title:republish?'Republish your changes?':'Publish to your live site?',message:republish?'This pushes your edits live on bulkmessagesender.com — updated in about a minute.':'This publishes the post to bulkmessagesender.com — it’ll be live in about a minute.',okText:republish?'Republish':'Publish',cancelText:'Not yet'}))save(false);
+};
 $('#btnDraft').onclick=()=>save(true);
+$('#btnPreview').onclick=async()=>{
+  const m=meta();
+  if(!m.title){toast('Add a title first',true);return;}
+  const w=window.open('','_blank');
+  if(w){w.document.write('<body style="font-family:sans-serif;padding:60px;color:#6b7a72;text-align:center">Loading preview…</body>');}
+  try{
+    const j=await api('/api/preview',{method:'POST',body:JSON.stringify({
+      collection:m.collection,title:m.title,desc:m.desc,date:m.date,author:m.author,
+      category:m.category,readTime:m.readTime,image:m.image,imageAlt:m.imageAlt,
+      tags:m.tags,keywords:m.keywords,metaTitle:m.metaTitle,
+      faqs:faqs.filter(f=>f.q.trim()&&f.a.trim()),html:getBody()
+    })});
+    if(w){w.document.open();w.document.write(j.html);w.document.close();}
+  }catch(e){toast('Preview failed: '+e.message,true);if(w)w.close();}
+};
 $('#btnNew').onclick=async()=>{if(await confirmLeave())newPost();};
 $('#promoNew').onclick=async()=>{if(await confirmLeave())newPost();};
 $('#btnBack').onclick=async()=>{if(await confirmLeave())gotoNav('posts');};
-function setBusy(on,label){['btnPublish','btnDraft','btnDelete'].forEach(id=>{const b=$('#'+id);if(b)b.disabled=on;});$('#btnPublish').textContent=on?(label||'Working…'):'Publish →';}
+function setBusy(on,label){isBusy=on;['btnPublish','btnDraft','btnDelete','btnPreview'].forEach(id=>{const b=$('#'+id);if(b)b.disabled=on;});if(on)$('#btnPublish').textContent=label||'Working…';else refreshPublishBtn();}
 $('#btnDelete').onclick=async()=>{if(!editing)return;if(!await dialog({title:'Delete this post?',message:'This permanently removes the post from your site. This can’t be undone.',okText:'Delete',cancelText:'Cancel',danger:true}))return;setBusy(true,'Deleting…');try{await api('/api/delete',{method:'POST',body:JSON.stringify({path:editing.path,sha:editing.sha})});setBusy(false);toast('Deleted');gotoNav('posts');}catch(e){setBusy(false);toast('Delete failed: '+e.message,true);}};
 
 //=================== search / filters ===================
@@ -794,7 +826,7 @@ document.addEventListener('keydown',e=>{if((e.metaKey||e.ctrlKey)&&e.key.toLower
 $('#fSlug').addEventListener('input',()=>slugTouched=true);
 $('#fTitle').addEventListener('input',()=>{if(!slugTouched)$('#fSlug').value=slugify($('#fTitle').value);refresh();});
 ['fCollection','fDate','fSlug'].forEach(id=>$('#'+id).addEventListener('input',refresh));
-['fTitle','fDesc','fDate','fAuthor','fCategory','fSubCat','fReadTime','fTags','fCover','fDraft','fSlug','fCollection','fMetaTitle','fKeywords','fImageAlt'].forEach(id=>{const el=$('#'+id);el.addEventListener('input',()=>formDirty=true);el.addEventListener('change',()=>formDirty=true);});
+['fTitle','fDesc','fDate','fAuthor','fCategory','fSubCat','fReadTime','fTags','fCover','fDraft','fSlug','fCollection','fMetaTitle','fKeywords','fImageAlt'].forEach(id=>{const el=$('#'+id);el.addEventListener('input',()=>markDirty());el.addEventListener('change',()=>markDirty());});
 window.addEventListener('beforeunload',e=>{if(isDirty()){e.preventDefault();e.returnValue='';}});
 
 init();
