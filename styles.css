@@ -1291,6 +1291,7 @@ details[open] > .post-faq-q::after { content: '−'; color: var(--green-deep); }
 }
 .blog-card .cover.v2 { background: linear-gradient(135deg, #14171A, #1E2226); }
 .blog-card .cover.v3 { background: linear-gradient(135deg, #F4F2EC, #E7E4DA); }
+.blog-card .cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .blog-card .body { padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .blog-card .cat { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
 .blog-card h3 { font-size: 17px; letter-spacing: -0.015em; line-height: 1.25; }
