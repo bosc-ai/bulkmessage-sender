@@ -312,21 +312,23 @@
       };
 
       const endpoint = contactForm.dataset.endpoint || '';
-      if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending…'; }
+      if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Submitting…'; }
 
       try {
         if (endpoint && !/PASTE_YOUR/.test(endpoint)) {
           // URLSearchParams + no-cors avoids a CORS preflight on Apps Script.
           await fetch(endpoint, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data) });
         }
-        const success = document.getElementById('contactSuccess');
-        if (success) success.classList.add('show');
+        // Replace the whole form with the thank-you box.
         contactForm.reset();
-        if (btn) { btn.textContent = 'Submitted ✓'; btn.disabled = true; }
-        contactForm.style.opacity = '.6';
-        contactForm.style.pointerEvents = 'none';
+        contactForm.style.display = 'none';
+        const success = document.getElementById('contactSuccess');
+        if (success) {
+          success.classList.add('show');
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       } catch (err) {
-        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Send message →'; }
+        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Submit →'; }
         alert('Sorry — something went wrong. Please email hello@serves.in and we\'ll get right back to you.');
       }
     });

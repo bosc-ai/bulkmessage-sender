@@ -37,8 +37,10 @@
     <section class="container" style="padding-bottom:96px">
       <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start" class="contact-grid">
         <div style="background:#fff;border:1px solid var(--line);border-radius:18px;padding:32px">
-          <div class="form-success" id="contactSuccess">
-            ✓ Thank you! We've recorded your response — our team will reach out to you shortly.
+          <div class="form-success" id="contactSuccess" role="status" aria-live="polite">
+            <div class="form-success-icon" aria-hidden="true">✓</div>
+            <h3>Thank you!</h3>
+            <p>We've recorded your response — our team will reach out to you shortly.</p>
           </div>
           <!-- Replace data-endpoint with your deployed Google Apps Script Web App URL -->
           <form id="contactForm" novalidate data-endpoint="https://script.google.com/macros/s/AKfycbzBMQ7awNUFCRh9bs1sPg2gvie8ASw12FfnbtG54_QEi2Ge5TEwgbuoBDsyh9IZ8Kqu/exec">
@@ -96,7 +98,7 @@
               <textarea class="textarea" id="cMsg" placeholder="A few lines about your business, current WhatsApp setup, and what you'd like to solve."></textarea>
             </div>
             <div class="form-actions">
-              <button class="btn btn-green" type="submit">Send message →</button>
+              <button class="btn btn-green" type="submit">Submit →</button>
             </div>
           </form>
         </div>

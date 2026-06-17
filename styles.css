@@ -1207,16 +1207,24 @@ details[open] > .post-faq-q::after { content: '−'; color: var(--green-deep); }
 .form-checkbox { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #475569; line-height: 1.45; margin: 18px 0 0; }
 .form-checkbox input { margin-top: 3px; accent-color: var(--green); }
 .form-success {
+  display: none;
+  text-align: center;
   background: var(--green-tint);
   border: 1px solid #BFEFCE;
-  color: var(--green-deep);
-  padding: 14px 16px;
-  border-radius: 10px;
-  font-size: 14px;
-  margin-bottom: 18px;
-  display: none;
+  border-radius: 14px;
+  padding: 44px 28px;
 }
 .form-success.show { display: block; }
+.form-success-icon {
+  width: 56px; height: 56px; margin: 0 auto 18px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--green); color: #fff;
+  font-size: 28px; line-height: 1; font-weight: 700;
+  box-shadow: 0 8px 24px -8px rgba(37,211,102,.6);
+}
+.form-success h3 { font-size: 20px; font-weight: 600; color: var(--ink); margin: 0 0 8px; }
+.form-success p { font-size: 14px; color: var(--muted); max-width: 360px; margin: 0 auto; line-height: 1.55; }
 
 /* ===== inner-page grids ===== */
 .f-grid {
