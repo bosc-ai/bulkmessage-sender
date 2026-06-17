@@ -185,6 +185,19 @@ h3 { font-size: 22px; line-height: 1.25; letter-spacing: -0.02em; }
 
 .nav-cta { display: flex; align-items: center; gap: 10px; }
 .nav-cta .btn { height: 38px; padding: 0 14px; font-size: 13.5px; }
+/* "Sign in" is a ghost button — give it a solid white surface so it
+   doesn't wash out against the transparent nav over the hero gradient. */
+.nav-cta .nav-signin {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.nav-cta .nav-signin:hover {
+  background: #fff;
+  border-color: var(--green-2);
+  box-shadow: var(--shadow-md);
+}
 
 .nav-burger {
   display: none;
