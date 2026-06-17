@@ -262,14 +262,48 @@
   // ---------- Inner page: contact form ----------
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    const val = (id) => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
+
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const ok = e.target.checkValidity();
-      if (!ok) { e.target.reportValidity(); return; }
-      const success = document.getElementById('contactSuccess');
-      if (success) success.classList.add('show');
-      e.target.style.opacity = '.4';
-      e.target.style.pointerEvents = 'none';
+      if (!e.target.checkValidity()) { e.target.reportValidity(); return; }
+
+      const btn = contactForm.querySelector('button[type="submit"]');
+      const countrySel = document.getElementById('cCountry');
+      const country = countrySel ? (countrySel.options[countrySel.selectedIndex].dataset.country || '') : '';
+      const dial = countrySel ? countrySel.value : '';
+
+      const data = {
+        name: val('cName'),
+        company: val('cCompany'),
+        email: val('cEmail'),
+        country: country,
+        dialCode: dial,
+        phone: (dial + ' ' + val('cPhone')).trim(),
+        topic: val('cTopic'),
+        teamSize: val('cAgents'),
+        message: val('cMsg'),
+        page: location.href,
+        submittedAt: new Date().toISOString()
+      };
+
+      const endpoint = contactForm.dataset.endpoint || '';
+      if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Sending…'; }
+
+      try {
+        if (endpoint && !/PASTE_YOUR/.test(endpoint)) {
+          // URLSearchParams + no-cors avoids a CORS preflight on Apps Script.
+          await fetch(endpoint, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data) });
+        }
+        const success = document.getElementById('contactSuccess');
+        if (success) success.classList.add('show');
+        contactForm.reset();
+        contactForm.style.opacity = '.4';
+        contactForm.style.pointerEvents = 'none';
+      } catch (err) {
+        if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Send message →'; }
+        alert('Sorry — something went wrong. Please email hello@serves.in and we\'ll get right back to you.');
+      }
     });
   }
 

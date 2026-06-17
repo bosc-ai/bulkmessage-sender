@@ -42,6 +42,7 @@ const SKIP_COPY = new Set([
   "README.md", ".gitignore", ".DS_Store", "sitemap.xml",
   "api", "lib", // serverless functions + their shared code — bundled by Vercel, not static
   "blog-editor.html", "ADMIN-SETUP.md", // local tools/docs — not published to the live site
+  "contact-form.gs", "CONTACT-FORM-SETUP.md", // server-side glue + docs — not static assets
 
   ...COLLECTIONS.map((c) => c.list), // listing pages are generated
 ]);
