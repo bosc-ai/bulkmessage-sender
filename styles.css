@@ -287,6 +287,21 @@ h3 { font-size: 22px; line-height: 1.25; letter-spacing: -0.02em; }
 }
 .hero-powered .weflux-link:hover { border-bottom-color: var(--green-deep); }
 .hero-cta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+/* On the green hero gradient a transparent ghost button washes out —
+   give it a solid white surface so it reads clearly as the secondary CTA. */
+.hero-cta .btn-ghost {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.hero-cta .btn-ghost:hover {
+  background: #fff;
+  border-color: var(--green-2);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+.hero-cta .btn-ghost svg { color: var(--green-deep); }
 .hero-trust { display: flex; align-items: center; gap: 22px; margin-top: 24px; flex-wrap: wrap; }
 .hero-trust span { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
 .hero-trust svg { color: var(--green-deep); }
