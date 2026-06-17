@@ -322,7 +322,8 @@
         const success = document.getElementById('contactSuccess');
         if (success) success.classList.add('show');
         contactForm.reset();
-        contactForm.style.opacity = '.4';
+        if (btn) { btn.textContent = 'Submitted ✓'; btn.disabled = true; }
+        contactForm.style.opacity = '.6';
         contactForm.style.pointerEvents = 'none';
       } catch (err) {
         if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Send message →'; }
