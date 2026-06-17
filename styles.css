@@ -1201,9 +1201,9 @@ details[open] > .post-faq-q::after { content: '−'; color: var(--green-deep); }
 .form-foot a:hover { text-decoration: underline; }
 .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 /* Phone field: country-code dropdown + number side by side */
-.phone-group { display: flex; gap: 8px; }
-.phone-group .phone-code { flex: 0 0 auto; width: auto; min-width: 112px; padding-right: 30px; background-position: right 10px center; }
-.phone-group .input { flex: 1 1 auto; min-width: 0; }
+.phone-group { display: flex; align-items: stretch; gap: 8px; }
+.phone-group .phone-code { flex: 0 0 auto; width: auto; min-width: 104px; padding-left: 12px; padding-right: 28px; background-position: right 9px center; }
+.phone-group .input { flex: 1 1 auto; min-width: 0; letter-spacing: .02em; }
 .form-checkbox { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #475569; line-height: 1.45; margin: 18px 0 0; }
 .form-checkbox input { margin-top: 3px; accent-color: var(--green); }
 .form-success {

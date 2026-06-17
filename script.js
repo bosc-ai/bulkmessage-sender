@@ -264,6 +264,30 @@
   if (contactForm) {
     const val = (id) => { const el = document.getElementById(id); return el ? el.value.trim() : ''; };
 
+    // Phone: digits only, with a per-country length limit (India = 10, UAE = 9, etc.)
+    const phoneEl = document.getElementById('cPhone');
+    const countryEl = document.getElementById('cCountry');
+    function phoneLen() {
+      if (!countryEl) return 10;
+      const opt = countryEl.options[countryEl.selectedIndex];
+      return parseInt((opt && opt.dataset.len) || '10', 10);
+    }
+    function applyPhoneLimit() {
+      if (!phoneEl) return;
+      const len = phoneLen();
+      phoneEl.maxLength = len;
+      phoneEl.setAttribute('pattern', '\\d{' + len + '}');
+      phoneEl.title = 'Enter the ' + len + '-digit phone number';
+      if (phoneEl.value.length > len) phoneEl.value = phoneEl.value.slice(0, len);
+    }
+    if (phoneEl) {
+      phoneEl.addEventListener('input', () => {
+        phoneEl.value = phoneEl.value.replace(/\D/g, '').slice(0, phoneLen());
+      });
+    }
+    if (countryEl) countryEl.addEventListener('change', applyPhoneLimit);
+    applyPhoneLimit();
+
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!e.target.checkValidity()) { e.target.reportValidity(); return; }
