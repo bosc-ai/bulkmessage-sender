@@ -274,7 +274,18 @@ h3 { font-size: 22px; line-height: 1.25; letter-spacing: -0.02em; }
 }
 @keyframes caret { 50% { opacity: 0; } }
 
-.hero .lede { margin-bottom: 32px; }
+.hero .lede { margin-bottom: 20px; }
+.hero-powered {
+  display: inline-flex; align-items: center; flex-wrap: wrap; gap: .35em;
+  margin: 0 0 30px; font-size: 14px; color: var(--muted);
+}
+.hero-powered strong { color: var(--ink-2); font-weight: 600; }
+.hero-powered .weflux-link {
+  color: var(--green-deep); font-weight: 600;
+  border-bottom: 1px solid rgba(15,138,83,.32);
+  transition: border-color .18s var(--ease);
+}
+.hero-powered .weflux-link:hover { border-bottom-color: var(--green-deep); }
 .hero-cta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .hero-trust { display: flex; align-items: center; gap: 22px; margin-top: 24px; flex-wrap: wrap; }
 .hero-trust span { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); }
@@ -1453,4 +1464,51 @@ details[open] > .post-faq-q::after { content: '−'; color: var(--green-deep); }
     animation-iteration-count: 1 !important;
     transition-duration: .15s !important;
   }
+}
+
+/* =========================================================
+   Weflux redirect interstitial (injected by shell.js)
+   Shown briefly before sending visitors to weflux.in.
+   ========================================================= */
+.weflux-redirect {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px;
+  background: radial-gradient(circle at 50% 38%, rgba(15,138,83,.16), rgba(10,10,10,.78) 70%), rgba(10,10,10,.72);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .28s var(--ease), visibility .28s var(--ease);
+}
+.weflux-redirect.show { opacity: 1; visibility: visible; pointer-events: auto; }
+.wfr-card {
+  text-align: center; max-width: 420px; width: 100%;
+  background: #fff; border: 1px solid var(--line); border-radius: 20px;
+  padding: 38px 32px 34px; box-shadow: var(--shadow-lg);
+  transform: translateY(10px) scale(.98);
+  transition: transform .32s var(--ease);
+}
+.weflux-redirect.show .wfr-card { transform: translateY(0) scale(1); }
+.wfr-spinner {
+  width: 46px; height: 46px; margin: 0 auto 22px;
+  border-radius: 50%;
+  border: 3px solid var(--green-tint);
+  border-top-color: var(--green); border-right-color: var(--green-2);
+  animation: wfrSpin .8s linear infinite;
+}
+@keyframes wfrSpin { to { transform: rotate(360deg); } }
+.wfr-title { font-size: 18px; font-weight: 600; color: var(--ink); margin: 0 0 6px; }
+.wfr-sub { font-size: 14px; color: var(--muted); margin: 0; }
+.wfr-sub strong { color: var(--green-deep); font-weight: 600; }
+.wfr-bar {
+  position: relative; height: 4px; margin-top: 22px; border-radius: 999px;
+  background: var(--green-tint); overflow: hidden;
+}
+.wfr-bar::after {
+  content: ""; position: absolute; inset: 0; left: -40%; width: 40%;
+  border-radius: 999px; background: var(--green);
+  animation: wfrBar 1.4s var(--ease) infinite;
+}
+@keyframes wfrBar { 0% { left: -40%; } 100% { left: 100%; } }
+@media (prefers-reduced-motion: reduce) {
+  .wfr-spinner, .wfr-bar::after { animation: none; }
 }

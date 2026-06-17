@@ -184,4 +184,64 @@
       </footer>
     `;
   }
+
+  // ---- WEFLUX REDIRECT INTERSTITIAL ----
+  // Any in-page link to weflux.in shows a short "Taking you to Weflux…"
+  // loading screen, then auto-continues. Injected once from the shell so
+  // every page (current and future) gets it for free.
+  (function () {
+    const WEFLUX_RE = /^https?:\/\/(www\.)?weflux\.in(\/|$|\?|#)/i;
+    const DELAY = 1500; // 1.5s — within the "1–2 sec" brief
+
+    const overlay = document.createElement('div');
+    overlay.className = 'weflux-redirect';
+    overlay.id = 'wc-weflux-redirect';
+    overlay.setAttribute('role', 'status');
+    overlay.setAttribute('aria-live', 'polite');
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.innerHTML = `
+      <div class="wfr-card">
+        <div class="wfr-spinner" aria-hidden="true"></div>
+        <p class="wfr-title">Taking you to Weflux…</p>
+        <p class="wfr-sub">the platform behind <strong>Bulk Message Sender</strong></p>
+        <div class="wfr-bar" aria-hidden="true"></div>
+      </div>
+    `;
+
+    let armed = false;
+    function ensureMounted() {
+      if (!overlay.isConnected) document.body.appendChild(overlay);
+    }
+    function go(href) {
+      ensureMounted();
+      // force reflow so the transition runs even if just appended
+      overlay.offsetHeight; // eslint-disable-line no-unused-expressions
+      overlay.classList.add('show');
+      overlay.setAttribute('aria-hidden', 'false');
+      window.setTimeout(function () { window.location.href = href; }, DELAY);
+    }
+
+    document.addEventListener('click', function (e) {
+      if (armed) { e.preventDefault(); return; }
+      // respect modifier keys / non-left clicks (open-in-new-tab, etc.)
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = e.target.closest && e.target.closest('a[href]');
+      if (!a) return;
+      if (a.target && a.target !== '' && a.target !== '_self') return; // new-tab links pass through
+      const href = a.getAttribute('href') || '';
+      if (!WEFLUX_RE.test(href)) return;
+      e.preventDefault();
+      armed = true;
+      go(href);
+    }, true);
+
+    // If the page is restored from bfcache, clear the overlay state.
+    window.addEventListener('pageshow', function (ev) {
+      if (ev.persisted) {
+        armed = false;
+        overlay.classList.remove('show');
+        overlay.setAttribute('aria-hidden', 'true');
+      }
+    });
+  })();
 })();
