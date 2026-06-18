@@ -68,7 +68,7 @@
         </div>
       </header>
 
-      <div class="mobile-menu" id="wc-mobile" aria-hidden="true">
+      <div class="mobile-menu" id="wc-mobile" aria-hidden="true" inert>
         <nav>
           ${navLinks.map(l => `<a href="${l.href}"${activeKey === l.key ? ' aria-current="page"' : ''}>${l.label}</a>`).join('')}
           <hr>
@@ -93,6 +93,9 @@
       burger.classList.toggle('open', open);
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
       mobile.setAttribute('aria-hidden', open ? 'false' : 'true');
+      // inert keeps the menu's links out of the tab order + a11y tree while closed
+      if (open) mobile.removeAttribute('inert');
+      else mobile.setAttribute('inert', '');
       document.body.style.overflow = open ? 'hidden' : '';
     }
     burger.addEventListener('click', () => setMenu(!mobile.classList.contains('open')));

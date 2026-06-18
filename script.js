@@ -178,8 +178,9 @@
   const billBtns = document.querySelectorAll('#billToggle button');
   billBtns.forEach((b) => {
     b.addEventListener('click', () => {
-      billBtns.forEach((x) => x.classList.remove('on'));
+      billBtns.forEach((x) => { x.classList.remove('on'); x.setAttribute('aria-pressed', 'false'); });
       b.classList.add('on');
+      b.setAttribute('aria-pressed', 'true');
       const mode = b.dataset.billing;
       document.querySelectorAll('.plan .price').forEach((p) => {
         const v = mode === 'annual' ? p.dataset.annual : p.dataset.monthly;

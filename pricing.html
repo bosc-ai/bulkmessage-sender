@@ -67,9 +67,9 @@
       <h1 style="max-width:18ch">Honest pricing. No conversation markup.</h1>
       <p class="lede" style="text-align:center">Pick a plan by team size and feature set. Meta's per-conversation charges are passed through at cost — you see them line-by-line on every invoice.</p>
 
-      <div class="bill-toggle" id="billToggle" role="tablist" style="margin-top:32px">
-        <button class="on" data-billing="monthly">Monthly</button>
-        <button data-billing="annual">Annual <span class="save">−20%</span></button>
+      <div class="bill-toggle" id="billToggle" role="group" aria-label="Billing period" style="margin-top:32px">
+        <button type="button" class="on" data-billing="monthly" aria-pressed="true">Monthly</button>
+        <button type="button" data-billing="annual" aria-pressed="false">Annual <span class="save">−20%</span></button>
       </div>
     </section>
 
