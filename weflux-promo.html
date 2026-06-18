@@ -35,6 +35,13 @@
       return null;
     }
 
+    const params = new URLSearchParams(window.location.search);
+    const showControls = params.get('controls') === '1';
+    const autoplay = params.get('autoplay') !== '0';
+    if (params.get('reset') === '1') {
+      try { localStorage.removeItem('weflux-promo:t'); } catch (e) {}
+    }
+
     function App() {
       return (
         <Stage
@@ -44,7 +51,8 @@
           background={WF ? WF.bg : '#060d06'}
           persistKey="weflux-promo"
           loop={false}
-          hideControls={true}
+          autoplay={autoplay}
+          hideControls={!showControls}
         >
           <div
             id="video-root"

@@ -140,6 +140,43 @@
     .wf-promo-foot { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 40px; position: relative; z-index: 1; }
     .wf-promo-note { font-size: 12px; color: rgba(37,201,95,.45); font-family: var(--font-mono); text-align: center; margin-top: 16px; }
 
+    /* ---- Walkthrough poster (opens the modal) ---- */
+    .wf-poster { display: block; width: 100%; padding: 0; border: 0; cursor: pointer; position: relative; aspect-ratio: 16/9; border-radius: 20px; overflow: hidden;
+      background: radial-gradient(ellipse 760px 340px at 50% 16%, rgba(37,201,95,.20), transparent 70%), linear-gradient(165deg, #0e1f12 0%, #060d06 62%);
+      box-shadow: 0 0 0 1px rgba(37,201,95,.16), 0 40px 100px -20px rgba(0,0,0,.7), 0 0 80px -20px rgba(37,201,95,.14);
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+    .wf-poster:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px rgba(37,201,95,.28), 0 48px 120px -20px rgba(0,0,0,.75), 0 0 100px -16px rgba(37,201,95,.22); }
+    .wf-poster:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+    .wf-poster-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center; padding: 24px; }
+    .wf-play { position: relative; width: 78px; height: 78px; border-radius: 50%; display: grid; place-items: center; color: #04240f; background: var(--green); box-shadow: 0 14px 44px -8px rgba(37,211,102,.7); transition: transform .25s var(--ease); }
+    .wf-play svg { margin-left: 4px; }
+    .wf-play::before { content: ''; position: absolute; inset: -10px; border-radius: 50%; border: 2px solid rgba(37,211,102,.45); animation: wfRing 2.4s var(--ease) infinite; }
+    .wf-poster:hover .wf-play { transform: scale(1.07); }
+    @keyframes wfRing { 0% { transform: scale(1); opacity: .6; } 70% { transform: scale(1.35); opacity: 0; } 100% { opacity: 0; } }
+    .wf-poster-title { color: #edfaef; font-size: clamp(20px, 3vw, 28px); font-weight: 600; letter-spacing: -0.01em; }
+    .wf-poster-sub { color: rgba(237,250,239,.55); font-size: 13.5px; font-family: var(--font-mono); }
+
+    /* ---- Walkthrough modal ---- */
+    .wf-modal { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 28px; }
+    .wf-modal.open { display: flex; }
+    .wf-modal-backdrop { position: absolute; inset: 0; background: rgba(3,8,4,.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); animation: wfFade .25s var(--ease); }
+    .wf-modal-card { position: relative; z-index: 1; width: min(1120px, 100%); animation: wfRise .3s var(--ease); }
+    .wf-modal-frame { position: relative; aspect-ratio: 16/9; border-radius: 16px; overflow: hidden; background: #000; box-shadow: 0 40px 120px -20px rgba(0,0,0,.85), 0 0 0 1px rgba(37,201,95,.18); }
+    .wf-modal-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .wf-modal-close { position: absolute; top: -16px; right: -16px; width: 42px; height: 42px; border-radius: 50%; background: #fff; color: #0a0a0a; display: grid; place-items: center; font-size: 16px; cursor: pointer; box-shadow: var(--shadow-md); z-index: 2; transition: transform .2s var(--ease); }
+    .wf-modal-close:hover { transform: scale(1.08); }
+    .wf-modal-hint { margin-top: 16px; text-align: center; font-size: 12.5px; color: rgba(237,250,239,.55); font-family: var(--font-mono); }
+    .wf-modal-hint kbd { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 5px; padding: 1px 6px; font-size: 11px; color: #edfaef; }
+    @keyframes wfFade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes wfRise { from { opacity: 0; transform: translateY(16px) scale(.98); } to { opacity: 1; transform: none; } }
+    @media (max-width: 700px) {
+      .wf-modal { padding: 14px; }
+      .wf-modal-close { top: 6px; right: 6px; background: rgba(255,255,255,.92); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wf-play::before { animation: none; }
+    }
+
     @media (max-width: 768px) {
       .lpdemo-tabs { display: none; }
       .lpinbox { height: auto; flex-direction: column; }
@@ -388,20 +425,33 @@
         <h2>Every feature, alive.</h2>
         <p class="lede">90 seconds. Inbox to pipeline to analytics. See the full Weflux CRM flow before you sign up.</p>
       </div>
-      <div class="wf-embed-wrap">
-        <iframe
-          src="weflux-promo.html"
-          title="Weflux CRM product walkthrough"
-          allow="autoplay"
-          loading="lazy"
-        ></iframe>
-      </div>
+      <button type="button" class="wf-poster" id="wfOpenDemo" aria-haspopup="dialog" aria-controls="wfModal">
+        <span class="wf-poster-inner">
+          <span class="wf-play" aria-hidden="true">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <span class="wf-poster-title">Take the product walkthrough</span>
+          <span class="wf-poster-sub">90-second interactive tour · play, pause &amp; scrub the timeline</span>
+        </span>
+      </button>
       <div class="wf-promo-foot">
         <a href="signup.html" class="btn btn-green">Start free trial →</a>
         <a href="https://weflux.in" target="_blank" rel="noopener" class="btn" style="background:rgba(255,255,255,.08);color:#edfaef;border:1px solid rgba(255,255,255,.18);">Explore Weflux →</a>
       </div>
     </div>
   </section>
+
+  <!-- ============ WALKTHROUGH MODAL ============ -->
+  <div class="wf-modal" id="wfModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Weflux CRM product walkthrough">
+    <div class="wf-modal-backdrop" data-wf-close></div>
+    <div class="wf-modal-card">
+      <button class="wf-modal-close" type="button" data-wf-close aria-label="Close walkthrough">✕</button>
+      <div class="wf-modal-frame">
+        <iframe id="wfModalFrame" title="Weflux CRM product walkthrough" allow="autoplay" src="about:blank"></iframe>
+      </div>
+      <p class="wf-modal-hint">Use the timeline below the demo to scrub forward and back · press <kbd>Esc</kbd> to close</p>
+    </div>
+  </div>
 
   <!-- ============ MARQUEE ============ -->
   <section class="marquee-section">
@@ -1306,6 +1356,42 @@
         btn.textContent = 'Sent ✓';
       }, 1200);
     }
+
+    /* ---- Walkthrough modal: lazy-load the demo with timeline controls ---- */
+    (function () {
+      const modal = document.getElementById('wfModal');
+      const frame = document.getElementById('wfModalFrame');
+      const opener = document.getElementById('wfOpenDemo');
+      if (!modal || !frame || !opener) return;
+      // controls=1 shows the built-in play/pause + scrub timeline; reset=1 starts at 0.
+      const SRC = 'weflux-promo.html?controls=1&autoplay=1&reset=1';
+      let lastFocus = null;
+
+      function openModal() {
+        lastFocus = document.activeElement;
+        frame.src = SRC;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        const closeBtn = modal.querySelector('.wf-modal-close');
+        if (closeBtn) closeBtn.focus();
+      }
+      function closeModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        frame.src = 'about:blank'; // stop playback + free resources
+        document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      opener.addEventListener('click', openModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target.hasAttribute('data-wf-close')) closeModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+      });
+    })();
 
     /* init */
     renderConv('priya');
