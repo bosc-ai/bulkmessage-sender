@@ -181,6 +181,7 @@ function writeSitemap(collectionUrls) {
     ["about.html", "0.6", "monthly"],
     ["contact.html", "0.7", "monthly"],
     ["docs.html", "0.6", "monthly"],
+    ["weflux-guide.html", "0.8", "weekly"],
     ["changelog.html", "0.5", "weekly"],
     ["support.html", "0.5", "monthly"],
     ["security.html", "0.5", "monthly"],

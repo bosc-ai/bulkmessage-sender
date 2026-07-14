@@ -152,7 +152,7 @@
                 <li><a href="/case-studies">Case Studies</a></li>
                 <li><a href="/help">Help Center</a></li>
                 <li><a href="/resources">Resources</a></li>
-
+                <li><a href="/weflux-guide">Weflux Guide</a></li>
                 <li><a href="/contact">Contact sales</a></li>
               </ul>
             </div>
