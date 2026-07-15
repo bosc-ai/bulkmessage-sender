@@ -3,3 +3,5 @@ dist/
 .DS_Store
 .vercel
 npm-debug.log*
+server.js
+add_ids.py
