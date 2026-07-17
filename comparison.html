@@ -90,9 +90,8 @@
     .feature-card-glass h3 { font-size: 1.4rem; margin-bottom: 16px; letter-spacing: -0.01em; color: var(--ink); }
     .feature-card-glass p { color: var(--muted); line-height: 1.7; flex-grow: 1; }
 
-    /* Premium Pricing Card */
     .pricing-grid-custom { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: stretch; margin-top: 50px; }
-    @media (min-width: 900px) { .pricing-grid-custom { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 900px) { .pricing-grid-custom { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
     .plan-custom { 
       display: flex; flex-direction: column; height: 100%; 
       background: #fff; border: 1px solid var(--line); border-radius: 18px; 
@@ -258,49 +257,67 @@
             <ul>
               <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 1 Agent Seat</li>
               <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited Contacts</li>
-              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 1 Number & Shared Inbox</li>
-              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 5 Templates</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 1 Number &amp; Inbox</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 5 Message Templates</li>
             </ul>
             <a href="https://weflux.in/register" class="btn btn-ghost">Start free</a>
           </article>
           
-          <!-- Basic Plan (Featured) -->
-          <article class="plan-custom premium-card">
+          <!-- Basic Plan -->
+          <article class="plan-custom">
             <div class="plan-head">
-              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
-                <h3 class="plan-name">Basic Plan</h3>
-                <span class="badge-pro">Most popular</span>
-              </div>
+              <h3 class="plan-name">Basic Plan</h3>
               <div class="plan-price">
                 <span class="amt">₹999</span><span class="mo">/mo</span>
               </div>
-              <p class="plan-desc">For many small businesses, this covers the entire operation.</p>
+              <p class="plan-desc">Perfect for freelancers &amp; small businesses.</p>
             </div>
             <ul>
-              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 20 Agent Seats</li>
-              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited Contacts & Templates</li>
-              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Broadcast Campaigns</li>
-              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 10 Automation Flows</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 1 WhatsApp Number</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 5 Team Members</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Shared Inbox &amp; Broadcast</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 10 Automation Flows</li>
             </ul>
-            <a href="https://weflux.in/register" class="btn btn-premium">Start free trial</a>
+            <a href="https://weflux.in/register?plan=basic" class="btn btn-ghost">Start free trial</a>
           </article>
-
-          <!-- Pro Plan -->
-          <article class="plan-custom">
+          
+          <!-- Pro Plan (Featured) -->
+          <article class="plan-custom premium-card">
             <div class="plan-head">
-              <h3 class="plan-name">Pro Plan</h3>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <h3 class="plan-name">Pro Plan</h3>
+                <span class="badge-pro">Most popular</span>
+              </div>
               <div class="plan-price">
                 <span class="amt">₹2,499</span><span class="mo">/mo</span>
               </div>
               <p class="plan-desc">Designed for growing sales and support teams.</p>
             </div>
             <ul>
-              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 30 Agents & 3 Numbers</li>
-              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Up to 20 Automation Flows</li>
-              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Real-Time Analytics & ROI Tracking</li>
-              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Segmentation & A/B Testing</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 3 WhatsApp Numbers</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 10 Team Members &amp; Calling</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 25 Automation Flows</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Advanced Analytics &amp; API</li>
             </ul>
-            <a href="https://weflux.in/register" class="btn btn-ghost">Start free trial</a>
+            <a href="https://weflux.in/register?plan=pro" class="btn btn-premium">Start free trial</a>
+          </article>
+
+          <!-- Scale Plan -->
+          <article class="plan-custom">
+            <div class="plan-head">
+              <h3 class="plan-name">Scale Plan</h3>
+              <div class="plan-price">
+                <span class="amt">₹4,999</span><span class="mo">/mo</span>
+              </div>
+              <p class="plan-desc">For teams handling high message volume.</p>
+            </div>
+            <ul>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 10 WhatsApp Numbers</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Unlimited Members &amp; flows</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Full REST API &amp; Webhooks</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> SLA Support &amp; Audit Logs</li>
+            </ul>
+            <a href="https://weflux.in/register?plan=scale" class="btn btn-ghost">Start free trial</a>
           </article>
         </div>
       </div>
