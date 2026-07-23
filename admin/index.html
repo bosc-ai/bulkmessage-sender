@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Content Studio — BulkMessageSender</title>
+<title>Content Studio — Weflux</title>
 <link rel="icon" href="/assets/wachat-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -259,7 +259,7 @@
 <!-- ===== LOGIN ===== -->
 <div class="login" id="loginView">
   <div class="login-card">
-    <img class="login-logo" src="/assets/wachat-logo.png" alt="BulkMessageSender">
+    <img class="login-logo" src="/assets/wachat-logo.png" alt="Weflux">
     <h1>Content Studio</h1>
     <p class="sub">Sign in to write and publish.</p>
     <form id="loginForm" autocomplete="on">
@@ -385,7 +385,7 @@
                   <div class="field"><label for="fDate">Date *</label><input type="date" id="fDate"></div>
                   <div class="field"><label for="fCover">Card color</label><select id="fCover"><option value="green">green</option><option value="dark">dark</option><option value="cream">cream</option></select></div>
                 </div>
-                <div class="field"><label for="fAuthor">Author</label><input type="text" id="fAuthor" value="BulkMessageSender Team"></div>
+                <div class="field"><label for="fAuthor">Author</label><input type="text" id="fAuthor" value="Weflux Team"></div>
                 <div class="row2">
                   <div class="field"><label for="fCategory">Category</label><input type="text" id="fCategory" placeholder="Broadcasts"></div>
                   <div class="field"><label for="fSubCat">Sub Category</label><input type="text" id="fSubCat" placeholder="Tutorial"></div>
@@ -471,7 +471,7 @@
 <script src="https://cdn.jsdelivr.net/npm/tinymce@7/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 //=================== config ===================
-const SITE='https://bulkmessagesender.com';
+const SITE='https://weflux.in';
 const COLLECTIONS=[
   {dir:'blog',label:'Blog'},{dir:'articles',label:'Articles'},
   {dir:'case-studies',label:'Case Studies'},{dir:'help',label:'Help Center'},{dir:'resources',label:'Resources'},
@@ -699,7 +699,7 @@ function renderSettings(){
       <div><div style="font-weight:700;font-size:16px">${escapeHtml(USER)}</div><div style="color:var(--muted);font-size:13px">Signed in to Content Studio</div></div>
     </div>
     <p style="color:var(--muted);font-size:13.5px;line-height:1.6">
-      Posts you publish go live on <a href="${SITE}" target="_blank">bulkmessagesender.com</a> automatically, usually within a minute.<br>
+      Posts you publish go live on <a href="${SITE}" target="_blank">weflux.in</a> automatically, usually within a minute.<br>
       To add or remove writers, an admin edits the <code>ADMIN_USERS</code> setting in Vercel.
     </p>
     <div style="margin-top:16px;display:flex;gap:9px;flex-wrap:wrap">
@@ -762,11 +762,11 @@ function openPost(p){
     setBody((fm.format==='html'?body:marked.parse(body||'')).trim());setBusy(false);
   }).catch(e=>{toast('Could not open: '+e.message,true);setBusy(false);gotoNav('posts');});
 }
-function newPost(){setView('edit');setActiveNav('');closeNav();editing=null;setDeleteVisible(false);fillForm('blog',{author:'BulkMessageSender Team',cover:'green',date:todayISO()});setBody('');}
+function newPost(){setView('edit');setActiveNav('');closeNav();editing=null;setDeleteVisible(false);fillForm('blog',{author:'Weflux Team',cover:'green',date:todayISO()});setBody('');}
 function parseFM(raw){const m=raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);if(!m)return{data:{},body:raw};let data={};try{data=jsyaml.load(m[1])||{};}catch(e){data={};}return{data,body:m[2]};}
 function fillForm(dir,fm){
   $('#fCollection').value=dir||'blog';$('#fTitle').value=fm.title||'';$('#fDesc').value=fm.description||'';
-  $('#fDate').value=toDateStr(fm.date);$('#fAuthor').value=fm.author||'BulkMessageSender Team';
+  $('#fDate').value=toDateStr(fm.date);$('#fAuthor').value=fm.author||'Weflux Team';
   $('#fCategory').value=fm.category||'';$('#fSubCat').value=Array.isArray(fm.sub_categories)?fm.sub_categories.join(', '):(fm.sub_categories||'');
   $('#fReadTime').value=fm.readTime||'';$('#fTags').value=Array.isArray(fm.tags)?fm.tags.join(', '):(fm.tags||'');
   $('#fCover').value=fm.cover||'green';$('#fDraft').checked=!!fm.draft;
@@ -844,7 +844,7 @@ async function save(asDraft){
 $('#btnPublish').onclick=async()=>{
   if(postIsLive&&!isDirty()){toast('Already live — no changes to publish');return;}
   const republish=postIsLive;
-  if(await dialog({title:republish?'Republish your changes?':'Publish to your live site?',message:republish?'This pushes your edits live on bulkmessagesender.com — updated in about a minute.':'This publishes the post to bulkmessagesender.com — it’ll be live in about a minute.',okText:republish?'Republish':'Publish',cancelText:'Not yet'}))save(false);
+  if(await dialog({title:republish?'Republish your changes?':'Publish to your live site?',message:republish?'This pushes your edits live on weflux.in — updated in about a minute.':'This publishes the post to weflux.in — it’ll be live in about a minute.',okText:republish?'Republish':'Publish',cancelText:'Not yet'}))save(false);
 };
 $('#btnDraft').onclick=()=>save(true);
 $('#btnPreview').onclick=async()=>{

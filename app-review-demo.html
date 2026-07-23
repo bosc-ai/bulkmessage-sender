@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Console Demo | BulkMessageSender</title>
-  <meta name="description" content="A guided demo of the BulkMessageSender WhatsApp Business console.">
-  <link rel="canonical" href="https://bulkmessagesender.com/app-review-demo.html">
-  <meta property="og:title" content="Console Demo | BulkMessageSender">
-  <meta property="og:description" content="A guided demo of the BulkMessageSender WhatsApp Business console.">
+  <title>Console Demo | Weflux</title>
+  <meta name="description" content="A guided demo of the Weflux WhatsApp Business console.">
+  <link rel="canonical" href="https://weflux.in/app-review-demo.html">
+  <meta property="og:title" content="Console Demo | Weflux">
+  <meta property="og:description" content="A guided demo of the Weflux WhatsApp Business console.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://bulkmessagesender.com/app-review-demo.html">
-  <meta property="og:site_name" content="BulkMessageSender">
+  <meta property="og:url" content="https://weflux.in/app-review-demo.html">
+  <meta property="og:site_name" content="Weflux">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="robots" content="noindex, follow">
   <link rel="icon" href="assets/wachat-logo.png">
@@ -102,14 +102,14 @@
       <div class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <span>Console Demo</span></div>
       <span class="eyebrow"><span class="dot"></span> Product walkthrough</span>
       <h1>See the workspace a business gets<br>after authorization.</h1>
-      <p class="lede">This console demo shows the practical surfaces BulkMessageSender provides: account onboarding, template operations, Cloud API sends, and webhook evidence — covering both <strong>whatsapp_business_management</strong> and <strong>whatsapp_business_messaging</strong> permissions.</p>
+      <p class="lede">This console demo shows the practical surfaces Weflux provides: account onboarding, template operations, Cloud API sends, and webhook evidence — covering both <strong>whatsapp_business_management</strong> and <strong>whatsapp_business_messaging</strong> permissions.</p>
     </section>
 
     <section class="container" style="padding:40px 0 96px">
       <div class="demo-shell">
 
         <nav class="demo-sidebar">
-          <strong>BulkMessageSender Console</strong>
+          <strong>Weflux Console</strong>
           <a class="active" href="#overview">Account health</a>
           <a href="#onboarding">Onboarding trail</a>
           <a href="#templates">Templates</a>
@@ -156,13 +156,13 @@
                 <div class="process-num">1</div>
                 <div>
                   <h3>Client authorized business assets via Embedded Signup</h3>
-                  <p>Business portfolio, WABA ID, and phone-number ID received after client completed Facebook Login for Business. BulkMessageSender exchanged the authorization code for a system user token via <code>GET /oauth/access_token</code>.</p>
+                  <p>Business portfolio, WABA ID, and phone-number ID received after client completed Facebook Login for Business. Weflux exchanged the authorization code for a system user token via <code>GET /oauth/access_token</code>.</p>
                 </div>
               </div>
               <div class="process-step">
                 <div class="process-num">2</div>
                 <div>
-                  <h3>BulkMessageSender created an isolated account workspace</h3>
+                  <h3>Weflux created an isolated account workspace</h3>
                   <p>WABA ID and phone number ID stored. Workspace access assigned to operations team. All identifiers stored with minimum-necessary access principle.</p>
                 </div>
               </div>
@@ -221,7 +221,7 @@
           <div class="demo-section" id="create-template">
             <p class="demo-eyebrow">Create template — whatsapp_business_management</p>
             <h2 style="font-size:20px;margin-bottom:6px;">Submit a new message template for Meta review.</h2>
-            <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">BulkMessageSender calls <code>POST /v20.0/{waba-id}/message_templates</code> on behalf of the authorized business. All templates go through Meta's review before they can be sent to customers.</p>
+            <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Weflux calls <code>POST /v20.0/{waba-id}/message_templates</code> on behalf of the authorized business. All templates go through Meta's review before they can be sent to customers.</p>
             <form onsubmit="event.preventDefault();alert('Template submitted for Meta review. Status will update from Draft to Approved or Rejected within 24-48 hours.');">
               <div class="demo-form-row">
                 <div class="demo-field">
@@ -271,7 +271,7 @@
             <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px;">
               <div>
                 <h2 style="font-size:20px;margin-bottom:4px;">Send a controlled template message.</h2>
-                <p style="font-size:13px;color:var(--muted);">BulkMessageSender calls <code>POST /v20.0/{phone-number-id}/messages</code> with an approved template. Only opted-in recipients receive messages.</p>
+                <p style="font-size:13px;color:var(--muted);">Weflux calls <code>POST /v20.0/{phone-number-id}/messages</code> with an approved template. Only opted-in recipients receive messages.</p>
               </div>
               <button class="btn btn-green" type="button" onclick="
                 var log = document.getElementById('demo-log');
@@ -319,7 +319,7 @@ recipient=+91 90000 00000</div>
           <div class="demo-section" id="webhooks">
             <p class="demo-eyebrow">Webhook evidence — whatsapp_business_management</p>
             <h2 style="font-size:20px;margin-bottom:6px;">Status changes your team can actually read.</h2>
-            <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">BulkMessageSender subscribes to webhook events using <code>POST /v20.0/{waba-id}/subscribed_apps</code>. Every event is captured and associated with the right business workspace.</p>
+            <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Weflux subscribes to webhook events using <code>POST /v20.0/{waba-id}/subscribed_apps</code>. Every event is captured and associated with the right business workspace.</p>
             <div class="demo-grid-3">
               <div class="demo-card">
                 <h3>messages.sent</h3>
@@ -356,7 +356,7 @@ recipient=+91 90000 00000</div>
       <div class="container" style="text-align:center;">
         <span class="eyebrow"><span class="dot"></span> Compliance links</span>
         <h2 style="margin:18px 0 14px;font-size:clamp(26px,3vw,38px);">All required policies are publicly accessible.</h2>
-        <p class="lede" style="margin:0 auto 32px;">BulkMessageSender maintains all Meta-required policy pages on this domain. All policies were effective before any business authorizes BulkMessageSender as a Tech Provider.</p>
+        <p class="lede" style="margin:0 auto 32px;">Weflux maintains all Meta-required policy pages on this domain. All policies were effective before any business authorizes Weflux as a Tech Provider.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
           <a href="privacy.html" class="btn btn-ghost">Privacy Policy</a>
           <a href="terms.html" class="btn btn-ghost">Terms of Service</a>

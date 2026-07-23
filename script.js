@@ -1,7 +1,6 @@
-/* =========================================================
-   BulkMessageSender — landing page interactions
-   Pure CSS animations only — no GSAP, no Lenis.
-   ========================================================= */
+/* ============================================================
+   Weflux — landing page interactions
+   ============================================================ */
 (function () {
   'use strict';
 
@@ -330,7 +329,7 @@
         }
       } catch (err) {
         if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Submit →'; }
-        alert('Sorry — something went wrong. Please email hello@serves.in and we\'ll get right back to you.');
+        alert('Sorry — something went wrong. Please email hello@weflux.in and we\'ll get right back to you.');
       }
     });
   }

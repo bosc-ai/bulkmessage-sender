@@ -1,5 +1,5 @@
 /* =========================================================
-   BulkMessageSender — shared shell (nav + footer + mobile menu)
+   Weflux — shared shell (nav + footer + mobile menu)
    All pages live at root level — no /pages/ prefix needed.
    ========================================================= */
 (function () {
@@ -47,11 +47,11 @@
       <a class="skip" href="#main">Skip to content</a>
       <header class="nav" id="wc-nav-el">
         <div class="container-wide nav-inner">
-          <a class="brand" href="/" aria-label="BulkMessageSender home">
+          <a class="brand" href="/" aria-label="Weflux home">
             <span class="brand-mark" aria-hidden="true">
               <img src="${logoSrc}" alt="" width="36" height="36">
             </span>
-            <span class="brand-name">BulkMessageSender</span>
+            <span class="brand-name">Weflux</span>
           </a>
 
           <nav class="nav-links" aria-label="Primary">
@@ -59,8 +59,8 @@
           </nav>
 
           <div class="nav-cta">
-            <a href="https://weflux.in/login" class="btn btn-ghost nav-signin">Sign in</a>
-            <a href="https://weflux.in/register" class="btn btn-green">Start free →</a>
+            <a href="https://app.weflux.in/power/login" class="btn btn-ghost nav-signin">Sign in</a>
+            <a href="https://app.weflux.in/power/register" class="btn btn-green">Start free →</a>
             <button class="nav-burger" id="wc-burger" aria-label="Open menu" aria-expanded="false" aria-controls="wc-mobile">
               <span></span><span></span><span></span>
             </button>
@@ -72,8 +72,8 @@
         <nav>
           ${navLinks.map(l => `<a href="${l.href}"${activeKey === l.key ? ' aria-current="page"' : ''}>${l.label}</a>`).join('')}
           <hr>
-          <a href="https://weflux.in/login">Sign in</a>
-          <a href="https://weflux.in/register" class="btn btn-green" style="justify-content:center;margin-top:6px">Start free →</a>
+          <a href="https://app.weflux.in/power/login">Sign in</a>
+          <a href="https://app.weflux.in/power/register" class="btn btn-green" style="justify-content:center;margin-top:6px">Start free →</a>
         </nav>
       </div>
     `;
@@ -116,10 +116,10 @@
                 <span class="brand-mark" aria-hidden="true">
                   <img src="${logoSrc}" alt="" width="32" height="32">
                 </span>
-                <span class="brand-name">BulkMessageSender</span>
+                <span class="brand-name">Weflux</span>
               </a>
-              <p>BulkMessageSender is a WhatsApp bulk message sender &amp; broadcast platform built on the official WhatsApp Business API — send campaigns, automate replies and manage a shared team inbox. A Weflux product by Serves Technologies, built in India.</p>
-              <p class="footer-contact"><a href="mailto:hello@serves.in">hello@serves.in</a> · <a href="https://weflux.in">A Weflux product</a></p>
+              <p>Weflux is an official WhatsApp Business API platform — send broadcast campaigns, automate replies, build workflows, and manage a shared team inbox. Built in India.</p>
+              <p class="footer-contact"><a href="mailto:hello@weflux.in">hello@weflux.in</a> · <a href="https://weflux.in">weflux.in</a></p>
             </div>
             <div class="footer-col">
               <h5>Product</h5>
@@ -182,7 +182,7 @@
               <a href="#" aria-label="GitHub"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.9 5.7-5.6 6 .4.4.8 1.1.8 2.3v3.4c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"/></svg></a>
             </div>
           </div>
-          <p class="footer-disclaimer">WhatsApp and the WhatsApp logo are trademarks of Meta Platforms, Inc. BulkMessageSender is an independent product of Serves Technologies (a Weflux product) and is not affiliated with, endorsed by, or sponsored by Meta. All product and company names herein may be trademarks of their respective owners.</p>
+          <p class="footer-disclaimer">WhatsApp and the WhatsApp logo are trademarks of Meta Platforms, Inc. Weflux is an independent product of Serves Technologies and is not affiliated with, endorsed by, or sponsored by Meta. All product and company names herein may be trademarks of their respective owners.</p>
         </div>
       </footer>
     `;
@@ -206,7 +206,7 @@
       <div class="wfr-card">
         <div class="wfr-spinner" aria-hidden="true"></div>
         <p class="wfr-title">Taking you to Weflux…</p>
-        <p class="wfr-sub">the platform behind <strong>Bulk Message Sender</strong></p>
+        <p class="wfr-sub">WhatsApp Automation &amp; Customer Communication Platform</p>
         <div class="wfr-bar" aria-hidden="true"></div>
       </div>
     `;

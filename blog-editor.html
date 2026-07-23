@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blog Editor — BulkMessageSender</title>
+<title>Blog Editor — Weflux</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -100,7 +100,7 @@
 </head>
 <body>
 <div class="topbar">
-  <div class="brand"><span class="dot"></span> BulkMessageSender · Blog Editor</div>
+  <div class="brand"><span class="dot"></span> Weflux · Blog Editor</div>
   <div class="grow"></div>
   <button class="btn ghost" id="btnDownload">⬇ Download .md</button>
   <button class="btn ghost" id="btnCopy">⧉ Copy</button>
@@ -200,7 +200,7 @@ Edits here are published as-is. Switch back to Visual to keep using the toolbar 
         </div>
         <div class="field">
           <label for="fAuthor">Author</label>
-          <input type="text" id="fAuthor" value="BulkMessageSender Team">
+          <input type="text" id="fAuthor" value="Weflux Team">
         </div>
         <div class="row">
           <div class="field">
@@ -657,7 +657,7 @@ $('#btnPublish').onclick=async()=>{
     const sha=await getSha(path);
     if(sha && !confirm('A post already exists at\n'+path+'\n\nOverwrite it?')){ btn.disabled=false; btn.textContent='Publish to GitHub →'; return; }
     const res=await putFile(path, b64(content), (sha?'Update':'Publish')+' "'+m.title+'" via blog editor', sha);
-    const liveUrl='https://bulkmessagesender.com/'+m.collection+'/'+m.slug+'.html';
+    const liveUrl='https://weflux.in/'+m.collection+'/'+m.slug+'.html';
     const sc=$('#successCard'); sc.className='success-card show';
     sc.innerHTML='<b>✓ Published.</b> Vercel is rebuilding the site now (usually ~1 min).<br>'+
       '• Committed file: <a href="'+res.content.html_url+'" target="_blank" rel="noopener">view on GitHub</a><br>'+

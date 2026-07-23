@@ -1,9 +1,9 @@
 {
-  "name": "bulkmessagesender-site",
+  "name": "weflux-site",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "BulkMessageSender marketing site + Markdown content build (blog, articles, help, resources).",
+  "description": "Weflux marketing site + Markdown content build (blog, articles, help, resources).",
   "scripts": {
     "build": "node build.js"
   },

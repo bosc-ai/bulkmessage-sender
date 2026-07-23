@@ -1,5 +1,5 @@
 /* =========================================================
-   BulkMessageSender — static site build
+   Weflux — static site build
    Copies the hand-written site into /dist and generates
    themed pages from Markdown in /content (blog, articles,
    help, resources) + a fresh sitemap.xml.
@@ -24,15 +24,15 @@ marked.setOptions({ mangle: false, headerIds: false });
 // ---- Collections (each = one publishable section + footer link) ----
 const COLLECTIONS = [
   { key: "blog",      dir: "blog",      list: "blog.html",      title: "Blog",         eyebrow: "Field notes",
-    lede: "Guides, playbooks and field notes on WhatsApp marketing, broadcasts and bulk messaging for Indian businesses." },
+    lede: "Guides, playbooks and field notes on WhatsApp marketing, broadcasts and customer communication." },
   { key: "articles",  dir: "articles",  list: "articles.html",  title: "Articles",     eyebrow: "Articles",
     lede: "In-depth articles on the WhatsApp Business API, broadcast strategy and growing with WhatsApp." },
   { key: "case-studies", dir: "case-studies", list: "case-studies.html", title: "Case Studies", eyebrow: "Case studies",
-    lede: "How Indian businesses grow revenue and retention with WhatsApp broadcasts and the official Business API." },
+    lede: "How businesses grow revenue and retention with WhatsApp broadcasts and the official Business API." },
   { key: "help",      dir: "help",      list: "help.html",      title: "Help Center",  eyebrow: "Help Center",
-    lede: "How-to guides and answers for setting up and running BulkMessageSender on the WhatsApp Business API." },
+    lede: "How-to guides and answers for setting up and running Weflux on the WhatsApp Business API." },
   { key: "resources", dir: "resources", list: "resources.html", title: "Resources",    eyebrow: "Resources",
-    lede: "Templates, checklists and resources to help you get more from WhatsApp broadcasts and bulk messaging." },
+    lede: "Templates, checklists and resources to help you get more from WhatsApp broadcasts and customer engagement." },
 ];
 
 // Files/dirs in the repo root that should NOT be copied into /dist.
@@ -59,7 +59,7 @@ function listPage(col, posts) {
     ? `<div class="blog-grid">
 ${posts
   .map(
-    (p) => `        <a class="blog-card" href="/${col.dir}/${p.slug}"><div class="cover${p.cover ? " " + p.cover : ""}">${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.imageAlt || p.title)}" loading="lazy">` : ""}</div><div class="body"><div class="cat">${esc([p.category, p.readTime].filter(Boolean).join(" · "))}</div><h3>${esc(p.title)}</h3><p class="excerpt">${esc(p.description)}</p><div class="meta"><span>${esc(p.author || "BulkMessageSender")}</span><span>${esc(p.dateLabel)}</span></div></div></a>`
+    (p) => `        <a class="blog-card" href="/${col.dir}/${p.slug}"><div class="cover${p.cover ? " " + p.cover : ""}">${p.image ? `<img src="${esc(p.image)}" alt="${esc(p.imageAlt || p.title)}" loading="lazy">` : ""}</div><div class="body"><div class="cat">${esc([p.category, p.readTime].filter(Boolean).join(" · "))}</div><h3>${esc(p.title)}</h3><p class="excerpt">${esc(p.description)}</p><div class="meta"><span>${esc(p.author || "Weflux Team")}</span><span>${esc(p.dateLabel)}</span></div></div></a>`
   )
   .join("\n")}
       </div>`
@@ -71,14 +71,14 @@ ${posts
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${esc(col.title)} — WhatsApp Bulk Messaging | BulkMessageSender</title>
+  <title>${esc(col.title)} — WhatsApp Automation | Weflux</title>
   <meta name="description" content="${esc(col.lede)}">
   <link rel="canonical" href="${url}">
-  <meta property="og:title" content="${esc(col.title)} | BulkMessageSender">
+  <meta property="og:title" content="${esc(col.title)} | Weflux">
   <meta property="og:description" content="${esc(col.lede)}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${url}">
-  <meta property="og:site_name" content="BulkMessageSender">
+  <meta property="og:site_name" content="Weflux">
   <meta property="og:image" content="${DEFAULT_OG}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="${DEFAULT_OG}">${HEAD_LINKS}

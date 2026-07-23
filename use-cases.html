@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WhatsApp Bulk Messaging Use Cases by Industry | BulkMessageSender</title>
-  <meta name="description" content="How D2C, education, finance, healthcare and logistics teams use WhatsApp broadcasts, bulk messaging and automation to grow. Real use cases and playbooks.">
-  <link rel="canonical" href="https://bulkmessagesender.com/use-cases.html">
-  <meta property="og:title" content="WhatsApp Bulk Messaging Use Cases by Industry | BulkMessageSender">
-  <meta property="og:description" content="How D2C, education, finance, healthcare and logistics teams use WhatsApp broadcasts, bulk messaging and automation to grow. Real use cases and playbooks.">
+  <title>WhatsApp Industry Use Cases | Weflux</title>
+  <meta name="description" content="How D2C, education, finance, healthcare and logistics teams use WhatsApp broadcasts, customer messaging and automation to grow. Real use cases and playbooks.">
+  <link rel="canonical" href="https://weflux.in/use-cases.html">
+  <meta property="og:title" content="WhatsApp Industry Use Cases | Weflux">
+  <meta property="og:description" content="How D2C, education, finance, healthcare and logistics teams use WhatsApp broadcasts, customer messaging and automation to grow. Real use cases and playbooks.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://bulkmessagesender.com/use-cases.html">
-  <meta property="og:site_name" content="BulkMessageSender">
+  <meta property="og:url" content="https://weflux.in/use-cases.html">
+  <meta property="og:site_name" content="Weflux">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/wachat-logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,25 +18,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .uc-mock { display:flex; flex-direction:column; gap:8px; font-size:13px; }
-    .uc-mock .b { padding:8px 12px; border-radius:12px; max-width:80%; line-height:1.4; }
-    .uc-mock .b.in { background:#fff; border:1px solid var(--line); border-bottom-left-radius:4px; align-self:flex-start; }
-    .uc-mock .b.out { background:linear-gradient(180deg,#DCFCE7,#BBF7D0); border:1px solid #86EFAC; color:#064E2C; border-bottom-right-radius:4px; align-self:flex-end; }
-    .uc-mock .head { display:flex; align-items:center; gap:10px; padding-bottom:10px; border-bottom:1px solid var(--line); margin-bottom:6px; }
-    .uc-mock .head .av { width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,#34D399,#06B6D4); }
-    .uc-mock .head .nm { font-size:13px; font-weight:600; }
-    .uc-mock .head .num { font-family:var(--font-mono); font-size:10.5px; color:var(--muted); }
+    .uc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 72px 0; border-bottom: 1px solid var(--line); }
+    .uc-row:last-of-type { border-bottom: none; }
+    .uc-row:nth-child(even) { grid-template-columns: 1fr 1fr; }
+    .uc-row:nth-child(even) .uc-row-text { order: 2; }
+    .uc-row:nth-child(even) .uc-vis { order: 1; }
+    .uc-vis { background: #FBFAF6; border: 1px solid var(--line); border-radius: 18px; padding: 32px; display: grid; place-items: center; min-height: 360px; }
+    .uc-mock { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px; width: 100%; max-width: 380px; box-shadow: var(--shadow-sm); font-size: 13px; }
+    .uc-mock .head { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+    .uc-mock .av { width: 32px; height: 32px; border-radius: 50%; background: var(--green-deep); color: #fff; display: grid; place-items: center; font-weight: 600; font-size: 12px; }
+    .uc-mock .nm { font-weight: 600; font-size: 14px; }
+    .uc-mock .num { font-size: 11px; color: var(--muted); font-family: var(--font-mono); }
+    .uc-mock .b { padding: 10px 14px; border-radius: 10px; margin-bottom: 10px; max-width: 85%; line-height: 1.45; }
+    .uc-mock .b.in { background: #F1F5F9; color: var(--ink); margin-right: auto; }
+    .uc-mock .b.out { background: var(--green-tint); color: var(--green-deep); margin-left: auto; font-weight: 500; }
+    @media (max-width: 900px) {
+      .uc-row { grid-template-columns: 1fr !important; gap: 32px; padding: 48px 0; }
+      .uc-row:nth-child(even) .uc-row-text { order: 1; }
+      .uc-row:nth-child(even) .uc-vis { order: 2; }
+    }
   </style>
 </head>
-<body data-page="use-cases" class="premium-page">
+<body data-page="use-cases">
   <div id="wc-nav"></div>
-
   <main id="main" class="page">
+
     <section class="container page-hero">
       <div class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <span>Use cases</span></div>
-      <span class="eyebrow"><span class="dot"></span> Use cases</span>
-      <h1>WhatsApp bulk messaging use cases for every industry.</h1>
-      <p class="lede">See how D2C, education, finance, healthcare and logistics teams use WhatsApp broadcasts, bulk messaging and automation. A jewellery brand in Jaipur, a 30-clinic dental chain in Pune, a travel agency in Kochi — the playbooks differ; the platform doesn't.</p>
+      <span class="eyebrow"><span class="dot"></span> By industry</span>
+      <h1>Built for every industry<br>that talks to customers.</h1>
+      <p class="lede">From abandoned-cart recovery to exam result nudges — see how leading teams use Weflux to turn WhatsApp into their highest-ROI channel.</p>
     </section>
 
     <section class="container">
@@ -44,26 +55,24 @@
       <article class="uc-row" id="d2c">
         <div class="uc-row-text">
           <span class="eyebrow"><span class="dot"></span> D2C &amp; E-commerce</span>
-          <h2 style="margin-top:14px">Recover carts, confirm COD, get reviews.</h2>
-          <p>WhatsApp open rates run 80–90% in India. That makes it the right channel for the high-intent moments — abandoned carts, COD confirmations, delivery updates, post-purchase reviews.</p>
+          <h2 style="margin-top:14px">Recover carts, drop new collections, automate COD verification.</h2>
+          <p>Email open rates are 18%. WhatsApp is 98%. D2C brands use Weflux to recover abandoned checkouts within 15 minutes, send back-in-stock alerts, and confirm COD orders automatically.</p>
           <ul>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Shopify and WooCommerce one-click installers</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> COD-to-prepaid nudge templates</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Cart-recovery flows with discount branching</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Review collection on Day 7 post-delivery</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> 3-step cart recovery sequences with single-click discount codes</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Automated COD verification → reduce RTO by 35%</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Shopify, WooCommerce and Custom API integrations</li>
           </ul>
-          <a class="btn btn-ghost" href="https://weflux.in/register">Try the D2C playbook</a>
+          <a class="btn btn-green" href="https://app.weflux.in/power/register">Start free trial →</a>
         </div>
         <div class="uc-vis">
           <div class="uc-mock">
             <div class="head">
-              <div class="av"></div>
-              <div><div class="nm">Northbloom</div><div class="num">order #N-2284 · COD</div></div>
+              <div class="av">NC</div>
+              <div><div class="nm">Nordic Club</div><div class="num">+91 98765 43210</div></div>
             </div>
-            <div class="b in">Hi Priya — just checking, do you still want to receive Order #N-2284? Reply YES to confirm, NO to cancel.</div>
-            <div class="b out">YES</div>
-            <div class="b in">Brilliant — you've also unlocked 5% off prepayment. Pay now to get free express shipping → np.com/p/2284</div>
-            <div class="b in">📦 Shipped! Expected by Friday. Track: np.com/t/2284</div>
+            <div class="b in">Hey Rahul — you left 2 items in your cart 🛒 Complete order now for an extra 10% off: nc.in/c/48192</div>
+            <div class="b out">Applied! Thanks 🙌</div>
+            <div class="b in">Order confirmed! Tracking ID: WFX-8921. Delivery expected Thursday.</div>
           </div>
         </div>
       </article>
@@ -72,13 +81,13 @@
         <div class="uc-row-text">
           <span class="eyebrow"><span class="dot"></span> Education</span>
           <h2 style="margin-top:14px">Run admissions and parent comms — without group chaos.</h2>
-          <p>WhatsApp groups are where conversations go to die. BulkMessageSender lets schools, ed-tech and coaching businesses run one-to-many comms with real tracking — and one-to-one threads when a parent needs help.</p>
+          <p>WhatsApp groups are where conversations go to die. Weflux lets schools, ed-tech and coaching businesses run one-to-many comms with real tracking — and one-to-one threads when a parent needs help.</p>
           <ul>
             <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Admission funnel: enquiry → form → payment → enrolment</li>
             <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Fee receipts and reminders, multi-language</li>
             <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Class reminders + attendance follow-up</li>
           </ul>
-          <a class="btn btn-ghost" href="https://weflux.in/register">Try the education playbook</a>
+          <a class="btn btn-ghost" href="https://app.weflux.in/power/register">Try the education playbook</a>
         </div>
         <div class="uc-vis">
           <div class="uc-mock">
@@ -97,7 +106,7 @@
         <div class="uc-row-text">
           <span class="eyebrow"><span class="dot"></span> Financial services</span>
           <h2 style="margin-top:14px">OTPs, statements, KYC — encrypted in transit, audited end-to-end.</h2>
-          <p>BulkMessageSender is built with regulated industries in mind. Audit logs, RBAC, encryption at rest, and a signed DPA make it the safer choice than ad-hoc WhatsApp on personal phones.</p>
+          <p>Weflux is built with regulated industries in mind. Audit logs, RBAC, encryption at rest, and a signed DPA make it the safer choice than ad-hoc WhatsApp on personal phones.</p>
           <ul>
             <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> OTP delivery with retry and fallback</li>
             <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> EMI reminders and statement nudges</li>
