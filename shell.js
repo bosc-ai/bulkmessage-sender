@@ -59,8 +59,8 @@
           </nav>
 
           <div class="nav-cta">
-            <a href="https://app.weflux.in/power/login" class="btn btn-ghost nav-signin">Sign in</a>
-            <a href="https://app.weflux.in/power/register" class="btn btn-green">Start free →</a>
+            <a href="https://app.weflux.in/login" class="btn btn-ghost nav-signin">Sign in</a>
+            <a href="https://app.weflux.in/register" class="btn btn-green">Start free →</a>
             <button class="nav-burger" id="wc-burger" aria-label="Open menu" aria-expanded="false" aria-controls="wc-mobile">
               <span></span><span></span><span></span>
             </button>
@@ -72,8 +72,8 @@
         <nav>
           ${navLinks.map(l => `<a href="${l.href}"${activeKey === l.key ? ' aria-current="page"' : ''}>${l.label}</a>`).join('')}
           <hr>
-          <a href="https://app.weflux.in/power/login">Sign in</a>
-          <a href="https://app.weflux.in/power/register" class="btn btn-green" style="justify-content:center;margin-top:6px">Start free →</a>
+          <a href="https://app.weflux.in/login">Sign in</a>
+          <a href="https://app.weflux.in/register" class="btn btn-green" style="justify-content:center;margin-top:6px">Start free →</a>
         </nav>
       </div>
     `;
