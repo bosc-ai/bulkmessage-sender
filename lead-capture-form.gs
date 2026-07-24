@@ -1,41 +1,45 @@
 /**
- * Weflux — Intent-Based Lead Capture & Native Calendar Booking → Google Sheet
- * -------------------------------------------------------------------------
- * Phase 1: Contact captured immediately on "Continue"
- * Phase 2: 8 qualification steps progressively enrich the row
- * Booking: Native Date & Time picker creates a Google Calendar event on hello@weflux.in
- *          AND sends a calendar invite to the lead's email — zero external redirects!
+ * Weflux — Multi-Sheet Lead Capture & Google Calendar Sync
+ * ---------------------------------------------------------
+ * Manages TWO sheets in a single Google Spreadsheet:
+ *   1. "IntentLeads"       → Popup Submissions & Native Demo Bookings
+ *   2. "ContactFormLeads" → Contact Page Form Submissions
  *
- * SESSION DEDUPLICATION: Multiple POSTs per visitor are merged
- * into a single row using the sessionId field.
+ * ROUTING:
+ *  - If formType === 'contact' or 'topic' parameter is present:
+ *      Appends a row to the "ContactFormLeads" sheet.
+ *  - Otherwise (formType === 'popup' or sessionId present):
+ *      Upserts a row in the "IntentLeads" sheet by Session ID
+ *      and creates a Google Calendar event if Date & Time are selected.
  *
- * SETUP (one time):
- *  1. Create / open a Google Sheet for intent leads.
- *  2. Extensions → Apps Script. Paste this whole file (replace Code.gs).
- *  3. Deploy → New deployment → type "Web app".
- *       - Execute as:      Me
- *       - Who has access:  Anyone
- *     Deploy, authorise, COPY the Web app URL.
- *  4. Paste that URL into lead-capture.js → CONFIG.endpoint.
- *
- * Redeploy: Manage deployments → edit → Version: New version.
+ * SETUP INSTRUCTIONS:
+ *  1. Create a Google Spreadsheet (e.g., "Weflux All Leads").
+ *  2. Go to Extensions → Apps Script. Paste this entire code into Code.gs.
+ *  3. Click Deploy → New deployment.
+ *       - Select type: Web app
+ *       - Execute as:  Me (hello@weflux.in)
+ *       - Who has access: Anyone
+ *  4. Click Deploy, authorize access, and copy the Web App URL.
+ *  5. Paste the URL into:
+ *       - lead-capture.js → CONFIG.endpoint
+ *       - contact.html    → <form data-endpoint="...">
  */
 
-var SHEET_NAME = 'IntentLeads';
+var SHEET_POPUP = 'IntentLeads';
+var SHEET_CONTACT = 'ContactFormLeads';
 
-var HEADERS = [
+// Tab 1: IntentLeads Headers (28 columns)
+var HEADERS_POPUP = [
   'Timestamp',
   'Session ID',
   'Status',
   'Abandoned At',
   'Intent Score',
   'Intent Tier',
-  // Phase 1 — Contact
   'Name',
   'Phone',
   'Email',
   'Country',
-  // Phase 2 — Qualification
   'Business Type',
   'WhatsApp Usage',
   'Current Provider',
@@ -45,11 +49,9 @@ var HEADERS = [
   'Features',
   'Timeline',
   'Budget',
-  // Booking
   'Booking Date',
   'Booking Time',
   'Calendar Event ID',
-  // Meta
   'Source Page',
   'Time on Page (s)',
   'Device',
@@ -58,77 +60,33 @@ var HEADERS = [
   'UTM Campaign'
 ];
 
+// Tab 2: ContactFormLeads Headers (10 columns)
+var HEADERS_CONTACT = [
+  'Timestamp',
+  'Name',
+  'Company',
+  'Email',
+  'Country',
+  'Phone',
+  'Topic',
+  'Team Size',
+  'Message',
+  'Source Page'
+];
+
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.waitLock(20000);
 
   try {
-    var sheet = getSheet_();
     var p = (e && e.parameter) ? e.parameter : {};
-    var sessionId = p.sessionId || '';
+    var isContactForm = (p.formType === 'contact') || (p.topic && !p.sessionId);
 
-    // --- Upsert: find existing row by sessionId ---
-    var existingRow = -1;
-    var existingCalId = '';
-    if (sessionId) {
-      var data = sheet.getDataRange().getValues();
-      for (var i = 1; i < data.length; i++) {
-        if (data[i][1] === sessionId) {
-          existingRow = i + 1;
-          existingCalId = data[i][21] || ''; // Calendar Event ID column
-          break;
-        }
-      }
-    }
-
-    // --- Create Google Calendar Event if date & time provided ---
-    var calEventId = existingCalId;
-    if (p.bookingDate && p.bookingTime && !calEventId) {
-      calEventId = createCalendarBooking_(p);
-    }
-
-    var row = [
-      new Date(),                           // Timestamp
-      sessionId,                            // Session ID
-      p.status || 'partial',                // Status
-      p.abandonedAtStep || '',              // Abandoned At
-      p.intentScore || '0',                 // Intent Score
-      p.intentTier || '',                   // Intent Tier
-      // Phase 1
-      p.name || '',                         // Name
-      p.phone || '',                        // Phone
-      p.email || '',                        // Email
-      p.country || '',                      // Country
-      // Phase 2
-      p.businessType || '',                 // Business Type
-      p.whatsappUsage || '',                // WhatsApp Usage
-      p.currentProvider || '',              // Current Provider
-      p.monthlyConversations || '',         // Monthly Conversations
-      p.teamSize || '',                     // Team Size
-      p.whatsappNumbers || '',              // WhatsApp Numbers
-      p.features || '',                     // Features (comma-separated)
-      p.timeline || '',                     // Timeline
-      p.budget || '',                       // Budget
-      // Booking
-      p.bookingDate || '',                  // Booking Date
-      p.bookingTime || '',                  // Booking Time
-      calEventId,                           // Calendar Event ID
-      // Meta
-      p.sourcePage || '',                   // Source Page
-      p.timeOnPage || '',                   // Time on Page
-      p.device || '',                       // Device
-      p.utmSource || '',                    // UTM Source
-      p.utmMedium || '',                    // UTM Medium
-      p.utmCampaign || ''                   // UTM Campaign
-    ];
-
-    if (existingRow > 0) {
-      sheet.getRange(existingRow, 1, 1, row.length).setValues([row]);
+    if (isContactForm) {
+      return handleContactForm_(p);
     } else {
-      sheet.appendRow(row);
+      return handlePopupLead_(p);
     }
-
-    return json_({ result: 'ok', calendarEventId: calEventId });
   } catch (err) {
     return json_({ result: 'error', message: String(err) });
   } finally {
@@ -136,11 +94,95 @@ function doPost(e) {
   }
 }
 
+// Handler for Tab 2: Contact Page Form
+function handleContactForm_(p) {
+  var sheet = getSheet_(SHEET_CONTACT, HEADERS_CONTACT);
+  sheet.appendRow([
+    new Date(),
+    p.name || '',
+    p.company || '',
+    p.email || '',
+    p.country || '',
+    p.phone || '',
+    p.topic || '',
+    p.teamSize || '',
+    p.message || '',
+    p.page || p.sourcePage || ''
+  ]);
+  return json_({ result: 'ok', sheet: SHEET_CONTACT });
+}
+
+// Handler for Tab 1: Popup Lead Capture & Calendar Booking
+function handlePopupLead_(p) {
+  var sheet = getSheet_(SHEET_POPUP, HEADERS_POPUP);
+  var sessionId = p.sessionId || '';
+
+  // Upsert: find existing row by sessionId
+  var existingRow = -1;
+  var existingCalId = '';
+  if (sessionId) {
+    var data = sheet.getDataRange().getValues();
+    for (var i = 1; i < data.length; i++) {
+      if (data[i][1] === sessionId) {
+        existingRow = i + 1;
+        existingCalId = data[i][21] || '';
+        break;
+      }
+    }
+  }
+
+  // Create Google Calendar event if booking Date & Time provided
+  var calEventId = existingCalId;
+  if (p.bookingDate && p.bookingTime && !calEventId) {
+    calEventId = createCalendarBooking_(p);
+  }
+
+  var row = [
+    new Date(),
+    sessionId,
+    p.status || 'partial',
+    p.abandonedAtStep || '',
+    p.intentScore || '0',
+    p.intentTier || '',
+    p.name || '',
+    p.phone || '',
+    p.email || '',
+    p.country || '',
+    p.businessType || '',
+    p.whatsappUsage || '',
+    p.currentProvider || '',
+    p.monthlyConversations || '',
+    p.teamSize || '',
+    p.whatsappNumbers || '',
+    p.features || '',
+    p.timeline || '',
+    p.budget || '',
+    p.bookingDate || '',
+    p.bookingTime || '',
+    calEventId,
+    p.sourcePage || '',
+    p.timeOnPage || '',
+    p.device || '',
+    p.utmSource || '',
+    p.utmMedium || '',
+    p.utmCampaign || ''
+  ];
+
+  if (existingRow > 0) {
+    sheet.getRange(existingRow, 1, 1, row.length).setValues([row]);
+  } else {
+    sheet.appendRow(row);
+  }
+
+  return json_({ result: 'ok', sheet: SHEET_POPUP, calendarEventId: calEventId });
+}
+
+// Helper: Create Google Calendar Event
 function createCalendarBooking_(p) {
   try {
     if (!p.bookingDate || !p.bookingTime) return '';
     var start = new Date(p.bookingDate + 'T' + p.bookingTime + ':00');
-    var end = new Date(start.getTime() + 30 * 60 * 1000); // 30 min duration
+    var end = new Date(start.getTime() + 30 * 60 * 1000);
 
     var name = p.name || 'Lead';
     var email = p.email || '';
@@ -177,31 +219,19 @@ function createCalendarBooking_(p) {
 }
 
 function doGet() {
-  return json_({ result: 'ok', message: 'Lead capture & native calendar booking endpoint is live.' });
+  return json_({ result: 'ok', message: 'Weflux unified lead capture endpoint is live.' });
 }
 
-function getSheet_() {
+function getSheet_(sheetName, headers) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName(SHEET_NAME);
+  var sheet = ss.getSheetByName(sheetName);
   if (!sheet) {
-    sheet = ss.insertSheet(SHEET_NAME);
+    sheet = ss.insertSheet(sheetName);
   }
   if (sheet.getLastRow() === 0) {
-    sheet.appendRow(HEADERS);
-    sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
+    sheet.appendRow(headers);
+    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
     sheet.setFrozenRows(1);
-    // Formatting
-    sheet.setColumnWidth(1, 160);   // Timestamp
-    sheet.setColumnWidth(3, 180);   // Status
-    sheet.setColumnWidth(5, 100);   // Intent Score
-    sheet.setColumnWidth(6, 120);   // Intent Tier
-    sheet.setColumnWidth(7, 160);   // Name
-    sheet.setColumnWidth(8, 140);   // Phone
-    sheet.setColumnWidth(9, 200);   // Email
-    sheet.setColumnWidth(17, 220);  // Features
-    sheet.setColumnWidth(20, 130);  // Booking Date
-    sheet.setColumnWidth(21, 110);  // Booking Time
-    sheet.setColumnWidth(22, 220);  // Calendar Event ID
   }
   return sheet;
 }

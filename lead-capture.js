@@ -672,6 +672,7 @@
     var timeOnPage = Math.round((Date.now() - state.pageLoadedAt) / 1000);
 
     var data = {
+      formType:               'popup',
       sessionId:              state.sessionId,
       status:                 status,
       abandonedAtStep:        state.submitted ? '' : (state.phase === 1 ? 'contact' : 'step_' + (state.qualStep + 1)),

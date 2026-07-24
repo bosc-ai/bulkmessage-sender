@@ -298,6 +298,7 @@
       const dial = countrySel ? countrySel.value : '';
 
       const data = {
+        formType: 'contact',
         name: val('cName'),
         company: val('cCompany'),
         email: val('cEmail'),
