@@ -27,6 +27,19 @@
     document.body.insertBefore(ns, document.body.firstChild);
   }
 
+  // ---- LEAD CAPTURE POPUP (injected once from shell so configured pages get it) ----
+  if (!document.querySelector('link[href*="lead-capture"]')) {
+    var lcCss = document.createElement('link');
+    lcCss.rel = 'stylesheet';
+    lcCss.href = '/lead-capture.css';
+    document.head.appendChild(lcCss);
+
+    var lcJs = document.createElement('script');
+    lcJs.defer = true;
+    lcJs.src = '/lead-capture.js';
+    document.head.appendChild(lcJs);
+  }
+
   const navLinks = [
     { href: '/features.html',   label: 'Features',  key: 'features' },
     { href: '/pricing.html',    label: 'Pricing',   key: 'pricing' },
