@@ -1,8 +1,10 @@
 /* =========================================================
-   Weflux — Lead Capture Popup v2
+   Weflux — Lead Capture & Native Calendar Booking Popup
    Phase 1: Contact details → saved immediately
    Phase 2: 8 qualification questions (one per screen)
-   Progressive intent scoring, session deduplication.
+   Native Booking: Pick Date & Time slot directly in popup.
+                   Google Apps Script creates Google Calendar event
+                   on hello@weflux.in & sends calendar invite to lead.
    ========================================================= */
 (function () {
   'use strict';
@@ -17,10 +19,8 @@
     triggerScrollPct: 40,
     cookieName: 'wf_lc_seen',
     cookieDays: 7,
-    // Google Apps Script Web App URL for Google Sheet lead storage
-    endpoint: 'PASTE_YOUR_LEAD_CAPTURE_ENDPOINT_HERE',
-    // Google Calendar Appointment Schedule link for hello@weflux.in
-    bookingUrl: 'https://calendar.google.com/calendar/u/0/appointments/s/PASTE_YOUR_GOOGLE_CALENDAR_LINK_HERE'
+    // Replace with your deployed Google Apps Script Web App URL
+    endpoint: 'PASTE_YOUR_LEAD_CAPTURE_ENDPOINT_HERE'
   };
 
   // ---- GUARD: page check ----
@@ -36,7 +36,7 @@
   // ---- STATE ----
   var state = {
     sessionId: generateId(),
-    phase: 1,          // 1 = contact, 2 = qualification
+    phase: 1,          // 1 = contact, 2 = qualification, 3 = booking
     qualStep: 0,       // 0-based index of current qualification step (0-7)
     score: 0,
     pageLoadedAt: Date.now(),
@@ -59,12 +59,15 @@
     features: [],       // multi-select
     timeline: '',
     budget: '',
+    // Native Booking
+    bookingDate: '',
+    bookingTime: '',
+    bookingTimeLabel: '',
+    bookingDateDisplay: '',
     // Scoring flags
     scored: {}
   };
 
-  // ---- TOTAL SCREENS: Phase 1 (1) + Phase 2 (8) + Thank You = 10 screens ----
-  // Progress: Phase 1 = 0%, Steps 1-8 = 10%..90%, Thank You = 100%
   var TOTAL_QUAL_STEPS = 8;
 
   // ---- SCORING ----
@@ -183,14 +186,11 @@
           '</div>',
 
           // ========== PHASE 2: Qualification Steps ==========
-
-          // Step 1: Business Type (20%)
           buildOptionScreen('lcQ1', 'What best describes your business?', [
             'B2B Services', 'Ecommerce', 'Retail Store', 'Education',
             'Healthcare', 'Real Estate', 'Agency', 'Manufacturing', 'Other'
           ], false, 1),
 
-          // Step 2: WhatsApp Usage (30%) — with conditional sub-field
           '<div class="lc-screen" id="lcQ2">',
             '<span class="lc-q-label">Have you used WhatsApp Business before?</span>',
             '<div class="lc-options" data-key="whatsappUsage">',
@@ -215,47 +215,56 @@
             buildNav(2),
           '</div>',
 
-          // Step 3: Monthly Conversations (40%)
           buildOptionScreen('lcQ3', 'Approximately how many conversations do you handle each month?', [
             'Under 500', '500–2,000', '2,000–10,000', '10,000+'
           ], false, 3),
 
-          // Step 4: Team Size (50%)
           buildOptionScreen('lcQ4', 'How many team members will use Weflux?', [
             'Just me', '2–5', '6–20', '20+'
           ], false, 4),
 
-          // Step 5: WhatsApp Numbers (60%)
           buildOptionScreen('lcQ5', 'How many WhatsApp numbers do you want to connect?', [
             '1', '2–3', '4–10', 'More than 10'
           ], false, 5),
 
-          // Step 6: Features — MULTI-SELECT (70%)
           buildOptionScreen('lcQ6', 'Which features are most important?', [
             'Shared Team Inbox', 'Automation', 'Broadcast', 'CRM Integration',
             'API Access', 'Chatbot', 'Analytics', 'AI Replies'
           ], true, 6),
 
-          // Step 7: Timeline (80%)
           buildOptionScreen('lcQ7', 'When are you planning to start?', [
             'Today', 'Within a week', 'This month', 'Just exploring'
           ], false, 7),
 
-          // Step 8: Budget (90%)
           buildOptionScreen('lcQ8', 'Monthly budget', [
             'Under ₹1,000', '₹1,000–2,500', '₹2,500–5,000', '₹5,000+'
           ], false, 8),
+
+          // ========== NATIVE GOOGLE CALENDAR BOOKING SCREEN ==========
+          '<div class="lc-screen" id="lcBooking">',
+            '<span class="lc-q-label">Schedule your 1-on-1 Product Demo</span>',
+            '<p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.4">Pick a convenient 30-minute slot. A calendar invitation will be sent to your email.</p>',
+            '<div class="lc-calendar-picker">',
+              '<label class="lc-label">Select Date</label>',
+              '<div class="lc-date-chips" id="lcDateChips"></div>',
+              '<div class="lc-time-title">Available Time Slots (IST)</div>',
+              '<div class="lc-time-grid" id="lcTimeGrid"></div>',
+            '</div>',
+            '<div class="lc-actions">',
+              '<button class="lc-btn lc-btn-ghost" id="lcBookingSkip">Skip for now</button>',
+              '<button class="lc-btn lc-btn-primary" id="lcBookingConfirm" disabled>Confirm Booking →</button>',
+            '</div>',
+          '</div>',
 
           // ========== SUCCESS ==========
           '<div class="lc-success" id="lcSuccess">',
             '<div class="lc-success-icon">',
               '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
             '</div>',
-            '<h3>Thank you!</h3>',
-            '<p>One of our specialists will contact you shortly.</p>',
+            '<h3 id="lcSuccessTitle">Thank you!</h3>',
+            '<p id="lcSuccessDesc">One of our specialists will contact you shortly.</p>',
             '<div class="lc-success-actions">',
-              '<a href="' + (CONFIG.bookingUrl && !/PASTE_YOUR/.test(CONFIG.bookingUrl) ? CONFIG.bookingUrl : 'https://calendar.google.com/calendar/u/0/appointments') + '" target="_blank" rel="noopener" class="lc-btn lc-btn-primary">Book a Demo (Google Calendar)</a>',
-              '<a href="https://app.weflux.in/register" class="lc-btn lc-btn-ghost" style="border:1.5px solid var(--line)">Start Free Trial</a>',
+              '<a href="https://app.weflux.in/register" class="lc-btn lc-btn-primary" style="height:44px;padding:0 24px">Start Free Trial →</a>',
             '</div>',
           '</div>',
 
@@ -291,10 +300,7 @@
   function buildNav(stepNum) {
     return '<div class="lc-actions">' +
       '<button class="lc-btn lc-btn-ghost lc-back">← Back</button>' +
-      (stepNum < TOTAL_QUAL_STEPS
-        ? '<div style="display:flex;gap:8px;align-items:center"><button class="lc-btn lc-btn-skip lc-skip-rest">Skip for now</button><button class="lc-btn lc-btn-primary lc-next">Next →</button></div>'
-        : '<div style="display:flex;gap:8px;align-items:center"><button class="lc-btn lc-btn-skip lc-skip-rest">Skip for now</button><button class="lc-btn lc-btn-primary lc-finish">Submit →</button></div>'
-      ) +
+      '<div style="display:flex;gap:8px;align-items:center"><button class="lc-btn lc-btn-skip lc-skip-rest">Skip for now</button><button class="lc-btn lc-btn-primary lc-next">Next →</button></div>' +
       '</div>';
   }
 
@@ -331,6 +337,7 @@
   for (var i = 1; i <= TOTAL_QUAL_STEPS; i++) {
     qualScreens.push(document.getElementById('lcQ' + i));
   }
+  var bookingScreen = document.getElementById('lcBooking');
   var successEl = document.getElementById('lcSuccess');
 
   // ---- PHONE INPUT: digits only ----
@@ -354,27 +361,17 @@
 
   // ---- PHASE 1: Contact Submit ----
   contactSubmitBtn.addEventListener('click', function () {
-    // Clear previous errors
     clearErrors();
-
-    // Validate
     var valid = true;
     var nameVal = nameInput.value.trim();
     var phoneVal = phoneInput.value.trim();
     var emailVal = emailInput.value.trim();
 
-    if (!nameVal) {
-      showError('lcName', 'lcNameErr'); valid = false;
-    }
-    if (!phoneVal || phoneVal.length < getPhoneLen()) {
-      showError('lcPhone', 'lcPhoneErr'); valid = false;
-    }
-    if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-      showError('lcEmail', 'lcEmailErr'); valid = false;
-    }
+    if (!nameVal) { showError('lcName', 'lcNameErr'); valid = false; }
+    if (!phoneVal || phoneVal.length < getPhoneLen()) { showError('lcPhone', 'lcPhoneErr'); valid = false; }
+    if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) { showError('lcEmail', 'lcEmailErr'); valid = false; }
     if (!valid) return;
 
-    // Save to state
     state.name = nameVal;
     state.phone = phoneVal;
     state.email = emailVal;
@@ -382,11 +379,9 @@
     state.dialCode = countrySelect.value;
     state.country = opt ? (opt.dataset.country || '') : '';
 
-    // IMMEDIATELY save contact to Google Sheet
     state.contactSaved = true;
     saveData('contact_captured');
 
-    // Move to Phase 2
     state.phase = 2;
     state.qualStep = 0;
     showQualScreen(0);
@@ -405,30 +400,25 @@
 
   // ---- PHASE 2: Qualification Navigation ----
   function showQualScreen(idx) {
-    // Hide all screens
     phase1Screen.classList.remove('active');
     qualScreens.forEach(function (s) { s.classList.remove('active'); });
+    bookingScreen.classList.remove('active');
     successEl.classList.remove('active');
 
-    // Show progress bar
     progressWrap.style.display = '';
 
-    // Show target screen
     if (idx >= 0 && idx < TOTAL_QUAL_STEPS) {
       qualScreens[idx].classList.add('active');
       state.qualStep = idx;
 
-      // Update progress
       var pct = Math.round(((idx + 1) / (TOTAL_QUAL_STEPS + 1)) * 100);
       progressLabel.textContent = 'Step ' + (idx + 1) + ' of ' + TOTAL_QUAL_STEPS;
       progressPct.textContent = pct + '%';
       progressFill.style.width = pct + '%';
 
-      // Update header
       titleEl.textContent = getStepTitle(idx);
       subtitleEl.textContent = 'Help us tailor Weflux for your needs.';
 
-      // Scroll body to top
       var body = popup.querySelector('.lc-body');
       if (body) body.scrollTop = 0;
     }
@@ -442,21 +432,141 @@
     ][idx] || 'Qualification';
   }
 
-  function showSuccess() {
+  // ---- NATIVE CALENDAR BOOKING RENDER ----
+  function showBookingScreen() {
+    state.phase = 3;
     phase1Screen.classList.remove('active');
     qualScreens.forEach(function (s) { s.classList.remove('active'); });
+    successEl.classList.remove('active');
+
+    bookingScreen.classList.add('active');
+    progressWrap.style.display = 'none';
+
+    titleEl.textContent = 'Book your Demo Slot';
+    subtitleEl.textContent = 'Select a date and time slot for a live 1-on-1 walkthrough.';
+
+    renderCalendarPicker();
+  }
+
+  function renderCalendarPicker() {
+    var dateContainer = document.getElementById('lcDateChips');
+    var timeContainer = document.getElementById('lcTimeGrid');
+    if (!dateContainer || !timeContainer) return;
+
+    var upcoming = [];
+    var d = new Date();
+    while (upcoming.length < 8) {
+      d.setDate(d.getDate() + 1);
+      var day = d.getDay();
+      if (day !== 0 && day !== 6) { // skip weekends
+        var iso = d.toISOString().slice(0, 10);
+        var dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
+        var monthName = d.toLocaleDateString('en-US', { month: 'short' });
+        var dateNum = d.getDate();
+        upcoming.push({ iso: iso, dayName: dayName, monthName: monthName, dateNum: dateNum, display: dayName + ', ' + monthName + ' ' + dateNum });
+      }
+    }
+
+    dateContainer.innerHTML = upcoming.map(function(item, idx) {
+      return '<div class="lc-date-chip' + (idx === 0 ? ' selected' : '') + '" data-date="' + item.iso + '" data-display="' + item.display + '">' +
+        '<span class="lc-day-name">' + item.dayName + '</span>' +
+        '<span class="lc-day-num">' + item.dateNum + '</span>' +
+      '</div>';
+    }).join('');
+
+    state.bookingDate = upcoming[0].iso;
+    state.bookingDateDisplay = upcoming[0].display;
+
+    var times = [
+      { label: '10:00 AM', val: '10:00' },
+      { label: '11:30 AM', val: '11:30' },
+      { label: '02:00 PM', val: '14:00' },
+      { label: '03:30 PM', val: '15:30' },
+      { label: '05:00 PM', val: '17:00' },
+      { label: '06:30 PM', val: '18:30' }
+    ];
+
+    timeContainer.innerHTML = times.map(function(t) {
+      return '<div class="lc-time-chip" data-time="' + t.val + '" data-label="' + t.label + '">' + t.label + '</div>';
+    }).join('');
+
+    state.bookingTime = '';
+    state.bookingTimeLabel = '';
+    var confirmBtn = document.getElementById('lcBookingConfirm');
+    if (confirmBtn) confirmBtn.disabled = true;
+  }
+
+  // Date & Time Chip Click Handlers
+  popup.addEventListener('click', function(e) {
+    var dateChip = e.target.closest('.lc-date-chip');
+    if (dateChip) {
+      var chips = popup.querySelectorAll('.lc-date-chip');
+      chips.forEach(function(c) { c.classList.remove('selected'); });
+      dateChip.classList.add('selected');
+      state.bookingDate = dateChip.dataset.date;
+      state.bookingDateDisplay = dateChip.dataset.display;
+      checkBookingForm();
+      return;
+    }
+
+    var timeChip = e.target.closest('.lc-time-chip');
+    if (timeChip) {
+      var tchips = popup.querySelectorAll('.lc-time-chip');
+      tchips.forEach(function(c) { c.classList.remove('selected'); });
+      timeChip.classList.add('selected');
+      state.bookingTime = timeChip.dataset.time;
+      state.bookingTimeLabel = timeChip.dataset.label;
+      checkBookingForm();
+      return;
+    }
+  });
+
+  function checkBookingForm() {
+    var confirmBtn = document.getElementById('lcBookingConfirm');
+    if (confirmBtn) {
+      confirmBtn.disabled = !(state.bookingDate && state.bookingTime);
+    }
+  }
+
+  // Booking Confirm & Skip
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'lcBookingConfirm') {
+      saveData('demo_booked');
+      state.submitted = true;
+      setCookie(CONFIG.cookieName, 'submitted', CONFIG.cookieDays);
+      showSuccess(true);
+    }
+    if (e.target && e.target.id === 'lcBookingSkip') {
+      saveData('completed');
+      state.submitted = true;
+      setCookie(CONFIG.cookieName, 'submitted', CONFIG.cookieDays);
+      showSuccess(false);
+    }
+  });
+
+  function showSuccess(hasBooked) {
+    phase1Screen.classList.remove('active');
+    qualScreens.forEach(function (s) { s.classList.remove('active'); });
+    bookingScreen.classList.remove('active');
     successEl.classList.add('active');
 
-    // Update progress to 100%
-    progressLabel.textContent = 'Complete';
-    progressPct.textContent = '100%';
-    progressFill.style.width = '100%';
-
-    // Hide header
     titleEl.style.display = 'none';
     subtitleEl.style.display = 'none';
     eyebrowEl.style.display = 'none';
     progressWrap.style.display = 'none';
+
+    var successTitle = document.getElementById('lcSuccessTitle');
+    var successDesc = document.getElementById('lcSuccessDesc');
+
+    if (hasBooked) {
+      if (successTitle) successTitle.textContent = 'Demo Scheduled! 🎉';
+      if (successDesc) {
+        successDesc.innerHTML = 'We have reserved <strong>' + (state.bookingDateDisplay || '') + ' at ' + (state.bookingTimeLabel || '') + ' (IST)</strong> for your 1-on-1 demo.<br><br>A Google Calendar invitation has been sent to <strong>' + state.email + '</strong>.';
+      }
+    } else {
+      if (successTitle) successTitle.textContent = 'Thank you!';
+      if (successDesc) successDesc.textContent = 'One of our specialists will contact you shortly.';
+    }
   }
 
   // ---- OPTION CLICK HANDLING (single + multi select) ----
@@ -471,22 +581,18 @@
     var key = container.dataset.key;
 
     if (isMulti) {
-      // Toggle selection
       opt.classList.toggle('selected');
-      // Collect all selected values
       var selected = [];
       container.querySelectorAll('.lc-option.selected').forEach(function (o) {
         selected.push(o.dataset.value);
       });
       state[key] = selected;
     } else {
-      // Single select
       container.querySelectorAll('.lc-option').forEach(function (o) { o.classList.remove('selected'); });
       opt.classList.add('selected');
       state[key] = opt.dataset.value;
     }
 
-    // Step 2 conditional: show provider field when "WhatsApp Business API" selected
     if (key === 'whatsappUsage') {
       var providerField = document.getElementById('lcProviderField');
       if (state.whatsappUsage === 'WhatsApp Business API') {
@@ -500,7 +606,6 @@
     }
   });
 
-  // Provider dropdown
   var providerSelect = document.getElementById('lcProvider');
   if (providerSelect) {
     providerSelect.addEventListener('change', function () {
@@ -510,20 +615,22 @@
 
   // ---- NAV BUTTON HANDLING (delegated) ----
   popup.addEventListener('click', function (e) {
-    var btn = e.target.closest('.lc-next, .lc-back, .lc-finish, .lc-skip-rest');
+    var btn = e.target.closest('.lc-next, .lc-back, .lc-skip-rest');
     if (!btn) return;
 
     if (btn.classList.contains('lc-next')) {
-      // Score current step before moving
       scoreCurrentStep();
-      // Save progress
       saveData('qualification_in_progress');
-      // Next step
-      showQualScreen(state.qualStep + 1);
+
+      if (state.qualStep + 1 < TOTAL_QUAL_STEPS) {
+        showQualScreen(state.qualStep + 1);
+      } else {
+        // After Step 8, show native Calendar Booking!
+        showBookingScreen();
+      }
     }
     else if (btn.classList.contains('lc-back')) {
       if (state.qualStep === 0) {
-        // Go back to Phase 1
         state.phase = 1;
         qualScreens.forEach(function (s) { s.classList.remove('active'); });
         phase1Screen.classList.add('active');
@@ -534,26 +641,14 @@
         showQualScreen(state.qualStep - 1);
       }
     }
-    else if (btn.classList.contains('lc-finish')) {
-      scoreCurrentStep();
-      state.submitted = true;
-      saveData('completed');
-      setCookie(CONFIG.cookieName, 'submitted', CONFIG.cookieDays);
-      showSuccess();
-    }
     else if (btn.classList.contains('lc-skip-rest')) {
-      // Score whatever they've answered so far
       scoreCurrentStep();
-      state.submitted = true;
-      saveData('skipped_qualification');
-      setCookie(CONFIG.cookieName, 'submitted', CONFIG.cookieDays);
-      showSuccess();
+      showBookingScreen();
     }
   });
 
   // ---- SCORING LOGIC ----
   function scoreCurrentStep() {
-    // Score based on current answers
     if (state.whatsappUsage === 'WhatsApp Business API') addScore('whatsapp_api');
     if (state.monthlyConversations === '10,000+') addScore('conv_10k');
     if (state.budget === '₹2,500–5,000') addScore('budget_2500_plus');
@@ -597,6 +692,9 @@
       features:               Array.isArray(state.features) ? state.features.join(', ') : state.features,
       timeline:               state.timeline,
       budget:                 state.budget,
+      // Native Booking
+      bookingDate:            state.bookingDate || '',
+      bookingTime:            state.bookingTime || '',
       // Meta
       sourcePage:             location.pathname,
       timeOnPage:             String(timeOnPage),
@@ -609,7 +707,7 @@
 
     var endpoint = CONFIG.endpoint;
     if (!endpoint || /PASTE_YOUR/.test(endpoint)) {
-      console.log('[Weflux Lead Capture]', status, data);
+      console.log('[Weflux Lead Capture & Booking]', status, data);
       return;
     }
 
@@ -633,13 +731,11 @@
   function closePopup() {
     backdrop.classList.remove('show');
     document.body.style.overflow = '';
-    // Save whatever we have
     if (!state.submitted) {
       if (state.contactSaved) {
         scoreCurrentStep();
         saveData('abandoned_qualification');
       }
-      // If they haven't even submitted contact, don't save (no lead)
     }
     if (!getCookie(CONFIG.cookieName)) {
       setCookie(CONFIG.cookieName, 'dismissed', CONFIG.cookieDays);

@@ -537,4 +537,102 @@
   .lc-success-actions .lc-btn {
     width: 100%;
   }
+  .lc-time-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
+
+/* ===== Native Custom Calendar Picker ===== */
+.lc-calendar-picker {
+  margin-top: 8px;
+}
+.lc-date-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  scrollbar-width: thin;
+}
+.lc-date-chip {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 64px;
+  padding: 8px;
+  border: 1.5px solid var(--line, #E7E4DA);
+  border-radius: 12px;
+  background: var(--paper, #FAFAF7);
+  cursor: pointer;
+  transition: all .2s cubic-bezier(.22, 1, .36, 1);
+  user-select: none;
+}
+.lc-date-chip:hover {
+  border-color: #c8c4ba;
+  background: #fff;
+}
+.lc-date-chip.selected {
+  border-color: var(--green, #25D366);
+  background: var(--green-tint, #E6F8EE);
+  color: var(--green-deep, #0F8A53);
+}
+.lc-date-chip .lc-day-name {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--muted, #6B7280);
+}
+.lc-date-chip.selected .lc-day-name {
+  color: var(--green-deep, #0F8A53);
+}
+.lc-date-chip .lc-day-num {
+  font-family: var(--font-mono, monospace);
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.lc-time-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted, #6B7280);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+.lc-time-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.lc-time-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1.5px solid var(--line, #E7E4DA);
+  border-radius: 10px;
+  background: #fff;
+  font-family: var(--font-mono, monospace);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink, #0A0A0A);
+  cursor: pointer;
+  transition: all .2s;
+}
+.lc-time-chip:hover {
+  border-color: var(--green, #25D366);
+  background: rgba(37, 211, 102, .03);
+}
+.lc-time-chip.selected {
+  border-color: var(--green, #25D366);
+  background: var(--green, #25D366);
+  color: #07371C;
+  font-weight: 700;
+  box-shadow: 0 4px 12px -4px rgba(37, 211, 102, .4);
+}
+

@@ -1,8 +1,10 @@
 /**
- * Weflux — Intent-Based Lead Capture v2 → Google Sheet
- * ----------------------------------------------------
+ * Weflux — Intent-Based Lead Capture & Native Calendar Booking → Google Sheet
+ * -------------------------------------------------------------------------
  * Phase 1: Contact captured immediately on "Continue"
  * Phase 2: 8 qualification steps progressively enrich the row
+ * Booking: Native Date & Time picker creates a Google Calendar event on hello@weflux.in
+ *          AND sends a calendar invite to the lead's email — zero external redirects!
  *
  * SESSION DEDUPLICATION: Multiple POSTs per visitor are merged
  * into a single row using the sessionId field.
@@ -43,6 +45,10 @@ var HEADERS = [
   'Features',
   'Timeline',
   'Budget',
+  // Booking
+  'Booking Date',
+  'Booking Time',
+  'Calendar Event ID',
   // Meta
   'Source Page',
   'Time on Page (s)',
@@ -63,14 +69,22 @@ function doPost(e) {
 
     // --- Upsert: find existing row by sessionId ---
     var existingRow = -1;
+    var existingCalId = '';
     if (sessionId) {
       var data = sheet.getDataRange().getValues();
       for (var i = 1; i < data.length; i++) {
         if (data[i][1] === sessionId) {
           existingRow = i + 1;
+          existingCalId = data[i][21] || ''; // Calendar Event ID column
           break;
         }
       }
+    }
+
+    // --- Create Google Calendar Event if date & time provided ---
+    var calEventId = existingCalId;
+    if (p.bookingDate && p.bookingTime && !calEventId) {
+      calEventId = createCalendarBooking_(p);
     }
 
     var row = [
@@ -95,6 +109,10 @@ function doPost(e) {
       p.features || '',                     // Features (comma-separated)
       p.timeline || '',                     // Timeline
       p.budget || '',                       // Budget
+      // Booking
+      p.bookingDate || '',                  // Booking Date
+      p.bookingTime || '',                  // Booking Time
+      calEventId,                           // Calendar Event ID
       // Meta
       p.sourcePage || '',                   // Source Page
       p.timeOnPage || '',                   // Time on Page
@@ -110,7 +128,7 @@ function doPost(e) {
       sheet.appendRow(row);
     }
 
-    return json_({ result: 'ok' });
+    return json_({ result: 'ok', calendarEventId: calEventId });
   } catch (err) {
     return json_({ result: 'error', message: String(err) });
   } finally {
@@ -118,8 +136,48 @@ function doPost(e) {
   }
 }
 
+function createCalendarBooking_(p) {
+  try {
+    if (!p.bookingDate || !p.bookingTime) return '';
+    var start = new Date(p.bookingDate + 'T' + p.bookingTime + ':00');
+    var end = new Date(start.getTime() + 30 * 60 * 1000); // 30 min duration
+
+    var name = p.name || 'Lead';
+    var email = p.email || '';
+    var phone = p.phone || '';
+    var title = 'Weflux Demo — ' + name + (p.company ? (' (' + p.company + ')') : '');
+
+    var desc = 'Weflux 1-on-1 Product Demo Session\n\n' +
+               'Lead Details:\n' +
+               '• Name: ' + name + '\n' +
+               '• Email: ' + email + '\n' +
+               '• Phone: ' + phone + '\n' +
+               '• Business: ' + (p.businessType || 'N/A') + '\n' +
+               '• Current Setup: ' + (p.whatsappUsage || 'N/A') + (p.currentProvider ? (' (' + p.currentProvider + ')') : '') + '\n' +
+               '• Monthly Volume: ' + (p.monthlyConversations || 'N/A') + '\n' +
+               '• Team Size: ' + (p.teamSize || 'N/A') + '\n' +
+               '• Features Interest: ' + (p.features || 'N/A') + '\n' +
+               '• Timeline: ' + (p.timeline || 'N/A') + '\n' +
+               '• Budget: ' + (p.budget || 'N/A');
+
+    var cal = CalendarApp.getDefaultCalendar();
+    var options = {
+      description: desc,
+      sendInvites: true
+    };
+    if (email && email.indexOf('@') !== -1) {
+      options.guests = email;
+    }
+    var event = cal.createEvent(title, start, end, options);
+    return event.getId();
+  } catch (err) {
+    Logger.log('Calendar creation failed: ' + err);
+    return 'Failed: ' + String(err);
+  }
+}
+
 function doGet() {
-  return json_({ result: 'ok', message: 'Lead capture endpoint is live.' });
+  return json_({ result: 'ok', message: 'Lead capture & native calendar booking endpoint is live.' });
 }
 
 function getSheet_() {
@@ -141,6 +199,9 @@ function getSheet_() {
     sheet.setColumnWidth(8, 140);   // Phone
     sheet.setColumnWidth(9, 200);   // Email
     sheet.setColumnWidth(17, 220);  // Features
+    sheet.setColumnWidth(20, 130);  // Booking Date
+    sheet.setColumnWidth(21, 110);  // Booking Time
+    sheet.setColumnWidth(22, 220);  // Calendar Event ID
   }
   return sheet;
 }
