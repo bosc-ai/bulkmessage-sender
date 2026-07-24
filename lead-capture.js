@@ -11,26 +11,17 @@
 
   // ---- CONFIG ----
   var CONFIG = {
-    enabledPages: [
-      '', 'home', 'features', 'platform', 'broadcasts',
-      'automations', 'shared-inbox', 'whatsapp-crm', 'use-cases', 'pricing'
-    ],
-    triggerDelayMs: 15000,
-    triggerScrollPct: 40,
-    cookieName: 'wf_lc_seen',
-    cookieDays: 7,
+    triggerDelayMs: 30000,          // 30 seconds delay (optimal engagement)
+    triggerScrollPct: 40,           // 40% scroll depth
+    dismissCookieName: 'wf_lc_seen',
+    dismissCookieDays: 7,           // Suppress for 7 days if user closes popup
+    submitCookieName: 'wf_lc_submitted',
+    submitCookieDays: 365,          // Never show again if user has submitted contact info
     endpoint: 'https://script.google.com/macros/s/AKfycbw33h-xZdZdkr1XUEYno7eCntwvCmVAefI22th8xyZRGU3JDZ7OsOLUS7YSbYSyWpuo/exec'
   };
 
-  // ---- GUARD: page check ----
-  var page = (document.body.dataset.page || '').toLowerCase();
-  var pathPage = location.pathname.replace(/^\//, '').replace(/\.html$/, '').toLowerCase();
-  if (pathPage === '' || pathPage === 'index') pathPage = '';
-  var currentPage = page || pathPage;
-  if (CONFIG.enabledPages.indexOf(currentPage) === -1 && CONFIG.enabledPages.indexOf(page) === -1) return;
-
-  // ---- GUARD: cookie check ----
-  if (getCookie(CONFIG.cookieName)) return;
+  // ---- GUARD: cookie check (do not show if submitted or recently dismissed) ----
+  if (getCookie(CONFIG.submitCookieName) || getCookie(CONFIG.dismissCookieName)) return;
 
   // ---- STATE ----
   var state = {
@@ -380,6 +371,7 @@
 
     state.contactSaved = true;
     saveData('contact_captured');
+    setCookie(CONFIG.submitCookieName, 'submitted', CONFIG.submitCookieDays);
 
     state.phase = 2;
     state.qualStep = 0;
@@ -532,13 +524,13 @@
     if (e.target && e.target.id === 'lcBookingConfirm') {
       saveData('demo_booked');
       state.submitted = true;
-      setCookie(CONFIG.cookieName, 'submitted', CONFIG.cookieDays);
+      setCookie(CONFIG.submitCookieName, 'submitted', CONFIG.submitCookieDays);
       showSuccess(true);
     }
     if (e.target && e.target.id === 'lcBookingSkip') {
       saveData('completed');
       state.submitted = true;
-      setCookie(CONFIG.cookieName, 'submitted', CONFIG.cookieDays);
+      setCookie(CONFIG.submitCookieName, 'submitted', CONFIG.submitCookieDays);
       showSuccess(false);
     }
   });
@@ -735,10 +727,10 @@
       if (state.contactSaved) {
         scoreCurrentStep();
         saveData('abandoned_qualification');
+        setCookie(CONFIG.submitCookieName, 'submitted', CONFIG.submitCookieDays);
+      } else {
+        setCookie(CONFIG.dismissCookieName, 'dismissed', CONFIG.dismissCookieDays);
       }
-    }
-    if (!getCookie(CONFIG.cookieName)) {
-      setCookie(CONFIG.cookieName, 'dismissed', CONFIG.cookieDays);
     }
   }
 
