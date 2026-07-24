@@ -17,7 +17,10 @@
     triggerScrollPct: 40,
     cookieName: 'wf_lc_seen',
     cookieDays: 7,
-    endpoint: 'PASTE_YOUR_LEAD_CAPTURE_ENDPOINT_HERE'
+    // Google Apps Script Web App URL for Google Sheet lead storage
+    endpoint: 'PASTE_YOUR_LEAD_CAPTURE_ENDPOINT_HERE',
+    // Google Calendar Appointment Schedule link for hello@weflux.in
+    bookingUrl: 'https://calendar.google.com/calendar/u/0/appointments/s/PASTE_YOUR_GOOGLE_CALENDAR_LINK_HERE'
   };
 
   // ---- GUARD: page check ----
@@ -251,7 +254,7 @@
             '<h3>Thank you!</h3>',
             '<p>One of our specialists will contact you shortly.</p>',
             '<div class="lc-success-actions">',
-              '<a href="/contact?topic=scale" class="lc-btn lc-btn-primary">Book a Demo</a>',
+              '<a href="' + (CONFIG.bookingUrl && !/PASTE_YOUR/.test(CONFIG.bookingUrl) ? CONFIG.bookingUrl : 'https://calendar.google.com/calendar/u/0/appointments') + '" target="_blank" rel="noopener" class="lc-btn lc-btn-primary">Book a Demo (Google Calendar)</a>',
               '<a href="https://app.weflux.in/register" class="lc-btn lc-btn-ghost" style="border:1.5px solid var(--line)">Start Free Trial</a>',
             '</div>',
           '</div>',

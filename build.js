@@ -43,7 +43,7 @@ const SKIP_COPY = new Set([
   "api", "lib", // serverless functions + their shared code — bundled by Vercel, not static
   "blog-editor.html", "ADMIN-SETUP.md", // local tools/docs — not published to the live site
   "contact-form.gs", "CONTACT-FORM-SETUP.md", // server-side glue + docs — not static assets
-  "lead-capture-form.gs", // Google Apps Script — not a static asset
+  "lead-capture-form.gs", "LEAD-CAPTURE-SETUP.md", // Google Apps Script + docs — not static assets
 
   ...COLLECTIONS.map((c) => c.list), // listing pages are generated
 ]);
