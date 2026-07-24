@@ -1,6 +1,6 @@
 /**
- * Weflux — Multi-Sheet Lead Capture & Google Calendar Sync
- * ---------------------------------------------------------
+ * Weflux — Multi-Sheet Lead Capture & Google Calendar Sync (v2.1)
+ * ----------------------------------------------------------------
  * Manages TWO sheets in a single Google Spreadsheet:
  *   1. "IntentLeads"       → Popup Submissions & Native Demo Bookings
  *   2. "ContactFormLeads" → Contact Page Form Submissions
@@ -13,16 +13,9 @@
  *      and creates a Google Calendar event if Date & Time are selected.
  *
  * SETUP INSTRUCTIONS:
- *  1. Create a Google Spreadsheet (e.g., "Weflux All Leads").
+ *  1. Open your Google Spreadsheet.
  *  2. Go to Extensions → Apps Script. Paste this entire code into Code.gs.
- *  3. Click Deploy → New deployment.
- *       - Select type: Web app
- *       - Execute as:  Me (hello@weflux.in)
- *       - Who has access: Anyone
- *  4. Click Deploy, authorize access, and copy the Web App URL.
- *  5. Paste the URL into:
- *       - lead-capture.js → CONFIG.endpoint
- *       - contact.html    → <form data-endpoint="...">
+ *  3. Click Deploy → Manage deployments → Edit → Version: New version → Deploy.
  */
 
 var SHEET_POPUP = 'IntentLeads';
@@ -73,6 +66,23 @@ var HEADERS_CONTACT = [
   'Message',
   'Source Page'
 ];
+
+// Run this function directly in Apps Script editor to create/verify headers for BOTH sheets immediately!
+function setupSheets() {
+  getSheet_(SHEET_POPUP, HEADERS_POPUP);
+  getSheet_(SHEET_CONTACT, HEADERS_CONTACT);
+  Logger.log('Successfully initialized headers for ' + SHEET_POPUP + ' and ' + SHEET_CONTACT);
+}
+
+// doGet initializes BOTH sheets automatically whenever the Web App URL is opened in browser
+function doGet() {
+  setupSheets();
+  return json_({
+    result: 'ok',
+    message: 'Weflux unified lead capture endpoint is active.',
+    sheetsInitialized: [SHEET_POPUP, SHEET_CONTACT]
+  });
+}
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
@@ -216,10 +226,6 @@ function createCalendarBooking_(p) {
     Logger.log('Calendar creation failed: ' + err);
     return 'Failed: ' + String(err);
   }
-}
-
-function doGet() {
-  return json_({ result: 'ok', message: 'Weflux unified lead capture endpoint is live.' });
 }
 
 function getSheet_(sheetName, headers) {

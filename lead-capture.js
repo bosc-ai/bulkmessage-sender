@@ -19,8 +19,7 @@
     triggerScrollPct: 40,
     cookieName: 'wf_lc_seen',
     cookieDays: 7,
-    // Replace with your deployed Google Apps Script Web App URL
-    endpoint: 'PASTE_YOUR_LEAD_CAPTURE_ENDPOINT_HERE'
+    endpoint: 'https://script.google.com/macros/s/AKfycbw33h-xZdZdkr1XUEYno7eCntwvCmVAefI22th8xyZRGU3JDZ7OsOLUS7YSbYSyWpuo/exec'
   };
 
   // ---- GUARD: page check ----
