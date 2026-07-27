@@ -320,6 +320,11 @@
           // URLSearchParams + no-cors avoids a CORS preflight on Apps Script.
           await fetch(endpoint, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data) });
         }
+        // Set submitted cookie — suppresses lead capture popup & demo booking across all pages
+        const d = new Date();
+        d.setTime(d.getTime() + 365 * 86400000);
+        document.cookie = 'wf_lc_submitted=submitted;expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+
         // Replace the whole form with the thank-you box.
         contactForm.reset();
         contactForm.style.display = 'none';

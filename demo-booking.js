@@ -146,10 +146,54 @@
     }
   }
 
+  // ---- COOKIE UTILITIES ----
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? match[2] : null;
+  }
+  function setCookie(name, value, days) {
+    var d = new Date();
+    d.setTime(d.getTime() + days * 86400000);
+    document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+  }
+
+  var SUBMIT_COOKIE = 'wf_lc_submitted';
+
   // ---- OPEN / CLOSE ----
   function openDemoPopup() {
     ensurePopup();
-    // Reset to step 1
+
+    // If user already submitted any form, show "already received" message
+    if (getCookie(SUBMIT_COOKIE)) {
+      showStep(1); // reset screens
+      // Show success screen with "already received" message
+      var step1 = document.getElementById('bdStep1');
+      var step2 = document.getElementById('bdStep2');
+      var successEl = document.getElementById('bdSuccess');
+      var titleEl = document.getElementById('bdTitle');
+      var subtitleEl = document.getElementById('bdSubtitle');
+      var eyebrowEl = document.getElementById('bdEyebrow');
+      var progressWrap = document.getElementById('bdProgressWrap');
+
+      step1.classList.remove('active');
+      step2.classList.remove('active');
+      successEl.classList.add('active');
+      titleEl.style.display = 'none';
+      subtitleEl.style.display = 'none';
+      eyebrowEl.style.display = 'none';
+      progressWrap.style.display = 'none';
+
+      var successTitle = document.getElementById('bdSuccessTitle');
+      var successDesc = document.getElementById('bdSuccessDesc');
+      if (successTitle) successTitle.textContent = 'We already have your details! ✅';
+      if (successDesc) successDesc.innerHTML = 'Our team has received your information and will reach out to you shortly.<br><br>If you need immediate help, email <strong>hello@weflux.in</strong> or call <strong>888-44-06029</strong>.';
+
+      popupEl.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      return;
+    }
+
+    // Normal flow — reset to step 1
     bookState.step = 1;
     bookState.bookingDate = '';
     bookState.bookingTime = '';
@@ -411,6 +455,7 @@
     // Confirm booking
     document.getElementById('bdConfirm').addEventListener('click', function () {
       sendBooking();
+      setCookie(SUBMIT_COOKIE, 'submitted', 365); // suppress all popups permanently
 
       var successDesc = document.getElementById('bdSuccessDesc');
       if (successDesc) {

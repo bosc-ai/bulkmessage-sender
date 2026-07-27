@@ -540,6 +540,28 @@
   .lc-time-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .lc-date-chip {
+    width: 58px;
+    height: 56px;
+  }
+  .lc-date-chip .lc-day-num {
+    font-size: 14px;
+  }
+  .lc-date-chips {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .lc-date-chips::-webkit-scrollbar {
+    display: none;
+  }
+  .lc-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+  .lc-actions .lc-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* ===== Native Custom Calendar Picker ===== */
