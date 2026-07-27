@@ -11,17 +11,18 @@
 
   // ---- CONFIG ----
   var CONFIG = {
-    triggerDelayMs: 30000,          // 30 seconds delay (optimal engagement)
-    triggerScrollPct: 40,           // 40% scroll depth
+    initialDelayMs: 1500,             // Tiny delay so page renders before popup
+    retryDelayMinSec: 30,             // Re-show popup min seconds after first dismiss
+    retryDelayMaxSec: 45,             // Re-show popup max seconds after first dismiss
     dismissCookieName: 'wf_lc_seen',
-    dismissCookieDays: 7,           // Suppress for 7 days if user closes popup
+    dismissCookieDays: 7,             // Suppress for 7 days if user closes popup twice
     submitCookieName: 'wf_lc_submitted',
-    submitCookieDays: 365,          // Never show again if user has submitted contact info
+    submitCookieDays: 365,            // Never show again if user has submitted contact info
     endpoint: 'https://script.google.com/macros/s/AKfycbw33h-xZdZdkr1XUEYno7eCntwvCmVAefI22th8xyZRGU3JDZ7OsOLUS7YSbYSyWpuo/exec'
   };
 
-  // ---- GUARD: cookie check (do not show if submitted or recently dismissed) ----
-  if (getCookie(CONFIG.submitCookieName) || getCookie(CONFIG.dismissCookieName)) return;
+  // ---- GUARD: cookie check (do not show if already submitted contact info) ----
+  if (getCookie(CONFIG.submitCookieName)) return;
 
   // ---- STATE ----
   var state = {
@@ -33,6 +34,7 @@
     popupOpenedAt: null,
     contactSaved: false,
     submitted: false,
+    popupShowCount: 0,  // how many times popup has been shown this session
     // Phase 1
     name: '',
     phone: '',
@@ -57,6 +59,7 @@
     // Scoring flags
     scored: {}
   };
+
 
   var TOTAL_QUAL_STEPS = 8;
 
@@ -714,6 +717,7 @@
 
   // ---- OPEN / CLOSE ----
   function openPopup() {
+    state.popupShowCount++;
     backdrop.classList.add('show');
     document.body.style.overflow = 'hidden';
     state.popupOpenedAt = Date.now();
@@ -725,10 +729,20 @@
     document.body.style.overflow = '';
     if (!state.submitted) {
       if (state.contactSaved) {
+        // Contact info already captured → save abandon data, suppress forever
         scoreCurrentStep();
         saveData('abandoned_qualification');
         setCookie(CONFIG.submitCookieName, 'submitted', CONFIG.submitCookieDays);
+      } else if (state.popupShowCount === 1) {
+        // First dismiss without submitting contact — schedule second attempt in 30-45s
+        var retryDelay = (CONFIG.retryDelayMinSec + Math.floor(Math.random() * (CONFIG.retryDelayMaxSec - CONFIG.retryDelayMinSec + 1))) * 1000;
+        setTimeout(function () {
+          if (!state.contactSaved && !state.submitted && !getCookie(CONFIG.submitCookieName)) {
+            openPopup();
+          }
+        }, retryDelay);
       } else {
+        // Second (or later) dismiss — set dismiss cookie, don't bother again this session
         setCookie(CONFIG.dismissCookieName, 'dismissed', CONFIG.dismissCookieDays);
       }
     }
@@ -740,29 +754,16 @@
     if (e.key === 'Escape' && backdrop.classList.contains('show')) closePopup();
   });
 
-  // ---- TRIGGERS ----
-  var triggered = false;
-  function triggerPopup() {
-    if (triggered) return;
-    triggered = true;
-    openPopup();
-  }
+  // ---- TRIGGER: Show popup immediately on page load ----
+  // (Short 1.5s delay to let the page render first, avoids jarring flash)
+  setTimeout(function () {
+    if (!getCookie(CONFIG.submitCookieName)) {
+      openPopup();
+    }
+  }, CONFIG.initialDelayMs);
 
-  var timerHandle = setTimeout(triggerPopup, CONFIG.triggerDelayMs);
-
-  function onScroll() {
-    if (triggered) return;
-    var pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-    if (pct >= CONFIG.triggerScrollPct) triggerPopup();
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-
-  if (!isMobile()) {
-    document.addEventListener('mouseout', function (e) {
-      if (triggered) return;
-      if (e.clientY <= 0 || e.clientX <= 0 || e.clientX >= window.innerWidth) triggerPopup();
-    });
-  }
+  // (Old timer/scroll/exit-intent triggers removed — popup now shows immediately on load
+  //  and retries once after 30-45s if dismissed without contact submission)
 
   // ---- BEFOREUNLOAD: save on tab close ----
   window.addEventListener('beforeunload', function () {
