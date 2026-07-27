@@ -38,6 +38,11 @@
     lcJs.defer = true;
     lcJs.src = '/lead-capture.js';
     document.head.appendChild(lcJs);
+
+    var dbJs = document.createElement('script');
+    dbJs.defer = true;
+    dbJs.src = '/demo-booking.js';
+    document.head.appendChild(dbJs);
   }
 
   const navLinks = [
