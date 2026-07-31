@@ -1484,6 +1484,29 @@ details[open] > .post-faq-q::after { content: '−'; color: var(--green-deep); }
   .cont-row .ph, .cont-row > div:nth-child(4) { display: none; }
   .cont-row.h > div:nth-child(3), .cont-row.h > div:nth-child(4) { display: none; }
   .feat-stage { min-height: 340px; }
+
+  /* ---- Hero mobile: fix text blending with gradient blobs ---- */
+  .mesh::before { width: 260px; height: 260px; opacity: .2; filter: blur(50px); }
+  .mesh::after  { width: 300px; height: 300px; opacity: .12; filter: blur(50px); }
+  .mesh .blob   { width: 220px; height: 220px; opacity: .15; filter: blur(50px); }
+  .hero h1 { text-shadow: 0 1px 2px rgba(255,255,255,.6); }
+  .hero .lede { text-shadow: 0 1px 1px rgba(255,255,255,.4); }
+  .hero-eyebrow { background: rgba(255,255,255,.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+
+  /* ---- Walkthrough poster: mobile responsive ---- */
+  .wf-poster-title { font-size: 18px !important; }
+  .wf-poster-sub { font-size: 11.5px; }
+  .wf-play { width: 56px; height: 56px; }
+  .wf-play svg { width: 22px; height: 22px; }
+  .wf-poster-inner { gap: 12px; padding: 16px; }
+  .wf-promo-head h2 { font-size: 26px; }
+  .wf-promo-head .lede { font-size: 14px; }
+
+  /* ---- FAQ: better mobile touch targets ---- */
+  .faq-q { padding: 18px 4px; font-size: 15px; gap: 12px; }
+  .faq-a-inner { font-size: 14px; }
+  .faq-item.open .faq-a { max-height: 300px; }
+
   /* inner page */
   .page { padding-top: 88px; }
   .page-hero { padding: 24px 0 40px; }
