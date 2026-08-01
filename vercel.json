@@ -5,6 +5,10 @@
   "trailingSlash": false,
   "cleanUrls": true,
   "redirects": [
-    { "source": "/dashboard", "destination": "https://app.weflux.in", "permanent": true }
+    { "source": "/dashboard", "destination": "https://app.weflux.in", "permanent": true },
+    { "source": "/register", "destination": "https://app.weflux.in/register", "permanent": true },
+    { "source": "/signup", "destination": "https://app.weflux.in/register", "permanent": true },
+    { "source": "/signin", "destination": "https://app.weflux.in/login", "permanent": true },
+    { "source": "/login", "destination": "https://app.weflux.in/login", "permanent": true }
   ]
 }
