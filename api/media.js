@@ -1,4 +1,4 @@
-// GET -> { media: [{name,url}] } — images uploaded to assets/uploads
+// GET -> { media: [{name,url}] } - images uploaded to assets/uploads
 import { requireUser, gh, json, OWNER, REPO, BRANCH } from "../lib/admin.js";
 
 export default async function handler(req, res) {

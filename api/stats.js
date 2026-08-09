@@ -1,4 +1,4 @@
-// Session-gated — returns per-post view counts for the dashboard.
+// Session-gated - returns per-post view counts for the dashboard.
 import { requireUser, json } from "../lib/admin.js";
 import { kvEnabled, kvCmd } from "../lib/kv.js";
 

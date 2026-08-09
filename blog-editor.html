@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blog Editor — Weflux</title>
+<title>Blog Editor - Weflux</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -632,7 +632,7 @@ $('#btnTest').onclick=async()=>{
   st.className='gh-status'; st.style.display='block'; st.textContent='Checking…';
   try{
     const r=await ghFetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}`);
-    if(r.ok){ const j=await r.json(); st.className='gh-status ok'; st.textContent='✓ Connected to '+j.full_name+(j.permissions&&j.permissions.push?' (write access)':' (read only — token needs Contents write!)'); }
+    if(r.ok){ const j=await r.json(); st.className='gh-status ok'; st.textContent='✓ Connected to '+j.full_name+(j.permissions&&j.permissions.push?' (write access)':' (read only - token needs Contents write!)'); }
     else { const j=await r.json().catch(()=>({})); st.className='gh-status bad'; st.textContent='✗ '+(j.message||('HTTP '+r.status)); }
   }catch(e){ st.className='gh-status bad'; st.textContent='✗ '+e.message; }
 };
@@ -648,7 +648,7 @@ $('#btnPublish').onclick=async()=>{
   if(!currentMarkdown()){ toast('Write some content first',true); return; }
   if(errs.length){ errs.forEach(s=>$(s).classList.add('invalid')); toast('Fill the required fields (*)',true); return; }
   const cfg=ghCfg();
-  if(!cfg.token){ toast('Add a GitHub token (right panel) — or use Download .md',true); $('#ghToken').focus(); return; }
+  if(!cfg.token){ toast('Add a GitHub token (right panel) - or use Download .md',true); $('#ghToken').focus(); return; }
 
   const path=filePath(m);
   const content=buildFile(m);
@@ -679,7 +679,7 @@ $('#btnDownload').onclick=()=>{
 };
 $('#btnCopy').onclick=async()=>{
   try{ await navigator.clipboard.writeText(buildFile(getMeta())); toast('Markdown copied'); }
-  catch{ toast('Copy failed — select from the preview',true); }
+  catch{ toast('Copy failed - select from the preview',true); }
 };
 
 //==================================================================

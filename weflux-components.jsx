@@ -1,4 +1,4 @@
-// weflux-components.jsx — Brand constants, icons, sidebar, UI primitives
+// weflux-components.jsx - Brand constants, icons, sidebar, UI primitives
 /* global React */
 const { useTime, interpolate, animate, Easing, clamp } = window;
 

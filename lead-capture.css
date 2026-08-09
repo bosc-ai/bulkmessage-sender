@@ -1,5 +1,5 @@
 /* =========================================================
-   Weflux — Lead Capture Popup v2 (Phase 1 + Phase 2)
+   Weflux - Lead Capture Popup v2 (Phase 1 + Phase 2)
    Phase 1: Contact details (saved immediately)
    Phase 2: 8 qualification questions (one per screen)
    ========================================================= */
@@ -157,7 +157,7 @@
   transition: width .5s cubic-bezier(.22, 1, .36, 1);
 }
 
-/* ===== Body — Step Container ===== */
+/* ===== Body - Step Container ===== */
 .lc-body {
   padding: 24px 28px 28px;
   overflow-y: auto;
@@ -176,7 +176,7 @@
   to   { opacity: 1; transform: translateX(0); }
 }
 
-/* ===== Phase 1 — Contact Form ===== */
+/* ===== Phase 1 - Contact Form ===== */
 .lc-form-row {
   margin-bottom: 16px;
 }
@@ -250,7 +250,7 @@
   flex: 1;
 }
 
-/* ===== Phase 2 — Single-Select Option Cards ===== */
+/* ===== Phase 2 - Single-Select Option Cards ===== */
 .lc-q-label {
   font-size: 15px;
   font-weight: 600;

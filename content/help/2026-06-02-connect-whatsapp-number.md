@@ -22,7 +22,7 @@ You can connect a number in about 10 minutes using Meta's embedded signup.
 2. Click **Connect with Meta** and sign in with your Facebook account.
 3. Select or create your Meta Business and WhatsApp Business account.
 4. Enter the phone number and verify it via SMS or call.
-5. Set your display name — this is what customers see.
+5. Set your display name - this is what customers see.
 
 Once Meta approves (usually minutes), your number is live and you can send your first template.
 

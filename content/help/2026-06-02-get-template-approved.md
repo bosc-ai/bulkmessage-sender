@@ -12,9 +12,9 @@ Most template rejections come from a handful of avoidable mistakes.
 
 ## Pick the right category
 
-- **Marketing** — offers, promotions, re-engagement
-- **Utility** — order/account updates tied to a transaction
-- **Authentication** — one-time passcodes
+- **Marketing**: offers, promotions, re-engagement
+- **Utility**: order/account updates tied to a transaction
+- **Authentication**: one-time passcodes
 
 Submitting a promotional message as Utility is the most common rejection reason.
 
@@ -27,6 +27,6 @@ Submitting a promotional message as Utility is the most common rejection reason.
 
 ## After you submit
 
-Approvals usually take minutes to a few hours. You'll see live status inside BulkMessageSender. If rejected, fix the flagged issue and resubmit — there's no penalty.
+Approvals usually take minutes to a few hours. You'll see live status inside BulkMessageSender. If rejected, fix the flagged issue and resubmit - there's no penalty.
 
 Need a hand? [Contact us](/contact.html).

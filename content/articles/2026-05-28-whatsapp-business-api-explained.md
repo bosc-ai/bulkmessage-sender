@@ -12,13 +12,13 @@ draft: false
 
 ## App vs API
 
-The **WhatsApp Business app** is for one person on one phone — great for a solo shop. The **WhatsApp Business API** is for teams: multiple agents, automation, broadcasts to thousands, and reporting. There's no phone app for the API — you use a platform like BulkMessageSender as the interface.
+The **WhatsApp Business app** is for one person on one phone - great for a solo shop. The **WhatsApp Business API** is for teams: multiple agents, automation, broadcasts to thousands, and reporting. There's no phone app for the API - you use a platform like BulkMessageSender as the interface.
 
 ## What you need to start
 
 1. A phone number that isn't currently on a personal WhatsApp account.
 2. A Facebook/Meta Business account.
-3. A platform (a BSP) to connect it all — that's us.
+3. A platform (a BSP) to connect it all - that's us.
 
 Our embedded signup walks you through Meta verification in minutes.
 

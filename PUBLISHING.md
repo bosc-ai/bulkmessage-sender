@@ -1,8 +1,7 @@
 # Publishing content (no code needed)
 
 Your **Blog, Articles, Help Center and Resources** are powered by Markdown files in `/content`
-and built into static pages by `build.js`. You edit them through a free web editor — **Pages CMS** —
-so you never touch code.
+and built into static pages by `build.js`. You edit them through a free web editor - **Pages CMS**: so you never touch code.
 
 ## How it flows
 
@@ -40,7 +39,7 @@ Images you upload go to `/assets/uploads` automatically.
 ## Editing without the CMS (optional)
 
 You can also just add a Markdown file under `content/blog/`, `content/articles/`,
-`content/help/` or `content/resources/` and push to GitHub — same result.
+`content/help/` or `content/resources/` and push to GitHub - same result.
 Filename format: `YYYY-MM-DD-some-title.md` (the date prefix is stripped from the URL).
 
 Frontmatter example:

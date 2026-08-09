@@ -1,5 +1,5 @@
 /* =========================================================
-   Weflux — Standalone "Book a Demo" Popup
+   Weflux - Standalone "Book a Demo" Popup
    Triggered by any element with [data-book-demo] or
    links whose visible text includes "Book a demo".
    Collects: Name, Email, Phone → then Date & Time picker.
@@ -193,7 +193,7 @@
       return;
     }
 
-    // Normal flow — reset to step 1
+    // Normal flow - reset to step 1
     bookState.step = 1;
     bookState.bookingDate = '';
     bookState.bookingTime = '';

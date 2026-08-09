@@ -1,4 +1,4 @@
-# Weflux — Unified Dual-Sheet Lead Capture & Calendar Sync Setup Guide
+# Weflux - Unified Dual-Sheet Lead Capture & Calendar Sync Setup Guide
 
 This guide explains how to set up **ONE Google Spreadsheet** with **TWO automatically managed tabs**:
 1. **`IntentLeads`** → Popup Submissions, Phase 1 Contact Info, Qualification & Native Calendar Bookings.

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Content Studio — Weflux</title>
+<title>Content Studio - Weflux</title>
 <link rel="icon" href="/assets/wachat-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -296,7 +296,7 @@
       </div>
       <div class="side-user">
         <div class="avatar" id="sideAvatar">A</div>
-        <div style="flex:1"><div class="nm" id="sideName">—</div><div class="rl">Writer</div></div>
+        <div style="flex:1"><div class="nm" id="sideName"> - </div><div class="rl">Writer</div></div>
         <button class="icon-btn" id="btnLogout" title="Sign out" style="width:32px;height:32px"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg></button>
       </div>
     </div>
@@ -409,7 +409,7 @@
             </div>
             <!-- FAQs -->
             <div class="card" style="margin-bottom:16px">
-              <div class="hd">FAQs <span style="font-weight:400;color:var(--muted);font-size:11px;text-transform:none;letter-spacing:0"> — adds FAQ rich results on Google</span></div>
+              <div class="hd">FAQs <span style="font-weight:400;color:var(--muted);font-size:11px;text-transform:none;letter-spacing:0"> - adds FAQ rich results on Google</span></div>
               <div class="pad">
                 <div id="faqList"></div>
                 <button class="btn" id="addFaq" style="width:100%;justify-content:center;font-size:13px">+ Add FAQ</button>
@@ -501,7 +501,7 @@ function toDateStr(d){if(!d)return todayISO();if(d instanceof Date&&!isNaN(d))re
 async function api(path,opts={}){
   const r=await fetch(path,Object.assign({credentials:'same-origin',headers:{'Content-Type':'application/json'}},opts));
   let j={};try{j=await r.json();}catch{}
-  if(r.status===401){USER=null;showLogin('Your session expired — please sign in again.');throw new Error('Not signed in');}
+  if(r.status===401){USER=null;showLogin('Your session expired - please sign in again.');throw new Error('Not signed in');}
   if(!r.ok)throw new Error(j.error||('HTTP '+r.status));
   return j;
 }
@@ -643,7 +643,7 @@ function currentPosts(){
   else posts.sort((a,b)=>sort==='old'?(a.date<b.date?-1:1):(a.date<b.date?1:-1));
   return posts;
 }
-function fmtUpdated(d){if(!d)return '—';const dt=new Date(d);if(isNaN(dt))return d;return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+function fmtUpdated(d){if(!d)return '-';const dt=new Date(d);if(isNaN(dt))return d;return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
 function renderTable(){
   const posts=currentPosts(), host=$('#postRows'), v=STATS.enabled;
   $('#postHead').innerHTML=`<tr><th>Post</th><th>Category</th><th>Status</th>${v?'<th>Views</th>':''}<th>Updated</th><th></th></tr>`;
@@ -838,13 +838,13 @@ async function save(asDraft){
     const j=await api('/api/save',{method:'POST',body:JSON.stringify({path:newPath,content:buildFile(m),sha:editing&&editing.path===newPath?editing.sha:undefined,oldPath:editing&&editing.path!==newPath?editing.path:undefined,title:m.title,draft:m.draft})});
     editing={path:newPath,sha:j.sha};setDeleteVisible(true);$('#fDraft').checked=m.draft;
     postIsLive=!m.draft;clearDirty();setBusy(false);
-    toast(m.draft?'Saved as draft ✓':'Published ✓ — live in about a minute');
+    toast(m.draft?'Saved as draft ✓':'Published ✓ - live in about a minute');
   }catch(e){setBusy(false);toast('Failed: '+e.message,true);}
 }
 $('#btnPublish').onclick=async()=>{
-  if(postIsLive&&!isDirty()){toast('Already live — no changes to publish');return;}
+  if(postIsLive&&!isDirty()){toast('Already live - no changes to publish');return;}
   const republish=postIsLive;
-  if(await dialog({title:republish?'Republish your changes?':'Publish to your live site?',message:republish?'This pushes your edits live on weflux.in — updated in about a minute.':'This publishes the post to weflux.in — it’ll be live in about a minute.',okText:republish?'Republish':'Publish',cancelText:'Not yet'}))save(false);
+  if(await dialog({title:republish?'Republish your changes?':'Publish to your live site?',message:republish?'This pushes your edits live on weflux.in - updated in about a minute.':'This publishes the post to weflux.in - it’ll be live in about a minute.',okText:republish?'Republish':'Publish',cancelText:'Not yet'}))save(false);
 };
 $('#btnDraft').onclick=()=>save(true);
 $('#btnPreview').onclick=async()=>{

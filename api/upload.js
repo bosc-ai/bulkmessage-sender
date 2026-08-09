@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   const path = "assets/uploads/" + safe;
   const r = await gh(`/repos/${OWNER}/${REPO}/contents/${path}`, {
     method: "PUT",
-    body: JSON.stringify({ message: `Upload ${safe} via Content Studio — ${u}`, content: base64, branch: BRANCH }),
+    body: JSON.stringify({ message: `Upload ${safe} via Content Studio - ${u}`, content: base64, branch: BRANCH }),
   });
   if (!r.ok) { const j = await r.json().catch(() => ({})); return json(res, r.status, { error: j.message || "Upload failed" }); }
   return json(res, 200, { url: "/" + path });

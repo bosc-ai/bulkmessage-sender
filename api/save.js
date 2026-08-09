@@ -15,7 +15,7 @@ export default async function handler(req, res) {
     if (r0.ok) useSha = (await r0.json()).sha; // file already exists -> update it
   }
 
-  const message = `${useSha ? "Update" : "Publish"} "${title || path}"${draft ? " (draft)" : ""} via Content Studio — ${u}`;
+  const message = `${useSha ? "Update" : "Publish"} "${title || path}"${draft ? " (draft)" : ""} via Content Studio - ${u}`;
   const body = { message, content: b64encode(content), branch: BRANCH };
   if (useSha) body.sha = useSha;
 
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
       const od = await ro.json();
       await gh(`/repos/${OWNER}/${REPO}/contents/${oldPath}`, {
         method: "DELETE",
-        body: JSON.stringify({ message: `Remove old path after rename via Content Studio — ${u}`, sha: od.sha, branch: BRANCH }),
+        body: JSON.stringify({ message: `Remove old path after rename via Content Studio - ${u}`, sha: od.sha, branch: BRANCH }),
       });
     }
   }

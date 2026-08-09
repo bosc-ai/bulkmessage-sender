@@ -1,4 +1,4 @@
-// weflux-scenes.jsx — All scene components
+// weflux-scenes.jsx - All scene components
 /* global React */
 const { useTime, interpolate, animate, Easing, clamp } = window;
 const { WF, SIDEBAR_ITEMS, WefluxLogo, Caption, CaptionFull, Counter, Sidebar,
@@ -125,7 +125,7 @@ function CampaignsPanel() {
   const campaigns = [
   { name: 'Summer Sale 2025', status: 'Sent', reach: 1247, pct: '94%', col: WF.green },
   { name: 'Product Launch Wave', status: 'Sent', reach: 3820, pct: '88%', col: WF.blue },
-  { name: 'Re-engagement Drive', status: 'Scheduled', reach: 2100, pct: '—', col: WF.amber }];
+  { name: 'Re-engagement Drive', status: 'Scheduled', reach: 2100, pct: '-', col: WF.amber }];
 
   // Paper plane that flies
   const planeX = animate({ from: 300, to: 1700, start: 24.8, end: 27.5, ease: Easing.easeInOutCubic })(t);
@@ -399,7 +399,7 @@ function CrmColumn({ col, t }) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// SCENE 1 — Logo Reveal (0–9s)
+// SCENE 1 - Logo Reveal (0–9s)
 // ═══════════════════════════════════════════════════════════════════════════════
 function Scene1() {
   const t = useTime();
@@ -407,14 +407,14 @@ function Scene1() {
 
   const sceneOp = animate({ from: 1, to: 0, start: 8.5, end: 9.5 })(t);
 
-  // Pulse dot — fully gone by t=1.8, logo starts at t=2.0
+  // Pulse dot - fully gone by t=1.8, logo starts at t=2.0
   const dotOp = Math.min(
     animate({ from: 0, to: 1, start: 0.8, end: 1.3, ease: Easing.easeOutQuad })(t),
     animate({ from: 1, to: 0, start: 1.4, end: 1.85, ease: Easing.easeInQuad })(t)
   );
   const dotScale = animate({ from: 0.4, to: 1, start: 0.8, end: 1.4, ease: Easing.easeOutBack })(t);
 
-  // Expanding rings — both fully gone by t=1.9
+  // Expanding rings - both fully gone by t=1.9
   const r1Scale = animate({ from: 1, to: 3.5, start: 1.0, end: 1.8, ease: Easing.easeOutCubic })(t);
   const r1Op = Math.min(
     animate({ from: 0, to: 0.65, start: 1.0, end: 1.15 })(t),
@@ -463,7 +463,7 @@ function Scene1() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// SCENE 2 — Sidebar Introduction (8–51s)
+// SCENE 2 - Sidebar Introduction (8–51s)
 // ═══════════════════════════════════════════════════════════════════════════════
 function Scene2() {
   const t = useTime();
@@ -491,7 +491,7 @@ function Scene2() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// SCENE 3 — CRM Board Reveal (49–68s)
+// SCENE 3 - CRM Board Reveal (49–68s)
 // ═══════════════════════════════════════════════════════════════════════════════
 function Scene3() {
   const t = useTime();
@@ -536,7 +536,7 @@ function Scene3() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// SCENE 4 — Metrics (66–77s)
+// SCENE 4 - Metrics (66–77s)
 // ═══════════════════════════════════════════════════════════════════════════════
 function Scene4() {
   const t = useTime();
@@ -600,7 +600,7 @@ function Scene4() {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// FINALE — Grand Finale (75–90s)
+// FINALE - Grand Finale (75–90s)
 // ═══════════════════════════════════════════════════════════════════════════════
 function Finale() {
   const t = useTime();
@@ -650,10 +650,10 @@ function Finale() {
         </div>
       </div>
 
-      {/* Center content — each block has explicit size so flex gap is accurate */}
+      {/* Center content - each block has explicit size so flex gap is accurate */}
       <div style={{ position: 'absolute', left: 260, right: 0, top: 0, bottom: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 44 }}>
 
-        {/* Large logo — rendered at real pixel size, entry scale uses center origin */}
+        {/* Large logo - rendered at real pixel size, entry scale uses center origin */}
         <div style={{ opacity: logoOp, transform: `scale(${logoSc})`, transformOrigin: 'center center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 28 }}>
             <img src="uploads/weflux.png" alt="Weflux" style={{ width: 130, height: 130, borderRadius: 28, flexShrink: 0, objectFit: 'cover', boxShadow: logoGl > 0 ? `0 0 ${Math.round(logoGl * 50)}px rgba(37,201,95,0.6),0 0 ${Math.round(logoGl * 100)}px rgba(37,201,95,0.3)` : 'none' }} />

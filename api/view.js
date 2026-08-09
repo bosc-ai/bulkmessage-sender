@@ -1,4 +1,4 @@
-// PUBLIC endpoint — pinged by each published post page to count a view.
+// PUBLIC endpoint - pinged by each published post page to count a view.
 // No session required (visitors aren't logged in). No-ops if KV isn't set up.
 import { kvEnabled, kvCmd } from "../lib/kv.js";
 

@@ -1,5 +1,5 @@
 /* =========================================================
-   WaChat — design system v3 (Geist · JetBrains Mono)
+   WaChat - design system v3 (Geist · JetBrains Mono)
    Combines homepage + inner-page styles into one file.
    ========================================================= */
 
@@ -185,7 +185,7 @@ h3 { font-size: 22px; line-height: 1.25; letter-spacing: -0.02em; }
 
 .nav-cta { display: flex; align-items: center; gap: 10px; }
 .nav-cta .btn { height: 38px; padding: 0 14px; font-size: 13.5px; }
-/* "Sign in" is a ghost button — give it a solid white surface so it
+/* "Sign in" is a ghost button - give it a solid white surface so it
    doesn't wash out against the transparent nav over the hero gradient. */
 .nav-cta .nav-signin {
   background: #fff;
@@ -300,7 +300,7 @@ h3 { font-size: 22px; line-height: 1.25; letter-spacing: -0.02em; }
 }
 .hero-powered .weflux-link:hover { border-bottom-color: var(--green-deep); }
 .hero-cta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-/* On the green hero gradient a transparent ghost button washes out —
+/* On the green hero gradient a transparent ghost button washes out - 
    give it a solid white surface so it reads clearly as the secondary CTA. */
 .hero-cta .btn-ghost {
   background: #fff;

@@ -1,5 +1,5 @@
 /* ============================================================
-   Weflux — landing page interactions
+   Weflux - landing page interactions
    ============================================================ */
 (function () {
   'use strict';
@@ -42,7 +42,7 @@
   const stream = document.getElementById('chatStream');
   const script = [
     { who: 'in',  text: 'Hi 👋 quick question about my order' },
-    { who: 'out', text: 'Hi Priya! I see order #12847 — how can I help?', meta: '11:41 · ✓✓' },
+    { who: 'out', text: 'Hi Priya! I see order #12847 - how can I help?', meta: '11:41 · ✓✓' },
     { who: 'in',  text: 'Awesome! When will it arrive?' },
     { who: 'out', text: 'Tomorrow by 6 PM. Tracking link → wc.in/t/12847', meta: '11:42 · ✓✓' },
   ];
@@ -320,7 +320,7 @@
           // URLSearchParams + no-cors avoids a CORS preflight on Apps Script.
           await fetch(endpoint, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(data) });
         }
-        // Set submitted cookie — suppresses lead capture popup & demo booking across all pages
+        // Set submitted cookie - suppresses lead capture popup & demo booking across all pages
         const d = new Date();
         d.setTime(d.getTime() + 365 * 86400000);
         document.cookie = 'wf_lc_submitted=submitted;expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
@@ -335,7 +335,7 @@
         }
       } catch (err) {
         if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Submit →'; }
-        alert('Sorry — something went wrong. Please email hello@weflux.in and we\'ll get right back to you.');
+        alert('Sorry - something went wrong. Please email hello@weflux.in and we\'ll get right back to you.');
       }
     });
   }

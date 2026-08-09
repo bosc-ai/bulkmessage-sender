@@ -1,6 +1,6 @@
 /* =========================================================
-   Weflux — shared shell (nav + footer + mobile menu)
-   All pages live at root level — no /pages/ prefix needed.
+   Weflux - shared shell (nav + footer + mobile menu)
+   All pages live at root level - no /pages/ prefix needed.
    ========================================================= */
 (function () {
   'use strict';
@@ -136,7 +136,7 @@
                 </span>
                 <span class="brand-name">Weflux</span>
               </a>
-              <p>Weflux is an official WhatsApp Business API platform — send broadcast campaigns, automate replies, build workflows, and manage a shared team inbox. Built in India.</p>
+              <p>Weflux is an official WhatsApp Business API platform - send broadcast campaigns, automate replies, build workflows, and manage a shared team inbox. Built in India.</p>
               <p class="footer-contact"><a href="mailto:hello@weflux.in">hello@weflux.in</a> · <a href="https://weflux.in">weflux.in</a></p>
             </div>
             <div class="footer-col">
@@ -211,7 +211,7 @@
   // every page (current and future) gets it for free.
   (function () {
     const WEFLUX_RE = /^https?:\/\/(www\.)?weflux\.in(\/|$|\?|#)/i;
-    const DELAY = 1500; // 1.5s — within the "1–2 sec" brief
+    const DELAY = 1500; // 1.5s - within the "1–2 sec" brief
 
     const overlay = document.createElement('div');
     overlay.className = 'weflux-redirect';

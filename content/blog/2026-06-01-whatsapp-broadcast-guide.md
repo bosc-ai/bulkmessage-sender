@@ -1,7 +1,7 @@
 ---
 title: How to send a WhatsApp broadcast that actually gets read
 description: A practical guide to planning, writing and sending WhatsApp
-  broadcast campaigns on the WhatsApp Business API — without getting your number
+  broadcast campaigns on the WhatsApp Business API - without getting your number
   flagged.
 date: 2026-06-01
 author: BulkMessageSender Team
@@ -9,7 +9,7 @@ category: Broadcasts
 cover: green
 draft: false
 ---
-WhatsApp broadcasts are the highest-engagement channel most Indian businesses have — open rates routinely beat email by 5–10×. But a careless blast can get your number rate-limited or your quality rating dropped. Here's how to do it right.
+WhatsApp broadcasts are the highest-engagement channel most Indian businesses have - open rates routinely beat email by 5–10×. But a careless blast can get your number rate-limited or your quality rating dropped. Here's how to do it right.
 
 ![image.png](blob:https:/app.pagescms.org/7e80c72e-d6bb-4e30-8266-d80d24d9c933)
 
@@ -19,9 +19,9 @@ Only message people who have opted in. Import your contacts, tag them by source,
 
 ## 2. Use the right template category
 
-- **Marketing** — promotions, offers, re-engagement.
-- **Utility** — order updates, reminders, account notices.
-- **Authentication** — one-time passcodes.
+- **Marketing**: promotions, offers, re-engagement.
+- **Utility**: order updates, reminders, account notices.
+- **Authentication**: one-time passcodes.
 
 Sending a promo as a utility template is the fastest way to get a template paused.
 

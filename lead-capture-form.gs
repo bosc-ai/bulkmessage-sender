@@ -1,5 +1,5 @@
 /**
- * Weflux — Multi-Sheet Lead Capture & Google Calendar Sync (v2.1)
+ * Weflux - Multi-Sheet Lead Capture & Google Calendar Sync (v2.1)
  * ----------------------------------------------------------------
  * Manages TWO sheets in a single Google Spreadsheet:
  *   1. "IntentLeads"       → Popup Submissions & Native Demo Bookings
@@ -197,7 +197,7 @@ function createCalendarBooking_(p) {
     var name = p.name || 'Lead';
     var email = p.email || '';
     var phone = p.phone || '';
-    var title = 'Weflux Demo — ' + name + (p.company ? (' (' + p.company + ')') : '');
+    var title = 'Weflux Demo - ' + name + (p.company ? (' (' + p.company + ')') : '');
 
     var desc = 'Weflux 1-on-1 Product Demo Session\n\n' +
                'Lead Details:\n' +

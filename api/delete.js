@@ -10,7 +10,7 @@ export default async function handler(req, res) {
 
   const r = await gh(`/repos/${OWNER}/${REPO}/contents/${path}`, {
     method: "DELETE",
-    body: JSON.stringify({ message: `Delete ${path} via Content Studio — ${u}`, sha, branch: BRANCH }),
+    body: JSON.stringify({ message: `Delete ${path} via Content Studio - ${u}`, sha, branch: BRANCH }),
   });
   if (!r.ok) { const j = await r.json().catch(() => ({})); return json(res, r.status, { error: j.message || "Delete failed" }); }
   return json(res, 200, { ok: true });

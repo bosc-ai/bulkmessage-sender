@@ -1,5 +1,5 @@
 /* =========================================================
-   Weflux — static site build
+   Weflux - static site build
    Copies the hand-written site into /dist and generates
    themed pages from Markdown in /content (blog, articles,
    help, resources) + a fresh sitemap.xml.
@@ -40,15 +40,15 @@ const SKIP_COPY = new Set([
   "dist", "content", "node_modules", ".git", ".github", ".claude", ".vscode",
   "build.js", "package.json", "package-lock.json", "vercel.json", ".pages.yml",
   "README.md", ".gitignore", ".DS_Store", "sitemap.xml",
-  "api", "lib", // serverless functions + their shared code — bundled by Vercel, not static
-  "blog-editor.html", "ADMIN-SETUP.md", // local tools/docs — not published to the live site
-  "contact-form.gs", "CONTACT-FORM-SETUP.md", // server-side glue + docs — not static assets
-  "lead-capture-form.gs", "LEAD-CAPTURE-SETUP.md", // Google Apps Script + docs — not static assets
+  "api", "lib", // serverless functions + their shared code - bundled by Vercel, not static
+  "blog-editor.html", "ADMIN-SETUP.md", // local tools/docs - not published to the live site
+  "contact-form.gs", "CONTACT-FORM-SETUP.md", // server-side glue + docs - not static assets
+  "lead-capture-form.gs", "LEAD-CAPTURE-SETUP.md", // Google Apps Script + docs - not static assets
 
   ...COLLECTIONS.map((c) => c.list), // listing pages are generated
 ]);
 
-// Body can be HTML (from the /admin dashboard — `format: html` in frontmatter)
+// Body can be HTML (from the /admin dashboard - `format: html` in frontmatter)
 // or Markdown (legacy posts / Pages CMS). Render each faithfully.
 function renderBody(data, content) {
   return data.format === "html" ? content : marked.parse(content);
@@ -72,7 +72,7 @@ ${posts
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${esc(col.title)} — WhatsApp Automation | Weflux</title>
+  <title>${esc(col.title)} - WhatsApp Automation | Weflux</title>
   <meta name="description" content="${esc(col.lede)}">
   <link rel="canonical" href="${url}">
   <meta property="og:title" content="${esc(col.title)} | Weflux">

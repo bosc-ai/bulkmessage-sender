@@ -1,5 +1,5 @@
 /* =========================================================
-   Weflux — Lead Capture & Native Calendar Booking Popup
+   Weflux - Lead Capture & Native Calendar Booking Popup
    Phase 1: Contact details → saved immediately
    Phase 2: 8 qualification questions (one per screen)
    Native Booking: Pick Date & Time slot directly in popup.
@@ -734,7 +734,7 @@
         saveData('abandoned_qualification');
         setCookie(CONFIG.submitCookieName, 'submitted', CONFIG.submitCookieDays);
       } else if (state.popupShowCount === 1) {
-        // First dismiss without submitting contact — schedule second attempt in 30-45s
+        // First dismiss without submitting contact - schedule second attempt in 30-45s
         var retryDelay = (CONFIG.retryDelayMinSec + Math.floor(Math.random() * (CONFIG.retryDelayMaxSec - CONFIG.retryDelayMinSec + 1))) * 1000;
         setTimeout(function () {
           if (!state.contactSaved && !state.submitted && !getCookie(CONFIG.submitCookieName)) {
@@ -742,7 +742,7 @@
           }
         }, retryDelay);
       } else {
-        // Second (or later) dismiss — set dismiss cookie, don't bother again this session
+        // Second (or later) dismiss - set dismiss cookie, don't bother again this session
         setCookie(CONFIG.dismissCookieName, 'dismissed', CONFIG.dismissCookieDays);
       }
     }
@@ -762,7 +762,7 @@
     }
   }, CONFIG.initialDelayMs);
 
-  // (Old timer/scroll/exit-intent triggers removed — popup now shows immediately on load
+  // (Old timer/scroll/exit-intent triggers removed - popup now shows immediately on load
   //  and retries once after 30-45s if dismissed without contact submission)
 
   // ---- BEFOREUNLOAD: save on tab close ----
