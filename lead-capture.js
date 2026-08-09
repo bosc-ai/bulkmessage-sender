@@ -21,8 +21,38 @@
     endpoint: 'https://script.google.com/macros/s/AKfycbw33h-xZdZdkr1XUEYno7eCntwvCmVAefI22th8xyZRGU3JDZ7OsOLUS7YSbYSyWpuo/exec'
   };
 
-  // ---- GUARD: cookie check (do not show if already submitted contact info) ----
-  if (getCookie(CONFIG.submitCookieName)) return;
+  // ---- GUARD: check contact page & cookie/storage ----
+  function isContactPage() {
+    var path = (window.location.pathname || '').toLowerCase();
+    var page = (document.body && document.body.dataset && document.body.dataset.page || '').toLowerCase();
+    return page === 'contact' || path.indexOf('contact') !== -1;
+  }
+  function getCookie(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return match ? match[2] : null;
+  }
+  function setCookie(name, value, days) {
+    var d = new Date();
+    d.setTime(d.getTime() + days * 86400000);
+    document.cookie = name + '=' + value + ';expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
+  }
+  function getStorage(key) {
+    try {
+      return localStorage.getItem(key) || getCookie(key);
+    } catch (e) {
+      return getCookie(key);
+    }
+  }
+  function setStorage(key, value, days) {
+    try {
+      localStorage.setItem(key, value);
+    } catch (e) {}
+    if (days) setCookie(key, value, days);
+  }
+
+  if (isContactPage()) return;
+  if (getCookie(CONFIG.submitCookieName) || getStorage(CONFIG.submitCookieName)) return;
+  if (getCookie(CONFIG.dismissCookieName) || getStorage(CONFIG.dismissCookieName)) return;
 
   // ---- STATE ----
   var state = {
@@ -716,7 +746,13 @@
   }
 
   // ---- OPEN / CLOSE ----
+  var timerId = null;
+
   function openPopup() {
+    if (isContactPage()) return;
+    if (getCookie(CONFIG.submitCookieName) || getStorage(CONFIG.submitCookieName)) return;
+    if (getCookie(CONFIG.dismissCookieName) || getStorage(CONFIG.dismissCookieName)) return;
+
     state.popupShowCount++;
     backdrop.classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -729,21 +765,32 @@
     document.body.style.overflow = '';
     if (!state.submitted) {
       if (state.contactSaved) {
-        // Contact info already captured → save abandon data, suppress forever
+        // Contact info already captured - save abandon data, suppress forever
         scoreCurrentStep();
         saveData('abandoned_qualification');
         setCookie(CONFIG.submitCookieName, 'submitted', CONFIG.submitCookieDays);
-      } else if (state.popupShowCount === 1) {
-        // First dismiss without submitting contact - schedule second attempt in 30-45s
-        var retryDelay = (CONFIG.retryDelayMinSec + Math.floor(Math.random() * (CONFIG.retryDelayMaxSec - CONFIG.retryDelayMinSec + 1))) * 1000;
-        setTimeout(function () {
-          if (!state.contactSaved && !state.submitted && !getCookie(CONFIG.submitCookieName)) {
-            openPopup();
-          }
-        }, retryDelay);
+        setStorage(CONFIG.submitCookieName, 'submitted', CONFIG.submitCookieDays);
       } else {
-        // Second (or later) dismiss - set dismiss cookie, don't bother again this session
-        setCookie(CONFIG.dismissCookieName, 'dismissed', CONFIG.dismissCookieDays);
+        var dismissCount = parseInt(getStorage('wf_lc_dismiss_count') || '0', 10) + 1;
+        setStorage('wf_lc_dismiss_count', dismissCount.toString(), 7);
+
+        if (dismissCount >= 2) {
+          // Second (or later) dismiss - set dismiss cookie & storage, don't bother again for 7 days
+          setCookie(CONFIG.dismissCookieName, 'dismissed', CONFIG.dismissCookieDays);
+          setStorage(CONFIG.dismissCookieName, 'dismissed', CONFIG.dismissCookieDays);
+        } else {
+          // First dismiss without submitting contact - schedule second attempt after 30-45s cooldown
+          var retryDelaySec = CONFIG.retryDelayMinSec + Math.floor(Math.random() * (CONFIG.retryDelayMaxSec - CONFIG.retryDelayMinSec + 1));
+          var nextShowTime = Date.now() + (retryDelaySec * 1000);
+          setStorage('wf_lc_next_show_time', nextShowTime.toString(), 1);
+
+          if (timerId) clearTimeout(timerId);
+          timerId = setTimeout(function () {
+            if (!state.contactSaved && !state.submitted && !getCookie(CONFIG.submitCookieName) && !getCookie(CONFIG.dismissCookieName) && !getStorage(CONFIG.dismissCookieName) && !isContactPage()) {
+              openPopup();
+            }
+          }, retryDelaySec * 1000);
+        }
       }
     }
   }
@@ -754,16 +801,38 @@
     if (e.key === 'Escape' && backdrop.classList.contains('show')) closePopup();
   });
 
-  // ---- TRIGGER: Show popup immediately on page load ----
-  // (Short 1.5s delay to let the page render first, avoids jarring flash)
-  setTimeout(function () {
-    if (!getCookie(CONFIG.submitCookieName)) {
-      openPopup();
-    }
-  }, CONFIG.initialDelayMs);
+  // ---- TRIGGER: Show popup with 30-45s dismissal cooldown & page rules ----
+  function initPopupTrigger() {
+    if (isContactPage()) return;
+    if (getCookie(CONFIG.submitCookieName) || getStorage(CONFIG.submitCookieName)) return;
+    if (getCookie(CONFIG.dismissCookieName) || getStorage(CONFIG.dismissCookieName)) return;
 
-  // (Old timer/scroll/exit-intent triggers removed - popup now shows immediately on load
-  //  and retries once after 30-45s if dismissed without contact submission)
+    var nextShowStr = getStorage('wf_lc_next_show_time');
+    if (nextShowStr) {
+      var nextShowTime = parseInt(nextShowStr, 10);
+      var now = Date.now();
+      var remainingMs = nextShowTime - now;
+
+      if (remainingMs > 0) {
+        // User closed popup recently on this or another page - wait out the remaining 30-45s window
+        timerId = setTimeout(function () {
+          if (!state.contactSaved && !state.submitted && !getCookie(CONFIG.submitCookieName) && !getCookie(CONFIG.dismissCookieName) && !getStorage(CONFIG.dismissCookieName) && !isContactPage()) {
+            openPopup();
+          }
+        }, remainingMs);
+        return;
+      }
+    }
+
+    // First time visitor or cooldown has elapsed - show after initial delay
+    timerId = setTimeout(function () {
+      if (!state.contactSaved && !state.submitted && !getCookie(CONFIG.submitCookieName) && !getCookie(CONFIG.dismissCookieName) && !getStorage(CONFIG.dismissCookieName) && !isContactPage()) {
+        openPopup();
+      }
+    }, CONFIG.initialDelayMs);
+  }
+
+  initPopupTrigger();
 
   // ---- BEFOREUNLOAD: save on tab close ----
   window.addEventListener('beforeunload', function () {
