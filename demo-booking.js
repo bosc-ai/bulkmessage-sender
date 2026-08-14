@@ -457,6 +457,12 @@
       sendBooking();
       setCookie(SUBMIT_COOKIE, 'submitted', 365); // suppress all popups permanently
 
+      if (window.fbq) {
+        try {
+          fbq('track', 'Schedule', { content_name: 'Standalone Demo Booking', booking_date: bookState.bookingDate, booking_time: bookState.bookingTime });
+        } catch (err) {}
+      }
+
       var successDesc = document.getElementById('bdSuccessDesc');
       if (successDesc) {
         successDesc.innerHTML = 'We have reserved <strong>' + (bookState.bookingDateDisplay || '') + ' at ' + (bookState.bookingTimeLabel || '') + ' (IST)</strong> for your 1-on-1 demo.<br><br>A Google Calendar invitation has been sent to <strong>' + bookState.email + '</strong>.';

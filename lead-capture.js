@@ -406,6 +406,12 @@
     saveData('contact_captured');
     setCookie(CONFIG.submitCookieName, 'submitted', CONFIG.submitCookieDays);
 
+    if (window.fbq) {
+      try {
+        fbq('track', 'Lead', { content_name: 'Lead Capture Popup', country: state.country });
+      } catch (e) {}
+    }
+
     state.phase = 2;
     state.qualStep = 0;
     showQualScreen(0);
@@ -558,6 +564,11 @@
       saveData('demo_booked');
       state.submitted = true;
       setCookie(CONFIG.submitCookieName, 'submitted', CONFIG.submitCookieDays);
+      if (window.fbq) {
+        try {
+          fbq('track', 'Schedule', { content_name: 'Lead Capture Calendar Booking', booking_date: state.bookingDate, booking_time: state.bookingTime });
+        } catch (err) {}
+      }
       showSuccess(true);
     }
     if (e.target && e.target.id === 'lcBookingSkip') {

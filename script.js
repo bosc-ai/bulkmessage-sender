@@ -325,6 +325,13 @@
         d.setTime(d.getTime() + 365 * 86400000);
         document.cookie = 'wf_lc_submitted=submitted;expires=' + d.toUTCString() + ';path=/;SameSite=Lax';
 
+        // Track Meta Pixel Lead event
+        if (window.fbq) {
+          try {
+            fbq('track', 'Lead', { content_name: 'Contact Sales Form', topic: val('cTopic'), team_size: val('cAgents') });
+          } catch (pe) {}
+        }
+
         // Replace the whole form with the thank-you box.
         contactForm.reset();
         contactForm.style.display = 'none';
@@ -339,5 +346,18 @@
       }
     });
   }
+
+  // ---------- Meta Pixel: Pricing Plan Selection Track ----------
+  document.addEventListener('click', (e) => {
+    const cardBtn = e.target.closest && e.target.closest('.plan .btn, [data-plan] .btn');
+    if (!cardBtn) return;
+    const planCard = cardBtn.closest('.plan, [data-plan]');
+    const planName = planCard ? (planCard.querySelector('h3, .plan-name, .plan-title')?.textContent || '').trim() : 'Plan';
+    if (window.fbq) {
+      try {
+        fbq('track', 'InitiateCheckout', { content_name: planName || 'Pricing Plan' });
+      } catch (err) {}
+    }
+  });
 
 })();

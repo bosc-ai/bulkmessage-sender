@@ -27,6 +27,72 @@
     document.body.insertBefore(ns, document.body.firstChild);
   }
 
+  // ---- META PIXEL (injected once from shell so all pages auto-track) ----
+  if (!window.fbq) {
+    !(function (f, b, e, v, n, t, s) {
+      if (f.fbq) return;
+      n = f.fbq = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      if (!f._fbq) f._fbq = n;
+      n.push = n;
+      n.loaded = !0;
+      n.version = '2.0';
+      n.queue = [];
+      t = b.createElement(e);
+      t.async = !0;
+      t.src = v;
+      s = b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t, s);
+    })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2167003997195249');
+    fbq('track', 'PageView');
+
+    var nsPixel = document.createElement('noscript');
+    nsPixel.innerHTML = '<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2167003997195249&ev=PageView&noscript=1" />';
+    if (document.body) {
+      document.body.appendChild(nsPixel);
+    } else {
+      document.addEventListener('DOMContentLoaded', function () {
+        if (document.body) document.body.appendChild(nsPixel);
+      });
+    }
+  }
+
+  // ---- META PIXEL AUTOMATIC EVENT TRACKING ----
+  try {
+    if (window.fbq) {
+      var path = location.pathname.toLowerCase();
+      var pageName = document.title || path;
+      if (path.indexOf('pricing') !== -1 || path.indexOf('features') !== -1 || path.indexOf('use-cases') !== -1 || path.indexOf('comparison') !== -1 || path.indexOf('platform') !== -1) {
+        fbq('track', 'ViewContent', { content_name: pageName, content_category: 'Product Page', page_path: path });
+      }
+
+      document.addEventListener('click', function(e) {
+        var target = e.target.closest ? e.target.closest('a, button') : null;
+        if (!target) return;
+        var href = (target.getAttribute('href') || '').toLowerCase();
+        var text = (target.textContent || '').trim().toLowerCase();
+
+        // Start Free / Register CTAs
+        if (href.indexOf('weflux.in/register') !== -1 || href.indexOf('register.html') !== -1 || href.indexOf('signup.html') !== -1 || text.indexOf('start free') !== -1 || text.indexOf('start 14-day free trial') !== -1 || text.indexOf('sign up') !== -1) {
+          fbq('track', 'CompleteRegistration', { content_name: text || 'Start Free CTA', link_url: href });
+        }
+        // Contact actions (WhatsApp, Phone, Email)
+        else if (href.indexOf('wa.me') !== -1 || href.indexOf('api.whatsapp.com') !== -1 || href.indexOf('whatsapp.com') !== -1) {
+          fbq('track', 'Contact', { content_name: 'WhatsApp Link Click', link_url: href });
+        } else if (href.indexOf('tel:') !== -1) {
+          fbq('track', 'Contact', { content_name: 'Phone Call Click', link_url: href });
+        } else if (href.indexOf('mailto:') !== -1) {
+          fbq('track', 'Contact', { content_name: 'Email Link Click', link_url: href });
+        }
+      }, true);
+    }
+  } catch (err) {
+    console.error('Meta Pixel auto-tracking error:', err);
+  }
+
+
   // ---- LEAD CAPTURE POPUP (injected once from shell so configured pages get it) ----
   if (!document.querySelector('link[href*="lead-capture"]')) {
     var lcCss = document.createElement('link');
