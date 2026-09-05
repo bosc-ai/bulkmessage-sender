@@ -4,15 +4,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pricing &amp; Plans - Official WhatsApp Business API Platform | Weflux</title>
+  <title>WhatsApp Business API Pricing in India — Plans &amp; Add-ons | Weflux</title>
   <meta name="description"
-    content="Simple, transparent WhatsApp Business API pricing starting at ₹999/mo with zero per-seat markup. Includes shared inbox, broadcast campaigns &amp; AI workflows. Start 14-day free trial!">
-  <meta name="keywords" content="WhatsApp Business API pricing, WhatsApp API cost India, WATI pricing alternative, AiSensy pricing alternative, Interakt pricing alternative, cheap WhatsApp Business API">
+    content="Weflux WhatsApp Business Platform pricing: Free, Basic ₹999/mo, Pro ₹2,499/mo, Scale ₹4,999/mo. Shared inbox, broadcasts, automation, campaigns &amp; integrations. No Weflux markup on WhatsApp messaging charges.">
+  <meta name="keywords"
+    content="WhatsApp Business API pricing in India, WhatsApp pricing, WhatsApp Business Platform, WhatsApp automation, WhatsApp marketing, WhatsApp inbox, WhatsApp broadcasts, WhatsApp campaigns, WhatsApp CRM, WhatsApp authentication, WhatsApp integrations, Weflux pricing">
   <link rel="canonical" href="https://weflux.in/pricing.html">
-  <meta property="og:title"
-    content="Pricing &amp; Plans - Official WhatsApp Business API Platform | Weflux">
+  <meta property="og:title" content="WhatsApp Business API Pricing in India — Plans &amp; Add-ons | Weflux">
   <meta property="og:description"
-    content="Simple, transparent WhatsApp Business API pricing starting at ₹999/mo with zero per-seat markup. Includes shared inbox, broadcast campaigns &amp; AI workflows. Start 14-day free trial!">
+    content="Weflux WhatsApp Business Platform pricing: Free, Basic ₹999/mo, Pro ₹2,499/mo, Scale ₹4,999/mo. No Weflux markup on WhatsApp messaging charges.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://weflux.in/pricing.html">
   <meta property="og:site_name" content="Weflux">
@@ -25,6 +25,9 @@
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* ===== Pricing-page-specific styles ===== */
+
+    /* --- comparison table --- */
     .compare {
       width: 100%;
       border-collapse: collapse;
@@ -89,48 +92,206 @@
       padding: 10px 18px;
     }
 
-    .meta-rates {
+    /* --- enterprise banner --- */
+    .enterprise-banner {
+      margin-top: 32px;
+      background: linear-gradient(135deg, var(--ink) 0%, var(--ink-2) 100%);
+      border-radius: 18px;
+      padding: 40px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      color: #fff;
+    }
+
+    .enterprise-banner h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .enterprise-banner p {
+      color: var(--muted-2);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 520px;
+    }
+
+    .enterprise-banner .btn-enterprise {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: var(--radius-btn);
+      transition: all .2s var(--ease);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .enterprise-banner .btn-enterprise:hover {
+      background: var(--green);
+      color: #07371C;
+      transform: translateY(-2px);
+    }
+
+    /* --- add-ons section --- */
+    .addons-section {
+      padding: 80px 0;
+    }
+
+    .addons-head {
+      max-width: 620px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .addons-head h2 {
+      margin-top: 14px;
+    }
+
+    .addons-head p {
+      color: var(--muted);
+      font-size: 15px;
+      margin-top: 10px;
+      line-height: 1.55;
+    }
+
+    .addon-category {
+      margin-bottom: 48px;
+    }
+
+    .addon-category:last-child {
+      margin-bottom: 0;
+    }
+
+    .addon-category h3 {
+      font-size: 13px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--muted);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .addon-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 14px;
     }
 
-    .rate {
+    .addon-card {
       background: #fff;
       border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 18px;
+      border-radius: 14px;
+      padding: 22px 20px;
+      transition: all .25s var(--ease);
+      display: flex;
+      flex-direction: column;
     }
 
-    .rate h5 {
-      font-size: 13px;
+    .addon-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .addon-card .addon-name {
       font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
     }
 
-    .rate .price {
+    .addon-card .addon-price {
       font-family: var(--font-mono);
       font-size: 20px;
+      font-weight: 500;
       letter-spacing: -0.02em;
-      margin-top: 6px;
+      margin-bottom: 4px;
     }
 
-    .rate p {
-      color: var(--muted);
+    .addon-card .addon-unit {
       font-size: 12px;
-      margin-top: 4px;
-      line-height: 1.45;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      margin-bottom: 10px;
     }
 
-    @media (min-width: 1025px) {
-      .pricing-grid {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 12px;
-      }
+    .addon-card .addon-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      flex: 1;
     }
 
+    .addon-card .addon-footnote {
+      font-size: 11.5px;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 8px;
+    }
+
+    .addon-card .addon-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--green-deep);
+      font-weight: 600;
+      font-size: 13px;
+      margin-top: 12px;
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .addon-card .addon-cta:hover {
+      color: var(--green-2);
+    }
+
+    /* --- messaging info --- */
+    .messaging-info {
+      background: var(--paper-2);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 40px 36px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .messaging-info h3 {
+      font-size: 20px;
+      margin-bottom: 14px;
+    }
+
+    .messaging-info p {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 1.65;
+      margin-bottom: 10px;
+    }
+
+    .messaging-info p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* --- responsive --- */
     @media (max-width: 1024px) {
-      .meta-rates {
+      .addon-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .enterprise-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 24px;
+      }
+
+      .enterprise-banner p {
+        max-width: none;
       }
 
       .compare {
@@ -143,8 +304,15 @@
       }
     }
 
+    @media (min-width: 1025px) {
+      .pricing-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+    }
+
     @media (max-width: 640px) {
-      .meta-rates {
+      .addon-grid {
         grid-template-columns: 1fr;
       }
 
@@ -155,108 +323,585 @@
       .compare {
         min-width: 760px;
       }
+
+      .messaging-info {
+        padding: 28px 20px;
+      }
+
+      .enterprise-banner {
+        padding: 28px 20px;
+      }
+    }
+    /* --- Pricing Calculator --- */
+    .calculator-section {
+      padding: 80px 24px;
+      background: var(--paper-2);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .calc-head {
+      max-width: 640px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    .calc-head h2 { margin-top: 14px; }
+    .calc-head p { color: var(--muted); font-size: 15px; margin-top: 10px; line-height: 1.5; }
+
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 960px) {
+      .calc-grid { grid-template-columns: 1fr; }
+    }
+
+    .calc-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .calc-group {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .calc-label {
+      display: block;
+      font-size: 13px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .plan-selector {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 600px) {
+      .plan-selector { grid-template-columns: 1fr; }
+    }
+    .plan-radio-card {
+      position: relative;
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      transition: all .2s var(--ease);
+      background: var(--paper-2);
+    }
+    .plan-radio-card input { position: absolute; opacity: 0; pointer-events: none; }
+    .plan-radio-card:hover { border-color: var(--muted-2); transform: translateY(-1px); }
+    .plan-radio-card.active {
+      border-color: var(--green-deep);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.15);
+    }
+    .plan-radio-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .plan-radio-name {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .plan-radio-price {
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--green-deep);
+    }
+    .plan-radio-price small { font-size: 11px; color: var(--muted); font-weight: normal; }
+    .plan-radio-desc { font-size: 12px; color: var(--muted); display: block; }
+    .calc-badge {
+      font-size: 10px;
+      background: var(--green);
+      color: #07371C;
+      padding: 2px 6px;
+      border-radius: 99px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .calc-addon-rows { display: flex; flex-direction: column; gap: 16px; }
+    .calc-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .calc-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .row-title { font-weight: 600; font-size: 14px; color: var(--ink); }
+    .row-sub { font-size: 12px; color: var(--muted); }
+
+    .counter-box {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .btn-counter {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: var(--paper-2);
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background .15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn-counter:hover { background: var(--line); }
+    .counter-box input {
+      width: 40px;
+      height: 32px;
+      border: none;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 14px;
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .calc-checkbox-grid { display: flex; flex-direction: column; gap: 10px; }
+    .calc-checkbox-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all .2s;
+      background: var(--paper-2);
+    }
+    .calc-checkbox-card input { position: absolute; opacity: 0; pointer-events: none; }
+    .calc-checkbox-card:hover { border-color: var(--muted-2); }
+    .calc-checkbox-card.active {
+      border-color: var(--green-deep);
+      background: #fff;
+    }
+    .chk-box {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid var(--muted-2);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s;
+      flex-shrink: 0;
+    }
+    .calc-checkbox-card.active .chk-box {
+      background: var(--green-deep);
+      border-color: var(--green-deep);
+    }
+    .calc-checkbox-card.active .chk-box::after {
+      content: '✓';
+      color: #fff;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .chk-name { font-weight: 600; font-size: 14px; display: block; color: var(--ink); }
+    .chk-price { font-size: 12px; color: var(--muted); }
+
+    .calc-summary-wrap {
+      position: sticky;
+      top: 100px;
+    }
+    .calc-summary-card {
+      background: #fff;
+      border: 2px solid var(--green-deep);
+      border-radius: 18px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow-md);
+    }
+    .summary-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+    .summary-head h3 { font-size: 18px; font-weight: 600; margin: 0; }
+    .billing-badge {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      background: var(--paper-2);
+      padding: 4px 8px;
+      border-radius: 6px;
+      color: var(--muted);
+    }
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--ink);
+    }
+    .summary-subtext {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .summary-divider {
+      height: 1px;
+      background: var(--line);
+      margin: 16px 0;
+    }
+    .summary-addons-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .summary-addon-item {
+      display: flex;
+      justify-content: space-between;
+      color: var(--ink);
+    }
+    .empty-addon-notice {
+      font-size: 12.5px;
+      color: var(--muted);
+      font-style: italic;
+    }
+    .summary-total-row {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .summary-total-row > span {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--muted);
+    }
+    .total-price-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+    }
+    .total-price-wrap .curr {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .total-price-wrap #calcTotalPrice {
+      font-size: 38px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    .total-price-wrap .unit {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .summary-tax-note {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+    .calc-cta {
+      width: 100%;
+      margin-top: 20px;
+      text-align: center;
+      justify-content: center;
+      padding: 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
   </style>
+
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Weflux",
+    "url": "https://weflux.in",
+    "logo": "https://weflux.in/assets/wachat-logo.png",
+    "description": "Weflux is a WhatsApp Business Platform for businesses that need a shared WhatsApp inbox, broadcasts, automation, integrations and customer management.",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "hello@weflux.in",
+      "contactType": "sales"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: SoftwareApplication with Offers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Weflux",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "description": "Weflux is a WhatsApp Business Platform that provides a shared inbox, broadcasts, automation, campaigns, integrations and business communication tools for growing businesses.",
+    "url": "https://weflux.in",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Free",
+        "price": "0",
+        "priceCurrency": "INR",
+        "description": "1 WhatsApp number, 1 team member, 500 contacts, shared inbox, 3 templates.",
+        "url": "https://weflux.in/pricing.html"
+      },
+      {
+        "@type": "Offer",
+        "name": "Basic",
+        "price": "999",
+        "priceCurrency": "INR",
+        "priceValidUntil": "2027-12-31",
+        "description": "1 WhatsApp number, 3 team members, unlimited contacts, 5 automations, 1 Google Sheet, broadcast campaigns, WhatsApp Calling, WhatsApp Authentication.",
+        "url": "https://weflux.in/pricing.html"
+      },
+      {
+        "@type": "Offer",
+        "name": "Pro",
+        "price": "2499",
+        "priceCurrency": "INR",
+        "priceValidUntil": "2027-12-31",
+        "description": "2 WhatsApp numbers, 5 team members, unlimited contacts, 15 automations, 3 Google Sheets, advanced segmentation, broadcast scheduling, webhooks, priority support.",
+        "url": "https://weflux.in/pricing.html"
+      },
+      {
+        "@type": "Offer",
+        "name": "Scale",
+        "price": "4999",
+        "priceCurrency": "INR",
+        "priceValidUntil": "2027-12-31",
+        "description": "5 WhatsApp numbers, 10 team members, unlimited contacts, 25 automations, 5 Google Sheets, advanced segmentation, broadcast scheduling, webhooks, priority support.",
+        "url": "https://weflux.in/pricing.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Weflux?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weflux is a WhatsApp Business Platform that provides a shared inbox, broadcasts, automation, campaigns, integrations and business communication tools."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Weflux charge a markup on WhatsApp messages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Weflux does not add a markup to applicable Meta/WhatsApp messaging charges. Meta charges are passed through separately."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Basic, Pro and Scale?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Basic includes 1 WhatsApp number, 3 team members and 5 automations. Pro includes 2 WhatsApp numbers, 5 team members and 15 automations with advanced segmentation and analytics. Scale includes 5 WhatsApp numbers, 10 team members and 25 automations for larger operations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I add more WhatsApp numbers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Additional WhatsApp numbers cost ₹500/month each."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I add more team members?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Additional team members cost ₹250/month each."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I add more automations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Additional automations cost ₹100/month each."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Weflux CRM included?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weflux CRM is an optional ₹1,500/month module. It is not included in the core plans by default."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Weflux support Google Sheets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Basic includes 1 Google Sheet integration, Pro includes 3, and Scale includes 5. Additional sheets cost ₹150/month each."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Weflux support Google Drive?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Google Drive attachments are included in Basic, Pro and Scale at no additional cost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Weflux support e-commerce integrations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. E-commerce integration is included in Basic, Pro and Scale at no additional cost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is WhatsApp Authentication included?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. WhatsApp Authentication is included in Basic, Pro and Scale. Applicable Meta/WhatsApp messaging charges for authentication messages are separate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Weflux support Facebook and Instagram?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Facebook and Instagram integration is available through a custom request. Pricing depends on the requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Weflux provide invoicing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Invoicing is an optional module costing ₹500/month plus ₹2 per invoice created."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can Weflux integrate with my own CRM?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Custom CRM integration is available from ₹300/month, with additional development or setup charges where applicable."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body data-page="pricing">
   <div id="wc-nav"></div>
 
   <main id="main" class="page">
+
+    <!-- ===== HERO ===== -->
     <section class="container page-hero"
       style="text-align:center;display:flex;flex-direction:column;align-items:center">
       <div class="crumb" style="justify-content:center"><a href="index.html">Home</a> <span class="sep">/</span>
-        <span>Pricing</span></div>
-      <span class="eyebrow"><span class="dot"></span> Pricing</span>
-      <h1 style="max-width:18ch">Honest pricing. No conversation markup.</h1>
-      <p class="lede" style="text-align:center">Pick a plan by team size and feature set. Meta's per-conversation
-        charges are passed through at cost - you see them line-by-line on every invoice.</p>
+        <span>Pricing</span>
+      </div>
+      <span class="eyebrow"><span class="dot"></span> WhatsApp Pricing</span>
+      <h1 style="max-width:22ch">Simple WhatsApp Pricing for Growing Businesses</h1>
+      <p class="lede" style="text-align:center;max-width:640px">Manage WhatsApp conversations, campaigns, automation
+        and integrations — with simple pricing and no Weflux markup on WhatsApp messaging charges.</p>
 
       <div class="bill-toggle" id="billToggle" role="group" aria-label="Billing period" style="margin-top:32px">
         <button type="button" class="on" data-billing="monthly" aria-pressed="true">Monthly</button>
-        <button type="button" data-billing="annual" aria-pressed="false">Annual <span class="save">−20%</span></button>
+        <button type="button" data-billing="annual" aria-pressed="false">Annual <span
+            class="save">−20%</span></button>
       </div>
     </section>
 
-    <section class="container" style="padding-bottom:64px">
-      <div class="pricing-grid">
-        <article class="plan">
+    <!-- ===== PRICING CARDS ===== -->
+    <section class="container" style="padding-bottom:0">
+      <div class="pricing-grid" id="pricingGrid">
+
+        <!-- FREE -->
+        <article class="plan" id="plan-free">
           <div>
             <div class="plan-name">Free</div>
             <div class="plan-price">
               <span class="amt">₹<span class="price" data-monthly="0" data-annual="0">0</span></span>
               <span class="per">/mo · forever</span>
             </div>
-            <p class="plan-desc">For trying the WhatsApp Business API hands-on before you commit.</p>
+            <p class="plan-desc">Try Weflux with essential WhatsApp inbox and contact management tools.</p>
           </div>
           <ul>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> 1 agent, unlimited contacts</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> 1 connected number</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Shared inbox &amp; 5 templates</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Community + email support</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 1 WhatsApp number</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 1 team member</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 500 contacts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Shared inbox</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 3 message templates</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Basic contact management</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Self-service support</li>
           </ul>
           <a href="https://app.weflux.in/register" class="btn btn-ghost">Start free</a>
         </article>
 
-        <article class="plan">
+        <!-- BASIC -->
+        <article class="plan" id="plan-basic">
           <div>
             <div class="plan-name">Basic</div>
             <div class="plan-price">
               <span class="amt">₹<span class="price" data-monthly="999" data-annual="799">999</span></span>
               <span class="per">/mo · billed monthly</span>
             </div>
-            <p class="plan-desc">Perfect for freelancers &amp; small businesses.</p>
+            <p class="plan-desc">Everything a small business needs to manage, engage and automate WhatsApp conversations.</p>
           </div>
           <ul>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> 1 WhatsApp Number</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> 5 Team Members</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Shared Inbox</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Broadcast</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> 10 Automation</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Basic Integration</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Unlimited Contacts</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Unlimited Templates</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 1 WhatsApp number</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 3 team members</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Unlimited contacts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Shared inbox &amp; Broadcasts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 5 automations</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Basic segmentation &amp; integrations</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 1 Google Sheet integration</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Campaign analytics &amp; Chat support</li>
           </ul>
           <a href="https://app.weflux.in/register?plan=basic" class="btn btn-ghost">Start free trial</a>
         </article>
 
-        <article class="plan featured">
+        <!-- PRO (Featured / Most Popular) -->
+        <article class="plan featured" id="plan-pro">
           <div class="plan-badge">Most popular</div>
           <div>
             <div class="plan-name">Pro</div>
@@ -264,184 +909,350 @@
               <span class="amt">₹<span class="price" data-monthly="2499" data-annual="1999">2,499</span></span>
               <span class="per">/mo · billed monthly</span>
             </div>
-            <p class="plan-desc">For growing businesses.</p>
+            <p class="plan-desc">For growing businesses that need more automation, campaigns, integrations and team capacity.</p>
           </div>
           <ul>
-            <li style="font-weight:600"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Everything in Basic +</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> 3 WhatsApp Numbers</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> 10 Team Members</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> 25 Automation</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Broadcast Scheduling</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> WhatsApp Calling</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Advanced Integration</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Campaign Analytics</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Team Performance</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> API Access (limited)</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Priority Support</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 2 WhatsApp numbers</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 5 team members</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Unlimited contacts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 15 automations</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Advanced segmentation &amp; integrations</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Broadcast scheduling</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 3 Google Sheets</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Webhooks &amp; Priority support</li>
           </ul>
           <a href="https://app.weflux.in/register?plan=pro" class="btn btn-green">Start free trial</a>
         </article>
 
-        <article class="plan">
+        <!-- SCALE -->
+        <article class="plan" id="plan-scale">
           <div>
             <div class="plan-name">Scale</div>
             <div class="plan-price">
               <span class="amt">₹<span class="price" data-monthly="4999" data-annual="3999">4,999</span></span>
               <span class="per">/mo · billed monthly</span>
             </div>
-            <p class="plan-desc">For teams handling high message volume.</p>
+            <p class="plan-desc">For businesses running larger WhatsApp operations with multiple numbers, team members and automations.</p>
           </div>
           <ul>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> 10 WhatsApp Numbers</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> WhatsApp Calling</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Custom Integrations</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Unlimited Team Members</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Unlimited Automation</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Webhooks</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Full REST API</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Role Permissions</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> SLA Support</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Audit Logs</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 5 WhatsApp numbers</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 10 team members</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Unlimited contacts</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 25 automations</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Advanced segmentation &amp; integrations</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Broadcast scheduling</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> 5 Google Sheets</li>
+            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg> Webhooks &amp; Priority support</li>
           </ul>
           <a href="https://app.weflux.in/register?plan=scale" class="btn btn-ghost">Start free trial</a>
         </article>
 
-        <article class="plan">
-          <div>
-            <div class="plan-name">Enterprise</div>
-            <div class="plan-price">
-              <span class="amt">Custom</span>
-            </div>
-            <p class="plan-desc">For customized enterprise-grade solutions.</p>
+      </div>
+
+      <div class="pricing-note" style="margin-top:24px">WhatsApp/Meta messaging charges are billed separately at cost. Weflux adds no markup.</div>
+
+      <!-- ===== ENTERPRISE BANNER ===== -->
+      <div class="enterprise-banner" id="enterprise">
+        <div>
+          <h3>Enterprise — Custom</h3>
+          <p>For custom requirements. We can build a plan around your business — custom WhatsApp numbers, team size, automations, integrations, workflows, infrastructure and dedicated support.</p>
+        </div>
+        <a href="contact.html?topic=enterprise" class="btn-enterprise">Talk to Sales →</a>
+      </div>
+    </section>
+
+    <!-- ===== ADD-ONS SECTION ===== -->
+    <section class="container addons-section" id="addons">
+      <div class="addons-head">
+        <span class="eyebrow"><span class="dot"></span> Add-ons</span>
+        <h2>Extend Weflux When You Need More</h2>
+        <p>Add extra capacity or activate specialized business modules without changing your core plan.</p>
+      </div>
+
+      <!-- Capacity Add-ons -->
+      <div class="addon-category">
+        <h3>Capacity</h3>
+        <div class="addon-grid">
+          <div class="addon-card">
+            <div class="addon-name">Additional WhatsApp Number</div>
+            <div class="addon-price">₹500</div>
+            <div class="addon-unit">/month per number</div>
+            <p class="addon-desc">Connect more WhatsApp numbers to your workspace.</p>
           </div>
-          <ul>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Dedicated Manager</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> On-premise</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> White Label</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Custom Integrations</li>
-            <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 6 9 17l-5-5" />
-              </svg> Dedicated Infrastructure</li>
-          </ul>
-          <a href="contact.html?topic=enterprise" class="btn btn-ghost">Talk to sales</a>
-        </article>
+          <div class="addon-card">
+            <div class="addon-name">Additional Team Member</div>
+            <div class="addon-price">₹250</div>
+            <div class="addon-unit">/month per member</div>
+            <p class="addon-desc">Add more team members to your shared inbox.</p>
+          </div>
+          <div class="addon-card">
+            <div class="addon-name">Additional Automation</div>
+            <div class="addon-price">₹100</div>
+            <div class="addon-unit">/month per automation</div>
+            <p class="addon-desc">Create more automation flows beyond your plan limit.</p>
+          </div>
+          <div class="addon-card">
+            <div class="addon-name">Additional Google Sheet</div>
+            <div class="addon-price">₹150</div>
+            <div class="addon-unit">/month per sheet</div>
+            <p class="addon-desc">Connect more Google Sheets to your workspace.</p>
+          </div>
+        </div>
       </div>
-      <div class="pricing-note" style="margin-top:24px">+ Meta conversation charges, billed at cost. No markup, ever.
+
+      <!-- Business Modules -->
+      <div class="addon-category">
+        <h3>Business Modules</h3>
+        <div class="addon-grid">
+          <div class="addon-card">
+            <div class="addon-name">Weflux CRM</div>
+            <div class="addon-price">₹1,500</div>
+            <div class="addon-unit">/month</div>
+            <p class="addon-desc">Add Weflux CRM to manage customers, conversations and business relationships in one
+              place.</p>
+          </div>
+          <div class="addon-card">
+            <div class="addon-name">Lead Alerts</div>
+            <div class="addon-price">₹250</div>
+            <div class="addon-unit">/month</div>
+            <p class="addon-desc">Get alerts when new leads require attention.</p>
+          </div>
+          <div class="addon-card">
+            <div class="addon-name">Invoicing</div>
+            <div class="addon-price">₹500</div>
+            <div class="addon-unit">/month + ₹2/invoice</div>
+            <p class="addon-desc">Send invoices via WhatsApp. Monthly fee plus ₹2 per invoice created. Example: 100
+              invoices = ₹500 + ₹200 = ₹700/month.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom -->
+      <div class="addon-category">
+        <h3>Custom</h3>
+        <div class="addon-grid">
+          <div class="addon-card">
+            <div class="addon-name">Custom CRM Integration</div>
+            <div class="addon-price">from ₹300</div>
+            <div class="addon-unit">/month*</div>
+            <p class="addon-desc">Connect your existing CRM to Weflux.</p>
+            <p class="addon-footnote">*Additional one-time development or setup charges may apply depending on
+              integration requirements.</p>
+          </div>
+          <div class="addon-card">
+            <div class="addon-name">Facebook &amp; Instagram</div>
+            <div class="addon-price">Custom</div>
+            <div class="addon-unit">Custom quote</div>
+            <p class="addon-desc">Connect Facebook and Instagram messaging to your Weflux workspace.</p>
+            <a href="contact.html?topic=social-integration" class="addon-cta">Request Integration →</a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="container" style="padding:48px 24px">
-      <div style="max-width:760px;margin:0 auto 24px">
-        <span class="eyebrow"><span class="dot"></span> Conversation charges, at cost</span>
-        <h2 style="margin-top:14px">Meta charges per conversation. We pass it through.</h2>
-        <p class="lede" style="margin-top:14px">Meta categorises each 24-hour conversation by intent. Below are the
-          current rates for India - these flow through your Weflux invoice with no markup and no batching.
-        </p>
+    <!-- ===== PRICING CALCULATOR SECTION ===== -->
+    <section class="calculator-section" id="calculator">
+      <div class="container">
+        <div class="calc-head">
+          <span class="eyebrow"><span class="dot"></span> Interactive Estimator</span>
+          <h2>Calculate Your Custom Monthly Cost</h2>
+          <p>Select your base plan and adjust extra capacity or business modules to see your total estimated monthly investment.</p>
+        </div>
+
+        <div class="calc-grid">
+          <!-- LEFT: Controls -->
+          <div class="calc-controls">
+            
+            <!-- Base Plan -->
+            <div class="calc-group">
+              <label class="calc-label">1. Select Base Plan</label>
+              <div class="plan-selector">
+                
+                <label class="plan-radio-card" data-plan="free">
+                  <input type="radio" name="calc-plan" value="free">
+                  <div class="plan-radio-info">
+                    <span class="plan-radio-name">Free</span>
+                    <span class="plan-radio-price">₹0<small>/mo</small></span>
+                  </div>
+                  <span class="plan-radio-desc">1 WA # · 1 Member · 0 Automations</span>
+                </label>
+
+                <label class="plan-radio-card active" data-plan="basic">
+                  <input type="radio" name="calc-plan" value="basic" checked>
+                  <div class="plan-radio-info">
+                    <span class="plan-radio-name">Basic</span>
+                    <span class="plan-radio-price">₹999<small>/mo</small></span>
+                  </div>
+                  <span class="plan-radio-desc">1 WA # · 3 Members · 5 Automations</span>
+                </label>
+
+                <label class="plan-radio-card" data-plan="pro">
+                  <input type="radio" name="calc-plan" value="pro">
+                  <div class="plan-radio-info">
+                    <span class="plan-radio-name">Pro <span class="calc-badge">Popular</span></span>
+                    <span class="plan-radio-price">₹2,499<small>/mo</small></span>
+                  </div>
+                  <span class="plan-radio-desc">2 WA # · 5 Members · 15 Automations</span>
+                </label>
+
+                <label class="plan-radio-card" data-plan="scale">
+                  <input type="radio" name="calc-plan" value="scale">
+                  <div class="plan-radio-info">
+                    <span class="plan-radio-name">Scale</span>
+                    <span class="plan-radio-price">₹4,999<small>/mo</small></span>
+                  </div>
+                  <span class="plan-radio-desc">5 WA # · 10 Members · 25 Automations</span>
+                </label>
+
+              </div>
+            </div>
+
+            <!-- Capacity Add-ons -->
+            <div class="calc-group">
+              <label class="calc-label">2. Add Extra Capacity</label>
+              <div class="calc-addon-rows">
+                
+                <div class="calc-row">
+                  <div>
+                    <div class="row-title">Extra WhatsApp Numbers</div>
+                    <div class="row-sub">₹500/month per additional number</div>
+                  </div>
+                  <div class="counter-box">
+                    <button type="button" class="btn-counter" data-target="calc-num-wa" data-action="-">−</button>
+                    <input type="number" id="calc-num-wa" value="0" min="0" max="20" readonly>
+                    <button type="button" class="btn-counter" data-target="calc-num-wa" data-action="+">+</button>
+                  </div>
+                </div>
+
+                <div class="calc-row">
+                  <div>
+                    <div class="row-title">Extra Team Members</div>
+                    <div class="row-sub">₹250/month per additional member</div>
+                  </div>
+                  <div class="counter-box">
+                    <button type="button" class="btn-counter" data-target="calc-num-team" data-action="-">−</button>
+                    <input type="number" id="calc-num-team" value="0" min="0" max="50" readonly>
+                    <button type="button" class="btn-counter" data-target="calc-num-team" data-action="+">+</button>
+                  </div>
+                </div>
+
+                <div class="calc-row">
+                  <div>
+                    <div class="row-title">Extra Automations</div>
+                    <div class="row-sub">₹100/month per additional flow</div>
+                  </div>
+                  <div class="counter-box">
+                    <button type="button" class="btn-counter" data-target="calc-num-auto" data-action="-">−</button>
+                    <input type="number" id="calc-num-auto" value="0" min="0" max="100" readonly>
+                    <button type="button" class="btn-counter" data-target="calc-num-auto" data-action="+">+</button>
+                  </div>
+                </div>
+
+                <div class="calc-row">
+                  <div>
+                    <div class="row-title">Extra Google Sheets</div>
+                    <div class="row-sub">₹150/month per additional sheet</div>
+                  </div>
+                  <div class="counter-box">
+                    <button type="button" class="btn-counter" data-target="calc-num-sheets" data-action="-">−</button>
+                    <input type="number" id="calc-num-sheets" value="0" min="0" max="20" readonly>
+                    <button type="button" class="btn-counter" data-target="calc-num-sheets" data-action="+">+</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Business Modules -->
+            <div class="calc-group">
+              <label class="calc-label">3. Business Modules</label>
+              <div class="calc-checkbox-grid">
+                
+                <label class="calc-checkbox-card">
+                  <input type="checkbox" id="calc-mod-crm" value="1500">
+                  <span class="chk-box"></span>
+                  <div>
+                    <span class="chk-name">Weflux CRM Module</span>
+                    <span class="chk-price">+₹1,500/month</span>
+                  </div>
+                </label>
+
+                <label class="calc-checkbox-card">
+                  <input type="checkbox" id="calc-mod-lead" value="250">
+                  <span class="chk-box"></span>
+                  <div>
+                    <span class="chk-name">Lead Alerts Module</span>
+                    <span class="chk-price">+₹250/month</span>
+                  </div>
+                </label>
+
+                <label class="calc-checkbox-card">
+                  <input type="checkbox" id="calc-mod-inv" value="500">
+                  <span class="chk-box"></span>
+                  <div>
+                    <span class="chk-name">Invoicing Module</span>
+                    <span class="chk-price">+₹500/month (+ ₹2/invoice created)</span>
+                  </div>
+                </label>
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: Summary Card -->
+          <div class="calc-summary-wrap">
+            <div class="calc-summary-card">
+              <div class="summary-head">
+                <h3>Cost Summary</h3>
+                <span class="billing-badge">Monthly Billed</span>
+              </div>
+
+              <div class="summary-breakdown">
+                <div class="summary-line">
+                  <span id="summaryPlanName">Basic Plan</span>
+                  <span id="summaryPlanPrice">₹999/mo</span>
+                </div>
+                <div class="summary-subtext" id="summaryPlanCaps">1 WA # · 3 Members · 5 Automations</div>
+
+                <div class="summary-divider"></div>
+
+                <div id="summaryAddonsList" class="summary-addons-list">
+                  <div class="empty-addon-notice">No add-ons selected</div>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-total-row">
+                  <span>Estimated Total</span>
+                  <div class="total-price-wrap">
+                    <span class="curr">₹</span><span id="calcTotalPrice">999</span><span class="unit">/mo</span>
+                  </div>
+                </div>
+                <p class="summary-tax-note">Meta messaging charges passed through separately at cost without markup.</p>
+              </div>
+
+              <a href="https://app.weflux.in/register?plan=basic" id="calcCtaBtn" class="btn btn-green calc-cta">Get Started With This Plan →</a>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="meta-rates">
-        <div class="rate">
-          <h5>Utility</h5>
-          <div class="price">₹0.115</div>
-          <p>Order updates, OTPs, payment reminders - anything tied to a transaction.</p>
-        </div>
-        <div class="rate">
-          <h5>Authentication</h5>
-          <div class="price">₹0.115</div>
-          <p>One-time passcodes for sign-in and verification flows.</p>
-        </div>
-        <div class="rate">
-          <h5>Marketing</h5>
-          <div class="price">₹0.7846</div>
-          <p>Promotional broadcasts to opted-in contacts - sales, drops, re-engagement.</p>
-        </div>
-        <div class="rate">
-          <h5>Service</h5>
-          <div class="price">Free</div>
-          <p>Customer-initiated conversations are now free in India, per Meta's 2024–25 update.</p>
-        </div>
-      </div>
-      <p style="text-align:center;color:var(--muted);font-size:12.5px;margin-top:16px;font-family:var(--font-mono)">
-        Rates per 24-hour conversation, India market · effective 2026. Meta updates these from time to time - current
-        rates always live in your billing console.</p>
     </section>
 
-    <section class="container" style="padding:80px 24px">
+    <!-- ===== WHATSAPP MESSAGING CHARGES ===== -->
+    <section class="container" style="padding:48px 24px 80px" id="whatsapp-charges">
+      <div class="messaging-info">
+        <h3>WhatsApp Messaging Charges</h3>
+        <p>Weflux does not add a markup to WhatsApp/Meta messaging charges. Applicable WhatsApp Business Platform
+          messaging charges are passed through at the rates determined by Meta.</p>
+        <p>Your Weflux subscription covers the Weflux platform, features and included usage limits. WhatsApp/Meta
+          messaging fees are separate.</p>
+      </div>
+    </section>
+
+    <!-- ===== FEATURE COMPARISON TABLE ===== -->
+    <section class="container" style="padding:80px 24px" id="compare">
       <div style="max-width:760px;margin:0 auto 32px">
         <span class="eyebrow"><span class="dot"></span> Compare plans</span>
         <h2 style="margin-top:14px">Every feature, side by side.</h2>
@@ -455,286 +1266,340 @@
               <th class="center">Basic</th>
               <th class="center featured-col">Pro</th>
               <th class="center">Scale</th>
-              <th class="center">Enterprise</th>
             </tr>
           </thead>
           <tbody>
+
+            <!-- Inbox & Team -->
             <tr class="group-row">
-              <td colspan="6">Inbox &amp; team</td>
+              <td colspan="5">Inbox &amp; team</td>
+            </tr>
+            <tr>
+              <td class="feat">WhatsApp numbers</td>
+              <td class="center">1</td>
+              <td class="center">1</td>
+              <td class="center featured-col">2</td>
+              <td class="center">5</td>
             </tr>
             <tr>
               <td class="feat">Team members</td>
               <td class="center">1</td>
-              <td class="center">5</td>
-              <td class="center featured-col">10</td>
-              <td class="center">Unlimited</td>
-              <td class="center">Unlimited</td>
-            </tr>
-            <tr>
-              <td class="feat">Connected numbers</td>
-              <td class="center">1</td>
-              <td class="center">1</td>
-              <td class="center featured-col">3</td>
+              <td class="center">3</td>
+              <td class="center featured-col">5</td>
               <td class="center">10</td>
-              <td class="center">Custom</td>
             </tr>
             <tr>
               <td class="feat">Contacts</td>
-              <td class="center">Unlimited</td>
+              <td class="center">500</td>
               <td class="center">Unlimited</td>
               <td class="center featured-col">Unlimited</td>
               <td class="center">Unlimited</td>
-              <td class="center">Unlimited</td>
             </tr>
             <tr>
-              <td class="feat">Assign, mention, snooze</td>
+              <td class="feat">Shared inbox</td>
               <td class="center check">✓</td>
               <td class="center check">✓</td>
               <td class="center featured-col check">✓</td>
-              <td class="center check">✓</td>
-              <td class="center check">✓</td>
-            </tr>
-            <tr>
-              <td class="feat">Internal notes</td>
-              <td class="center check">✓</td>
-              <td class="center check">✓</td>
-              <td class="center featured-col check">✓</td>
-              <td class="center check">✓</td>
-              <td class="center check">✓</td>
-            </tr>
-            <tr>
-              <td class="feat">Canned responses</td>
-              <td class="center check">✓</td>
-              <td class="center check">✓</td>
-              <td class="center featured-col check">✓</td>
-              <td class="center check">✓</td>
-              <td class="center check">✓</td>
-            </tr>
-            <tr>
-              <td class="feat">Roles &amp; permissions</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col dash"> - </td>
-              <td class="center check">✓</td>
               <td class="center check">✓</td>
             </tr>
 
+            <!-- Campaigns -->
             <tr class="group-row">
-              <td colspan="6">Campaigns &amp; templates</td>
+              <td colspan="5">Campaigns</td>
             </tr>
             <tr>
-              <td class="feat">Message templates</td>
-              <td class="center">5</td>
-              <td class="center">Unlimited</td>
-              <td class="center featured-col">Unlimited</td>
-              <td class="center">Unlimited</td>
-              <td class="center">Unlimited</td>
-            </tr>
-            <tr>
-              <td class="feat">Broadcast campaigns</td>
-              <td class="center check">✓</td>
+              <td class="feat">Broadcast</td>
+              <td class="center dash"> — </td>
               <td class="center check">✓</td>
               <td class="center featured-col check">✓</td>
-              <td class="center check">✓</td>
               <td class="center check">✓</td>
             </tr>
             <tr>
               <td class="feat">Broadcast scheduling</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
+              <td class="center dash"> — </td>
+              <td class="center dash"> — </td>
               <td class="center featured-col check">✓</td>
-              <td class="center check">✓</td>
-              <td class="center check">✓</td>
-            </tr>
-            <tr>
-              <td class="feat">WhatsApp Calling</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col check">✓</td>
-              <td class="center check">✓</td>
               <td class="center check">✓</td>
             </tr>
             <tr>
               <td class="feat">Segmentation</td>
-              <td class="center dash"> - </td>
-              <td class="center check">✓</td>
-              <td class="center featured-col check">✓</td>
-              <td class="center check">✓</td>
-              <td class="center check">✓</td>
+              <td class="center dash"> — </td>
+              <td class="center">Basic</td>
+              <td class="center featured-col">Advanced</td>
+              <td class="center">Advanced</td>
             </tr>
             <tr>
               <td class="feat">Campaign analytics</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col check">✓</td>
+              <td class="center dash"> — </td>
               <td class="center check">✓</td>
-              <td class="center check">✓</td>
-            </tr>
-            <tr>
-              <td class="feat">Team performance</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col check">✓</td>
-              <td class="center check">✓</td>
-              <td class="center check">✓</td>
+              <td class="center featured-col">Advanced</td>
+              <td class="center">Advanced</td>
             </tr>
 
+            <!-- Automation & Integrations -->
             <tr class="group-row">
-              <td colspan="6">Automation &amp; integrations</td>
+              <td colspan="5">Automation &amp; integrations</td>
             </tr>
             <tr>
-              <td class="feat">Automation flows</td>
-              <td class="center dash"> - </td>
-              <td class="center">10</td>
-              <td class="center featured-col">25</td>
-              <td class="center">Unlimited</td>
-              <td class="center">Unlimited</td>
-            </tr>
-            <tr>
-              <td class="feat">No-code flow builder</td>
-              <td class="center dash"> - </td>
-              <td class="center check">✓</td>
-              <td class="center featured-col check">✓</td>
-              <td class="center check">✓</td>
-              <td class="center check">✓</td>
+              <td class="feat">Automations</td>
+              <td class="center">0</td>
+              <td class="center">5</td>
+              <td class="center featured-col">15</td>
+              <td class="center">25</td>
             </tr>
             <tr>
               <td class="feat">Integrations</td>
-              <td class="center dash"> - </td>
+              <td class="center dash"> — </td>
               <td class="center">Basic</td>
               <td class="center featured-col">Advanced</td>
-              <td class="center">Custom</td>
-              <td class="center">Custom</td>
-            </tr>
-
-            <tr class="group-row">
-              <td colspan="6">Developer &amp; API</td>
+              <td class="center">Advanced</td>
             </tr>
             <tr>
-              <td class="feat">REST API</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col">Limited</td>
-              <td class="center">Full</td>
-              <td class="center">Full</td>
+              <td class="feat">Google Sheets</td>
+              <td class="center dash"> — </td>
+              <td class="center">1</td>
+              <td class="center featured-col">3</td>
+              <td class="center">5</td>
+            </tr>
+            <tr>
+              <td class="feat">Google Drive</td>
+              <td class="center dash"> — </td>
+              <td class="center check">✓</td>
+              <td class="center featured-col check">✓</td>
+              <td class="center check">✓</td>
+            </tr>
+            <tr>
+              <td class="feat">E-commerce integration</td>
+              <td class="center dash"> — </td>
+              <td class="center check">✓</td>
+              <td class="center featured-col check">✓</td>
+              <td class="center check">✓</td>
+            </tr>
+            <tr>
+              <td class="feat">WhatsApp Calling</td>
+              <td class="center dash"> — </td>
+              <td class="center check">✓</td>
+              <td class="center featured-col check">✓</td>
+              <td class="center check">✓</td>
+            </tr>
+            <tr>
+              <td class="feat">WhatsApp Authentication</td>
+              <td class="center dash"> — </td>
+              <td class="center check">✓</td>
+              <td class="center featured-col check">✓</td>
+              <td class="center check">✓</td>
             </tr>
             <tr>
               <td class="feat">Webhooks</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col dash"> - </td>
-              <td class="center check">✓</td>
-              <td class="center check">✓</td>
-            </tr>
-
-            <tr class="group-row">
-              <td colspan="6">Security &amp; compliance</td>
-            </tr>
-            <tr>
-              <td class="feat">On-premise deployment</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center check">✓</td>
-            </tr>
-            <tr>
-              <td class="feat">White label solution</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center check">✓</td>
-            </tr>
-            <tr>
-              <td class="feat">Dedicated infrastructure</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center check">✓</td>
-            </tr>
-            <tr>
-              <td class="feat">SSO (SAML / OIDC)</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col dash"> - </td>
-              <td class="center check">✓</td>
-              <td class="center check">✓</td>
-            </tr>
-            <tr>
-              <td class="feat">Audit log</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col dash"> - </td>
-              <td class="center check">✓</td>
+              <td class="center dash"> — </td>
+              <td class="center dash"> — </td>
+              <td class="center featured-col check">✓</td>
               <td class="center check">✓</td>
             </tr>
 
+            <!-- Support -->
             <tr class="group-row">
-              <td colspan="6">Support</td>
+              <td colspan="5">Support</td>
             </tr>
             <tr>
-              <td class="feat">Dedicated manager</td>
-              <td class="center dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center featured-col dash"> - </td>
-              <td class="center dash"> - </td>
-              <td class="center check">✓</td>
+              <td class="feat">Support</td>
+              <td class="center">Self-service</td>
+              <td class="center">Chat support</td>
+              <td class="center featured-col">Priority support</td>
+              <td class="center">Priority support</td>
             </tr>
-            <tr>
-              <td class="feat">Support SLA</td>
-              <td class="center">Community</td>
-              <td class="center">Standard</td>
-              <td class="center featured-col">Priority</td>
-              <td class="center">SLA Support</td>
-              <td class="center">Dedicated CSM + SLA</td>
-            </tr>
+
           </tbody>
         </table>
       </div>
     </section>
 
-    <section class="page-section alt">
+    <!-- ===== FAQ ===== -->
+    <section class="page-section alt" id="faq">
       <div class="container">
         <div style="max-width:760px;margin:0 auto 40px;text-align:center">
-          <h2>Pricing questions, answered.</h2>
+          <h2>Frequently asked questions</h2>
         </div>
         <div class="faq-list" id="faqList" style="max-width:760px;margin:0 auto">
+
           <div class="faq-item open">
-            <button class="faq-q">How exactly does pass-through pricing work? <svg class="chev" width="16" height="16"
+            <button class="faq-q">What is Weflux? <svg class="chev" width="16" height="16" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Weflux is a WhatsApp Business Platform that provides a shared inbox, broadcasts,
+                automation, campaigns, integrations and business communication tools.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">Does Weflux charge a markup on WhatsApp messages? <svg class="chev" width="16"
+                height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">No. Weflux does not add a markup to applicable Meta/WhatsApp messaging charges.
+                Meta charges are passed through separately.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">What is the difference between Basic, Pro and Scale? <svg class="chev" width="16"
+                height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Basic includes 1 WhatsApp number, 3 team members and 5 automations. Pro includes
+                2 WhatsApp numbers, 5 team members and 15 automations with advanced segmentation and analytics. Scale
+                includes 5 WhatsApp numbers, 10 team members and 25 automations for larger operations.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">Can I add more WhatsApp numbers? <svg class="chev" width="16" height="16"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
                 stroke-linejoin="round">
                 <path d="m6 9 6 6 6-6" />
               </svg></button>
             <div class="faq-a">
-              <div class="faq-a-inner">Meta charges per 24-hour conversation, by category and destination country. We
-                pass that cost straight to you - every invoice line shows Meta's published rate and the count, with a
-                clearly labelled zero markup column. You can reconcile against Meta's own billing portal at any time.
-              </div>
+              <div class="faq-a-inner">Yes. Additional WhatsApp numbers cost ₹500/month each.</div>
             </div>
           </div>
+
           <div class="faq-item">
-            <button class="faq-q">Can I switch plans later? <svg class="chev" width="16" height="16" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <button class="faq-q">Can I add more team members? <svg class="chev" width="16" height="16"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
                 <path d="m6 9 6 6 6-6" />
               </svg></button>
             <div class="faq-a">
-              <div class="faq-a-inner">Yes, upgrade or downgrade in one click inside your workspace. We pro-rate the
-                difference, no contracts.</div>
+              <div class="faq-a-inner">Yes. Additional team members cost ₹250/month each.</div>
             </div>
           </div>
+
           <div class="faq-item">
-            <button class="faq-q">Do you charge GST? <svg class="chev" width="16" height="16" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <button class="faq-q">Can I add more automations? <svg class="chev" width="16" height="16"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
                 <path d="m6 9 6 6 6-6" />
               </svg></button>
             <div class="faq-a">
-              <div class="faq-a-inner">We're a registered MSME (Udyam) and don't currently add GST on the platform fee - 
-                you pay the listed price. Every invoice is in INR and downloadable as PDF. Meta's per-conversation
-                charges are billed separately, at cost.</div>
+              <div class="faq-a-inner">Yes. Additional automations cost ₹100/month each.</div>
             </div>
           </div>
+
+          <div class="faq-item">
+            <button class="faq-q">Is Weflux CRM included? <svg class="chev" width="16" height="16"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Weflux CRM is an optional ₹1,500/month module. It is not included in the core
+                plans by default.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">Does Weflux support Google Sheets? <svg class="chev" width="16" height="16"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Yes. Basic includes 1 Google Sheet integration, Pro includes 3, and Scale
+                includes 5. Additional sheets cost ₹150/month each.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">Does Weflux support Google Drive? <svg class="chev" width="16" height="16"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Yes. Google Drive attachments are included in Basic, Pro and Scale at no
+                additional cost.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">Does Weflux support e-commerce integrations? <svg class="chev" width="16" height="16"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Yes. E-commerce integration is included in Basic, Pro and Scale at no additional
+                cost.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">Is WhatsApp Authentication included? <svg class="chev" width="16" height="16"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Yes. WhatsApp Authentication is included in Basic, Pro and Scale. Applicable
+                Meta/WhatsApp messaging charges for authentication messages are separate.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">Does Weflux support Facebook and Instagram? <svg class="chev" width="16" height="16"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Facebook and Instagram integration is available through a custom request. Pricing
+                depends on the requirements. <a href="contact.html?topic=social-integration">Contact our sales team</a>
+                to discuss.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">Does Weflux provide invoicing? <svg class="chev" width="16" height="16"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Yes. Invoicing is an optional module costing ₹500/month plus ₹2 per invoice
+                created.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">Can Weflux integrate with my own CRM? <svg class="chev" width="16" height="16"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Yes. Custom CRM integration is available from ₹300/month, with additional
+                development or setup charges where applicable.</div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q">Can I switch plans later? <svg class="chev" width="16" height="16"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6" />
+              </svg></button>
+            <div class="faq-a">
+              <div class="faq-a-inner">Yes. You can upgrade or downgrade in one click inside your workspace. We pro-rate
+                the difference — no contracts.</div>
+            </div>
+          </div>
+
           <div class="faq-item">
             <button class="faq-q">What payment methods do you accept? <svg class="chev" width="16" height="16"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
@@ -743,17 +1608,160 @@
               </svg></button>
             <div class="faq-a">
               <div class="faq-a-inner">UPI, Net Banking, Visa / Mastercard / Amex, and NEFT/RTGS for enterprise.
-                International cards work too - we bill in INR.</div>
+                International cards work too — we bill in INR.</div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
   </main>
 
   <div id="wc-footer"></div>
+  <script src="pricing-config.js"></script>
   <script src="shell.js"></script>
   <script src="script.js"></script>
+
+  <script>
+    /* ===== PRICING CALCULATOR INTERACTIVE LOGIC ===== */
+    (function initCalculator() {
+      const planData = {
+        free: { name: 'Free Plan', monthly: 0, caps: '1 WA # · 1 Member · 0 Automations' },
+        basic: { name: 'Basic Plan', monthly: 999, caps: '1 WA # · 3 Members · 5 Automations · 1 Sheet' },
+        pro: { name: 'Pro Plan', monthly: 2499, caps: '2 WA # · 5 Members · 15 Automations · 3 Sheets' },
+        scale: { name: 'Scale Plan', monthly: 4999, caps: '5 WA # · 10 Members · 25 Automations · 5 Sheets' }
+      };
+
+      const addonPrices = {
+        wa: 500,
+        team: 250,
+        auto: 100,
+        sheets: 150
+      };
+
+      const planCards = document.querySelectorAll('.plan-radio-card');
+      const counterBtns = document.querySelectorAll('.btn-counter');
+      const checkboxes = document.querySelectorAll('.calc-checkbox-card input');
+
+      const summaryPlanName = document.getElementById('summaryPlanName');
+      const summaryPlanPrice = document.getElementById('summaryPlanPrice');
+      const summaryPlanCaps = document.getElementById('summaryPlanCaps');
+      const summaryAddonsList = document.getElementById('summaryAddonsList');
+      const calcTotalPrice = document.getElementById('calcTotalPrice');
+      const calcCtaBtn = document.getElementById('calcCtaBtn');
+
+      let currentPlan = 'basic';
+
+      function updateCalculation() {
+        const activeRadio = document.querySelector('input[name="calc-plan"]:checked');
+        if (activeRadio) currentPlan = activeRadio.value;
+
+        planCards.forEach(card => {
+          const radio = card.querySelector('input');
+          card.classList.toggle('active', radio.checked);
+        });
+
+        const baseInfo = planData[currentPlan] || planData.basic;
+        if (summaryPlanName) summaryPlanName.textContent = baseInfo.name;
+        if (summaryPlanPrice) summaryPlanPrice.textContent = '₹' + baseInfo.monthly.toLocaleString('en-IN') + '/mo';
+        if (summaryPlanCaps) summaryPlanCaps.textContent = baseInfo.caps;
+
+        let total = baseInfo.monthly;
+        let addonsHTML = '';
+
+        const numWaInput = document.getElementById('calc-num-wa');
+        const numTeamInput = document.getElementById('calc-num-team');
+        const numAutoInput = document.getElementById('calc-num-auto');
+        const numSheetsInput = document.getElementById('calc-num-sheets');
+
+        const numWa = numWaInput ? (parseInt(numWaInput.value) || 0) : 0;
+        const numTeam = numTeamInput ? (parseInt(numTeamInput.value) || 0) : 0;
+        const numAuto = numAutoInput ? (parseInt(numAutoInput.value) || 0) : 0;
+        const numSheets = numSheetsInput ? (parseInt(numSheetsInput.value) || 0) : 0;
+
+        if (numWa > 0) {
+          const cost = numWa * addonPrices.wa;
+          total += cost;
+          addonsHTML += `<div class="summary-addon-item"><span>+ ${numWa} WhatsApp Number${numWa > 1 ? 's' : ''}</span><strong>₹${cost.toLocaleString('en-IN')}/mo</strong></div>`;
+        }
+        if (numTeam > 0) {
+          const cost = numTeam * addonPrices.team;
+          total += cost;
+          addonsHTML += `<div class="summary-addon-item"><span>+ ${numTeam} Team Member${numTeam > 1 ? 's' : ''}</span><strong>₹${cost.toLocaleString('en-IN')}/mo</strong></div>`;
+        }
+        if (numAuto > 0) {
+          const cost = numAuto * addonPrices.auto;
+          total += cost;
+          addonsHTML += `<div class="summary-addon-item"><span>+ ${numAuto} Automation${numAuto > 1 ? 's' : ''}</span><strong>₹${cost.toLocaleString('en-IN')}/mo</strong></div>`;
+        }
+        if (numSheets > 0) {
+          const cost = numSheets * addonPrices.sheets;
+          total += cost;
+          addonsHTML += `<div class="summary-addon-item"><span>+ ${numSheets} Google Sheet${numSheets > 1 ? 's' : ''}</span><strong>₹${cost.toLocaleString('en-IN')}/mo</strong></div>`;
+        }
+
+        checkboxes.forEach(chk => {
+          const card = chk.closest('.calc-checkbox-card');
+          card.classList.toggle('active', chk.checked);
+          if (chk.checked) {
+            const val = parseInt(chk.value) || 0;
+            total += val;
+            const name = card.querySelector('.chk-name').textContent;
+            addonsHTML += `<div class="summary-addon-item"><span>+ ${name}</span><strong>₹${val.toLocaleString('en-IN')}/mo</strong></div>`;
+          }
+        });
+
+        if (!addonsHTML) {
+          addonsHTML = `<div class="empty-addon-notice">No add-ons selected</div>`;
+        }
+
+        if (summaryAddonsList) summaryAddonsList.innerHTML = addonsHTML;
+        if (calcTotalPrice) calcTotalPrice.textContent = total.toLocaleString('en-IN');
+
+        if (calcCtaBtn) {
+          calcCtaBtn.href = currentPlan === 'free'
+            ? 'https://app.weflux.in/register'
+            : `https://app.weflux.in/register?plan=${currentPlan}&addons=${numWa}-${numTeam}-${numAuto}`;
+        }
+      }
+
+      planCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const radio = card.querySelector('input');
+          if (radio) {
+            radio.checked = true;
+            updateCalculation();
+          }
+        });
+      });
+
+      counterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const targetId = btn.getAttribute('data-target');
+          const action = btn.getAttribute('data-action');
+          const input = document.getElementById(targetId);
+          if (!input) return;
+          let val = parseInt(input.value) || 0;
+          const min = parseInt(input.getAttribute('min')) || 0;
+          const max = parseInt(input.getAttribute('max')) || 100;
+
+          if (action === '+' && val < max) val++;
+          if (action === '-' && val > min) val--;
+          input.value = val;
+          updateCalculation();
+        });
+      });
+
+      checkboxes.forEach(chk => {
+        chk.addEventListener('change', updateCalculation);
+      });
+
+      updateCalculation();
+    })();
+  </script>
+
 </body>
 
 </html>
