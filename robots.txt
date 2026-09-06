@@ -1,7 +1,43 @@
 User-agent: *
 Allow: /
-Disallow: /signin.html
-Disallow: /signup.html
-Disallow: /app-review-demo.html
 
-Sitemap: https://bulkmessagesender.com/sitemap.xml
+# App surfaces - no index value, and they 301 to app.weflux.in anyway.
+Disallow: /signin
+Disallow: /signup
+Disallow: /register
+Disallow: /login
+Disallow: /dashboard
+Disallow: /app-review-demo
+Disallow: /blog-editor
+Disallow: /admin/
+
+# AI crawlers are welcome. Being cited by an assistant is distribution,
+# and everything here is public marketing copy.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+Sitemap: https://weflux.in/sitemap.xml

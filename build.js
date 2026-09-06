@@ -14,6 +14,7 @@ import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
 import { marked } from "marked";
 import { SITE, esc, fmtDate, readTime, absUrl, DEFAULT_OG, HEAD_LINKS, renderPostPage } from "./lib/postTemplate.js";
+import { injectShell } from "./lib/shell.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = __dirname;
@@ -39,7 +40,7 @@ const COLLECTIONS = [
 const SKIP_COPY = new Set([
   "dist", "content", "node_modules", ".git", ".github", ".claude", ".vscode",
   "build.js", "package.json", "package-lock.json", "vercel.json", ".pages.yml",
-  "README.md", ".gitignore", ".DS_Store", "sitemap.xml",
+  "README.md", "SEO-AEO-BRIEF.md", ".gitignore", ".DS_Store", "sitemap.xml",
   "api", "lib", // serverless functions + their shared code - bundled by Vercel, not static
   "blog-editor.html", "ADMIN-SETUP.md", // local tools/docs - not published to the live site
   "contact-form.gs", "CONTACT-FORM-SETUP.md", // server-side glue + docs - not static assets
@@ -147,6 +148,69 @@ function loadPosts(col) {
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
+// Walk every page in /dist and render the nav + footer as real HTML.
+// Runs last so it covers both copied root pages and generated posts.
+function renderShells() {
+  const pages = [];
+  (function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) walk(full);
+      else if (e.name.endsWith(".html")) pages.push(full);
+    }
+  })(DIST);
+
+  let done = 0;
+  for (const file of pages) {
+    const html = fs.readFileSync(file, "utf-8");
+    if (!html.includes('id="wc-nav"')) continue;
+    fs.writeFileSync(file, injectShell(html));
+    done++;
+  }
+  return { total: pages.length, done };
+}
+
+// A page with no crawlable nav is invisible to every AI crawler and
+// costs Googlebot a render pass. Fail the build rather than ship it.
+function assertCrawlable() {
+  const problems = [];
+  (function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) walk(full);
+      else if (e.name.endsWith(".html")) {
+        const html = fs.readFileSync(full, "utf-8");
+        const rel = path.relative(DIST, full);
+        if (NOT_INDEXED.has(rel) || rel.startsWith("admin/") || rel.startsWith("assets/")) continue;
+        if (!NO_SHELL.has(rel)) {
+          if (!html.includes('id="wc-nav-el"')) problems.push(`${rel}: no static <nav>`);
+          if (!html.includes("footer-disclaimer")) problems.push(`${rel}: no static <footer>`);
+        }
+        const h1 = (html.match(/<h1[\s>]/gi) || []).length;
+        if (h1 !== 1) problems.push(`${rel}: ${h1} <h1> (expected exactly 1)`);
+        if (!/rel="canonical"/.test(html)) problems.push(`${rel}: no canonical`);
+        if (!/property="og:title"/.test(html)) problems.push(`${rel}: no og:title`);
+      }
+    }
+  })(DIST);
+
+  if (problems.length) {
+    console.error("\nBuild failed - crawlability checks:\n" + problems.map((p) => "  " + p).join("\n"));
+    process.exit(1);
+  }
+}
+
+// Not indexed, so none of the checks apply: app redirects, the offline
+// fallback and the Meta review demo.
+const NOT_INDEXED = new Set([
+  "dashboard.html", "register.html", "signin.html", "signup.html",
+  "app-review-demo.html", "weflux-promo.html", "offline.html",
+]);
+
+// Indexed, but carries its own inline CSS and internal chapter nav rather
+// than the site shell. It links back to the site through its own footer.
+const NO_SHELL = new Set(["weflux-guide.html"]);
+
 function run() {
   fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
@@ -165,7 +229,11 @@ function run() {
     console.log(`  ${col.list.padEnd(15)} ${posts.length} post(s)`);
   }
 
+  const shells = renderShells();
+  console.log(`  shell           ${shells.done}/${shells.total} page(s)`);
+
   writeSitemap(urls);
+  assertCrawlable();
   console.log(`Build complete -> ${path.relative(ROOT, DIST)}/`);
 }
 
@@ -176,6 +244,11 @@ function writeSitemap(collectionUrls) {
     ["", "1.0", "weekly"],
     ["features.html", "0.9", "weekly"],
     ["pricing.html", "0.9", "weekly"],
+    ["broadcasts.html", "0.9", "weekly"],
+    ["automations.html", "0.9", "weekly"],
+    ["shared-inbox.html", "0.9", "weekly"],
+    ["whatsapp-crm.html", "0.9", "weekly"],
+    ["comparison.html", "0.9", "weekly"],
     ["use-cases.html", "0.8", "monthly"],
     ["platform.html", "0.8", "monthly"],
     ["customers.html", "0.7", "monthly"],
