@@ -40,4 +40,4 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-Sitemap: https://weflux.in/sitemap.xml
+Sitemap: https://www.weflux.in/sitemap.xml

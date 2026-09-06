@@ -263,7 +263,7 @@ Edits here are published as-is. Switch back to Visual to keep using the toolbar 
   <div class="modal">
     <h3>Insert link</h3>
     <div class="field"><label for="lkText">Text</label><input type="text" id="lkText" placeholder="Start free"></div>
-    <div class="field"><label for="lkUrl">URL</label><input type="text" id="lkUrl" placeholder="https://weflux.in/register"></div>
+    <div class="field"><label for="lkUrl">URL</label><input type="text" id="lkUrl" placeholder="https://www.weflux.in/register"></div>
     <div class="btn-row">
       <button class="btn ghost" data-close>Cancel</button>
       <button class="btn primary" id="lkInsert">Insert</button>
@@ -657,7 +657,7 @@ $('#btnPublish').onclick=async()=>{
     const sha=await getSha(path);
     if(sha && !confirm('A post already exists at\n'+path+'\n\nOverwrite it?')){ btn.disabled=false; btn.textContent='Publish to GitHub →'; return; }
     const res=await putFile(path, b64(content), (sha?'Update':'Publish')+' "'+m.title+'" via blog editor', sha);
-    const liveUrl='https://weflux.in/'+m.collection+'/'+m.slug+'.html';
+    const liveUrl='https://www.weflux.in/'+m.collection+'/'+m.slug+'.html';
     const sc=$('#successCard'); sc.className='success-card show';
     sc.innerHTML='<b>✓ Published.</b> Vercel is rebuilding the site now (usually ~1 min).<br>'+
       '• Committed file: <a href="'+res.content.html_url+'" target="_blank" rel="noopener">view on GitHub</a><br>'+
