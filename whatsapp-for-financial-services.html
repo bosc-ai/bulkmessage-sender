@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp for Banks, NBFCs &amp; Insurance in India | Weflux</title>
+  <meta name="description" content="WhatsApp for financial services: OTP delivery, statements and payment reminders, in-chat document collection and renewal flows, with audit logging and access control.">
+  <link rel="canonical" href="https://www.weflux.in/whatsapp-for-financial-services">
+  <meta property="og:title" content="WhatsApp for Banks, NBFCs &amp; Insurance in India | Weflux">
+  <meta property="og:description" content="WhatsApp for financial services: OTP delivery, statements and payment reminders, in-chat document collection and renewal flows, with audit logging and access control.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.weflux.in/whatsapp-for-financial-services">
+  <meta property="og:site_name" content="Weflux">
+  <meta property="og:image" content="https://www.weflux.in/assets/weflux-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WhatsApp for Banks, NBFCs &amp; Insurance in India | Weflux">
+  <meta name="twitter:description" content="WhatsApp for financial services: OTP delivery, statements and payment reminders, in-chat document collection and renewal flows, with audit logging and access control.">
+  <link rel="icon" href="assets/weflux-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="use-cases">
+  <div id="wc-nav"></div>
+
+  <main id="main" class="page">
+    <section class="container page-hero">
+      <div class="crumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/use-cases">Use cases</a> <span class="sep">/</span> <span>Financial services</span></div>
+      <span class="eyebrow"><span class="dot"></span> Financial services</span>
+      <h1>WhatsApp for banks, NBFCs and insurance.</h1>
+      <p class="lede">Authentication messages, statements, EMI and renewal reminders, and document collection, on infrastructure where access is controlled and actions are logged.</p>
+      <div class="cta-row">
+        <a href="https://app.weflux.in/register" class="btn btn-green">Start free →</a>
+        <a href="/contact" class="btn btn-ghost">Talk to sales</a>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom:24px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+        <h2>Where WhatsApp fits, and where it does not</h2>
+        <p>Financial services get more value from WhatsApp than most sectors and carry more risk in how they use it, so the boundary matters more than the feature list.</p>
+        <p><strong>WhatsApp is well suited to</strong> notifications and low-sensitivity exchanges: a payment is due, a policy is expiring, a statement is ready, a document is needed, an OTP is required.</p>
+        <p><strong>WhatsApp is not the place for</strong> account balances, transaction detail, full account or card numbers, or anything that would matter if the phone were unlocked on a table. Notify in the thread and put the content behind authentication.</p>
+
+        <h2>Authentication messages</h2>
+        <p>Authentication is its own template category with a fixed shape and no room for marketing copy. Delivery is measurable, which SMS often is not, and read rates are high. The rules are unglamorous and non-negotiable: short expiry, never resend the same code, never include an OTP in any other message type, and rate-limit requests per number.</p>
+
+        <h2>Collections and renewals</h2>
+        <p>EMI reminders ahead of the due date with a payment link, renewal reminders timed to policy expiry, and a clear escalation path for accounts that go past due. Two cautions specific to this sector.</p>
+        <p>First, collections messaging is regulated conduct, not marketing. Frequency, tone and timing all fall under fair-practice expectations, and "the automation sent it" is not a defence. Set the frequency deliberately and keep a record of what was sent.</p>
+        <p>Second, keep the reminder factual. A payment reminder that reads as pressure is both a conduct risk and a fast route to being blocked, which then costs you the channel for the customers who were going to pay anyway.</p>
+
+        <h2>Document collection</h2>
+        <p>Customers can send documents in the thread rather than visiting a branch or wrestling with an upload portal. Two rules make this safe: acknowledge receipt so nobody sends it four times, and move the document into your own system rather than leaving it as the record of truth in a chat.</p>
+
+        <h2>Audit, access and evidence</h2>
+        <p>What regulated firms need from a messaging platform is usually less about features and more about being able to answer questions afterwards.</p>
+        <ul>
+          <li><strong>Who sent what, and when.</strong> Conversation history is retained per contact, across agents.</li>
+          <li><strong>Who could see it.</strong> Role-based access separates visibility from the ability to broadcast.</li>
+          <li><strong>What consent existed.</strong> Store the source and date of consent as a contact attribute so it is evidence rather than assumption.</li>
+          <li><strong>Data handling.</strong> Encryption in transit and at rest, a signed DPA, and deletion on request.</li>
+        </ul>
+        <p>The <a href="/security">security page</a> covers the controls. Your own retention, disclosure and conduct policies remain yours to set, and we would treat any vendor claiming otherwise as a red flag.</p>
+      </div>
+    </section>
+
+    <section class="container" style="padding:0 0 72px">
+      <div class="faq-layout" style="max-width:760px;margin:0 auto">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> FAQ</span>
+          <h2 style="margin:10px 0 6px">Common questions from financial firms</h2>
+        </div>
+        <div class="faq-list" id="faqList">
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can we send OTPs over WhatsApp? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes, using the Authentication template category, which has a fixed shape and cannot carry marketing content. Delivery is measurable, unlike much SMS. Apply the usual discipline: short expiry, no resending the same code, and rate limiting per number.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Is it safe to send account information? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Send notifications rather than account data. A message saying a statement is ready, with a link behind authentication, is appropriate. Balances, transaction detail and full account or card numbers are not, because the message sits on a device that may be unlocked or shared.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Do you support audit requirements? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Conversation history is retained per contact across agents, role-based access controls who can see and send what, and consent source and date can be stored as contact attributes. Your retention and disclosure policies remain yours to define.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Are collections messages allowed on WhatsApp? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Payment reminders are, and they work well. Treat them as regulated conduct rather than marketing: set frequency and tone deliberately, keep them factual, and keep a record. Automation does not transfer responsibility.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can customers send KYC documents in the chat? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes. Acknowledge receipt so they do not resend, and move the document into your own system rather than treating the chat as the system of record.</div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom:72px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+        <hr>
+        <h2>Related</h2>
+        <ul>
+          <li><a href="/security">Security and compliance</a></li>
+          <li><a href="/automations">Automations</a> for reminders and renewals</li>
+          <li><a href="/shared-inbox">Shared inbox</a> with role-based access</li>
+          <li><a href="/use-cases">All industry playbooks</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container final-cta-inner">
+        <h2>Talk to us about a regulated deployment.</h2>
+        <p class="sub">Access control, audit trail and a signed DPA, discussed properly before you commit.</p>
+        <div class="cta-row">
+          <a href="https://app.weflux.in/register" class="btn btn-white">Start free →</a>
+          <a href="/contact" class="btn btn-ghost">Talk to sales</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="wc-footer"></div>
+  <script defer src="/shell.js"></script>
+  <script defer src="/script.js"></script>
+</body>
+</html>

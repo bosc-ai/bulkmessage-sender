@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp for E-commerce &amp; D2C in India | Weflux</title>
+  <meta name="description" content="WhatsApp playbook for Indian D2C and e-commerce: cart recovery, COD confirmation to cut RTO, order updates and back-in-stock alerts on the official API.">
+  <link rel="canonical" href="https://www.weflux.in/whatsapp-for-ecommerce">
+  <meta property="og:title" content="WhatsApp for E-commerce &amp; D2C in India | Weflux">
+  <meta property="og:description" content="WhatsApp playbook for Indian D2C and e-commerce: cart recovery, COD confirmation to cut RTO, order updates and back-in-stock alerts on the official API.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.weflux.in/whatsapp-for-ecommerce">
+  <meta property="og:site_name" content="Weflux">
+  <meta property="og:image" content="https://www.weflux.in/assets/weflux-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WhatsApp for E-commerce &amp; D2C in India | Weflux">
+  <meta name="twitter:description" content="WhatsApp playbook for Indian D2C and e-commerce: cart recovery, COD confirmation to cut RTO, order updates and back-in-stock alerts on the official API.">
+  <link rel="icon" href="assets/weflux-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="use-cases">
+  <div id="wc-nav"></div>
+
+  <main id="main" class="page">
+    <section class="container page-hero">
+      <div class="crumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/use-cases">Use cases</a> <span class="sep">/</span> <span>E-commerce</span></div>
+      <span class="eyebrow"><span class="dot"></span> D2C &amp; e-commerce</span>
+      <h1>WhatsApp for D2C and e-commerce.</h1>
+      <p class="lede">Cart recovery, COD confirmation and order updates on the official WhatsApp Business API. The flows that move revenue for Indian online brands, and the order to build them in.</p>
+      <div class="cta-row">
+        <a href="https://app.weflux.in/register" class="btn btn-green">Start free →</a>
+        <a href="/contact" class="btn btn-ghost">Talk to sales</a>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom:24px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+        <h2>Why WhatsApp works for Indian D2C</h2>
+        <p>Two things make WhatsApp different from email for an Indian online brand. Almost everyone reads it, and almost nobody has an inbox habit that filters it. That cuts both ways: reach is real, and so is the cost of abusing it.</p>
+        <p>The other reason is cash on delivery. A large share of Indian e-commerce orders are COD, and every unconfirmed COD parcel that ships is a return-to-origin cost paid twice, once out and once back, plus stock sitting in transit. A confirmation message before dispatch is the cheapest intervention available, and it only works on a channel people actually answer.</p>
+
+        <h2>The five flows, in build order</h2>
+        <p>Build them in this sequence. Each one funds the next.</p>
+
+        <h3>1. COD confirmation</h3>
+        <p>Fires the moment a COD order is placed. A Utility template with confirm and cancel buttons, then tag by the response and hold the silent ones for a human call before dispatch. Start here, because it saves money on day one rather than generating demand you then have to fulfil.</p>
+
+        <h3>2. Abandoned cart recovery</h3>
+        <p>Fires 15 to 60 minutes after abandonment, exits the moment an order is placed. A Marketing template naming the actual item, with a button back to the cart. The exit condition matters as much as the copy: a reminder for something already bought is worse than no reminder.</p>
+
+        <h3>3. Order and shipping updates</h3>
+        <p>Confirmed, packed, dispatched, out for delivery. These are Utility templates, cheaper than Marketing, and they quietly reduce your "where is my order" support volume, which is usually the single largest ticket category.</p>
+
+        <h3>4. Back in stock and price drop</h3>
+        <p>Opt-in on the product page, message when it is true. Small audience, high intent, and the least likely message on this list to be resented.</p>
+
+        <h3>5. Post-purchase and replenishment</h3>
+        <p>Care instructions, then a review request once they have actually used it, then a replenishment nudge timed to when the product genuinely runs out. Your order data already tells you when that is.</p>
+
+        <h2>What to connect</h2>
+        <p>Order events should come from your store rather than being entered by hand. Weflux takes inbound webhooks, so Shopify, WooCommerce or a custom backend can trigger a flow and update the contact when an order is placed, paid, dispatched or cancelled. Outbound webhooks push the reply back, so a COD confirmation can mark the order ready to ship in your own system. Details in the <a href="/docs">API documentation</a>.</p>
+
+        <h2>Getting opt-in without wrecking checkout</h2>
+        <p>The moments that work are the ones where the customer already expects contact: a checkbox at checkout that says plainly they will get order updates on WhatsApp, a click-to-WhatsApp ad, a back-in-stock request, an order-tracking link. What does not work is treating the delivery phone number as marketing consent. It is not, and the block rate will tell you so.</p>
+        <p>Keep transactional and promotional consent separate in your own records. Someone who wants shipping updates has not necessarily asked for Friday's sale, and conflating the two is the fastest way to lose both.</p>
+
+        <h2>Watch the quality rating during sale periods</h2>
+        <p>Sale season is when brands send the most and segment the least, and it is when quality ratings drop. A rating fall during your highest-revenue week restricts the number exactly when you need it. Send to segments rather than the whole list, keep promotional frequency defensible, and check the rating after each large send rather than at the end of the campaign.</p>
+      </div>
+    </section>
+
+    <section class="container" style="padding:0 0 72px">
+      <div class="faq-layout" style="max-width:760px;margin:0 auto">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> FAQ</span>
+          <h2 style="margin:10px 0 6px">Common questions from D2C brands</h2>
+        </div>
+        <div class="faq-list" id="faqList">
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can WhatsApp reduce my RTO on COD orders? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">It can help, by confirming the order before you dispatch it. A Utility template with confirm and cancel buttons, sent immediately after a COD order, gives you an answer while the purchase is fresh. Unconfirmed orders can then be held for a call instead of shipped on hope. The size of the improvement depends on your category and your current process, so measure it against a holdout rather than trusting a headline number.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Does it integrate with Shopify or WooCommerce? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes, through inbound and outbound webhooks and the REST API, so order, payment and fulfilment events can trigger flows and update contacts. Google Sheets is supported directly if that is where your orders currently live.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">What does a cart recovery message cost? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">A Weflux plan fee plus Meta's per-message charge for a Marketing template to India. Weflux adds no markup to Meta's charge and shows the rate on every invoice line.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">How soon should the cart reminder go out? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Usually 15 to 60 minutes. Too early and you interrupt someone still deciding; the next day and they have often bought elsewhere. Longer for considered, higher-value purchases.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Will my customers find order updates annoying? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Order updates are among the least resented messages you can send, because the customer is waiting for exactly that information. Promotional sends are where opt-out risk lives. Watch the two separately.</div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom:72px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+        <hr>
+        <h2>Related</h2>
+        <ul>
+          <li><a href="/automations">Automations</a> for building these flows</li>
+          <li><a href="/broadcasts">Broadcasts</a> for launches and sale campaigns</li>
+          <li><a href="/whatsapp-crm">WhatsApp CRM</a> for segmenting by order history</li>
+          <li><a href="/docs">API and webhooks</a> for connecting your store</li>
+          <li><a href="/use-cases">All industry playbooks</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container final-cta-inner">
+        <h2>Start with COD confirmation.</h2>
+        <p class="sub">Connect your store, approve one Utility template, and measure it against a holdout. The free plan covers the whole loop.</p>
+        <div class="cta-row">
+          <a href="https://app.weflux.in/register" class="btn btn-white">Start free →</a>
+          <a href="/contact" class="btn btn-ghost">Talk to sales</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="wc-footer"></div>
+  <script defer src="/shell.js"></script>
+  <script defer src="/script.js"></script>
+</body>
+</html>
