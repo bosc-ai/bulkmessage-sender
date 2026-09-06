@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 290" width="760" height="290" role="img" aria-labelledby="tl dl">
+  <title id="tl">WhatsApp messaging limit tiers</title>
+  <desc id="dl">Meta sets a messaging limit per number, typically starting at 250 unique customers per rolling 24 hours and rising through 1,000, 10,000 and 100,000 as quality holds.</desc>
+  <style>
+    .h{font:600 15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#0A0A0A}
+    .v{font:700 17px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#0A0A0A}
+    .m{font:400 12px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#6B7280}
+  </style>
+  <rect width="760" height="290" fill="#FAFAF7"/>
+  <text x="32" y="40" class="h">Messaging limits rise as quality holds</text>
+  <text x="32" y="62" class="m">Unique customers you can start a conversation with per rolling 24 hours</text>
+
+  <!-- steps -->
+  <rect x="32"  y="182" width="128" height="46"  rx="10" fill="#E6F8EE" stroke="#25D366" stroke-width="1.2"/>
+  <text x="96"  y="204" class="v" text-anchor="middle">250</text>
+  <text x="96"  y="221" class="m" text-anchor="middle">new number</text>
+
+  <rect x="184" y="150" width="128" height="78"  rx="10" fill="#E6F8EE" stroke="#25D366" stroke-width="1.2"/>
+  <text x="248" y="186" class="v" text-anchor="middle">1,000</text>
+  <text x="248" y="205" class="m" text-anchor="middle">tier 1</text>
+
+  <rect x="336" y="118" width="128" height="110" rx="10" fill="#D7F3E4" stroke="#1FB855" stroke-width="1.2"/>
+  <text x="400" y="170" class="v" text-anchor="middle">10,000</text>
+  <text x="400" y="189" class="m" text-anchor="middle">tier 2</text>
+
+  <rect x="488" y="86"  width="128" height="142" rx="10" fill="#C6EED8" stroke="#0F8A53" stroke-width="1.2"/>
+  <text x="552" y="154" class="v" text-anchor="middle">100,000</text>
+  <text x="552" y="173" class="m" text-anchor="middle">tier 3</text>
+
+  <rect x="640" y="86"  width="88"  height="142" rx="10" fill="#fff" stroke="#E7E4DA" stroke-dasharray="4 4"/>
+  <text x="684" y="150" class="m" text-anchor="middle">higher</text>
+  <text x="684" y="167" class="m" text-anchor="middle">on request</text>
+
+  <line x1="32" y1="234" x2="728" y2="234" stroke="#E7E4DA" stroke-width="2"/>
+  <text x="32" y="262" class="m">Limits fall too. Blocks and reports lower your quality rating, and the limit follows it down.</text>
+</svg>

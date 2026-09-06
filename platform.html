@@ -270,11 +270,21 @@
         <p>The arithmetic worth doing before you choose anyone: take your expected monthly message volume, apply Meta's published rate for the category you will actually send, then add any per-message markup the provider takes. At low volume the platform fee dominates. Past a few thousand messages a month the markup does, and it does not stop growing. Full detail on <a href="/pricing">the pricing page</a>.</p>
 
         <h2>Message templates, and the 24-hour window</h2>
+        <figure style="margin:28px 0">
+          <img src="/assets/diagrams/whatsapp-24-hour-window.svg" alt="Timeline showing a customer message opening a 24-hour window for free-form replies, after which only approved templates can be sent" width="760" height="300" loading="lazy" decoding="async" style="width:100%;height:auto;border:1px solid var(--line);border-radius:12px">
+          <figcaption style="font-size:13px;color:var(--muted);margin-top:8px">A customer message opens the window. Once it closes, reaching them again costs a template.</figcaption>
+        </figure>
+
         <p>Two rules explain most of how the platform behaves.</p>
         <p><strong>You cannot message someone first with free-form text.</strong> Any message to a person who has not written to you in the last 24 hours must use a template that Meta approved in advance. Templates come in three categories: Marketing for anything promotional, Utility for messages about a transaction the customer already made, and Authentication for one-time passcodes.</p>
         <p><strong>A customer message opens a 24-hour window.</strong> Inside it you can reply with ordinary text, images or documents, with no template and no approval. When it closes, you are back to templates. This is why response time on WhatsApp is a commercial number and not just a service metric: a late reply converts a free conversation into a paid one.</p>
 
         <h2>Quality rating, messaging limits and the green tick</h2>
+        <figure style="margin:28px 0">
+          <img src="/assets/diagrams/whatsapp-messaging-limits.svg" alt="Bar chart of WhatsApp messaging limit tiers rising from 250 to 1,000 to 10,000 to 100,000 unique customers per rolling 24 hours" width="760" height="290" loading="lazy" decoding="async" style="width:100%;height:auto;border:1px solid var(--line);border-radius:12px">
+          <figcaption style="font-size:13px;color:var(--muted);margin-top:8px">Limits step up as you send consistently with a healthy quality rating, and step back down when it falls.</figcaption>
+        </figure>
+
         <p>Meta assigns every number a quality rating driven by how recipients react, principally blocks and reports, and a messaging limit for how many unique customers you can start conversations with per rolling 24 hours. Send to people who want to hear from you and the limit rises. Do not, and it falls, usually during the campaign where you needed it most.</p>
         <p>The green tick, formally the Official Business Account badge, is separate from Business Verification and is not something any provider can promise. Meta grants it based on your brand's public notability: press coverage and third-party mentions, not your ad spend or your provider. We will help you prepare and submit the application, and anyone guaranteeing the outcome is selling you something they do not control.</p>
 

@@ -5,3 +5,7 @@ dist/
 npm-debug.log*
 server.js
 add_ids.py
+
+# Internal SEO strategy doc - this repo is public, keep it local
+SEO-AEO-BRIEF.md
+.claude/

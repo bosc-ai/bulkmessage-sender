@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 260" width="760" height="260" role="img" aria-labelledby="tb db">
+  <title id="tb">How a WhatsApp broadcast is sent on the official API</title>
+  <desc id="db">A broadcast goes from choosing a segment, to an approved template, to a paced send, to delivery events from Meta, with replies opening a 24-hour conversation window.</desc>
+  <style>
+    .h{font:600 15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#0A0A0A}
+    .n{font:600 13px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#0A0A0A}
+    .m{font:400 11.5px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#6B7280}
+    .num{font:700 11px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#fff}
+  </style>
+  <rect width="760" height="260" fill="#FAFAF7"/>
+  <text x="32" y="38" class="h">How a broadcast actually runs</text>
+
+  <g>
+    <rect x="32" y="64" width="158" height="92" rx="12" fill="#fff" stroke="#E7E4DA"/>
+    <circle cx="52" cy="86" r="10" fill="#25D366"/><text x="52" y="90" class="num" text-anchor="middle">1</text>
+    <text x="48" y="118" class="n">Segment</text>
+    <text x="48" y="136" class="m">Tags, attributes,</text>
+    <text x="48" y="151" class="m">lead stage</text>
+  </g>
+  <path d="M198 110 L214 110" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <g>
+    <rect x="222" y="64" width="158" height="92" rx="12" fill="#fff" stroke="#E7E4DA"/>
+    <circle cx="242" cy="86" r="10" fill="#25D366"/><text x="242" y="90" class="num" text-anchor="middle">2</text>
+    <text x="238" y="118" class="n">Approved template</text>
+    <text x="238" y="136" class="m">Variables mapped</text>
+    <text x="238" y="151" class="m">per recipient</text>
+  </g>
+  <path d="M388 110 L404 110" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <g>
+    <rect x="412" y="64" width="158" height="92" rx="12" fill="#fff" stroke="#E7E4DA"/>
+    <circle cx="432" cy="86" r="10" fill="#25D366"/><text x="432" y="90" class="num" text-anchor="middle">3</text>
+    <text x="428" y="118" class="n">Paced send</text>
+    <text x="428" y="136" class="m">Throttled to your</text>
+    <text x="428" y="151" class="m">messaging limit</text>
+  </g>
+  <path d="M578 110 L594 110" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <g>
+    <rect x="602" y="64" width="126" height="92" rx="12" fill="#E6F8EE" stroke="#25D366"/>
+    <circle cx="622" cy="86" r="10" fill="#0F8A53"/><text x="622" y="90" class="num" text-anchor="middle">4</text>
+    <text x="618" y="118" class="n">Results</text>
+    <text x="618" y="136" class="m">Delivered, read,</text>
+    <text x="618" y="151" class="m">replied, opted out</text>
+  </g>
+
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <rect x="32" y="180" width="696" height="46" rx="10" fill="#fff" stroke="#E7E4DA"/>
+  <text x="48" y="202" class="m">A reply opens a 24-hour window in which you can respond with ordinary messages, no template needed.</text>
+  <text x="48" y="219" class="m">Replies and opt-outs tell you more than read rate, which is high on WhatsApp for everything.</text>
+</svg>
