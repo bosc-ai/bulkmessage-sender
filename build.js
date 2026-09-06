@@ -237,7 +237,7 @@ const NOT_INDEXED = new Set([
 // than the site shell. It links back to the site through its own footer.
 const NO_SHELL = new Set(["weflux-guide.html"]);
 
-function run() {
+async function run() {
   fs.rmSync(DIST, { recursive: true, force: true });
   fs.mkdirSync(DIST, { recursive: true });
   copyStatic();
@@ -261,7 +261,48 @@ function run() {
 
   writeSitemap(urls);
   assertCrawlable();
+  await pingIndexNow();
   console.log(`Build complete -> ${path.relative(ROOT, DIST)}/`);
+}
+
+// Populated by writeSitemap, consumed by pingIndexNow.
+let SUBMITTED_URLS = [];
+
+// IndexNow key. The file must be reachable at ${SITE}/${INDEXNOW_KEY}.txt and
+// contain exactly the key. The key is public by design, that is the protocol.
+const INDEXNOW_KEY = "5252890d487ac855bbc0f82402ca2a9c";
+
+/**
+ * Tell Bing (and Yandex, Naver, Seznam) which URLs exist, instead of waiting
+ * to be crawled. Production deploys only: a preview build should not be
+ * announcing URLs, and a local build definitely should not.
+ *
+ * Never fails the build. A search engine being unreachable is not a reason to
+ * refuse to ship a site.
+ */
+async function pingIndexNow() {
+  if (process.env.VERCEL_ENV !== "production") {
+    console.log("  indexnow        skipped (not a production deploy)");
+    return;
+  }
+  const host = new URL(SITE).host;
+  const body = {
+    host,
+    key: INDEXNOW_KEY,
+    keyLocation: `${SITE}/${INDEXNOW_KEY}.txt`,
+    urlList: SUBMITTED_URLS,
+  };
+  try {
+    const res = await fetch("https://api.indexnow.org/indexnow", {
+      method: "POST",
+      headers: { "Content-Type": "application/json; charset=utf-8" },
+      body: JSON.stringify(body),
+      signal: AbortSignal.timeout(10_000),
+    });
+    console.log(`  indexnow        ${res.status} for ${SUBMITTED_URLS.length} url(s)`);
+  } catch (err) {
+    console.log(`  indexnow        skipped (${err.message})`);
+  }
 }
 
 function writeSitemap(collectionUrls) {
@@ -301,6 +342,7 @@ function writeSitemap(collectionUrls) {
   ].map(([p, pr, cf]) => ({ loc: `${SITE}/${p.replace(/\.html$/, "")}`, lastmod: today, pr, cf }));
 
   const all = [...statics, ...collectionUrls];
+  SUBMITTED_URLS = all.map((u) => u.loc);
   const body = all
     .map(
       (u) =>
