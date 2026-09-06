@@ -1046,6 +1046,12 @@ h3 { font-size: 22px; line-height: 1.25; letter-spacing: -0.02em; }
   overflow: auto; font-family: var(--font-mono); font-size: 13px; margin: 20px 0;
 }
 .prose pre code { background: none; border: 0; padding: 0; color: inherit; font-size: 13px; }
+.prose .table-wrap {
+  overflow-x: auto;
+  margin: 24px 0;
+  -webkit-overflow-scrolling: touch;
+}
+.prose .table-wrap > table { margin: 0; min-width: 520px; }
 .prose table {
   width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14.5px;
   border: 1px solid var(--line); border-radius: 10px; overflow: hidden;
