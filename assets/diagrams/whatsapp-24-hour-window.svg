@@ -1,41 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" width="760" height="300" role="img" aria-labelledby="t24 d24">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="760" height="360" role="img" aria-labelledby="t24 d24">
   <title id="t24">The WhatsApp 24-hour customer service window</title>
   <desc id="d24">A customer message opens a 24-hour window in which a business can reply with free-form messages. After it closes, only Meta-approved templates can be sent.</desc>
   <style>
-    .h{font:600 15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#0A0A0A}
-    .l{font:500 13px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#14171A}
-    .m{font:400 12px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#6B7280}
-    .k{font:600 11px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;letter-spacing:.04em}
+    .h{font:600 22px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#0A0A0A}
+    .l{font:600 18px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#14171A}
+    .m{font:400 16px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;fill:#6B7280}
+    .k{font:700 15px system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;letter-spacing:.05em}
   </style>
-  <rect width="760" height="300" fill="#FAFAF7"/>
-  <text x="32" y="40" class="h">The 24-hour customer service window</text>
+  <rect width="760" height="360" fill="#FAFAF7"/>
+  <text x="32" y="46" class="h">The 24-hour customer service window</text>
 
-  <!-- timeline -->
-  <line x1="32" y1="120" x2="728" y2="120" stroke="#E7E4DA" stroke-width="2"/>
+  <line x1="32" y1="140" x2="728" y2="140" stroke="#E7E4DA" stroke-width="2"/>
 
-  <!-- open window band -->
-  <rect x="120" y="96" width="360" height="48" rx="10" fill="#E6F8EE" stroke="#25D366" stroke-width="1.5"/>
-  <text x="300" y="118" class="k" fill="#0F8A53" text-anchor="middle">WINDOW OPEN &#183; 24 HOURS</text>
-  <text x="300" y="134" class="m" text-anchor="middle">Reply freely: text, images, documents</text>
+  <rect x="112" y="108" width="368" height="64" rx="12" fill="#E6F8EE" stroke="#25D366" stroke-width="2"/>
+  <text x="296" y="134" class="k" fill="#0F8A53" text-anchor="middle">WINDOW OPEN &#183; 24 HOURS</text>
+  <text x="296" y="157" class="m" text-anchor="middle">Reply freely: text, images, documents</text>
 
-  <!-- closed band -->
-  <rect x="496" y="96" width="232" height="48" rx="10" fill="#F4F2EC" stroke="#E7E4DA" stroke-width="1.5"/>
-  <text x="612" y="118" class="k" fill="#6B7280" text-anchor="middle">WINDOW CLOSED</text>
-  <text x="612" y="134" class="m" text-anchor="middle">Approved templates only</text>
+  <rect x="496" y="108" width="232" height="64" rx="12" fill="#F4F2EC" stroke="#E7E4DA" stroke-width="2"/>
+  <text x="612" y="134" class="k" fill="#6B7280" text-anchor="middle">WINDOW CLOSED</text>
+  <text x="612" y="157" class="m" text-anchor="middle">Templates only</text>
 
-  <!-- start marker -->
-  <circle cx="120" cy="120" r="7" fill="#25D366"/>
-  <line x1="120" y1="120" x2="120" y2="176" stroke="#25D366" stroke-width="1.5" stroke-dasharray="3 3"/>
-  <text x="120" y="196" class="l" text-anchor="middle">Customer messages you</text>
-  <text x="120" y="213" class="m" text-anchor="middle">Window opens</text>
+  <circle cx="112" cy="140" r="9" fill="#25D366"/>
+  <line x1="112" y1="149" x2="112" y2="206" stroke="#25D366" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="112" y="232" class="l" text-anchor="middle">Customer messages you</text>
+  <text x="112" y="255" class="m" text-anchor="middle">Window opens</text>
 
-  <!-- close marker -->
-  <circle cx="480" cy="120" r="7" fill="#F59E0B"/>
-  <line x1="480" y1="120" x2="480" y2="176" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="3 3"/>
-  <text x="480" y="196" class="l" text-anchor="middle">24 hours later</text>
-  <text x="480" y="213" class="m" text-anchor="middle">Free-form replies stop</text>
+  <circle cx="480" cy="140" r="9" fill="#F59E0B"/>
+  <line x1="480" y1="149" x2="480" y2="206" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="480" y="232" class="l" text-anchor="middle">24 hours later</text>
+  <text x="480" y="255" class="m" text-anchor="middle">Free-form replies stop</text>
 
-  <!-- note -->
-  <rect x="32" y="238" width="696" height="38" rx="9" fill="#fff" stroke="#E7E4DA"/>
-  <text x="48" y="262" class="m">Every customer reply reopens the window. A quick-reply button on a template is the cheapest way to open one.</text>
+  <rect x="32" y="286" width="696" height="52" rx="10" fill="#fff" stroke="#E7E4DA"/>
+  <text x="52" y="309" class="m">Every customer reply reopens the window. A quick-reply button</text>
+  <text x="52" y="330" class="m">on a template is the cheapest way to open one.</text>
 </svg>

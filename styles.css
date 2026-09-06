@@ -1046,6 +1046,19 @@ h3 { font-size: 22px; line-height: 1.25; letter-spacing: -0.02em; }
   overflow: auto; font-family: var(--font-mono); font-size: 13px; margin: 20px 0;
 }
 .prose pre code { background: none; border: 0; padding: 0; color: inherit; font-size: 13px; }
+.prose figure { margin: 28px 0; }
+/* Diagrams keep a readable minimum size and scroll inside their own box
+   rather than shrinking to unreadable text on a phone. Same idea as tables. */
+.prose .figure-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+.prose .figure-scroll > img { display: block; min-width: 560px; width: 100%; height: auto; border: 0; border-radius: 0; }
+.prose figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
 .prose .table-wrap {
   overflow-x: auto;
   margin: 24px 0;
