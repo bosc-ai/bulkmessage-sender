@@ -15,6 +15,7 @@ import matter from "gray-matter";
 import { marked } from "marked";
 import { SITE, esc, fmtDate, readTime, absUrl, DEFAULT_OG, HEAD_LINKS, renderPostPage } from "./lib/postTemplate.js";
 import { injectShell } from "./lib/shell.js";
+import { injectSchema } from "./lib/schema.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = __dirname;
@@ -161,13 +162,27 @@ function renderShells() {
   })(DIST);
 
   let done = 0;
+  let schema = 0;
   for (const file of pages) {
-    const html = fs.readFileSync(file, "utf-8");
-    if (!html.includes('id="wc-nav"')) continue;
-    fs.writeFileSync(file, injectShell(html));
-    done++;
+    const rel = path.relative(DIST, file);
+    let html = fs.readFileSync(file, "utf-8");
+    const hasShellHost = html.includes('id="wc-nav"');
+    if (hasShellHost) {
+      html = injectShell(html);
+      done++;
+    }
+    // Generated posts already carry their own Article/FAQ graph from
+    // postTemplate.js; only the hand-written pages need one.
+    // Generated posts already carry their own Article/FAQ graph from
+    // postTemplate.js; only the hand-written root pages need one.
+    const schemaAdded = !NOT_INDEXED.has(rel) && !rel.includes("/") && !rel.startsWith("admin");
+    if (schemaAdded) {
+      html = injectSchema(html, rel);
+      schema++;
+    }
+    if (hasShellHost || schemaAdded) fs.writeFileSync(file, html);
   }
-  return { total: pages.length, done };
+  return { total: pages.length, done, schema };
 }
 
 // A page with no crawlable nav is invisible to every AI crawler and
@@ -190,6 +205,17 @@ function assertCrawlable() {
         if (h1 !== 1) problems.push(`${rel}: ${h1} <h1> (expected exactly 1)`);
         if (!/rel="canonical"/.test(html)) problems.push(`${rel}: no canonical`);
         if (!/property="og:title"/.test(html)) problems.push(`${rel}: no og:title`);
+        const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+        if (!ld.length) problems.push(`${rel}: no structured data`);
+        for (const [, raw] of ld) {
+          try {
+            JSON.parse(raw);
+          } catch (e) {
+            problems.push(`${rel}: invalid JSON-LD (${e.message})`);
+          }
+        }
+        const orgs = (html.match(/"@type":\s*"Organization"/g) || []).length;
+        if (orgs > 1) problems.push(`${rel}: Organization defined ${orgs} times`);
       }
     }
   })(DIST);
@@ -231,6 +257,7 @@ function run() {
 
   const shells = renderShells();
   console.log(`  shell           ${shells.done}/${shells.total} page(s)`);
+  console.log(`  schema          ${shells.schema} page(s)`);
 
   writeSitemap(urls);
   assertCrawlable();
