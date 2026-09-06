@@ -255,6 +255,7 @@ async function run() {
     console.log(`  ${col.list.padEnd(15)} ${posts.length} post(s)`);
   }
 
+  writeLlmsFull();
   const shells = renderShells();
   console.log(`  shell           ${shells.done}/${shells.total} page(s)`);
   console.log(`  schema          ${shells.schema} page(s)`);
@@ -303,6 +304,34 @@ async function pingIndexNow() {
   } catch (err) {
     console.log(`  indexnow        skipped (${err.message})`);
   }
+}
+
+// Every article as one plain-text file. Retrieval crawlers do not run
+// JavaScript and mostly do not want our CSS; this hands them the corpus
+// directly. llms.txt (the curated map) is hand-written and copied as-is.
+function writeLlmsFull() {
+  const parts = [
+    "# Weflux - full content",
+    "",
+    "Every published article from https://www.weflux.in, as plain text.",
+    "The curated site map is at https://www.weflux.in/llms.txt",
+    "",
+  ];
+  for (const col of COLLECTIONS) {
+    for (const p of loadPosts(col)) {
+      parts.push(
+        `---`,
+        `# ${p.title}`,
+        `URL: ${SITE}/${col.dir}/${p.slug}`,
+        p.date ? `Date: ${p.date}` : "",
+        p.description ? `Summary: ${p.description}` : "",
+        "",
+        p.html.replace(/<[^>]+>/g, " ").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim(),
+        ""
+      );
+    }
+  }
+  fs.writeFileSync(path.join(DIST, "llms-full.txt"), parts.filter((l) => l !== "").join("\n") + "\n");
 }
 
 function writeSitemap(collectionUrls) {

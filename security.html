@@ -38,40 +38,41 @@
           <a href="#data-handling">4. Data handling</a>
           <a href="#vuln">5. Vulnerability management</a>
           <a href="#incident">6. Incident response</a>
-          <a href="#certs">7. Certifications &amp; reports</a>
+          <a href="#certs">7. Standards &amp; reports</a>
           <a href="#contact">8. Contact</a>
         </aside>
         <div class="prose">
           <p class="updated">Last updated · 1 May 2026 · Effective for all Weflux customers globally.</p>
           <h2 id="program">1. Security programme</h2>
-<p>Weflux operates a SOC 2 Type II audited and ISO 27001 certified information security programme. Our latest reports are available under NDA - contact <a href="mailto:security@weflux.in">security@weflux.in</a> to request a copy.</p>
+<p>Weflux runs a documented information security programme covering encryption, access control, data segregation, retention and deletion. The controls described on this page are the ones we operate today, and we would rather list those precisely than claim a certification we do not yet hold.</p>
+    <p>If your procurement process needs a security review, a completed questionnaire or a signed DPA, write to <a href="mailto:security@weflux.in">security@weflux.in</a> and we will work through it directly.</p>
 
 <h2 id="infrastructure">2. Infrastructure</h2>
-<p>Weflux runs on Amazon Web Services in the Mumbai region (<code>ap-south-1</code>). Customer Data is encrypted at rest using AES-256 with keys managed by AWS KMS. All data in transit uses TLS 1.3.</p>
-    <p>Our production environment is segregated from staging and development. Access to production systems requires hardware-token two-factor authentication and is logged in a tamper-evident audit log.</p>
+<p>All traffic between your browser, our services and Meta is encrypted in transit using TLS with modern cipher suites. Customer Data is encrypted at rest, and sensitive credentials - WhatsApp access tokens, webhook verify tokens and SMTP passwords - are additionally encrypted at the application layer with AES-256-GCM before storage, so they are never written in plaintext. Account passwords are hashed with bcrypt and are never stored or logged in plaintext.</p>
+    <p>Production is segregated from staging and development, and administrative access to production is restricted to named engineers. Ask us for specifics on hosting location and data residency and we will answer honestly for your contract, rather than publish infrastructure detail that mainly helps an attacker.</p>
 
 <h2 id="access">3. Access controls</h2>
-<p>Internal access follows the principle of least privilege. All staff access is provisioned through SSO and revoked within four hours of role change or departure. Production database access requires a justified, time-bounded ticket reviewed by a second engineer.</p>
+<p>Internal access follows the principle of least privilege, and access is revoked promptly on role change or departure. Production data access is restricted to the engineers who need it for a specific task.</p>
     <h3>For customers</h3>
-    <p>Inside your workspace, you can enable two-factor authentication for all users (recommended), set role-based permissions, and enforce SSO via SAML 2.0 on the Scale plan.</p>
+    <p>Inside your workspace you can set role-based permissions, so that seeing a conversation and being able to broadcast to your whole contact list are separate rights. If you need SAML single sign-on, tell us: it is not available today and we will not pretend otherwise.</p>
 
 <h2 id="data-handling">4. Data handling</h2>
 <p>Customer Data is encrypted at rest, segregated per workspace, and never used for product development or model training. Backups are encrypted and retained for 30 days. Deletion follows our <a href="/data-deletion">Data Deletion Policy</a>.</p>
 
 <h2 id="vuln">5. Vulnerability management</h2>
-<p>We run continuous static analysis on every commit, dependency scanning every 24 hours, and weekly authenticated dynamic scans against production. We commission a third-party penetration test annually; a redacted summary is available under NDA.</p>
+<p>Dependencies are monitored for known vulnerabilities and patched, and code changes are reviewed before release. If your procurement requires evidence of a third-party penetration test, talk to us about scope and timing before you commit rather than after.</p>
     <h3>Responsible disclosure</h3>
     <p>Found a security issue? Email <a href="mailto:security@weflux.in">security@weflux.in</a> with details. We respond within 48 hours and reward valid reports based on severity. Please don't disclose publicly until we've shipped a fix.</p>
 
 <h2 id="incident">6. Incident response</h2>
-<p>We maintain a 24/7 on-call rotation. In the event of a confirmed security incident affecting Customer Data, we notify the affected Customers without undue delay and no later than 72 hours after confirmation, in accordance with Indian and EU data-protection law.</p>
+<p>In the event of a confirmed security incident affecting Customer Data, we notify affected customers without undue delay and no later than 72 hours after confirmation, consistent with Indian and EU data-protection expectations.</p>
 
-<h2 id="certs">7. Certifications &amp; reports</h2>
+<h2 id="certs">7. Standards &amp; reports</h2>
 <ul>
-      <li>SOC 2 Type II (annual)</li>
-      <li>ISO/IEC 27001:2022 (annual)</li>
-      <li>DPDP Act 2023 compliance (India)</li>
-      <li>GDPR-aligned controls (EU customers)</li>
+      <li>DPDP Act 2023 (India) - aligned</li>
+      <li>Signed Data Processing Agreement available on request</li>
+      <li>GDPR-aligned controls for EU customers</li>
+      <li>SOC 2 and ISO 27001: not currently held. We will say so here if that changes.</li>
     </ul>
 
 <h2 id="contact">8. Contact</h2>

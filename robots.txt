@@ -41,4 +41,7 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
+# Curated site summary for language models
+# https://www.weflux.in/llms.txt
+
 Sitemap: https://www.weflux.in/sitemap.xml
