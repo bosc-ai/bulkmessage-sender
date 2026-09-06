@@ -27,7 +27,7 @@
 
   <main id="main" class="page">
     <section class="container page-hero">
-      <div class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <a href="features.html">Features</a> <span class="sep">/</span> <span>Automations</span></div>
+      <div class="crumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/features">Features</a> <span class="sep">/</span> <span>Automations</span></div>
       <span class="eyebrow"><span class="dot"></span> Smart Automations</span>
       <h1>AI-powered flow creation. No drag-and-drop required.</h1>
       <p class="lede">Other platforms force you into complicated, messy visual flow builders. We use cutting-edge LLM models so you can simply write out your scenario, and we generate the automated flow for you instantly.</p>
@@ -79,6 +79,116 @@
       </div>
     </section>
 
+        <section class="container" style="padding-bottom:24px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+
+        <h2>What is WhatsApp automation?</h2>
+        <p>WhatsApp automation is a set of rules that send a message when something happens, without anyone in your team pressing send. Something happens (an order is placed, a cart is abandoned, a form is submitted, a customer replies with a keyword), a condition is checked, and a message goes out.</p>
+        <p>That is the whole idea. The complexity in most automation tools is not in the concept, it is in the interface, which is why Weflux lets you describe the flow in plain English and builds it for you rather than making you assemble it from boxes and arrows.</p>
+        <p>The useful distinction is between automation that <em>replaces</em> a conversation and automation that <em>starts</em> one. Order updates and OTPs replace a conversation nobody wanted to have. A cart-recovery message starts one you very much want. The second kind needs more care with timing and tone, and it is where the returns are.</p>
+
+        <h2>What can trigger a flow</h2>
+        <ul>
+          <li><strong>An inbound message.</strong> A customer messages you, or replies with a specific keyword.</li>
+          <li><strong>A button tap.</strong> Someone taps a quick-reply or call-to-action button on a template.</li>
+          <li><strong>A CRM change.</strong> A contact moves to a new lead stage, or gains a tag.</li>
+          <li><strong>An external event.</strong> Your store, CRM or backend calls a Weflux webhook: order placed, payment failed, shipment dispatched.</li>
+          <li><strong>A schedule.</strong> A fixed delay after a previous step, or a set time before an appointment.</li>
+        </ul>
+
+        <h2>Five flows worth building first</h2>
+        <p>Rather than a feature list, here is what these actually look like in practice.</p>
+
+        <h3>1. Abandoned cart recovery</h3>
+        <p><strong>Trigger:</strong> cart abandoned webhook from your store. <strong>Wait:</strong> 15 to 60 minutes. <strong>Condition:</strong> order still not placed. <strong>Send:</strong> a Marketing template naming the item, with a button back to the cart.</p>
+        <p>The wait matters more than the copy. Fire it in two minutes and you interrupt someone who is still deciding. Fire it the next day and they have bought elsewhere.</p>
+
+        <h3>2. Cash-on-delivery confirmation</h3>
+        <p><strong>Trigger:</strong> COD order placed. <strong>Send:</strong> a Utility template asking the customer to confirm with a button. <strong>Then:</strong> tag confirmed orders, and route the silent ones to a human before dispatch.</p>
+        <p>For Indian D2C this is usually the highest-return flow on the list, because every unconfirmed COD parcel that ships is a return-to-origin cost you pay both ways.</p>
+
+        <h3>3. Appointment reminders</h3>
+        <p><strong>Trigger:</strong> a booking exists. <strong>Send:</strong> a Utility reminder ahead of the slot, with the time and, for virtual bookings, the meeting link. Weflux generates a Google Meet link automatically for virtual appointments and includes it in the reminder.</p>
+
+        <h3>4. Post-purchase sequence</h3>
+        <p><strong>Trigger:</strong> order delivered. <strong>Send:</strong> a thank-you and care instructions, then after a sensible gap a review request, then a replenishment nudge timed to the product's actual life. Three messages spread over weeks, not three messages on Tuesday.</p>
+
+        <h3>5. Lead qualification</h3>
+        <p><strong>Trigger:</strong> new inbound message from an unknown number. <strong>Send:</strong> two or three quick-reply questions, tag by the answers, set the lead stage, and assign to the right agent in the shared inbox. The point is not to close the lead, it is to make sure a human opens the right conversation first.</p>
+
+        <h2>Building a flow</h2>
+        <ol>
+          <li><strong>Describe it.</strong> Write what should happen in ordinary language, including the trigger, the wait and the exit condition.</li>
+          <li><strong>Check the templates.</strong> Any step that reaches someone outside the 24-hour window needs an approved template. The flow will tell you which steps those are.</li>
+          <li><strong>Set the exit.</strong> Decide what stops the flow: a purchase, a reply, a stage change. A flow with no exit condition is how customers end up getting a cart reminder for something they already bought.</li>
+          <li><strong>Test on yourself.</strong> Run it against your own number before it touches a list.</li>
+          <li><strong>Turn it on and watch the opt-outs.</strong> Opt-out rate is the honest measure of whether the automation is welcome.</li>
+        </ol>
+
+        <h2>What WhatsApp automation cannot do</h2>
+        <p>Worth being direct about, because these are platform rules rather than product gaps, and every provider has them.</p>
+        <ul>
+          <li><strong>You cannot message someone first with free-form text.</strong> Outside the 24-hour window, every automated message must be an approved template. If a flow needs to say something unpredictable, it cannot reach a cold contact.</li>
+          <li><strong>Automation cannot manufacture opt-in.</strong> A flow can only message people who have consented, and no amount of clever triggering changes that.</li>
+          <li><strong>Templates are approved before use, not on the fly.</strong> A flow that needs new wording needs a new template and Meta's review first.</li>
+          <li><strong>Facebook Messenger and Instagram behave differently.</strong> On those channels you cannot start a conversation at all, and there are no templates. Automation there can only respond to someone who messaged you.</li>
+          <li><strong>Automation is not a substitute for the inbox.</strong> Anything that draws a reply hands a human a live conversation, which is the point.</li>
+        </ul>
+
+        <h2>Connecting your own systems</h2>
+        <p>Flows are more useful when the trigger comes from where the event actually happens. Weflux takes inbound webhooks so your store, CRM or backend can start a flow, sends outbound webhooks so a flow can update your systems, and offers a REST API for anything bespoke. Google Sheets works for the many real cases where a spreadsheet is genuinely the system of record. Details in the <a href="/docs">API documentation</a>.</p>
+      </div>
+    </section>
+
+    <section class="container" style="padding:0 0 72px">
+      <div class="faq-layout" style="max-width:760px;margin:0 auto">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> FAQ</span>
+          <h2 style="margin:10px 0 6px">Common questions about WhatsApp automation</h2>
+        </div>
+        <div class="faq-list" id="faqList">
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can a chatbot reply to customers 24/7? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes. Once someone messages you, a 24-hour window opens in which automated free-form replies are allowed, so an out-of-hours flow can answer immediately and hand over to a human in the morning. What it cannot do is start a conversation with someone at 2am who never messaged you.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Do automated messages need approved templates? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Only the ones that reach someone outside the 24-hour window, which covers most proactive flows such as cart recovery, order updates and reminders. Replies inside an open window can be free-form.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Do I have to build flows with a drag-and-drop editor? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">No. You describe the scenario in plain English and Weflux builds the flow, which you can then review and adjust. Most people find describing a flow faster than assembling one from boxes and arrows.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can automations trigger from my store or CRM? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes. Your systems can call a Weflux webhook to start a flow, and flows can call out to your systems. There is also a REST API and Google Sheets support for cases where a spreadsheet is the real system of record.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">How do I stop a flow when someone buys? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Set an exit condition, such as an order being placed or a lead stage changing. This is the step people most often skip, and it is why customers sometimes receive a reminder for something they already bought.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Does automation work on Instagram and Messenger? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Partly. You can automate replies to people who message you, but neither channel lets a business start a conversation, and neither has message templates. Anything that depends on reaching someone first is WhatsApp only.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom:72px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+        <hr>
+        <h2>Related</h2>
+        <ul>
+          <li><a href="/broadcasts">WhatsApp broadcasts</a> for the campaigns that feed people into these flows</li>
+          <li><a href="/shared-inbox">Shared team inbox</a> for the human handover when a flow draws a reply</li>
+          <li><a href="/whatsapp-crm">WhatsApp CRM</a> for the tags and stages flows read and write</li>
+          <li><a href="/docs">API and webhooks</a> for triggering flows from your own systems</li>
+          <li><a href="/use-cases">Industry playbooks</a> for the flows that work in your sector</li>
+        </ul>
+      </div>
+    </section>
+
     <section class="final-cta">
       <div class="container final-cta-inner">
         <h2>Automate your messaging today.</h2>
@@ -90,5 +200,6 @@
 
   <div id="wc-footer"></div>
   <script src="shell.js"></script>
+  <script defer src="/script.js"></script>
 </body>
 </html>

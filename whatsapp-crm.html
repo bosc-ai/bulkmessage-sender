@@ -27,7 +27,7 @@
 
   <main id="main" class="page">
     <section class="container page-hero">
-      <div class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <a href="features.html">Features</a> <span class="sep">/</span> <span>CRM Features</span></div>
+      <div class="crumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/features">Features</a> <span class="sep">/</span> <span>CRM Features</span></div>
       <span class="eyebrow"><span class="dot"></span> Lightweight CRM</span>
       <h1>Manage contacts with a built-in WhatsApp CRM.</h1>
       <p class="lede">Get the feel of a full CRM right inside your messaging platform. We support comprehensive bulk uploads for contacts, tags, labels, stages, and rules to keep your data organized.</p>
@@ -79,6 +79,86 @@
       </div>
     </section>
 
+        <section class="container" style="padding-bottom:24px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+
+        <h2>What a WhatsApp CRM is</h2>
+        <p>A WhatsApp CRM is contact management that lives where the conversation happens. Each contact carries their attributes, tags, lead stage and complete message history, so the person answering can see who they are talking to without opening another system.</p>
+        <p>It differs from a general CRM in what it is organised around. A traditional CRM is built around deals and pipeline stages, updated by a salesperson after the fact. A WhatsApp CRM is built around the thread, and it updates itself as the conversation happens. For businesses whose sales and support genuinely run on WhatsApp, that is the difference between a record that is current and one that is somebody's Friday admin task.</p>
+
+        <h2>What you can store against a contact</h2>
+        <ul>
+          <li><strong>Custom attributes.</strong> Whatever your business actually needs on a contact: city, plan, order value, admission year, policy number.</li>
+          <li><strong>Tags.</strong> Lightweight labels for grouping, applied by hand or by automation.</li>
+          <li><strong>Lead stage.</strong> Where this person sits in your funnel, so the inbox can prioritise and campaigns can segment.</li>
+          <li><strong>Full conversation history.</strong> Every message with this contact across every agent, on one thread.</li>
+          <li><strong>Opt-in and opt-out state.</strong> Tracked, and enforced automatically on every campaign.</li>
+        </ul>
+
+        <h2>Getting contacts in and out</h2>
+        <p>Bulk import by CSV, with the columns mapped to your attributes. Contacts also arrive automatically from inbound conversations, from your connected systems, and from Google Sheets where a sheet is the real system of record, which it more often is than anyone admits.</p>
+        <p>Export works the same way in reverse. Your contact data is yours, and you can take it out in a standard format whenever you want. It is worth checking that any platform you evaluate will say that plainly.</p>
+
+        <h2>Segmentation that earns its keep</h2>
+        <p>Any combination of tags, attributes and lead stage defines a segment, and a segment is what a broadcast sends to. In practice the segments that make money are unglamorous: bought in the last ninety days, replied but never converted, cart abandoned this week, renewal due next month, one city, one product line.</p>
+        <p>The discipline is sending to the segment rather than the list. A smaller, better-chosen audience protects your quality rating, costs less per campaign, and converts better. Every broadcast to everyone is a small withdrawal from your number's health.</p>
+
+        <h2>Connecting the systems you already run</h2>
+        <p>A CRM that does not know about your orders is a contact list with extra steps. Weflux connects through inbound and outbound webhooks and a REST API, so order, payment and fulfilment events from your store or backend can update contacts, move stages and start flows. Google Sheets is supported directly. See the <a href="/docs">API documentation</a> for the specifics.</p>
+
+        <h2>Data protection and deletion</h2>
+        <p>Contact data is customer personal data, and it is treated that way. Access is role-based, data is encrypted in transit and at rest, and deletion requests can be honoured for individual contacts or the whole workspace. The <a href="/security">security page</a> covers the controls, and <a href="/data-deletion">data deletion</a> explains the process.</p>
+      </div>
+    </section>
+
+    <section class="container" style="padding:0 0 72px">
+      <div class="faq-layout" style="max-width:760px;margin:0 auto">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> FAQ</span>
+          <h2 style="margin:10px 0 6px">Common questions about the WhatsApp CRM</h2>
+        </div>
+        <div class="faq-list" id="faqList">
+          <div class="faq-item">
+            <button class="faq-q" type="button">Do I still need a separate CRM? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">If WhatsApp is where your sales and support actually happen, usually not. If you run a large outbound sales motion with complex pipeline reporting, keep your CRM as the system of record and connect the two through webhooks or the API so the conversation history flows into it.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">How do I import my existing contacts? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Bulk upload a CSV and map the columns to your attributes and tags. Contacts also arrive automatically from inbound conversations, from connected systems and from Google Sheets.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can I export my contacts? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes. Your contact data is yours and can be exported in a standard format at any time.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Is there a limit on how many contacts I can store? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">The free plan stores up to 500 contacts. Paid plans are unlimited. Full detail on the pricing page.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Are opt-outs handled automatically? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes. Opt-out state is stored on the contact and enforced on every campaign, so someone who has asked to stop is excluded without anyone having to remember.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can it sync with Shopify, WooCommerce or my own backend? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes, through inbound and outbound webhooks and the REST API, so order and payment events can update contacts, change lead stages and trigger flows. Google Sheets is supported directly.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom:72px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+        <hr>
+        <h2>Related</h2>
+        <ul>
+          <li><a href="/shared-inbox">Shared team inbox</a> where these contact records are used</li>
+          <li><a href="/broadcasts">Broadcasts</a> for sending to a segment</li>
+          <li><a href="/automations">Automations</a> for keeping tags and stages current</li>
+          <li><a href="/docs">API and webhooks</a> for syncing with your own systems</li>
+        </ul>
+      </div>
+    </section>
+
     <section class="final-cta">
       <div class="container final-cta-inner">
         <h2>Organize your customer data.</h2>
@@ -90,5 +170,6 @@
 
   <div id="wc-footer"></div>
   <script src="shell.js"></script>
+  <script defer src="/script.js"></script>
 </body>
 </html>
