@@ -1,11 +1,11 @@
 ---
 title: "How to Get WhatsApp Business API Access in India?"
-description: "Want WhatsApp Business API access in India? Learn how to apply via Meta or a BSP like BulkMessageSender. Get verified, go live in days. No tech expertise needed."
+description: "Want WhatsApp Business API access in India? Learn how to apply via Meta or a BSP like Weflux. Get verified, go live in days. No tech expertise needed."
 meta_title: "WhatsApp Business API Access in India: Step-by-Step Setup Guide"
 keywords: "whatsapp business api india, whatsapp api access india, how to get whatsapp business api, whatsapp bsp india, whatsapp api for business india, whatsapp cloud api india, apply for whatsapp api, whatsapp api activation india, meta whatsapp api india, whatsapp api provider india, whatsapp business solution provider india, whatsapp api setup india, whatsapp api integration india, whatsapp bulk messaging api, whatsapp business api 2025"
 tags: "Whatsapp Business API"
 date: 2026-06-18
-author: "BulkMessageSender Team"
+author: "Weflux Team"
 category: "Whatsapp Business API"
 cover: dark
 image: "/assets/uploads/mqjn82gg-cover.png"

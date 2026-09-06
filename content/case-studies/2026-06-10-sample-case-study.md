@@ -2,7 +2,7 @@
 title: "Sample case study (replace me)"
 description: "A starter case study showing how rich content - tables, alignment and images - renders on the site."
 date: 2026-06-10
-author: "BulkMessageSender Team"
+author: "Weflux Team"
 category: "Case study"
 cover: green
 draft: true

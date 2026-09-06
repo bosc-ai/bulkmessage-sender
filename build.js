@@ -59,7 +59,10 @@ const SKIP_COPY = new Set([
 // Body can be HTML (from the /admin dashboard - `format: html` in frontmatter)
 // or Markdown (legacy posts / Pages CMS). Render each faithfully.
 function renderBody(data, content) {
-  return data.format === "html" ? content : marked.parse(content);
+  const html = data.format === "html" ? content : marked.parse(content);
+  // marked emits bare <table>, which overflows the viewport on a phone. Wrap
+  // it so wide tables scroll inside their own box instead of moving the page.
+  return html.replace(/<table[^>]*>[\s\S]*?<\/table>/g, (t) => `<div class="table-wrap">${t}</div>`);
 }
 
 // ---------- Templates ----------
