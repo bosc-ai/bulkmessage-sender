@@ -111,6 +111,57 @@
       </div>
     </section>
 
+    <section class="container" style="padding:0 0 24px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+
+        <h2>Tags or attributes: which to use</h2>
+        <p>Both label a contact and people use them interchangeably, then wonder why segmentation gets unwieldy. The distinction that holds up:</p>
+        <p>An <strong>attribute</strong> is a field with a value. City is Bengaluru. Plan is Pro. Order count is four. There is one answer, it can change, and you often want to compare it (order count above three, renewal date this month).</p>
+        <p>A <strong>tag</strong> is a flag that is either present or not. Attended the webinar. Requested a demo. VIP. A contact can carry many, and you rarely compare them, you just filter on presence.</p>
+        <p>The failure mode is putting values into tags: tags named "city-bengaluru", "city-mumbai", "city-pune" and so on. It works for a while, then you have four hundred tags and no way to ask "everyone outside Karnataka". If a label has a value, make it an attribute.</p>
+
+        <h2>Lead stages in practice</h2>
+        <p>A lead stage is where someone sits in your funnel, and it drives both inbox priority and campaign segmentation. Two things make stages useful rather than decorative.</p>
+        <p>Keep them few. Five or six stages that everyone applies the same way beat fifteen that each person interprets differently. If your team hesitates about which stage something is in, you have too many.</p>
+        <p>Make them move by themselves where you can. A stage that depends on someone remembering to update it after a call is a stage that is wrong by Thursday. Automations can advance a stage on a reply, a button tap, or an order webhook from your store, which is how the record stays current without anyone doing admin.</p>
+
+        <h2>Keeping contact data clean</h2>
+        <p>Contact quality is what determines your delivery rate, your cost per campaign and eventually your quality rating. Some of this is unglamorous maintenance:</p>
+        <ul>
+          <li><strong>Store numbers in full international format.</strong> The most common import failure is a spreadsheet of ten-digit numbers with no country code.</li>
+          <li><strong>Do not import numbers you cannot account for.</strong> If nobody can say where a list came from, it is not a list, it is a liability.</li>
+          <li><strong>Prune non-deliverables.</strong> Numbers that fail repeatedly are cost with no upside, and they drag your campaign statistics into fiction.</li>
+          <li><strong>Record how consent was obtained.</strong> An attribute holding the source and date turns "we think they opted in" into something you can actually stand behind.</li>
+          <li><strong>Deduplicate on the phone number.</strong> The same person imported three times gets your message three times, and then blocks you once.</li>
+        </ul>
+
+        <h2>How a conversation becomes a record</h2>
+        <p>The reason a WhatsApp CRM stays current is that it is fed by the thing your team already does all day. An inbound message creates or matches a contact. An agent applies a tag while replying. A flow advances the stage when a button is tapped. An order webhook writes the order value. Nobody sits down to update the CRM, because updating it is a side effect of the work.</p>
+        <p>That is also its limit, and worth saying plainly. If a meaningful part of your sales happens on calls or email, those interactions will not appear here. In that case keep your main CRM as the system of record and connect the two, so the WhatsApp history flows into it rather than living in a second place nobody checks.</p>
+      </div>
+    </section>
+
+    <section class="container" style="padding:0 0 24px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+
+        <h2>WhatsApp CRM or a general CRM?</h2>
+        <p>They solve overlapping problems and the right answer depends on where your customer conversations actually happen.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>&nbsp;</th><th>WhatsApp CRM</th><th>General CRM</th></tr></thead>
+          <tbody>
+            <tr><td>Organised around</td><td>The conversation thread</td><td>Deals and pipeline</td></tr>
+            <tr><td>Updated by</td><td>The conversation itself, and automations</td><td>A person, after the fact</td></tr>
+            <tr><td>Strongest at</td><td>High-volume inbound messaging</td><td>Long, multi-touch outbound sales</td></tr>
+            <tr><td>Message history</td><td>Complete and native</td><td>Usually via an integration, often partial</td></tr>
+            <tr><td>Sends WhatsApp</td><td>Directly, on approved templates</td><td>Through a connector, if at all</td></tr>
+            <tr><td>Reporting depth</td><td>Conversation and campaign level</td><td>Forecasting, quotas, attribution</td></tr>
+          </tbody>
+        </table></div>
+        <p>The short version: if your customers reach you on WhatsApp and your team answers there all day, a WhatsApp CRM keeps itself current and a general CRM will always lag behind what was actually said. If you run a considered outbound sale across calls, email and meetings, keep your CRM as the system of record and connect Weflux to it, so conversation history flows in rather than forming a second unchecked source of truth.</p>
+        <p>Running both without connecting them is the outcome to avoid. Two half-current records is worse than either one alone, because now nobody trusts the answer.</p>
+      </div>
+    </section>
+
     <section class="container" style="padding:0 0 72px">
       <div class="faq-layout" style="max-width:760px;margin:0 auto">
         <div>

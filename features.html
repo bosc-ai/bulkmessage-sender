@@ -24,7 +24,7 @@
 
   <main id="main" class="page">
     <section class="container page-hero">
-      <div class="crumb"><a href="index.html">Home</a> <span class="sep">/</span> <span>Features</span></div>
+      <div class="crumb"><a href="/">Home</a> <span class="sep">/</span> <span>Features</span></div>
       <span class="eyebrow"><span class="dot"></span> Features</span>
       <h1>Every WhatsApp automation &amp; messaging feature, in one place.</h1>
       <p class="lede">From the first hello to the post-purchase review - Weflux covers WhatsApp broadcasts, customer messaging, template campaigns, automation and customer data in one product, all on the official WhatsApp Business API.</p>
@@ -155,6 +155,110 @@
       </div>
     </section>
 
+        <section class="container" style="padding-bottom:24px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+
+        <h2>The four things most teams use</h2>
+        <p>Weflux is a WhatsApp Business Platform, which in practice means four capabilities that feed each other. A campaign goes out, replies land in a shared queue, automations handle the predictable parts, and the contact record keeps up on its own. Each has its own page with the detail.</p>
+
+        <h3><a href="/broadcasts">Broadcast campaigns</a></h3>
+        <p>Send approved message templates to a segment, scheduled or immediate, paced to your account's messaging limit. Delivery, read, reply and opt-out reporting comes from Meta's own webhooks rather than being inferred. Rich media, variables and interactive buttons are supported.</p>
+
+        <h3><a href="/shared-inbox">Shared team inbox</a></h3>
+        <p>One number, several people, each with their own login. Assignment, routing rules, internal notes, quick replies and response-time tracking, with Facebook Messenger and Instagram DM landing in the same queue as add-ons.</p>
+
+        <h3><a href="/automations">Automation flows</a></h3>
+        <p>Describe a flow in plain English and Weflux builds it. Triggers from inbound messages, button taps, CRM changes, external webhooks or a schedule. Cart recovery, COD confirmation, appointment reminders, post-purchase sequences and lead qualification are the usual first five.</p>
+
+        <h3><a href="/whatsapp-crm">Contacts and CRM</a></h3>
+        <p>Custom attributes, tags, lead stages, full conversation history and opt-out state, with bulk import and export. Segments defined here are what campaigns send to and what flows read.</p>
+
+        <h2>What else is in the product</h2>
+
+        <h3>Message templates</h3>
+        <p>Build, submit and track Meta templates from the dashboard, with approval status shown as Meta returns it. Templates carry variables for per-recipient personalisation, and support images, video, documents and interactive buttons. The template category you choose determines both what you may say and what the message costs, which is covered on the <a href="/broadcasts">broadcasts page</a>.</p>
+
+        <h3>Appointments and booking</h3>
+        <p>Take bookings, send WhatsApp confirmations and pre-meeting reminders, and let people reschedule without a phone call. Virtual bookings get a Google Meet link generated automatically and included in the reminder. Useful anywhere a no-show costs you a slot: clinics, salons, tutoring, consultations, service visits.</p>
+
+        <h3>Analytics</h3>
+        <p>Campaign-level delivery, read, reply and opt-out figures, conversation volumes and response times by agent. Enough to answer whether a campaign worked and whether the team is keeping inside the 24-hour window, which are the two questions that actually change what you do next.</p>
+
+        <h3>Invoicing</h3>
+        <p>Generate and send invoices from the same place you talk to the customer, so a payment request arrives in the thread rather than in an email nobody opens.</p>
+
+        <h3>Multi-channel: Messenger and Instagram</h3>
+        <p>Facebook Messenger and Instagram DM are available as separate add-ons and appear in the same inbox with the same assignment and notes. Both are reply-only by platform rule: no business can start a conversation on either, and neither supports message templates. The interface reflects that rather than showing controls that could never work.</p>
+
+        <h3>Integrations, API and webhooks</h3>
+        <p>Inbound webhooks so your store, CRM or backend can trigger flows and update contacts. Outbound webhooks so Weflux can update your systems. A REST API for anything bespoke, and Google Sheets support for the many cases where a sheet genuinely is the system of record. See the <a href="/docs">developer documentation</a>.</p>
+
+        <h3>Meta onboarding and green tick</h3>
+        <p>Number onboarding runs through Meta's Embedded Signup, so you authorise via Facebook Business Manager and come back with official API access, typically in minutes rather than days. Existing numbers on the WhatsApp Business app or with another provider can be migrated. We help with Business Manager verification and the green tick application, though the decision on both is Meta's, not ours.</p>
+
+        <h3>Security and access control</h3>
+        <p>Role-based access so visibility and the ability to broadcast are separate permissions, encryption in transit and at rest, and data deletion on request for a single contact or an entire workspace. Details on the <a href="/security">security page</a>.</p>
+
+        <h2>What Weflux does not do</h2>
+        <p>Worth stating, because it saves everyone a demo call.</p>
+        <ul>
+          <li><strong>No unofficial sending.</strong> Everything runs on Meta's Cloud API. There is no mode that automates the WhatsApp app, and we will not build one.</li>
+          <li><strong>Not a general helpdesk.</strong> If most of your volume is email with WhatsApp as a side channel, a general helpdesk with a WhatsApp connector fits better.</li>
+          <li><strong>Not a full ticketing system.</strong> Conversations, assignment, notes and stages, rather than SLA policies, escalation matrices and CSAT surveys.</li>
+          <li><strong>No SMS or email channels.</strong> This is a WhatsApp-first product with two Meta channels alongside it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="container" style="padding:0 0 72px">
+      <div class="faq-layout" style="max-width:760px;margin:0 auto">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> FAQ</span>
+          <h2 style="margin:10px 0 6px">Common questions</h2>
+        </div>
+        <div class="faq-list" id="faqList">
+          <div class="faq-item">
+            <button class="faq-q" type="button">Which features are on the free plan? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">The free plan covers one WhatsApp number, one team member, up to 500 contacts, the shared inbox and three templates, and you can send template messages on it. It is enough to connect a number and run a real campaign end to end. See the pricing page for what each paid plan adds.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Do I need technical skills to set this up? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">No. Number onboarding runs through Meta's Embedded Signup, and flows are described in plain English rather than built from boxes and arrows. The API and webhooks are there if you want them, not required to use the product.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can I use more than one WhatsApp number? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes on the paid plans. Pro includes two numbers and Scale includes five, each with its own inbox view inside the same workspace.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Are Messenger and Instagram included? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">They are separate add-ons, sold independently of each other, and they appear in the same inbox once connected. Both are reply-only: neither channel lets a business message someone first, and neither supports templates.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can Weflux help with the green tick? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">We help you prepare and submit the application, and with Business Manager verification beforehand, which is a prerequisite. The decision is Meta's and depends on your brand's public notability, so nobody can promise it.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">What happens to my data if I leave? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Export your contacts in a standard format at any time, and request deletion of your workspace data. Your WhatsApp number belongs to you and can be migrated to another provider.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom:72px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+        <hr>
+        <h2>Go deeper</h2>
+        <ul>
+          <li><a href="/broadcasts">Broadcasts</a>, <a href="/automations">Automations</a>, <a href="/shared-inbox">Shared Inbox</a> and <a href="/whatsapp-crm">WhatsApp CRM</a> in detail</li>
+          <li><a href="/platform">The platform</a> for infrastructure, roles and API access</li>
+          <li><a href="/use-cases">Industry playbooks</a> for what to build first in your sector</li>
+          <li><a href="/pricing">Pricing</a> and how Meta's charges are passed through at cost</li>
+          <li><a href="/comparison">How Weflux compares</a> with other Indian providers</li>
+        </ul>
+      </div>
+    </section>
+
     <section class="final-cta">
       <div class="container final-cta-inner">
         <h2>Run your team like a real team.</h2>
@@ -167,5 +271,6 @@
 
   <div id="wc-footer"></div>
   <script src="shell.js"></script>
+  <script defer src="/script.js"></script>
 </body>
 </html>
