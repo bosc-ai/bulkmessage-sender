@@ -37,6 +37,12 @@ const COLLECTIONS = [
     lede: "Templates, checklists and resources to help you get more from WhatsApp broadcasts and customer engagement." },
 ];
 
+// Intro copy for each listing page. A grid of cards with a one-line lede is
+// not a page; these give the section something to rank on and something for a
+// retrieval crawler to quote.
+const COLLECTION_INTROS = {"blog": "Field notes on running WhatsApp as a sales and support channel: what works, what gets your number restricted, and the arithmetic behind both. Written from operating the platform rather than from a keyword list.", "articles": "Longer pieces on the WhatsApp Business API itself. How the platform actually behaves, what Meta's rules mean in practice, and how to decide between the options in front of you.", "case-studies": "How businesses use WhatsApp to move a number they care about. We publish a story only when the customer has agreed to be named and the figures are theirs.", "help": "Setup guides and answers for running Weflux on the WhatsApp Business API. Connecting a number, getting templates approved, building flows, and what to do when something is rejected.", "resources": "Templates, checklists and worked examples you can use directly. Message template wording by industry, campaign checklists, and the questions to ask a provider before you sign."};
+for (const c of COLLECTIONS) c.intro = COLLECTION_INTROS[c.key] || "";
+
 // Files/dirs in the repo root that should NOT be copied into /dist.
 const SKIP_COPY = new Set([
   "dist", "content", "node_modules", ".git", ".github", ".claude", ".vscode",
@@ -94,6 +100,11 @@ ${posts
       <span class="eyebrow"><span class="dot"></span> ${esc(col.eyebrow)}</span>
       <h1>${esc(col.title)}</h1>
       <p class="lede">${esc(col.lede)}</p>
+    </section>
+    <section class="container" style="padding-bottom:8px">
+      <div class="prose" style="max-width:760px">
+        <p>${esc(col.intro)}</p>
+      </div>
     </section>
     <section class="container" style="padding-bottom:96px">
       ${cards}
@@ -168,7 +179,7 @@ function renderShells() {
     let html = fs.readFileSync(file, "utf-8");
     const hasShellHost = html.includes('id="wc-nav"');
     if (hasShellHost) {
-      html = injectShell(html);
+      html = injectShell(html, EMPTY_COLLECTIONS);
       done++;
     }
     // Generated posts already carry their own Article/FAQ graph from
@@ -250,6 +261,19 @@ async function run() {
       fs.writeFileSync(path.join(DIST, col.dir, `${p.slug}.html`), renderPostPage(col, p));
       urls.push({ loc: `${SITE}/${col.dir}/${p.slug}`, lastmod: p.date || undefined, pr: "0.6", cf: "monthly" });
     }
+    // A listing page with nothing on it is a soft 404. Do not publish it, do
+    // not put it in the sitemap, and do not link it from the footer.
+    if (!posts.length) {
+      EMPTY_COLLECTIONS.add(col.dir);
+      console.log(`  ${col.list.padEnd(15)} 0 post(s) - section not published`);
+      continue;
+    }
+    // vercel.json holds a temporary redirect for any section that was empty
+    // when it was added. If posts now exist, that redirect would shadow this
+    // page, so say so loudly rather than silently serving a redirect.
+    if (REDIRECTED_WHEN_EMPTY.has(col.dir)) {
+      console.warn(`  WARNING: /${col.dir} has ${posts.length} post(s) but vercel.json still redirects it. Remove that redirect.`);
+    }
     fs.writeFileSync(path.join(DIST, col.list), listPage(col, posts));
     urls.push({ loc: `${SITE}/${col.dir}`, pr: "0.7", cf: "weekly" });
     console.log(`  ${col.list.padEnd(15)} ${posts.length} post(s)`);
@@ -268,6 +292,14 @@ async function run() {
 
 // Populated by writeSitemap, consumed by pingIndexNow.
 let SUBMITTED_URLS = [];
+
+// Collections with no published posts this build. Their footer links are
+// dropped so we never link to a page that does not exist.
+const EMPTY_COLLECTIONS = new Set();
+
+// Sections that have a temporary redirect in vercel.json because they were
+// empty. Kept in sync by hand; the build warns if one gains posts.
+const REDIRECTED_WHEN_EMPTY = new Set(["case-studies"]);
 
 // IndexNow key. The file must be reachable at ${SITE}/${INDEXNOW_KEY}.txt and
 // contain exactly the key. The key is public by design, that is the protocol.
@@ -346,6 +378,8 @@ function writeSitemap(collectionUrls) {
     ["shared-inbox.html", "0.9", "weekly"],
     ["whatsapp-crm.html", "0.9", "weekly"],
     ["comparison.html", "0.9", "weekly"],
+    ["whatsapp-message-templates.html", "0.8", "monthly"],
+    ["whatsapp-green-tick.html", "0.8", "monthly"],
     ["use-cases.html", "0.8", "monthly"],
     ["whatsapp-for-ecommerce.html", "0.8", "monthly"],
     ["whatsapp-for-healthcare.html", "0.8", "monthly"],

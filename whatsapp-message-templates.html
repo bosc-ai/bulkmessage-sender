@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WhatsApp Message Templates: Categories, Rules &amp; Examples | Weflux</title>
+  <meta name="description" content="How WhatsApp message templates work: the three categories, why templates get rejected, formatting rules, variables, buttons, and examples you can adapt.">
+  <link rel="canonical" href="https://www.weflux.in/whatsapp-message-templates">
+  <meta property="og:title" content="WhatsApp Message Templates: Categories, Rules &amp; Examples | Weflux">
+  <meta property="og:description" content="How WhatsApp message templates work: the three categories, why templates get rejected, formatting rules, variables, buttons, and examples you can adapt.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.weflux.in/whatsapp-message-templates">
+  <meta property="og:site_name" content="Weflux">
+  <meta property="og:image" content="https://www.weflux.in/assets/weflux-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="WhatsApp Message Templates: Categories, Rules &amp; Examples | Weflux">
+  <meta name="twitter:description" content="How WhatsApp message templates work: the three categories, why templates get rejected, formatting rules, variables, buttons, and examples you can adapt.">
+  <link rel="icon" href="assets/weflux-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="use-cases">
+  <div id="wc-nav"></div>
+
+  <main id="main" class="page">
+    <section class="container page-hero">
+      <div class="crumb"><a href="/">Home</a> <span class="sep">/</span> <a href="/use-cases">Use cases</a> <span class="sep">/</span> <span>Message templates</span></div>
+      <span class="eyebrow"><span class="dot"></span> Message templates</span>
+      <h1>WhatsApp message templates, explained properly.</h1>
+      <p class="lede">Every WhatsApp broadcast starts with an approved template. Here is how the three categories work, what gets a template rejected, and how to write ones that pass first time.</p>
+      <div class="cta-row">
+        <a href="https://app.weflux.in/register" class="btn btn-green">Start free →</a>
+        <a href="/contact" class="btn btn-ghost">Talk to sales</a>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom:24px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+        <h2>What a WhatsApp message template is</h2>
+        <p>A WhatsApp message template is a message you register with Meta in advance and get approved before you can send it. Once approved, you can send it to anyone who has opted in, filling in the variable parts per recipient.</p>
+        <p>Templates exist because of one rule: on the WhatsApp Business API you cannot send free-form text to someone who has not messaged you in the last 24 hours. Any first contact, any broadcast, any reminder to a quiet customer, has to be a template. Inside an open 24-hour window you can write whatever the conversation needs, with no template at all.</p>
+
+        <h2>The three categories</h2>
+        <p>Meta sorts every template into a category. The category decides both what you are allowed to say and what Meta charges you, and choosing the wrong one is the single most common reason a template is rejected.</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Category</th><th>What it is for</th><th>Typical examples</th><th>Relative cost</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Marketing</strong></td><td>Anything promotional, or whose purpose is to bring someone back</td><td>Offers, launches, cart recovery, re-engagement, newsletters</td><td>Highest</td></tr>
+            <tr><td><strong>Utility</strong></td><td>A message about a transaction or request the customer already made</td><td>Order confirmations, shipping updates, receipts, appointment reminders</td><td>Lower</td></tr>
+            <tr><td><strong>Authentication</strong></td><td>One-time passcodes and account verification only</td><td>Login OTP, transaction verification</td><td>Its own rate</td></tr>
+          </tbody>
+        </table></div>
+        <p>The tempting move is to submit promotional content as Utility because it is cheaper. It does not work: reviewers check whether a real transaction exists, the template gets rejected, and repeated attempts affect your account standing. Meta publishes and periodically revises the actual rates by category and country.</p>
+
+        <h2>Why templates get rejected</h2>
+        <p>Rejections are not penalties. You correct and resubmit. But the same handful of causes account for most of them.</p>
+        <ul>
+          <li><strong>Category mismatch.</strong> Promotional content submitted as Utility. By far the most common.</li>
+          <li><strong>Variables at the very start or end.</strong> A template that begins or ends with <code>{{1}}</code> is rejected, because Meta cannot tell what the message will actually look like.</li>
+          <li><strong>Two variables side by side.</strong> <code>{{1}} {{2}}</code> with nothing between them reads as a blank to a reviewer.</li>
+          <li><strong>Placeholder sample values.</strong> Submitting samples like "xxxx" or "test" gives the reviewer nothing to judge. Use realistic values.</li>
+          <li><strong>Unclear purpose.</strong> A message a reviewer cannot map to a real business action, or that reads like it was written for a different channel.</li>
+          <li><strong>Prohibited content.</strong> Categories WhatsApp does not permit at all, including alcohol, tobacco, weapons, adult content, gambling in most jurisdictions, and unapproved medical claims.</li>
+          <li><strong>Formatting abuse.</strong> Excessive capitals, repeated punctuation, or emoji standing in for words.</li>
+        </ul>
+
+        <h2>Formatting rules that matter</h2>
+        <ul>
+          <li><strong>Variables</strong> are numbered <code>{{1}}</code>, <code>{{2}}</code> and so on, in order, with no gaps. Provide a realistic sample for each.</li>
+          <li><strong>Header</strong> is optional and can be text or media: image, video or document. Media headers carry well for order confirmations and launches.</li>
+          <li><strong>Body</strong> is the message. Keep it short enough to read on a phone without expanding.</li>
+          <li><strong>Footer</strong> is optional, small, and cannot contain variables. A good place for an opt-out line.</li>
+          <li><strong>Buttons</strong> come in two kinds: quick replies, which send a response back into the conversation, and call-to-action buttons, which open a URL or dial a number. Buttons materially improve response rates, and a quick reply is the cheapest way to open a 24-hour window.</li>
+          <li><strong>Languages</strong> are per-template. The same template registered in Hindi and English is two approvals, selected per contact.</li>
+        </ul>
+
+        <h2>Template patterns that pass</h2>
+
+        <h3>Order confirmation (Utility)</h3>
+        <p><em>Hi {{1}}, your order {{2}} is confirmed. We will let you know as soon as it ships. Total: {{3}}.</em> Buttons: Track order, Contact us. Passes because a real transaction exists, the variables are surrounded by text, and the purpose is unambiguous.</p>
+
+        <h3>Cash-on-delivery confirmation (Utility)</h3>
+        <p><em>Hi {{1}}, please confirm your COD order {{2}} for {{3}} so we can dispatch it today.</em> Buttons: Confirm order, Cancel. The quick replies do the work here; they open a window and give you a machine-readable answer.</p>
+
+        <h3>Appointment reminder (Utility)</h3>
+        <p><em>Hi {{1}}, this is a reminder for your appointment on {{2}} at {{3}}.</em> Buttons: Confirm, Reschedule. Keep the procedure or department out of it: the patient knows what they booked, and the message sits on a device that may be shared.</p>
+
+        <h3>Abandoned cart (Marketing)</h3>
+        <p><em>Hi {{1}}, you left {{2}} in your cart. It is still available if you would like to complete your order.</em> Button: Complete order. Marketing category, correctly declared. Trying to pass this as Utility is the classic rejection.</p>
+
+        <h3>Back in stock (Marketing)</h3>
+        <p><em>Hi {{1}}, {{2}} is back in stock. You asked us to let you know.</em> Button: Shop now. The second sentence matters: it reminds the recipient they opted in, which lowers the block rate.</p>
+
+        <h2>Writing templates that people do not block</h2>
+        <p>Approval is the low bar. Not being blocked is the one that protects your number.</p>
+        <ul>
+          <li><strong>Say who you are in the first line.</strong> Nobody should have to guess before deciding whether to report you.</li>
+          <li><strong>Make the first sentence the point.</strong> The notification preview is what most people actually read.</li>
+          <li><strong>One purpose per template.</strong> A message doing three jobs gets ignored for all three.</li>
+          <li><strong>Give an exit.</strong> A footer opt-out line costs you a few recipients and protects your quality rating, which is worth far more.</li>
+          <li><strong>Write for the person, not the category.</strong> Utility templates that read like marketing get reported even when they were approved.</li>
+        </ul>
+
+        <h2>Managing templates in Weflux</h2>
+        <p>Build, submit and track templates from the dashboard, with Meta's approval status shown as it returns. Variables map to contact attributes so a broadcast fills them per recipient, and the preview renders exactly what the recipient will see, which is the cheapest place to catch a broken merge field. See <a href="/broadcasts">broadcasts</a> for how templates are used in a campaign.</p>
+      </div>
+    </section>
+
+    <section class="container" style="padding:0 0 72px">
+      <div class="faq-layout" style="max-width:760px;margin:0 auto">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> FAQ</span>
+          <h2 style="margin:10px 0 6px">Template questions</h2>
+        </div>
+        <div class="faq-list" id="faqList">
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">How long does WhatsApp template approval take? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Usually quick, often within minutes to a few hours, but it is Meta's review queue rather than your provider's. Plan a day for anything time-sensitive, and get templates approved before the campaign is scheduled rather than alongside it.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Why was my WhatsApp template rejected? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Most commonly a category mismatch, where promotional content was submitted as Utility. After that: variables at the very start or end of the message, two variables adjacent with no text between, placeholder sample values like “test”, or content in a category WhatsApp does not permit. Rejections are not penalties; correct and resubmit.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can I edit an approved template? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Editing an approved template sends it back for review. For anything materially different, create a new template rather than editing a working one, so you are not left without an approved version mid-campaign.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">How many templates can I have? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Meta sets a limit per WhatsApp Business Account that is generous for normal use. The practical constraint is usually managing them, not the cap. Retire templates you no longer send.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Do I need a template to reply to a customer? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">No. When a customer messages you, a 24-hour window opens in which you can reply with ordinary free-form text, images or documents. Templates are only required to reach someone outside that window.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can templates be in Hindi or other Indian languages? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes. Templates are registered per language, so the same message in Hindi and English is two approvals. Store the contact's preferred language as an attribute and select the variant from it.</div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom:72px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+        <hr>
+        <h2>Related</h2>
+        <ul>
+          <li><a href="/broadcasts">Broadcasts</a> for sending templates at scale</li>
+          <li><a href="/automations">Automations</a> for triggering them from events</li>
+          <li><a href="/platform">WhatsApp Business API guide</a> for how the platform works</li>
+          <li><a href="/resources/whatsapp-template-examples">More template examples</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container final-cta-inner">
+        <h2>Get your first template approved.</h2>
+        <p class="sub">Build and submit from the dashboard, and watch Meta's status come back. The free plan includes templates.</p>
+        <div class="cta-row">
+          <a href="https://app.weflux.in/register" class="btn btn-white">Start free →</a>
+          <a href="/contact" class="btn btn-ghost">Talk to sales</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="wc-footer"></div>
+  <script defer src="/shell.js"></script>
+  <script defer src="/script.js"></script>
+</body>
+</html>

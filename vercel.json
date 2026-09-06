@@ -54,6 +54,11 @@
       "source": "/case-studies/case-studies/:slug",
       "destination": "/case-studies/:slug",
       "permanent": true
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/customers",
+      "permanent": false
     }
   ]
 }
