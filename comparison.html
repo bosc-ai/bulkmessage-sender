@@ -341,6 +341,91 @@
     </section>
 
     <!-- Final CTA -->
+        <section class="container" style="padding:24px 0">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+
+        <h2>How to compare WhatsApp Business API providers</h2>
+        <p>Every provider in India, Weflux included, sits on the same Meta Cloud API. The messages travel the same path, the templates go through the same approval queue, and the delivery rates are Meta's, not the vendor's. Anyone claiming meaningfully better deliverability on the official API is describing something that does not exist.</p>
+        <p>So the comparison is not about the pipe. It is about five things.</p>
+
+        <h3>1. Markup on Meta's charges</h3>
+        <p>The one that matters most and is hardest to see. Meta publishes per-message rates by template category and country. Many providers add a margin on top, quoted as a bundled "per conversation" price that you cannot decompose.</p>
+        <p>Ask any provider directly: <em>do you charge Meta's published rate, or your own?</em> A provider passing through at cost will answer immediately and show you an invoice line. Weflux passes through at cost and prints Meta's rate on every line.</p>
+        <p>Why it compounds: the platform fee is fixed and the markup is not. At a thousand messages a month the fee dominates and the markup looks trivial. At a hundred thousand it is the entire bill, and by then you have built your operations on their platform.</p>
+
+        <h3>2. Whether seats are charged individually</h3>
+        <p>Per-agent pricing sounds fair and behaves badly. It quietly discourages giving access to the people who occasionally need it, and those are exactly the people whose absence turns a two-minute answer into a two-day one. Check whether team seats are included in the plan or billed per head.</p>
+
+        <h3>3. Who owns the WhatsApp Business Account</h3>
+        <p>Your number and your WhatsApp Business Account should sit in <strong>your</strong> Facebook Business Manager, with the provider granted access. Some providers onboard clients under their own Business Manager because it is faster. It is also how a routine switch becomes a negotiation, and how one provider's restriction takes down every customer at once. Ask where the assets live before you sign, not when you leave.</p>
+
+        <h3>4. Whether you can leave</h3>
+        <p>Can you export your contacts in a standard format, and can you migrate your number to another provider? Both answers should be an immediate yes. A number migration is a Meta process, not a favour the provider grants.</p>
+
+        <h3>5. What happens when something breaks</h3>
+        <p>A template rejected the day before a campaign, a quality rating drop, a number restriction. Ask what support looks like on a bad day, on your plan, not the enterprise tier.</p>
+
+        <h2>Switching from another provider</h2>
+        <p>Migration is more routine than most people expect, and the surprises are consistent.</p>
+        <ul>
+          <li><strong>The number moves.</strong> Migration between providers is a Meta process. It typically completes quickly once Meta clears the request, and your number keeps working.</li>
+          <li><strong>Templates do not always come with it.</strong> Approved templates are tied to the WhatsApp Business Account. If the account stays yours, they generally carry. If your current provider holds the account, expect to resubmit.</li>
+          <li><strong>Conversation history does not migrate.</strong> Message history lives with the provider. Export what you need before you start; contacts export cleanly, threads generally do not.</li>
+          <li><strong>Your quality rating and messaging limit follow the number</strong>, not the provider. A good rating is not lost by switching, and a poor one is not escaped by it.</li>
+          <li><strong>Run both for a week.</strong> Keep the old tooling readable while the team learns the new inbox. The technical migration is quick; the habit change is not.</li>
+        </ul>
+
+        <h2>When another provider is the better choice</h2>
+        <p>Genuinely, and we would rather say it here than three months in.</p>
+        <ul>
+          <li><strong>WhatsApp is a side channel.</strong> If most of your volume is email or phone with WhatsApp occasional, a general helpdesk with a WhatsApp connector fits better than a WhatsApp-first product.</li>
+          <li><strong>You need full ticketing.</strong> SLA policies, escalation matrices, CSAT surveys and workforce management are not what this is. If procurement requires them, buy a service desk.</li>
+          <li><strong>You need SMS and email in the same tool.</strong> Weflux is WhatsApp plus Messenger and Instagram. No SMS, no email.</li>
+          <li><strong>You need SAML single sign-on or a current SOC 2 report.</strong> We have neither today. If your security review requires them, we will fail it, and you should know that now rather than at the end of a procurement cycle.</li>
+          <li><strong>You are a global enterprise with a dedicated Meta relationship.</strong> At that scale, working with Meta directly or through a large multinational BSP may serve you better than an Indian specialist.</li>
+        </ul>
+        <p>What we are good at is narrower and clearer: an Indian business whose sales and support genuinely run on WhatsApp, that wants the official API without a markup on Meta's rates, and that would rather have the team seats included than metered.</p>
+
+        <h2>A note on this comparison</h2>
+        <p>The table above compares Weflux against typical platform behaviour rather than naming specific competitors, because published pricing and features change frequently and a stale comparison is worse than none. Check current terms on any provider's own site before deciding, and ask all of them the markup question in writing.</p>
+      </div>
+    </section>
+
+    <section class="container" style="padding:0 0 72px">
+      <div class="faq-layout" style="max-width:760px;margin:0 auto">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> FAQ</span>
+          <h2 style="margin:10px 0 6px">Switching and comparison questions</h2>
+        </div>
+        <div class="faq-list" id="faqList">
+          <div class="faq-item">
+            <button class="faq-q" type="button">Do some providers really mark up Meta's message charges? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">It is a common model, usually presented as a bundled per-conversation price rather than as a markup. Ask any provider in writing whether they bill Meta's published rate or their own. One passing through at cost will answer immediately and show you an invoice line.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Will I lose my templates if I switch providers? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Templates belong to the WhatsApp Business Account. If that account is in your own Business Manager they generally carry across. If your current provider holds it, expect to resubmit. This is the strongest practical reason to own your own Business Manager from the start.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Does switching reset my quality rating? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">No. Quality rating and messaging limits attach to the number, not the provider. A good rating survives a switch, and a poor one cannot be escaped by switching.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Is one provider's delivery rate better than another's? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Not meaningfully. Every provider on the official API sends through the same Meta Cloud API, so delivery is Meta's. What a provider can affect is pacing against your messaging limit and how clearly it reports failures. Treat claims of superior deliverability on the official API with suspicion.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">How long does migrating a number take? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">The technical migration is usually quick once Meta clears the request, and the number keeps working. Plan more time for the team habit change than for the migration itself, and keep the old tooling readable for about a week.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can I export my data if I leave Weflux? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes. Contacts export in a standard format at any time, and your number can be migrated to another provider because it belongs to your Business Manager, not ours. We would rather you could leave easily and chose not to.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="final-cta">
       <div class="container final-cta-inner">
         <h2>Ready to switch to Weflux?</h2>
@@ -352,5 +437,6 @@
 
   <div id="wc-footer"></div>
   <script src="shell.js"></script>
+  <script defer src="/script.js"></script>
 </body>
 </html>

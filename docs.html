@@ -79,9 +79,50 @@
 <span style="color:#94A3B8">// → { id: "msg_01HXY...", status: "queued", cost: { category: "utility", inr: 0.115 } }</span></pre>
       </div>
     </section>
+    <section class="container" style="padding:24px 0 72px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+
+        <h2>What the API covers</h2>
+        <p>The Weflux REST API sits over the Meta Cloud API and handles the parts you would otherwise build yourself: sending template and session messages, managing contacts and their attributes, reading campaign results, and receiving events. Authentication is by API key, scoped to a workspace.</p>
+        <ul>
+          <li><strong>Messages.</strong> Send an approved template to a number, or a free-form message inside an open 24-hour window.</li>
+          <li><strong>Templates.</strong> List your approved templates and their variables, so your own code does not hardcode names that may change.</li>
+          <li><strong>Contacts.</strong> Create and update contacts, set attributes, tags and lead stage.</li>
+          <li><strong>Campaigns.</strong> Read delivery, read, reply and opt-out figures per campaign.</li>
+          <li><strong>Webhooks.</strong> Receive inbound messages and delivery events; trigger automation flows from your own systems.</li>
+        </ul>
+
+        <h2>Webhooks are the part worth designing carefully</h2>
+        <p>Most integrations spend their time here rather than on sending, so a few things save trouble later.</p>
+        <p><strong>Respond fast, process later.</strong> Acknowledge the webhook immediately and do the work on a queue. A slow handler causes retries, and retries cause duplicates.</p>
+        <p><strong>Expect duplicates and design for them.</strong> Delivery is at-least-once. Key your processing on the message id so replaying an event is harmless.</p>
+        <p><strong>Events arrive out of order.</strong> A read receipt can land before the delivered event it logically follows. Store state by comparing timestamps rather than assuming sequence.</p>
+        <p><strong>Verify the signature.</strong> Your endpoint is a public URL. Check the signature before trusting the payload.</p>
+
+        <h2>Errors and what they usually mean</h2>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Situation</th><th>Usual cause</th><th>What to do</th></tr></thead>
+          <tbody>
+            <tr><td>Message rejected, template not found</td><td>Template name or language variant does not match an approved template</td><td>List templates via the API rather than hardcoding names</td></tr>
+            <tr><td>Message rejected, outside window</td><td>Free-form send to someone who has not messaged in 24 hours</td><td>Send an approved template instead</td></tr>
+            <tr><td>Send accepted, never delivered</td><td>Invalid number, or the recipient does not have WhatsApp</td><td>Validate numbers in full international format on import</td></tr>
+            <tr><td>Sends start failing mid-campaign</td><td>Messaging limit for the rolling 24 hours reached</td><td>Pace sends; the limit rises as quality holds</td></tr>
+            <tr><td>Template paused</td><td>Recipients marked it as unwanted</td><td>Rewrite the template and review who it is going to</td></tr>
+            <tr><td>Rate limited</td><td>Too many API calls in a short burst</td><td>Back off exponentially and retry</td></tr>
+          </tbody>
+        </table></div>
+
+        <h2>Keep your API key server-side</h2>
+        <p>The API key authenticates as your workspace and can send messages that cost money. It belongs in server-side code or a secrets manager, never in browser JavaScript, a mobile app bundle, or a public repository. If a key is exposed, rotate it immediately and check your campaign log before assuming nothing happened.</p>
+
+        <h2>Testing without messaging real customers</h2>
+        <p>Use your own number as the recipient while you build. Template approval is per-template, not per-recipient, so a test template behaves exactly like a production one. Get the whole loop working end to end on a number you own before any code points at a contact list.</p>
+      </div>
+    </section>
   </main>
 
   <div id="wc-footer"></div>
   <script src="shell.js"></script>
+  <script defer src="/script.js"></script>
 </body>
 </html>
