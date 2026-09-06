@@ -5,10 +5,55 @@
   "trailingSlash": false,
   "cleanUrls": true,
   "redirects": [
-    { "source": "/dashboard", "destination": "https://app.weflux.in", "permanent": true },
-    { "source": "/register", "destination": "https://app.weflux.in/register", "permanent": true },
-    { "source": "/signup", "destination": "https://app.weflux.in/register", "permanent": true },
-    { "source": "/signin", "destination": "https://app.weflux.in/login", "permanent": true },
-    { "source": "/login", "destination": "https://app.weflux.in/login", "permanent": true }
+    {
+      "source": "/dashboard",
+      "destination": "https://app.weflux.in",
+      "permanent": true
+    },
+    {
+      "source": "/register",
+      "destination": "https://app.weflux.in/register",
+      "permanent": true
+    },
+    {
+      "source": "/signup",
+      "destination": "https://app.weflux.in/register",
+      "permanent": true
+    },
+    {
+      "source": "/signin",
+      "destination": "https://app.weflux.in/login",
+      "permanent": true
+    },
+    {
+      "source": "/login",
+      "destination": "https://app.weflux.in/login",
+      "permanent": true
+    },
+    {
+      "source": "/blog/blog/:slug",
+      "destination": "/blog/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/articles/articles/:slug",
+      "destination": "/articles/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/help/help/:slug",
+      "destination": "/help/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/resources/resources/:slug",
+      "destination": "/resources/:slug",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies/case-studies/:slug",
+      "destination": "/case-studies/:slug",
+      "permanent": true
+    }
   ]
 }

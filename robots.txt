@@ -10,6 +10,7 @@ Disallow: /dashboard
 Disallow: /app-review-demo
 Disallow: /blog-editor
 Disallow: /admin/
+Disallow: /api/
 
 # AI crawlers are welcome. Being cited by an assistant is distribution,
 # and everything here is public marketing copy.

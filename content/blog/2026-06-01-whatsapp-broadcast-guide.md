@@ -11,7 +11,6 @@ draft: false
 ---
 WhatsApp broadcasts are the highest-engagement channel most Indian businesses have - open rates routinely beat email by 5–10×. But a careless blast can get your number rate-limited or your quality rating dropped. Here's how to do it right.
 
-![image.png](blob:https:/app.pagescms.org/7e80c72e-d6bb-4e30-8266-d80d24d9c933)
 
 ## 1. Start from an opted-in list
 
