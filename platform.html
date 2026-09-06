@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>WhatsApp Business API Platform &amp; Tech Provider | Weflux</title>
-  <meta name="description" content="A complete WhatsApp Business API platform: broadcast campaigns, automation, team inbox, and Cloud API access with embedded signup.">
+  <title>WhatsApp Business API: Complete Guide &amp; Platform | Weflux</title>
+  <meta name="description" content="What the WhatsApp Business API is, how it differs from the Business app, how to get access in India, what Meta charges per message, templates, messaging limits and the green tick.">
   <link rel="canonical" href="https://www.weflux.in/platform">
-  <meta property="og:title" content="WhatsApp Business API Platform &amp; Tech Provider | Weflux">
-  <meta property="og:description" content="A complete WhatsApp Business API platform: broadcast campaigns, automation, team inbox, and Cloud API access with embedded signup.">
+  <meta property="og:title" content="WhatsApp Business API: Complete Guide &amp; Platform | Weflux">
+  <meta property="og:description" content="What the WhatsApp Business API is, how it differs from the Business app, how to get access in India, what Meta charges per message, templates, messaging limits and the green tick.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.weflux.in/platform">
   <meta property="og:site_name" content="Weflux">
@@ -96,7 +96,7 @@
           <p class="lede">Weflux requests only what is required to operate WhatsApp Business workflows. No permission is used for advertising, profiling, or any purpose beyond the features described here.</p>
         </div>
         <div style="margin-top:48px;overflow-x:auto;">
-          <table class="perm-table">
+          <div class="table-wrap"><table class="perm-table">
             <thead>
               <tr>
                 <th>Product action</th>
@@ -121,7 +121,7 @@
                 <td><a href="/embedded-signup">Signup flow</a></td>
               </tr>
             </tbody>
-          </table>
+          </table></div>
         </div>
       </div>
     </section>
@@ -224,8 +224,146 @@
       </div>
     </section>
 
+    <section class="container" style="padding:24px 0">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+
+        <h2>What is the WhatsApp Business API?</h2>
+        <p>The WhatsApp Business API, officially the WhatsApp Business Platform, is Meta's programmatic interface for sending and receiving WhatsApp messages at scale. It has no chat interface of its own. It connects to software, which is where the interface lives, and it is built for volume, multiple agents and automation in a way the consumer apps are not.</p>
+        <p>It exists because WhatsApp's other products do not scale. The consumer app is one person, one phone. The WhatsApp Business app adds a catalogue and quick replies but is still tied to a single device. The API separates the phone number from the device entirely, which is what makes a shared inbox, a broadcast to 20,000 people, and an automated order update possible at all.</p>
+
+        <h2>API, Business App or consumer app: which do you need?</h2>
+        <div class="table-wrap"><table>
+          <thead><tr><th>&nbsp;</th><th>WhatsApp (consumer)</th><th>WhatsApp Business app</th><th>WhatsApp Business API</th></tr></thead>
+          <tbody>
+            <tr><td>Cost</td><td>Free</td><td>Free</td><td>Platform fee plus Meta's per-message charge</td></tr>
+            <tr><td>Users per number</td><td>1 device</td><td>1 device, limited linked devices</td><td>Unlimited, through software</td></tr>
+            <tr><td>Bulk messaging</td><td>No</td><td>Broadcast lists, capped, contact-saved only</td><td>Yes, on approved templates</td></tr>
+            <tr><td>Automation</td><td>No</td><td>Away messages and greetings only</td><td>Full, event-driven</td></tr>
+            <tr><td>Integrations</td><td>No</td><td>No</td><td>REST API and webhooks</td></tr>
+            <tr><td>Green tick eligible</td><td>No</td><td>No</td><td>Yes, subject to Meta's review</td></tr>
+            <tr><td>Chat interface</td><td>The app</td><td>The app</td><td>None; your provider supplies it</td></tr>
+            <tr><td>Best for</td><td>Personal use</td><td>A one-person business</td><td>A team, or any real volume</td></tr>
+          </tbody>
+        </table></div>
+        <p>The practical test: if more than one person needs to answer the number, or you need to message more than a handful of people who have not saved your contact, you need the API. Below that, the Business app is genuinely fine and free.</p>
+
+        <h2>What a BSP is, and why you need one</h2>
+        <p>Meta does not sell the WhatsApp Business Platform to businesses directly in any meaningful retail sense. You reach it through a <strong>Business Solution Provider</strong>: a company that holds the relationship with Meta, runs the API infrastructure, and gives you software to actually use it.</p>
+        <p>What a BSP does for you: onboards your number through Meta, submits and tracks your message templates, provides the inbox, campaign tools, automation and CRM, handles webhooks and delivery events, and bills you.</p>
+        <p>Where BSPs differ is almost entirely commercial, not technical. Everyone is on the same Cloud API. The differences that matter are what they charge on top of Meta's per-message rate, whether the platform fee is per seat or per workspace, how fast onboarding actually is, and whether they will help with Business Manager verification and the green tick.</p>
+        <p><strong>The markup question is the one to ask first.</strong> Meta publishes its conversation rates. Many providers add a per-message margin on top, which is invisible on a monthly bill and becomes the dominant cost as volume grows. Weflux passes Meta's charges through at cost and shows Meta's rate on each invoice line, which is the whole reason the company positions the way it does.</p>
+
+        <h2>How to get WhatsApp Business API access in India</h2>
+        <ol>
+          <li><strong>Have a Facebook Business Manager.</strong> Free to create. This is where your WhatsApp Business Account lives, and it should be under your own company, not your provider's.</li>
+          <li><strong>Pick a phone number.</strong> It must be able to receive an SMS or call for verification, and it must not currently be active on the WhatsApp consumer or Business app. A number already on the Business app can be migrated, but it leaves the app when it does.</li>
+          <li><strong>Connect through Embedded Signup.</strong> With Weflux this is a Facebook authorisation flow that takes minutes rather than a support ticket that takes days. You stay the owner of the assets throughout.</li>
+          <li><strong>Complete Business Verification.</strong> Meta verifies your business exists using registration documents and a matching public presence. This gates your messaging limits, so do it early rather than when you hit the cap.</li>
+          <li><strong>Get templates approved.</strong> Submit the messages you intend to send. Review is usually quick but it is Meta's queue, so plan a day for anything time-sensitive.</li>
+          <li><strong>Send, and let the limits rise.</strong> New numbers typically start at 250 unique customers per rolling 24 hours and step up through 1,000, 10,000 and 100,000 as you send consistently with a good quality rating.</li>
+        </ol>
+
+        <h2>What it costs</h2>
+        <p>Two charges, and conflating them is the most common source of confusion.</p>
+        <p><strong>Meta charges per message</strong>, by template category and destination country. Marketing is the most expensive, Utility is cheaper, Authentication is its own category, and service replies inside the 24-hour window are treated differently again. Meta publishes and periodically revises these rates.</p>
+        <p><strong>Your provider charges a platform fee</strong> for the software. On Weflux that starts free and runs to ₹4,999 a month, and it is separate from Meta's charges, which we pass through at cost.</p>
+        <p>The arithmetic worth doing before you choose anyone: take your expected monthly message volume, apply Meta's published rate for the category you will actually send, then add any per-message markup the provider takes. At low volume the platform fee dominates. Past a few thousand messages a month the markup does, and it does not stop growing. Full detail on <a href="/pricing">the pricing page</a>.</p>
+
+        <h2>Message templates, and the 24-hour window</h2>
+        <p>Two rules explain most of how the platform behaves.</p>
+        <p><strong>You cannot message someone first with free-form text.</strong> Any message to a person who has not written to you in the last 24 hours must use a template that Meta approved in advance. Templates come in three categories: Marketing for anything promotional, Utility for messages about a transaction the customer already made, and Authentication for one-time passcodes.</p>
+        <p><strong>A customer message opens a 24-hour window.</strong> Inside it you can reply with ordinary text, images or documents, with no template and no approval. When it closes, you are back to templates. This is why response time on WhatsApp is a commercial number and not just a service metric: a late reply converts a free conversation into a paid one.</p>
+
+        <h2>Quality rating, messaging limits and the green tick</h2>
+        <p>Meta assigns every number a quality rating driven by how recipients react, principally blocks and reports, and a messaging limit for how many unique customers you can start conversations with per rolling 24 hours. Send to people who want to hear from you and the limit rises. Do not, and it falls, usually during the campaign where you needed it most.</p>
+        <p>The green tick, formally the Official Business Account badge, is separate from Business Verification and is not something any provider can promise. Meta grants it based on your brand's public notability: press coverage and third-party mentions, not your ad spend or your provider. We will help you prepare and submit the application, and anyone guaranteeing the outcome is selling you something they do not control.</p>
+
+        <h2>Building on it directly</h2>
+        <p>Weflux is an interface over the API, not a replacement for it. Inbound webhooks let your systems trigger flows and update contacts, outbound webhooks push events back, and the REST API covers sending, templates and contacts for anything bespoke. Google Sheets is supported directly for the many cases where a sheet is genuinely the system of record. See the <a href="/docs">developer documentation</a>.</p>
+        <p>Role-based access separates reading a conversation from being able to broadcast to your entire contact list, which matters more the moment a second person has a login.</p>
+      </div>
+    </section>
+
+    <section class="container" style="padding:0 0 72px">
+      <div class="faq-layout" style="max-width:760px;margin:0 auto">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> FAQ</span>
+          <h2 style="margin:10px 0 6px">WhatsApp Business API questions</h2>
+        </div>
+        <div class="faq-list" id="faqList">
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">What is the WhatsApp Business API? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Meta's programmatic interface for sending and receiving WhatsApp messages at scale, officially called the WhatsApp Business Platform. It has no chat interface of its own; it connects to software that supplies one. Unlike the WhatsApp Business app, which is tied to a single device, the API separates the number from the device, which is what makes multiple agents, broadcasts and automation possible.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">How much does the WhatsApp Business API cost in India? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Two separate charges. Meta bills per message by template category and destination country, at rates it publishes and revises periodically. Your provider bills a platform fee for the software. On Weflux that is free to ₹4,999 a month, and Meta's charges are passed through at cost with no markup. Check whether any provider you compare adds a per-message margin, because that is invisible on a monthly bill and dominates the cost as volume grows.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">How do I get WhatsApp Business API access in India? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Create a Facebook Business Manager, choose a number that is not currently active on the WhatsApp consumer or Business app, and connect it through a provider's Embedded Signup flow. With Weflux that takes minutes rather than days. Then complete Meta's Business Verification, which gates your messaging limits, and get your first templates approved.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">What is the difference between the WhatsApp Business app and the API? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">The Business app is free, runs on one phone, and suits a one-person business. The API has no app of its own, costs money per message, and supports unlimited agents on one number, bulk broadcasts on approved templates, automation and integrations. If more than one person needs to answer the number, or you need real broadcast volume, you need the API.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Do I need a Business Solution Provider? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">In practice yes. A BSP holds the Meta relationship, runs the API infrastructure and gives you the software to use it. Every BSP sits on the same Meta Cloud API, so the real differences are commercial: markup on Meta's rates, whether seats are charged individually, onboarding speed, and whether they will help with verification and the green tick.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">Can I keep my existing WhatsApp number? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">Yes. A number on the WhatsApp Business app, or with another provider, can be migrated. Once it is on the API it leaves the phone app, because the API becomes how that number sends and receives. Many businesses keep a separate personal number on the app.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">How do I get the WhatsApp green tick? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">The green tick, formally the Official Business Account badge, is granted by Meta based on your brand's public notability, principally press and third-party coverage. It is separate from Business Verification, which is a document check. We help prepare and submit the application, but the decision is Meta's and no provider can guarantee it.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" type="button">How many messages can I send per day? <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="faq-a"><div class="faq-a-inner">It depends on your messaging limit, which Meta sets per number. New numbers typically start at 250 unique customers per rolling 24 hours and step up through 1,000, 10,000 and 100,000 as you send consistently and maintain a good quality rating. Replies to people who messaged you do not count against it.</div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom:72px">
+      <div class="prose" style="max-width:760px;margin:0 auto">
+        <hr>
+        <h2>Related</h2>
+        <ul>
+          <li><a href="/broadcasts">Broadcasts</a> for bulk campaigns on the official API</li>
+          <li><a href="/automations">Automations</a> for event-driven messaging</li>
+          <li><a href="/shared-inbox">Shared inbox</a> for multiple agents on one number</li>
+          <li><a href="/embedded-signup">Embedded Signup</a> for how onboarding actually works</li>
+          <li><a href="/pricing">Pricing</a> and the pass-through billing model</li>
+          <li><a href="/docs">API and webhook documentation</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container final-cta-inner">
+        <h2>Connect a number and see it work.</h2>
+        <p class="sub">Embedded Signup takes minutes, the free plan sends real template messages, and Meta's charges are passed through at cost.</p>
+        <div class="cta-row">
+          <a href="https://app.weflux.in/register" class="btn btn-white">Start free →</a>
+          <a href="/contact" class="btn btn-ghost">Talk to sales</a>
+        </div>
+      </div>
+    </section>
   </main>
   <div id="wc-footer"></div>
   <script src="shell.js"></script>
+  <script defer src="/script.js"></script>
 </body>
 </html>
