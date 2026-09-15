@@ -1,5 +1,6 @@
 ---
 title: "How to run high-volume WhatsApp broadcast campaigns without getting restricted"
+slug: "whatsapp-broadcasts-without-getting-restricted"
 description: "Why unofficial bulk tools get numbers banned, how the official WhatsApp Business API differs, and the compliance rules that keep a number healthy at scale."
 date: 2026-05-20
 author: "Weflux Team"

@@ -28,31 +28,31 @@
       <h1>Build on WhatsApp without the boilerplate.</h1>
       <p class="lede">REST API, webhooks, SDKs and step-by-step playbooks for every Weflux workflow.</p>
       <div class="cta-row">
-        <a href="#" class="btn btn-green">API reference →</a>
-        <a href="#" class="btn btn-ghost">View on GitHub</a>
+        <a href="#api-coverage" class="btn btn-green">API reference ↓</a>
+        <a href="/weflux-guide" class="btn btn-ghost">Product guide →</a>
       </div>
     </section>
 
     <section class="container" style="padding-bottom:48px">
       <div class="docs-grid">
-        <a href="#" class="docs-card"><h4>Quickstart</h4><p>From sign-up to your first sent message in under 10 minutes.</p>
-          <div class="links"><a>Send your first template →</a><a>Authenticate the API →</a><a>Verify your number →</a></div></a>
-        <a href="#" class="docs-card"><h4>API reference</h4><p>Every endpoint, every parameter, with cURL and Node samples.</p>
-          <div class="links"><a>Messages →</a><a>Contacts →</a><a>Templates →</a></div></a>
-        <a href="#" class="docs-card"><h4>Webhooks</h4><p>Signed events, retry budget, replay tooling.</p>
-          <div class="links"><a>Event types →</a><a>Signature verification →</a><a>Replay events →</a></div></a>
-        <a href="#" class="docs-card"><h4>SDKs</h4><p>First-party libraries that handle pagination, retries and rate limits.</p>
-          <div class="links"><a>Node.js →</a><a>Python →</a><a>PHP →</a><a>Go →</a></div></a>
-        <a href="#" class="docs-card"><h4>Integrations</h4><p>Drop-in installers for Shopify, WooCommerce, Razorpay, Zoho and more.</p>
-          <div class="links"><a>Shopify →</a><a>WooCommerce →</a><a>Razorpay →</a></div></a>
-        <a href="#" class="docs-card"><h4>Playbooks</h4><p>Opinionated guides for cart-recovery, OTPs, admissions and more.</p>
-          <div class="links"><a>Cart abandoned flow →</a><a>OTP login flow →</a><a>Admissions funnel →</a></div></a>
-        <a href="#" class="docs-card"><h4>Meta verification</h4><p>How to get your business verified and templates approved fast.</p>
-          <div class="links"><a>Business verification checklist →</a><a>Template do's and don'ts →</a></div></a>
-        <a href="#" class="docs-card"><h4>Security</h4><p>RBAC, audit logs, encryption, sub-processors.</p>
-          <div class="links"><a>SOC 2 / ISO 27001 →</a><a>Data residency →</a><a>DPA →</a></div></a>
-        <a href="#" class="docs-card"><h4>Migration</h4><p>Moving from another BSP? Here's the path of least pain.</p>
-          <div class="links"><a>Full migration guide →</a><a>Number porting →</a><a>Template migration →</a></div></a>
+        <a href="/weflux-guide" class="docs-card"><h4>Quickstart</h4><p>From sign-up to your first sent message in under 10 minutes.</p>
+          <div class="links"><span>Product onboarding guide →</span></div></a>
+        <a href="#api-coverage" class="docs-card"><h4>API reference</h4><p>Endpoints for messages, contacts, templates, and analytics.</p>
+          <div class="links"><span>Explore API scope ↓</span></div></a>
+        <a href="#webhooks-design" class="docs-card"><h4>Webhooks</h4><p>HMAC-signed events, retry budgets, and delivery events.</p>
+          <div class="links"><span>Webhook design patterns ↓</span></div></a>
+        <a href="/contact" class="docs-card"><h4>SDKs &amp; Libraries</h4><p>REST API integration guidance for Node.js, Python, and Go.</p>
+          <div class="links"><span>Talk to engineering →</span></div></a>
+        <a href="/features" class="docs-card"><h4>Integrations</h4><p>Native workflows with your CRM, store, or internal databases.</p>
+          <div class="links"><span>View integrations →</span></div></a>
+        <a href="/use-cases" class="docs-card"><h4>Playbooks</h4><p>Battle-tested flows for cart recovery, OTPs, and lead pipelines.</p>
+          <div class="links"><span>Browse playbooks →</span></div></a>
+        <a href="/whatsapp-green-tick" class="docs-card"><h4>Meta verification</h4><p>Official green tick badge criteria and template guidelines.</p>
+          <div class="links"><span>Read verification guide →</span></div></a>
+        <a href="/security" class="docs-card"><h4>Security &amp; Privacy</h4><p>Data residency, encryption in transit, and DPA agreements.</p>
+          <div class="links"><span>Review security standards →</span></div></a>
+        <a href="/contact?topic=migration" class="docs-card"><h4>BSP Migration</h4><p>Moving from WATI, Interakt, or AiSensy with zero downtime.</p>
+          <div class="links"><span>Migration assistance →</span></div></a>
       </div>
     </section>
 
@@ -82,7 +82,7 @@
     <section class="container" style="padding:24px 0 72px">
       <div class="prose" style="max-width:760px;margin:0 auto">
 
-        <h2>What the API covers</h2>
+        <h2 id="api-coverage">What the API covers</h2>
         <p>The Weflux REST API sits over the Meta Cloud API and handles the parts you would otherwise build yourself: sending template and session messages, managing contacts and their attributes, reading campaign results, and receiving events. Authentication is by API key, scoped to a workspace.</p>
         <ul>
           <li><strong>Messages.</strong> Send an approved template to a number, or a free-form message inside an open 24-hour window.</li>
@@ -92,7 +92,7 @@
           <li><strong>Webhooks.</strong> Receive inbound messages and delivery events; trigger automation flows from your own systems.</li>
         </ul>
 
-        <h2>Webhooks are the part worth designing carefully</h2>
+        <h2 id="webhooks-design">Webhooks are the part worth designing carefully</h2>
         <p>Most integrations spend their time here rather than on sending, so a few things save trouble later.</p>
         <p><strong>Respond fast, process later.</strong> Acknowledge the webhook immediately and do the work on a queue. A slow handler causes retries, and retries cause duplicates.</p>
         <p><strong>Expect duplicates and design for them.</strong> Delivery is at-least-once. Key your processing on the message id so replaying an event is harmless.</p>

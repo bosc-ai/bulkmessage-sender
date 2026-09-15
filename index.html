@@ -447,9 +447,9 @@
     <div class="wf-modal-card">
       <button class="wf-modal-close" type="button" data-wf-close aria-label="Close walkthrough">✕</button>
       <div class="wf-modal-frame">
-        <iframe id="wfModalFrame" title="Weflux CRM product walkthrough" allow="autoplay" src="about:blank"></iframe>
+        <iframe id="wfModalFrame" title="Weflux CRM product walkthrough" allow="autoplay" loading="lazy" src="/weflux-promo.html?controls=1&amp;autoplay=1&amp;reset=1"></iframe>
       </div>
-      <p class="wf-modal-hint">Use the timeline below the demo to scrub forward and back · press <kbd>Esc</kbd> to close</p>
+      <p class="wf-modal-hint">Use the timeline below the demo to scrub forward and back · press <kbd>Esc</kbd> to close · <a href="/weflux-promo.html?controls=1&amp;autoplay=1" target="_blank" rel="noopener" style="color:var(--green-bright);text-decoration:underline;margin-left:6px">Open full window ↗</a></p>
     </div>
   </div>
 
@@ -732,7 +732,7 @@
                 <div class="endpoint"><span class="method get">GET</span><span>/v2/contacts/{id}</span></div>
                 <div class="endpoint"><span class="method">POST</span><span>/v2/templates/send</span></div>
                 <div class="endpoint"><span class="method del">DEL</span><span>/v2/conversations/{id}</span></div>
-                <p style="font-size:12.5px;color:var(--muted);line-height:1.55;margin-top:8px">Idempotent retries · Signed webhooks · 99.98% gateway uptime.</p>
+                <p style="font-size:12.5px;color:var(--muted);line-height:1.55;margin-top:8px">Idempotent retries · HMAC-signed webhooks · Automatic rate-limit backoff.</p>
               </div>
               <div class="right">
                 <div class="ln"><span class="num-x">1</span><span><span class="c">// send a templated message</span></span></div>
@@ -1297,12 +1297,14 @@
       const opener = document.getElementById('wfOpenDemo');
       if (!modal || !frame || !opener) return;
       // controls=1 shows the built-in play/pause + scrub timeline; reset=1 starts at 0.
-      const SRC = 'weflux-promo.html?controls=1&autoplay=1&reset=1';
+      const SRC = '/weflux-promo.html?controls=1&autoplay=1&reset=1';
       let lastFocus = null;
 
       function openModal() {
         lastFocus = document.activeElement;
-        frame.src = SRC;
+        if (!frame.src || frame.src === 'about:blank' || frame.src.endsWith('about:blank')) {
+          frame.src = SRC;
+        }
         modal.classList.add('open');
         modal.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
@@ -1312,7 +1314,6 @@
       function closeModal() {
         modal.classList.remove('open');
         modal.setAttribute('aria-hidden', 'true');
-        frame.src = 'about:blank'; // stop playback + free resources
         document.body.style.overflow = '';
         if (lastFocus && lastFocus.focus) lastFocus.focus();
       }

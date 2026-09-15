@@ -59,6 +59,11 @@
       "source": "/case-studies",
       "destination": "/customers",
       "permanent": false
+    },
+    {
+      "source": "/blog/bulk-whatsapp-without-getting-banned",
+      "destination": "/blog/whatsapp-broadcasts-without-getting-restricted",
+      "permanent": true
     }
   ]
 }
