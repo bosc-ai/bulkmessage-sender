@@ -511,7 +511,7 @@ Authentication ≈₹0.16 (OTPs) · Service reply free (in-window chat).
 
 **Inbox shortcuts:** `j`/`k` next/previous · `Esc` close · `⌘/Ctrl+N` new chat · `/` canned reply.
 
-**Need a hand?** WhatsApp/phone +91 63945 53354 · email hello@serves.in · or the green assistant
+**Need a hand?** WhatsApp/phone +91 88844 06099 · email hello@weflux.in · or the green assistant
 bubble on any screen.
 
 ---
