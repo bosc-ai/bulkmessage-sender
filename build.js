@@ -406,6 +406,9 @@ function writeSitemap(collectionUrls) {
     ["embedded-signup.html", "0.5", "monthly"],
     ["privacy.html", "0.3", "yearly"],
     ["terms.html", "0.3", "yearly"],
+    ["refund-policy.html", "0.3", "yearly"],
+    ["service-delivery.html", "0.3", "yearly"],
+    ["acceptable-use.html", "0.4", "yearly"],
     ["cookies.html", "0.3", "yearly"],
     ["data-deletion.html", "0.3", "yearly"],
   ].map(([p, pr, cf]) => ({ loc: `${SITE}/${p.replace(/\.html$/, "")}`, lastmod: today, pr, cf }));

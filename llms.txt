@@ -1,15 +1,11 @@
 # Weflux
 
-> Weflux is an official WhatsApp Business Solution Provider (BSP) built on the Meta
-> WhatsApp Cloud API, operated by Serves Technologies in Bengaluru, India. It provides
-> WhatsApp broadcast campaigns, a multi-agent shared inbox, no-code automation flows and
-> a built-in CRM. Weflux bills Meta's per-message conversation charges at cost with 0%
-> markup and shows Meta's own rate on every invoice line.
+> Weflux is a WhatsApp Business API platform built on the official Meta WhatsApp Cloud API, operated by Prateek Prakash (Trade Name: Weflux) in India. It provides WhatsApp opt-in customer notifications, broadcast campaigns, a multi-agent shared inbox, no-code automation flows and a built-in CRM. Weflux bills Meta's per-message conversation charges at cost with 0% markup and shows Meta's own rate on every invoice line.
 
 ## What Weflux does
 
 - Official WhatsApp Business API access via Meta Embedded Signup, set up in minutes
-- Bulk broadcast campaigns on approved message templates, with scheduling, segmentation and delivery reporting
+- Broadcast campaigns to opted-in contacts on approved message templates, with scheduling, segmentation and delivery reporting
 - Multi-agent shared inbox: assignment, routing rules, internal notes, quick replies, response-time tracking
 - No-code automation: auto-replies, drip sequences, cart recovery, COD confirmation, appointment reminders
 - Built-in WhatsApp CRM: custom attributes, tags, lead stages, segmentation, full conversation history
@@ -28,6 +24,7 @@ markup to Meta's charges. 14-day trial, no card required.
 ## Things Weflux does not do
 
 - No unofficial sending. Everything runs on Meta's Cloud API; there is no mode that automates the WhatsApp app.
+- No list selling. Weflux does not provide, sell, or facilitate access to phone number databases. Uploading scraped or purchased lists is strictly prohibited under our Acceptable Use Policy.
 - Not a general helpdesk. If most volume is email with WhatsApp as a side channel, a helpdesk with a WhatsApp connector fits better.
 - Not a full ticketing system. Conversations, assignment, notes and stages, not SLA policies or CSAT surveys.
 - No SMS or email channels.
@@ -45,13 +42,16 @@ markup to Meta's charges. 14-day trial, no card required.
 ## Key pages
 
 - [Pricing](https://www.weflux.in/pricing): plan tiers, add-ons, pass-through conversation pricing
-- [Broadcasts](https://www.weflux.in/broadcasts): bulk WhatsApp campaigns on the official API, template categories, deliverability
+- [Broadcasts](https://www.weflux.in/broadcasts): WhatsApp broadcast campaigns to opted-in contacts on the official API, template categories, deliverability
 - [Automations](https://www.weflux.in/automations): no-code chatbot and drip flows, and what automation cannot do on WhatsApp
 - [Shared Inbox](https://www.weflux.in/shared-inbox): multi-agent team inbox on one number
 - [WhatsApp CRM](https://www.weflux.in/whatsapp-crm): contacts, tags, lead stages, segmentation
 - [Features](https://www.weflux.in/features): the full product surface
 - [Platform](https://www.weflux.in/platform): infrastructure, roles and API access
 - [Comparison](https://www.weflux.in/comparison): Weflux against other Indian BSPs
+- [Refund Policy](https://www.weflux.in/refund-policy): 14-day free trial, cancellation, 5-7 business day refund timeline
+- [Service Delivery](https://www.weflux.in/service-delivery): instant digital provisioning and onboarding timelines
+- [Acceptable Use Policy](https://www.weflux.in/acceptable-use): opt-in consent requirement, anti-spam enforcement
 - [Docs](https://www.weflux.in/docs): REST API and webhook reference
 - [Security](https://www.weflux.in/security): encryption, access control, data handling
 - [Help Centre](https://www.weflux.in/help): setup and troubleshooting
@@ -67,5 +67,7 @@ markup to Meta's charges. 14-day trial, no card required.
 
 ## Company
 
-Serves Technologies, Bengaluru, India. MSME Udyam UDYAM-KR-03-0513677.
-Contact: hello@weflux.in. Marketing site: https://www.weflux.in. Application: https://app.weflux.in
+Weflux (Proprietor: Prateek Prakash). GSTIN: 09GMBPP2567J1ZJ. MSME Udyam: UDYAM-UP-07-0119131.
+Principal Place of Business: Building No. 00109, Akolhi, Azamgarh, Uttar Pradesh 276202, India.
+Operations: Bengaluru, Karnataka, India.
+Contact: hello@weflux.in · +91 63945 53354. Marketing site: https://www.weflux.in. Application: https://app.weflux.in

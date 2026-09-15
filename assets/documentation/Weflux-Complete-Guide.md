@@ -108,8 +108,7 @@ Your Weflux account is a **workspace** (organisation). The person who registers 
 - **Google:** click **Continue with Google**.
 - **Returning:** use **Sign in**.
 
-Note: the sign-up screen is branded **"Bulk Message Sender" (powered by Weflux)**: this is
-intentional (a sister brand), not a bug. Inside the app everything is Weflux. The "contact
+Note: The registration screen creates your secure Weflux workspace. The "contact
 number" on sign-up is just how Weflux reaches you - **not** your WhatsApp Business number.
 
 ## 2.2 A tour of the dashboard
